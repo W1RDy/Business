@@ -6,7 +6,7 @@ public abstract class CustomButton : MonoBehaviour
 {
     protected Button _button;
 
-    protected ButtonService _buttonSertvice;
+    protected ButtonService _buttonService;
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public abstract class CustomButton : MonoBehaviour
 
     protected virtual void Init()
     {
-        _buttonSertvice = ServiceLocator.Instance.Get<ButtonService>();
+        _buttonService = ServiceLocator.Instance.Get<ButtonService>();
 
         _button = GetComponent<Button>();
         _button.onClick.AddListener(ClickCallback);

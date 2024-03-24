@@ -19,7 +19,8 @@ public class TimeButton : CustomButton
 
     protected override void ClickCallback()
     {
-        _buttonSertvice.AddTime(_timeValue);
+        base.ClickCallback();
+        _buttonService.AddTime(_timeValue);
     }
 
     private void SetText()

@@ -16,7 +16,8 @@ public class HandsCoinsButton : CustomButton
 
     protected override void ClickCallback()
     {
-        _buttonSertvice.RemoveHandsCoins(_coinsValue);
+        base.ClickCallback();
+        _buttonService.RemoveHandsCoins(_coinsValue);
     }
 
     private void SetText()

@@ -52,6 +52,12 @@ namespace CoinsCounter
             _coins = 1000;
             UpdateIndicator();
         }
+
+        public void DoubleCoins()
+        {
+            _coins *= 2;
+            UpdateIndicator();
+        }
     }
 }
 

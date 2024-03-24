@@ -16,10 +16,14 @@ public class TimeController : IService
 
     private TimeIndicator _timeIndicator;
 
+    private PeriodController _periodController;
+
     public TimeController(TimeIndicator timeIndicator)
     {
         _timeIndicator = timeIndicator;
         _timeIndicator.Init(_maxTime);
+
+        _periodController = ServiceLocator.Instance.Get<PeriodController>();
     }
 
     public void AddTime(int time)
@@ -28,10 +32,17 @@ public class TimeController : IService
 
         if (_time == _maxTime)
         {
-            _currentMonth++;
-            _timeIndicator.UpdateMonth(_currentMonth);
-            _time = 0;
+            _periodController.FinishPeriod();
         }
+
+        _timeIndicator.SetTime(_time);
+    }
+
+    public void UpdateMonth()
+    {
+        _currentMonth++;
+        _timeIndicator.UpdateMonth(_currentMonth);
+        _time = 0;
 
         _timeIndicator.SetTime(_time);
     }

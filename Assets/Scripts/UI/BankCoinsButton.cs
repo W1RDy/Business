@@ -7,6 +7,8 @@ public class BankCoinsButton : CustomButton
 
     [SerializeField] private TextMeshProUGUI _buttonText;
 
+    [SerializeField] private bool _isDebitButton;
+
     protected override void Init()
     {
         base.Init();
@@ -16,11 +18,17 @@ public class BankCoinsButton : CustomButton
 
     protected override void ClickCallback()
     {
-        _buttonSertvice.DebitCoinsFromBank(_coinsValue);
+        base.ClickCallback();
+        if (_isDebitButton) _buttonService.DebitCoinsFromBank(_coinsValue);
+        else _buttonService.PutCoinsOnBunk(_coinsValue);
     }
 
     private void SetText()
     {
-        _buttonText.text = "Debit " + _coinsValue + " coins";
+        string text;
+        if (_isDebitButton) text = "Debit " + _coinsValue + " coins";
+        else text = "Put on bank " + _coinsValue + " coins";
+        
+        _buttonText.text = text;
     }
 }
