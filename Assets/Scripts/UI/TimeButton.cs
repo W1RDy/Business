@@ -2,34 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
-[RequireComponent(typeof(Button))]
-public class TimeButton : MonoBehaviour
+public class TimeButton : CustomButton
 {
     [SerializeField] private int _timeValue;
 
     [SerializeField] private TextMeshProUGUI _buttonText;
-    private Button _button;
 
-    private ButtonService _buttonSertvice;
-
-    private void Start()
+    protected override void Init() 
     {
-        Init();
-    }
-
-    private void Init() 
-    {
-        _buttonSertvice = ServiceLocator.Instance.Get<ButtonService>();
-
-        _button = GetComponent<Button>();
-        _button.onClick.AddListener(AddTime);
+        base.Init();
 
         SetText();
     }
 
-    public void AddTime()
+    protected override void ClickCallback()
     {
         _buttonSertvice.AddTime(_timeValue);
     }
@@ -37,10 +25,5 @@ public class TimeButton : MonoBehaviour
     private void SetText()
     {
         _buttonText.text = "Add " + _timeValue + " days";
-    }
-
-    private void OnDestroy()
-    {
-        _button.onClick.RemoveListener(AddTime);
     }
 }

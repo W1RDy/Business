@@ -7,7 +7,7 @@ public class ServiceLocator : MonoBehaviour
 {
     public static ServiceLocator Instance;
 
-    private Dictionary<Type, IService> _sertvices = new Dictionary<Type, IService>();
+    private Dictionary<Type, IService> _services = new Dictionary<Type, IService>();
 
     private void Awake()
     {
@@ -20,9 +20,9 @@ public class ServiceLocator : MonoBehaviour
     public void Register(IService service)
     {
         var type = service.GetType();
-        if (!_sertvices.ContainsKey(type))
+        if (!_services.ContainsKey(type))
         {
-            _sertvices.Add(type, service);
+            _services.Add(type, service);
         }
         else throw new ArgumentException("Service with type " + type + " already exists!");
     }
@@ -30,9 +30,9 @@ public class ServiceLocator : MonoBehaviour
     public void Unregister(IService service)
     {
         var type = service.GetType();
-        if (_sertvices.ContainsKey(type))
+        if (_services.ContainsKey(type))
         {
-            _sertvices.Remove(type);
+            _services.Remove(type);
         }
         else throw new ArgumentException("Service with type " + type + " doesn't exist!");
     }
@@ -41,6 +41,6 @@ public class ServiceLocator : MonoBehaviour
     {
         var type = typeof(T);
 
-        return (T)_sertvices[type];
+        return (T)_services[type];
     }
 }
