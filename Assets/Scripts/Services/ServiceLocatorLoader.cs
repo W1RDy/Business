@@ -23,11 +23,30 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindWindowActivator();
 
         BindCoinsCounters();
+        BindRewardHandler();
+
+        BindOrdersServices();
 
         BindPeriodController();
         BindTimeController();
 
         BindButtonService();
+    }
+
+    private void BindRewardHandler()
+    {
+        var rewardHandler = new RewardHandler();
+
+        ServiceLocator.Instance.Register(rewardHandler);
+    }
+
+    private void BindOrdersServices()
+    {
+        var ordersService = new OrderService();
+        var activeOrderService = new ActiveOrderService();
+
+        ServiceLocator.Instance.Register(ordersService);
+        ServiceLocator.Instance.Register(activeOrderService);
     }
 
     private void BindPeriodController()

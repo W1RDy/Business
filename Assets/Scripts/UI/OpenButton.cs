@@ -1,20 +1,19 @@
-﻿public class CloseButton : WindowControlButton
+﻿public class OpenButton : WindowControlButton
 {
     protected override void ClickCallback()
     {
         base.ClickCallback();
-        CloseWindow();
+        OpenWindow();
     }
 
-    private void CloseWindow()
+    private void OpenWindow()
     {
         switch (_windowType)
         {
             case WindowType.PeriodFinish:
-                _buttonService.ClosePeriodWindow();
                 break;
             case WindowType.OrdersWindow:
-                _buttonService.CloseOrdersWindow();
+                _buttonService.OpenOrdersWindow();
                 break;
             throw new System.ArgumentNullException("Window with type " + _windowType + " doesn't exist!");
         }

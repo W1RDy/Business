@@ -28,4 +28,5 @@ public class WindowService : IService
 public enum WindowType
 {
     PeriodFinish,
+    OrdersWindow
 }
