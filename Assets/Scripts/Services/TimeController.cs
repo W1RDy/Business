@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TimeController : IService
@@ -18,6 +20,8 @@ public class TimeController : IService
 
     private PeriodController _periodController;
 
+    public event Action<int> OnTimeChanged;
+
     public TimeController(TimeIndicator timeIndicator)
     {
         _timeIndicator = timeIndicator;
@@ -28,6 +32,8 @@ public class TimeController : IService
 
     public void AddTime(int time)
     {
+        var previousTime = _time;
+
         _time = Mathf.Clamp(_time + time, 0, _maxTime);
 
         if (_time == _maxTime)
@@ -36,6 +42,8 @@ public class TimeController : IService
         }
 
         _timeIndicator.SetTime(_time);
+
+        OnTimeChanged?.Invoke(_time - previousTime);
     }
 
     public void UpdateMonth()
