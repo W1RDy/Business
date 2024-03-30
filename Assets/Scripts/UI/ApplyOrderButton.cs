@@ -18,6 +18,7 @@ public class ApplyOrderButton : OrdersControlButton
     private void ApplyOrder()
     {
         _buttonService.ApplyOrder(_order);
+        _button.interactable = false;
         SetText("Applied");
     }
 }

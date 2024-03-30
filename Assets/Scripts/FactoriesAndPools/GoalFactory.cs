@@ -33,7 +33,8 @@ public class GoalFactory : IFactory
         goal.transform.localRotation = rotation;
         goal.transform.localPosition = Vector3.zero;
 
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_container);
+        var layoutRootForRebuild = goal.transform.GetChild(2).GetComponent<RectTransform>();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRootForRebuild);
 
         return goal;
     }

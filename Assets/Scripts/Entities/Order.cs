@@ -4,19 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderView))]
-public class Order : MonoBehaviour, IOrder
+public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 {
     #region Values
 
-    [SerializeField] private int _id;
-    [SerializeField] private int _cost;
-    [SerializeField] private int _time;
+    [SerializeField] private OrderConfig _orderConfig;
 
     private int _remainTime;
 
-    public int ID => _id;
-    public int Cost => _cost;
-    public int Time => _time;
+    public int ID => _orderConfig.ID;
+    public int Cost => _orderConfig.Cost;
+    public int Time => _orderConfig.Time;
 
     #endregion
 
@@ -32,15 +30,28 @@ public class Order : MonoBehaviour, IOrder
     private Action<int> TimeChangedDelegate;
 
     private Goal _goal;
-    [SerializeField] RectTransform _goalFactory;
     private GoalPool _goalPool;
 
-    private void Start()
-    {
-        _view = GetComponent<OrderView>();
-        _view.SetView(_cost, _time);
+    public bool IsFree => !gameObject.activeInHierarchy;
+    public Order Element => this;
 
-        _remainTime = _time;
+    private bool _isInitialized;
+
+    public void Init(OrderConfig orderConfig)
+    {
+        if (!_isInitialized) InitDependency();
+
+        _orderConfig = orderConfig;
+        _view.SetView(_orderConfig.Cost, _orderConfig.Time);
+
+        _remainTime = _orderConfig.Time;
+    }
+
+    private void InitDependency()
+    {
+        _isInitialized = true;
+
+        _view = GetComponent<OrderView>();
 
         _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
         _timeController = ServiceLocator.Instance.Get<TimeController>();
@@ -50,11 +61,7 @@ public class Order : MonoBehaviour, IOrder
 
         _timeController.OnTimeChanged += TimeChangedDelegate;
 
-        var goalFactory = new GoalFactory(_goalFactory);
-        goalFactory.LoadResources();
-
-        _goalPool = new GoalPool(goalFactory, 2);
-        _goalPool.Init();
+        _goalPool = ServiceLocator.Instance.Get<GoalPool>();
     }
 
     public void ApplyOrder()
@@ -91,7 +98,7 @@ public class Order : MonoBehaviour, IOrder
 
     private void ChangeRemainTime(int changeValue)
     {
-        _remainTime = Mathf.Clamp(_remainTime - changeValue, 0, _time);
+        _remainTime = Mathf.Clamp(_remainTime - changeValue, 0, _orderConfig.Time);
 
         if (_remainTime == 0)
         {
@@ -107,5 +114,15 @@ public class Order : MonoBehaviour, IOrder
     public void OnDestroy()
     {
         _timeController.OnTimeChanged -= TimeChangedDelegate;
+    }
+
+    public void Activate()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Release()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -12,6 +12,16 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     [SerializeField] private Window[] _windows;
 
+    #region PoolsTransforms
+
+    [SerializeField] private RectTransform _orderPoolContainer;
+    [SerializeField] private Transform _orderParent;
+
+    [SerializeField] private RectTransform _goalPoolContainer;
+    [SerializeField] private Transform _goalParent;
+
+    #endregion
+
     private void Awake()
     {
         Bind();
@@ -31,6 +41,20 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindTimeController();
 
         BindButtonService();
+
+        BindPools();
+    }
+
+    private void BindPools()
+    {
+        var orderPool = new OrderPool(_orderPoolContainer, _orderParent, 2);
+        orderPool.Init();
+
+        var goalPool = new GoalPool(_goalPoolContainer, _goalParent, 2);
+        goalPool.Init();
+
+        ServiceLocator.Instance.Register(orderPool);
+        ServiceLocator.Instance.Register(goalPool);
     }
 
     private void BindRewardHandler()
