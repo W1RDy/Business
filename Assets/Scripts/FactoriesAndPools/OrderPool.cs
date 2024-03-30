@@ -61,6 +61,7 @@ public class OrderPool : IPool<Order>, IService
 
         var newOrder = Create();
         newOrder.transform.SetParent(_parent);
+        newOrder.Activate();
 
         return newOrder;
     }

@@ -23,6 +23,8 @@ public class OrderService : IService
     {
         return _ordersDict[id];
     }
+
+    public int GetOrdersCount() => _ordersDict.Count;
 }
 
 public class ActiveOrderService : OrderService

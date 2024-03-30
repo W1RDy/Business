@@ -6,32 +6,49 @@ using Random = UnityEngine.Random;
 
 public class OrderGenerator : MonoBehaviour
 {
-    [SerializeField] private OrderConfig[] orders;
+    [SerializeField] private OrderConfig[] _orders;
+    [SerializeField] private int _maxOrdersCount;
 
     private OrderPool _pool;
+
+    private OrderService _orderService;
+    private IDGenerator _idGenerator;
 
     private void Start()
     {
         _pool = ServiceLocator.Instance.Get<OrderPool>();
+        _orderService = ServiceLocator.Instance.Get<OrderService>();
+        _idGenerator = new IDGenerator();
+        
         StartCoroutine(GenerateCoroutine());
     }
 
     private IEnumerator GenerateCoroutine()
     {
-        yield return new WaitForSeconds(3f);
-        GenerateOrder();
+        while (true)
+        {
+            yield return new WaitForSeconds(3f);
+            GenerateOrder();
+            if (_orderService.GetOrdersCount() == _maxOrdersCount) break;
+        }
     }
 
     private OrderConfig GetOrderConfig()
     {
-        var randomIndex = Random.Range(0, orders.Length);
-        return orders[randomIndex];
+        var randomIndex = Random.Range(0, _orders.Length);
+        return _orders[randomIndex];
     }
 
     public Order GenerateOrder()
     {
         var order = _pool.Get();
-        order.Init(GetOrderConfig());
+        var id = _idGenerator.GetID();
+        Debug.Log(id);
+
+        order.Init(id, GetOrderConfig());
+
+        _orderService.AddOrder(order);
+
         return order;
     }
 }

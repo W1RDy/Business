@@ -25,6 +25,9 @@ public abstract class CustomButton : MonoBehaviour
 
     private void OnDestroy()
     {
-        _button.onClick.RemoveListener(ClickCallback);
+        if (_button != null)
+        {
+            _button.onClick.RemoveListener(ClickCallback);
+        }
     }
 }

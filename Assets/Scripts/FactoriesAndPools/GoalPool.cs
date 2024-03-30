@@ -60,6 +60,7 @@ public class GoalPool : IPool<Goal>, IService
 
         var newGoal = Create();
         newGoal.transform.SetParent(_parent);
+        newGoal.Activate();
 
         return newGoal;
     }

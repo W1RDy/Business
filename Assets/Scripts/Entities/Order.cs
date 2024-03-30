@@ -10,9 +10,10 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
     [SerializeField] private OrderConfig _orderConfig;
 
+    private int _id;
     private int _remainTime;
 
-    public int ID => _orderConfig.ID;
+    public int ID => _id;
     public int Cost => _orderConfig.Cost;
     public int Time => _orderConfig.Time;
 
@@ -26,22 +27,26 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
     private RewardHandler _rewardHandler;
     private TimeController _timeController;
     private ActiveOrderService _activeOrderService;
+    private OrderService _orderService;
 
     private Action<int> TimeChangedDelegate;
 
     private Goal _goal;
     private GoalPool _goalPool;
 
-    public bool IsFree => !gameObject.activeInHierarchy;
+    private bool _isInitialized;
+    private bool _isFree;
+    public bool IsFree => _isFree;
     public Order Element => this;
 
-    private bool _isInitialized;
 
-    public void Init(OrderConfig orderConfig)
+    public void Init(int id, OrderConfig orderConfig)
     {
         if (!_isInitialized) InitDependency();
 
         _orderConfig = orderConfig;
+        _id = id;
+
         _view.SetView(_orderConfig.Cost, _orderConfig.Time);
 
         _remainTime = _orderConfig.Time;
@@ -56,6 +61,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
         _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
         _timeController = ServiceLocator.Instance.Get<TimeController>();
         _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
+        _orderService = ServiceLocator.Instance.Get<OrderService>();
 
         TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
 
@@ -82,7 +88,9 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
         {
             Debug.Log("Order canceled");
             _isApplied = false;
+
             _activeOrderService.RemoveOrder(this);
+            _orderService.RemoveOrder(this);
         }
     }
 
@@ -93,6 +101,9 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
             Debug.Log("Order completed");
             _isApplied = false;
             _rewardHandler.ApplyRewardForOrder(this);
+
+            _activeOrderService.RemoveOrder(this);
+            _orderService.RemoveOrder(this);
         }
     }
 
@@ -113,16 +124,21 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
     public void OnDestroy()
     {
-        _timeController.OnTimeChanged -= TimeChangedDelegate;
+        if (_timeController != null)
+        {
+            _timeController.OnTimeChanged -= TimeChangedDelegate;
+        }
     }
 
     public void Activate()
     {
         gameObject.SetActive(true);
+        _isFree = false;
     }
 
     public void Release()
     {
         gameObject.SetActive(false);
+        _isFree = true;
     }
 }
