@@ -1,9 +1,12 @@
-﻿public class IDGenerator
+﻿using UnityEngine;
+
+public class IDGenerator
 {
-    private int _previousID = 0;
+    private int _id = 0;
 
     public int GetID()
     {
-        return _previousID++;
+        var id = Mathf.Clamp(_id++, 0, 1000);
+        return id;
     }
 }

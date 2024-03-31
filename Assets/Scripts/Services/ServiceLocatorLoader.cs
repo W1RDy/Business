@@ -20,7 +20,12 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private RectTransform _goalPoolContainer;
     [SerializeField] private Transform _goalParent;
 
+    [SerializeField] private RectTransform _deliveryOrderPoolContainer;
+    [SerializeField] private Transform _deliveryOrderParent;
+
     #endregion
+
+    [SerializeField] private CompositeOrder _compositeDeliveryOrder;
 
     private void Awake()
     {
@@ -36,6 +41,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindRewardHandler();
 
         BindOrdersServices();
+        BindDeliveryCompositeOrder();
 
         BindPeriodController();
         BindTimeController();
@@ -43,6 +49,13 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         BindPools();
+    }
+
+    private void BindDeliveryCompositeOrder()
+    {
+        _compositeDeliveryOrder.Init();
+
+        ServiceLocator.Instance.Register(_compositeDeliveryOrder);
     }
 
     private void BindPools()
@@ -53,8 +66,12 @@ public class ServiceLocatorLoader : MonoBehaviour
         var goalPool = new GoalPool(_goalPoolContainer, _goalParent, 2);
         goalPool.Init();
 
+        var deliveryOrderPool = new DeliveryOrderPool(_deliveryOrderPoolContainer, _deliveryOrderParent, 3);
+        deliveryOrderPool.Init();
+
         ServiceLocator.Instance.Register(orderPool);
         ServiceLocator.Instance.Register(goalPool);
+        ServiceLocator.Instance.Register(deliveryOrderPool);
     }
 
     private void BindRewardHandler()
@@ -68,9 +85,11 @@ public class ServiceLocatorLoader : MonoBehaviour
     {
         var ordersService = new OrderService();
         var activeOrderService = new ActiveOrderService();
+        var deliveryOrderService = new DeliveryOrderService();
 
         ServiceLocator.Instance.Register(ordersService);
         ServiceLocator.Instance.Register(activeOrderService);
+        ServiceLocator.Instance.Register(deliveryOrderService);
     }
 
     private void BindPeriodController()

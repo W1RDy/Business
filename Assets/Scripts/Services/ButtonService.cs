@@ -33,20 +33,32 @@ public class ButtonService : IService
 
     #region WindowsControl
 
+    public void OpenWindow(WindowType windowType)
+    {
+        _windowActivator.ActivateWindow(windowType);
+    }
+
+    public void CloseWindow(WindowType windowType)
+    {
+        _windowActivator.DeactivateWindow(windowType);
+    }
+
     public void ClosePeriodWindow()
     {
-        _windowActivator.DeactivateWindow(WindowType.PeriodFinish);
+        CloseWindow(WindowType.PeriodFinish);
         _timeController.UpdateMonth();
     }
 
-    public void CloseOrdersWindow()
+    public void OpenInventoryWindow()
     {
-        _windowActivator.DeactivateWindow(WindowType.OrdersWindow);
+        OpenWindow(WindowType.InventoryWindow);
+        CloseWindow(WindowType.DeliveryWindow);
     }
 
-    public void OpenOrdersWindow()
+    public void OpenDeliveryWindow()
     {
-        _windowActivator.ActivateWindow(WindowType.OrdersWindow);
+        OpenWindow(WindowType.DeliveryWindow);
+        CloseWindow(WindowType.InventoryWindow);
     }
 
     #endregion
@@ -84,5 +96,10 @@ public class ButtonService : IService
     {
         order.ApplyOrder();
         _activeOrderService.AddOrder(order);
+    }
+
+    public void AddDeliveryOrder(Delivery delivery)
+    {
+        delivery.AddDeliveryOrder();
     }
 }

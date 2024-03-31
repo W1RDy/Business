@@ -8,7 +8,7 @@ public abstract class CustomButton : MonoBehaviour
 
     protected ButtonService _buttonService;
 
-    private void Start()
+    protected virtual void Start()
     {
         Init();
     }

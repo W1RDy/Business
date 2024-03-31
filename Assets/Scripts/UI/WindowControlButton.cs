@@ -7,7 +7,7 @@ public abstract class WindowControlButton : CustomButton
 
     protected WindowType _windowType;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _windowType = _window.Type;
     }

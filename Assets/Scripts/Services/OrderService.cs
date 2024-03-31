@@ -21,13 +21,19 @@ public class OrderService : IService
 
     public IOrder GetOrder(int id)
     {
-        return _ordersDict[id];
+        if (_ordersDict.TryGetValue(id, out var order)) return order;
+        return null;
     }
 
     public int GetOrdersCount() => _ordersDict.Count;
 }
 
 public class ActiveOrderService : OrderService
+{
+
+}
+
+public class DeliveryOrderService : OrderService
 {
 
 }

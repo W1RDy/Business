@@ -24,9 +24,3 @@ public class WindowService : IService
         return _windowsDict[windowType];
     }
 }
-
-public enum WindowType
-{
-    PeriodFinish,
-    OrdersWindow
-}
