@@ -60,13 +60,13 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindPools()
     {
-        var orderPool = new OrderPool(_orderPoolContainer, _orderParent, 2);
+        var orderPool = new Pool<Order>(new OrderFactory(_orderPoolContainer), _orderPoolContainer, _orderParent, 2);
         orderPool.Init();
 
-        var goalPool = new GoalPool(_goalPoolContainer, _goalParent, 2);
+        var goalPool = new Pool<Goal>(new GoalFactory(_goalPoolContainer), _goalPoolContainer, _goalParent, 2);
         goalPool.Init();
 
-        var deliveryOrderPool = new DeliveryOrderPool(_deliveryOrderPoolContainer, _deliveryOrderParent, 3);
+        var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_deliveryOrderPoolContainer), _deliveryOrderPoolContainer, _deliveryOrderParent, 3);
         deliveryOrderPool.Init();
 
         ServiceLocator.Instance.Register(orderPool);

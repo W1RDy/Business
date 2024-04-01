@@ -9,14 +9,14 @@ public class OrderGenerator : MonoBehaviour
     [SerializeField] private OrderConfig[] _orders;
     [SerializeField] private int _maxOrdersCount;
 
-    private OrderPool _pool;
+    private Pool<Order> _pool;
 
     private OrderService _orderService;
     private IDGenerator _idGenerator;
 
     private void Start()
     {
-        _pool = ServiceLocator.Instance.Get<OrderPool>();
+        _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
         _idGenerator = new IDGenerator();
         

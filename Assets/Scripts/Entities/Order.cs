@@ -32,7 +32,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
     private Action<int> TimeChangedDelegate;
 
     private Goal _goal;
-    private GoalPool _goalPool;
+    private Pool<Goal> _pool;
 
     private bool _isInitialized;
     private bool _isFree;
@@ -67,7 +67,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
         _timeController.OnTimeChanged += TimeChangedDelegate;
 
-        _goalPool = ServiceLocator.Instance.Get<GoalPool>();
+        _pool = ServiceLocator.Instance.Get<Pool<Goal>>();
     }
 
     public void ApplyOrder()
@@ -77,7 +77,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
             Debug.Log("Order applied");
             _isApplied = true;
 
-            _goal = _goalPool.Get();
+            _goal = _pool.Get();
             _goal.Init(ID, Cost, Time);
         }
     }

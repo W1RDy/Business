@@ -31,7 +31,7 @@ public class Delivery : MonoBehaviour
 
     #endregion
 
-    private DeliveryOrderPool _pool;
+    private Pool<DeliveryOrder> _pool;
 
     private DeliveryOrderService _orderService;
     private CompositeOrder _compositeOrder;
@@ -46,7 +46,7 @@ public class Delivery : MonoBehaviour
 
     private void Start()
     {
-        _pool = ServiceLocator.Instance.Get<DeliveryOrderPool>();
+        _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
         _orderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
         _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
     }
