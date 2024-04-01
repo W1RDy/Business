@@ -17,3 +17,4 @@ MonoBehaviour:
   _deliveryDescription: All medium.
   _deliveryCost: 20
   _deliveryTime: 5
+  _goodsType: 1

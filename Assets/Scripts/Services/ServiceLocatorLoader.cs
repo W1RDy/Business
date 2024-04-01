@@ -23,9 +23,14 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private RectTransform _deliveryOrderPoolContainer;
     [SerializeField] private Transform _deliveryOrderParent;
 
+    [SerializeField] private RectTransform _goodsPoolContainer;
+    [SerializeField] private Transform _goodsParent;
+
     #endregion
 
     [SerializeField] private CompositeOrder _compositeDeliveryOrder;
+
+    [SerializeField] private GoodsConfig[] _goodsConfigs;
 
     private void Awake()
     {
@@ -49,6 +54,17 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         BindPools();
+
+        BindGoodsService();
+    }
+
+    private void BindGoodsService()
+    {
+        var goodsService = new GoodsService();
+        ServiceLocator.Instance.Register(goodsService);
+
+        var goodsGenerator = new GoodsGenerator(_goodsConfigs);
+        ServiceLocator.Instance.Register(goodsGenerator);
     }
 
     private void BindDeliveryCompositeOrder()
@@ -69,9 +85,13 @@ public class ServiceLocatorLoader : MonoBehaviour
         var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_deliveryOrderPoolContainer), _deliveryOrderPoolContainer, _deliveryOrderParent, 3);
         deliveryOrderPool.Init();
 
+        var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
+        goodsPool.Init();
+
         ServiceLocator.Instance.Register(orderPool);
         ServiceLocator.Instance.Register(goalPool);
         ServiceLocator.Instance.Register(deliveryOrderPool);
+        ServiceLocator.Instance.Register(goodsPool);
     }
 
     private void BindRewardHandler()

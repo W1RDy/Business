@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a49c963bb062eb4b9f8f089ef47b0af, type: 3}
-  m_Name: LowDelivery
+  m_Script: {fileID: 11500000, guid: e8a96dd6eabe65e49b20b0e38116bf1a, type: 3}
+  m_Name: LowQualityGoods
   m_EditorClassIdentifier: 
-  _deliveryType: 0
-  _deliveryTitle: Low delivery
-  _deliveryDescription: Slow delivery, bad quality. But low price.
-  _deliveryCost: 10
-  _deliveryTime: 8
-  _goodsType: 2
+  _goodsType: 0
+  _title: HighGoods
+  _description: asdas
+  _buildTime: 30

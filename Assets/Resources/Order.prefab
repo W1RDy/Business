@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35a675ff50e6284c8e8e24341e2db6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _order: {fileID: 3717929654221527168}
+  _orderClass: {fileID: 3717929654221527168}
   _stateText: {fileID: 1027911129598963890}
 --- !u!1 &1376340218647712144
 GameObject:
@@ -636,7 +636,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orderConfig: {fileID: 0}
-  _goalFactory: {fileID: 0}
 --- !u!114 &361876560085482280
 MonoBehaviour:
   m_ObjectHideFlags: 0

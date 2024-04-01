@@ -25,6 +25,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         }
     }
 
+    private GoodsType _goodsType;
+
     #endregion
 
     #region View
@@ -42,6 +44,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
 
     private DeliveryOrderService _deliveryOrderService;
 
+    private GoodsGenerator _goodsGenerator;
+
     private void Awake()
     {
         _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
@@ -49,11 +53,14 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         _deliveryOrderView = new DeliveryOrderView(_priceText, _amountText);
     }
 
-    public void Init(int id, int cost, int time)
+    public void Init(int id, int cost, int time, GoodsType goodsType)
     {
+        if (_goodsGenerator == null) _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
+
         ID = id;
         Cost = cost;
         Time = time;
+        _goodsType = goodsType;
 
         Amount = 1;
     }
@@ -81,6 +88,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
             IsApplied = false;
             Release();
             _deliveryOrderService.RemoveOrder(this);
+            _goodsGenerator.GenerateGoods(_goodsType);
         }
     }
 

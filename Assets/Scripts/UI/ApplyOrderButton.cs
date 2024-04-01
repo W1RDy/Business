@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 public class ApplyOrderButton : OrdersControlButton
 {
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         SetText("Apply");
     }
 
