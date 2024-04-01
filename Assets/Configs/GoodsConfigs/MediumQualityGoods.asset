@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a96dd6eabe65e49b20b0e38116bf1a, type: 3}
   m_Name: MediumQualityGoods
   m_EditorClassIdentifier: 
-  _goodsType: 0
-  _title: HighGoods
-  _description: asdas
-  _buildTime: 30
+  _goodsType: 1
+  _title: MediumGoods
+  _description: Some normal.
+  _buildTime: 2

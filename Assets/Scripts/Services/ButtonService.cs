@@ -102,4 +102,9 @@ public class ButtonService : IService
     {
         delivery.AddDeliveryOrder();
     }
+
+    public void ConstructPC(Goods goods)
+    {
+        goods.ConstructPC();
+    }
 }

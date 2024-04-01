@@ -31,6 +31,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private CompositeOrder _compositeDeliveryOrder;
 
     [SerializeField] private GoodsConfig[] _goodsConfigs;
+    [SerializeField] private PCConfig[] _pcConfigs;
 
     private void Awake()
     {
@@ -56,6 +57,16 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindPools();
 
         BindGoodsService();
+        BindPCService();
+    }
+
+    private void BindPCService()
+    {
+        var pcService = new PCService();
+        ServiceLocator.Instance.Register(pcService);
+
+        var pcGenerator = new PCGenerator(_pcConfigs);
+        ServiceLocator.Instance.Register(pcGenerator);
     }
 
     private void BindGoodsService()
@@ -88,10 +99,14 @@ public class ServiceLocatorLoader : MonoBehaviour
         var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
         goodsPool.Init();
 
+        var pcPool = new Pool<PC>(new PCFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
+        pcPool.Init();
+
         ServiceLocator.Instance.Register(orderPool);
         ServiceLocator.Instance.Register(goalPool);
         ServiceLocator.Instance.Register(deliveryOrderPool);
         ServiceLocator.Instance.Register(goodsPool);
+        ServiceLocator.Instance.Register(pcPool);
     }
 
     private void BindRewardHandler()

@@ -40,14 +40,30 @@ public class Goods : MonoBehaviour, IPoolElement<Goods>
     public bool IsFree { get; private set; }
     public Goods Element => this;
 
-    public void Init(GoodsConfig config, bool isBroken)
+    private PCGenerator _pcGenerator;
+    private Pool<Goods> _pool;
+
+    public void Init(GoodsConfig config, bool isBroken, int amount)
     {
         _config = config;
         IsBroken = isBroken;
 
         if (_view == null) _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
-        Amount = 1;
+        Amount = amount;
         _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount);
+    }
+
+    private void Start()
+    {
+        _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
+        _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
+    }
+
+    public void ConstructPC()
+    {
+        _pcGenerator.GeneratePC(_config.GoodsType, IsBroken);
+        Amount -= 1;
+        if (Amount == 0) _pool.Release(this);
     }
 
     public void Activate()

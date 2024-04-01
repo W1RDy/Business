@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 7712517103421431355}
   - component: {fileID: 7773339151014674713}
   - component: {fileID: 8617616336688798313}
+  - component: {fileID: 2666572515153817633}
   m_Layer: 5
   m_Name: ConstructButton
   m_TagString: Untagged
@@ -292,6 +293,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2666572515153817633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096247243227698040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a7c389fc13c0c043899b6fe30e83e76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _goods: {fileID: 877243323409300393}
+  _text: {fileID: 3137136785771970628}
 --- !u!1 &1118346842646315014
 GameObject:
   m_ObjectHideFlags: 0

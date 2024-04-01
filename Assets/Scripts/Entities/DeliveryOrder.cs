@@ -46,11 +46,18 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
 
     private GoodsGenerator _goodsGenerator;
 
+    private Pool<DeliveryOrder> _pool;
+
     private void Awake()
     {
         _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
 
         _deliveryOrderView = new DeliveryOrderView(_priceText, _amountText);
+    }
+
+    private void Start()
+    {
+        _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
     }
 
     public void Init(int id, int cost, int time, GoodsType goodsType)
@@ -77,7 +84,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     public void CancelOrder()
     {
         IsApplied = false;
-        Release();
+        _pool.Release(this);
         _deliveryOrderService.RemoveOrder(this);
     }
 
@@ -86,9 +93,9 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         if (IsApplied)
         {
             IsApplied = false;
-            Release();
+            _pool.Release(this);
             _deliveryOrderService.RemoveOrder(this);
-            _goodsGenerator.GenerateGoods(_goodsType);
+            _goodsGenerator.GenerateGoods(_goodsType, Amount);
         }
     }
 

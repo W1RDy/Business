@@ -35,18 +35,18 @@ public class GoodsGenerator : IService
         return randomIndex > 70;
     }
 
-    public void GenerateGoods(GoodsType goodsType)
+    public void GenerateGoods(GoodsType goodsType, int amount)
     {
         var goodsConfigInstance = _configsDictionary[goodsType];
         var isBroken = GetRandomBrokenState();
 
         var goods = _goodsService.GetGoods((int)goodsType);
 
-        if (goods != null) goods.Amount++;
+        if (goods != null) goods.Amount += amount;
         else
         {
             goods = _pool.Get();
-            goods.Init(goodsConfigInstance, isBroken);
+            goods.Init(goodsConfigInstance, isBroken, amount);
 
             _goodsService.AddGoods(goods);
         }

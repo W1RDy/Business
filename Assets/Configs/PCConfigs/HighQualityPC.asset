@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8a96dd6eabe65e49b20b0e38116bf1a, type: 3}
-  m_Name: HighQualityGoods
+  m_Script: {fileID: 11500000, guid: 52c76603f85e2c542ada8ee06057d0dd, type: 3}
+  m_Name: HighQualityPC
   m_EditorClassIdentifier: 
   _goodsType: 0
-  _title: HighGoods
-  _description: All high.
-  _buildTime: 1
+  _title: HighQualityPC
+  _description: WOOOW

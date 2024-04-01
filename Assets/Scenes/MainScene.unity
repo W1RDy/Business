@@ -2910,7 +2910,14 @@ MonoBehaviour:
   _goodsPoolContainer: {fileID: 1293592682}
   _goodsParent: {fileID: 898538482}
   _compositeDeliveryOrder: {fileID: 1896856299}
-  _goodsConfigs: []
+  _goodsConfigs:
+  - {fileID: 11400000, guid: c3ec9088072ad934c9b358ff518a88c0, type: 2}
+  - {fileID: 11400000, guid: db498d56320c6fb47badf261af8b3b5b, type: 2}
+  - {fileID: 11400000, guid: 84076c32a2dca704f87fc58eca8944e8, type: 2}
+  _pcConfigs:
+  - {fileID: 11400000, guid: 6c650a6484e79574197608049b9b0fa0, type: 2}
+  - {fileID: 11400000, guid: f2485292e2db6f640a3ca987d03e0f32, type: 2}
+  - {fileID: 11400000, guid: 3293ae8fb1e2f084e8822b74d334b5ef, type: 2}
 --- !u!1 &699151836
 GameObject:
   m_ObjectHideFlags: 0
