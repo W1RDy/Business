@@ -8,6 +8,7 @@
 
     private void CloseWindow()
     {
-        _buttonService.CloseWindow(_windowType);
+        if (_windowType == WindowType.PeriodFinish) _buttonService.ClosePeriodWindow();
+        else _buttonService.CloseWindow(_windowType);
     }
 }

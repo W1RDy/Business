@@ -19,6 +19,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     [SerializeField] private TextMeshProUGUI _priceText;
     [SerializeField] private TextMeshProUGUI _timeText;
 
+    [SerializeField] private ApplyOrderButton _applyOrderButton;
+
     private CompositeOrderView _view;
 
     #endregion
@@ -37,7 +39,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     {
         _isInitialized = true;
 
-        _view = new CompositeOrderView(_priceText, _timeText);
+        _view = new CompositeOrderView(_priceText, _timeText, _applyOrderButton);
         _idGenerator = new IDGenerator();
 
         _view.SetView("Delivery", 0, 0);
@@ -58,6 +60,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Time += order.Time;
 
         _view.SetView("Delivery", Cost, Time);
+        _view.ChangeState(false);
     }
 
     public void RemoveOrder(IOrder order)
@@ -79,15 +82,18 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Time += newOrder.Time;
 
         _view.SetView("Delivery", Cost, Time);
+        _view.ChangeState(false);
     }
 
     public void ApplyOrder()
     {
-        foreach (IOrder order in _orders)
+        var ordersCopy = new List<IOrder>(_orders);
+        foreach (IOrder order in ordersCopy)
         {
             order.ApplyOrder();
         }
-        IsApplied = _orders[0].IsApplied;
+        IsApplied = _orders.Count > 0;
+        _view.ChangeState(true);
     }
 
     public void CancelOrder()
@@ -96,16 +102,16 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.CancelOrder();
         }
-        IsApplied = _orders[0].IsApplied;
+        IsApplied = false;
     }
 
     public void CompleteOrder()
     {
         foreach (IOrder order in _orders)
         {
-            order.CancelOrder();
+            order.CompleteOrder();
         }
-        IsApplied = _orders[0].IsApplied;
+        IsApplied = false;
     }
 }
 
@@ -114,15 +120,24 @@ public class CompositeOrderView
     private TextMeshProUGUI _priceText;
     private TextMeshProUGUI _timeText;
 
-    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText)
+    private ApplyOrderButton _applyButton;
+
+    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, ApplyOrderButton applyOrderButton)
     {
         _priceText = priceText;
         _timeText = timeText;
+
+        _applyButton = applyOrderButton;
     }
 
     public void SetView(string orderType, int price, int time)
     {
         _priceText.text = orderType + " price: " + price;
         _timeText.text = orderType + " time: " + time;
+    }
+
+    public void ChangeState(bool isApplied)
+    {
+        _applyButton.ChangeState(isApplied);
     }
 }

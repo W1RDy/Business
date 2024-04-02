@@ -97,8 +97,18 @@ public class ButtonService : IService
 
     public void ApplyOrder(IOrder order)
     {
-        order.ApplyOrder();
-        if (order as Order != null) _activeOrderService.AddOrder(order);
+        if (order as Order != null)
+        {
+            order.ApplyOrder();
+            _activeOrderService.AddOrder(order);
+        }
+        else if (_handCoinsCounter.Coins >= order.Cost)
+        {
+            Debug.Log(order.Cost);
+            AddTime(order.Time);
+            RemoveHandsCoins(order.Cost);
+            order.ApplyOrder();
+        }
     }
 
     public void AddDeliveryOrder(Delivery delivery)
@@ -109,5 +119,11 @@ public class ButtonService : IService
     public void ConstructPC(Goods goods)
     {
         goods.ConstructPC();
+        AddTime(goods.Time);
+    }
+
+    public void ThrowOut(IOrder order)
+    {
+        order.CancelOrder();
     }
 }

@@ -25,6 +25,11 @@ public class OrderView : MonoBehaviour
         _timeText.text = timeValue.ToString();
     }   
 
+    public void ChangeApplyState(bool isApplied)
+    {
+        _applyOrderButton.ChangeState(isApplied);
+    }
+
     public void ChangeViewForComplete()
     {
         _applyOrderButton.gameObject.SetActive(false);

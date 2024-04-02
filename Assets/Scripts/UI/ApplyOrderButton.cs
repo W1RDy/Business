@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ApplyOrderButton : OrdersControlButton
 {
@@ -18,11 +19,11 @@ public class ApplyOrderButton : OrdersControlButton
     private void ApplyOrder()
     {
         _buttonService.ApplyOrder(_order);
-        ChangeState(true);
     }
 
     public void ChangeState(bool isApplied)
     {
+        if (_button == null) Start();
         _button.interactable = !isApplied;
         var text = isApplied ? "Applied" : "Apply";
         SetText(text);

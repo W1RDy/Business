@@ -331,8 +331,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330337217671957393}
-  - component: {fileID: 8750776062870025772}
   - component: {fileID: 1790697467583919186}
+  - component: {fileID: 8750776062870025772}
   m_Layer: 5
   m_Name: DeliveryOrder
   m_TagString: Untagged
@@ -362,6 +362,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 349.8, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1790697467583919186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3461401032350823039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a371c307654f6c2458b568c02437ed3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priceText: {fileID: 1058058287880062558}
+  _amountText: {fileID: 1168688727417954552}
 --- !u!114 &8750776062870025772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,20 +402,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1790697467583919186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3461401032350823039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a371c307654f6c2458b568c02437ed3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _priceText: {fileID: 1058058287880062558}
-  _amountText: {fileID: 1168688727417954552}
 --- !u!1 &3672960569346792970
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 194.20667, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5285439790074449701
@@ -845,6 +845,7 @@ GameObject:
   - component: {fileID: 8658569362628600044}
   - component: {fileID: 4512289009836919030}
   - component: {fileID: 3528329130965412820}
+  - component: {fileID: 4687595848474768700}
   m_Layer: 5
   m_Name: ThrowButton
   m_TagString: Untagged
@@ -954,3 +955,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4687595848474768700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7149856613108365316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b60d22fbcfec38c45854ca413fd19d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _orderClass: {fileID: 1790697467583919186}
+  _stateText: {fileID: 1581018752644958926}

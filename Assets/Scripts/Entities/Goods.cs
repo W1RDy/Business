@@ -7,6 +7,8 @@ public class Goods : MonoBehaviour, IPoolElement<Goods>
 
     public int ID => (int)_config.GoodsType;
 
+    public int Time => _config.BuildTime;
+
     private GoodsConfig _config;
 
 

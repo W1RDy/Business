@@ -18,7 +18,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         get => _amount;
         set 
         {
-            Cost = value * Cost;
+            Cost = value * (Cost / Mathf.Clamp(_amount, 1, int.MaxValue));
             _amount = value;
 
             _deliveryOrderView.SetView(Cost, value);
@@ -42,6 +42,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     public bool IsApplied { get; private set; }
     public bool IsFree {get; private set;}
     public DeliveryOrder Element => this;
+    private CompositeOrder _compositeOrder;
 
     private DeliveryOrderService _deliveryOrderService;
 
@@ -52,13 +53,13 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     private void Awake()
     {
         _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
-
         _deliveryOrderView = new DeliveryOrderView(_priceText, _amountText);
     }
 
     private void Start()
     {
         _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
+        _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
     }
 
     public void Init(int id, int cost, int time, GoodsType goodsType)
@@ -85,8 +86,17 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     public void CancelOrder()
     {
         IsApplied = false;
-        _pool.Release(this);
-        _deliveryOrderService.RemoveOrder(this);
+        if (Amount == 1)
+        {
+            _pool.Release(this);
+            _compositeOrder.RemoveOrder(this);
+        }
+        else
+        {
+            var oldCost = Cost;
+            Amount--;
+            _compositeOrder.ChangeOrder(oldCost, Time, this);
+        }
     }
 
     public void CompleteOrder()
@@ -95,8 +105,9 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         {
             IsApplied = false;
             _pool.Release(this);
-            _deliveryOrderService.RemoveOrder(this);
+            
             _goodsGenerator.GenerateGoods(_goodsType, Amount);
+            _compositeOrder.RemoveOrder(this);
         }
     }
 
@@ -111,6 +122,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         IsFree = true;
         IsApplied = false;
         gameObject.SetActive(false);
+        if (_goodsGenerator != null) _deliveryOrderService.RemoveOrder(this);
     }
 }
 

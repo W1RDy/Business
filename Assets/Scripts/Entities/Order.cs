@@ -83,6 +83,8 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
             _goal = _goalPool.Get();
             _goal.Init(ID, Cost, Time);
+
+            _view.ChangeApplyState(true);
         }
     }
 
@@ -120,15 +122,18 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
     private void ChangeRemainTime(int changeValue)
     {
-        _remainTime = Mathf.Clamp(_remainTime - changeValue, 0, _orderConfig.Time);
+        if (_isApplied)
+        {
+            _remainTime = Mathf.Clamp(_remainTime - changeValue, 0, _orderConfig.Time);
 
-        if (_remainTime == 0)
-        {
-            CancelOrder();
-        }
-        else
-        {
-            _goal.SetRemainTime(_remainTime);
+            if (_remainTime == 0)
+            {
+                CancelOrder();
+            }
+            else
+            {
+                _goal.SetRemainTime(_remainTime);
+            }
         }
     }
 
