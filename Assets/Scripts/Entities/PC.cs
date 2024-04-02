@@ -20,6 +20,8 @@ public class PC : MonoBehaviour, IPoolElement<PC>
         }
     }
 
+    public GoodsType QualityType => _config.GoodsType;
+
     #endregion
 
     #region View

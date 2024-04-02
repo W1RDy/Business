@@ -14,6 +14,8 @@ public class ButtonService : IService
 
     private ActiveOrderService _activeOrderService;
 
+    private OrderProgressChecker _orderProgressChecker;
+
     public ButtonService() 
     {
         _timeController = ServiceLocator.Instance.Get<TimeController>();
@@ -24,6 +26,8 @@ public class ButtonService : IService
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
         _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
+
+        _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
     }
 
     public void AddTime(int time)
@@ -88,14 +92,13 @@ public class ButtonService : IService
 
     public void SendOrder(IOrder order)
     {
-        order.CompleteOrder();
-        _activeOrderService.RemoveOrder(order);
+        _orderProgressChecker.CompleteOrder(order as Order);
     }
 
     public void ApplyOrder(IOrder order)
     {
         order.ApplyOrder();
-        _activeOrderService.AddOrder(order);
+        if (order as Order != null) _activeOrderService.AddOrder(order);
     }
 
     public void AddDeliveryOrder(Delivery delivery)

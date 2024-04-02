@@ -87,7 +87,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.ApplyOrder();
         }
-        IsApplied = true;
+        IsApplied = _orders[0].IsApplied;
     }
 
     public void CancelOrder()
@@ -96,7 +96,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.CancelOrder();
         }
-        IsApplied = false;
+        IsApplied = _orders[0].IsApplied;
     }
 
     public void CompleteOrder()
@@ -105,7 +105,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.CancelOrder();
         }
-        IsApplied = false;
+        IsApplied = _orders[0].IsApplied;
     }
 }
 

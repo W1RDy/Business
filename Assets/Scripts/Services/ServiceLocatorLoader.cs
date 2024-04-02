@@ -52,12 +52,20 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindPeriodController();
         BindTimeController();
 
-        BindButtonService();
-
         BindPools();
 
         BindGoodsService();
         BindPCService();
+
+        BindOrderProgressChecker();
+
+        BindButtonService();
+    }
+
+    private void BindOrderProgressChecker()
+    {
+        var orderProgressChecker = new OrderProgressChecker();
+        ServiceLocator.Instance.Register(orderProgressChecker);
     }
 
     private void BindPCService()

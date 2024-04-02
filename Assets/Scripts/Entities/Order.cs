@@ -16,6 +16,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
     public int ID => _id;
     public int Cost => _orderConfig.Cost;
     public int Time => _orderConfig.Time;
+    public GoodsType NeededGoods => _orderConfig.NeededGoods;
 
     #endregion
 
@@ -26,13 +27,15 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
     private RewardHandler _rewardHandler;
     private TimeController _timeController;
+
     private ActiveOrderService _activeOrderService;
     private OrderService _orderService;
 
     private Action<int> TimeChangedDelegate;
 
     private Goal _goal;
-    private Pool<Goal> _pool;
+    private Pool<Goal> _goalPool;
+    private Pool<Order> _orderPool;
 
     private bool _isInitialized;
     private bool _isFree;
@@ -67,7 +70,8 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
 
         _timeController.OnTimeChanged += TimeChangedDelegate;
 
-        _pool = ServiceLocator.Instance.Get<Pool<Goal>>();
+        _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
+        _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
     }
 
     public void ApplyOrder()
@@ -77,7 +81,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
             Debug.Log("Order applied");
             _isApplied = true;
 
-            _goal = _pool.Get();
+            _goal = _goalPool.Get();
             _goal.Init(ID, Cost, Time);
         }
     }
@@ -89,8 +93,16 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
             Debug.Log("Order canceled");
             _isApplied = false;
 
-            _activeOrderService.RemoveOrder(this);
-            _orderService.RemoveOrder(this);
+            _orderPool.Release(this);
+        }
+    }
+
+    public void ChangeOrderState(bool isReadyForComplete)
+    {
+        if (_isApplied)
+        {
+            if (isReadyForComplete) _view.ChangeViewForComplete();
+            else _view.ChangeViewForProcess();
         }
     }
 
@@ -102,8 +114,7 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
             _isApplied = false;
             _rewardHandler.ApplyRewardForOrder(this);
 
-            _activeOrderService.RemoveOrder(this);
-            _orderService.RemoveOrder(this);
+            _orderPool.Release(this);
         }
     }
 
@@ -114,7 +125,6 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
         if (_remainTime == 0)
         {
             CancelOrder();
-            _goal.DestroyGoal();
         }
         else
         {
@@ -140,5 +150,14 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
     {
         gameObject.SetActive(false);
         _isFree = true;
+        _isApplied = false;
+
+        if (_isInitialized)
+        {
+            _activeOrderService.RemoveOrder(this);
+            _orderService.RemoveOrder(this);
+
+            _goalPool.Release(_goal);
+        }
     }
 }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class ApplyOrderButton : OrdersControlButton
 {
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
-        SetText("Apply");
+        base.Start();
+        ChangeState(false);
     }
 
     protected override void ClickCallback()
@@ -18,7 +18,13 @@ public class ApplyOrderButton : OrdersControlButton
     private void ApplyOrder()
     {
         _buttonService.ApplyOrder(_order);
-        _button.interactable = false;
-        SetText("Applied");
+        ChangeState(true);
+    }
+
+    public void ChangeState(bool isApplied)
+    {
+        _button.interactable = !isApplied;
+        var text = isApplied ? "Applied" : "Apply";
+        SetText(text);
     }
 }

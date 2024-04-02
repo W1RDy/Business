@@ -26,6 +26,22 @@ public class OrderService : IService
     }
 
     public int GetOrdersCount() => _ordersDict.Count;
+
+    public List<IOrder> GetOrdersByGoods(GoodsType goodsType)
+    {
+        var result = new List<IOrder>();
+
+        foreach (var orderInterface in _ordersDict.Values)
+        {
+            if (orderInterface is Order order)
+            {
+                if (order.NeededGoods == goodsType) result.Add(orderInterface);
+            }
+            else break;
+        }
+
+        return result;
+    }
 }
 
 public class ActiveOrderService : OrderService

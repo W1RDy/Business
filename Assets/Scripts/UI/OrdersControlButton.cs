@@ -11,10 +11,11 @@ public abstract class OrdersControlButton : CustomButton
 
     protected IOrder _order;
 
-    protected virtual void Awake()
+    protected override void Start()
     {
         if (_orderClass is IOrder order) _order = order;
         else throw new System.ArgumentException(_orderClass.name + " doesn't realize interface IOrder");
+        base.Start();
     }
 
     protected virtual void SetText(string text)

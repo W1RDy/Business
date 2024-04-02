@@ -26,6 +26,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     }
 
     private GoodsType _goodsType;
+    public GoodsType NeededGoods => _goodsType;
 
     #endregion
 
@@ -108,6 +109,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     public void Release()
     {
         IsFree = true;
+        IsApplied = false;
         gameObject.SetActive(false);
     }
 }

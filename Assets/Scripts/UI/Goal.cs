@@ -51,11 +51,6 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
         _view.SetTime(remainTime, _time);
     }
 
-    public void DestroyGoal()
-    {
-        gameObject.SetActive(false);
-    }
-
     public void Activate()
     {
         gameObject.SetActive(true);

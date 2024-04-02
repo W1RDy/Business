@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SendOrderButton : OrdersControlButton
 {
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         SetText("Send");
     }
 
