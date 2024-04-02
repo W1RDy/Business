@@ -1,37 +1,26 @@
 using System;
 using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GoalFactory : IFactory
+public class GoalFactory : BaseFactory
 {
     private const string Path = "Goal";
 
-    private Goal _prefab;
-
-    private RectTransform _container;
-
-    public GoalFactory(RectTransform container)
+    public GoalFactory(RectTransform container) : base(container)
     {
-        _container = container;
+
     }
 
-    public void LoadResources()
+    public override void LoadResources()
     {
-        _prefab = Resources.Load<Goal>(Path);
+        if (_prefab == null) _prefab = Resources.Load<Goal>(Path);
     }
 
-    public MonoBehaviour Create()
+    public override MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
     {
-        return Create(Vector2.zero, Quaternion.identity, _container);
-    }
-
-    public MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
-    {
-        var goal = MonoBehaviour.Instantiate(_prefab, pos, rotation, _container);
-
-        goal.transform.localRotation = rotation;
-        goal.transform.localPosition = Vector3.zero;
+        var goal = base.Create(pos, rotation, parent);
 
         var layoutRootForRebuild = goal.transform.GetChild(2).GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRootForRebuild);

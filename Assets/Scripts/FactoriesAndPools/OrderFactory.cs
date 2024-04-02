@@ -3,35 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OrderFactory : IFactory
+public class OrderFactory : BaseFactory
 {
     private const string Path = "Order";
 
-    private Order _orderPrefab;
-
-    private RectTransform _container;
-
-    public OrderFactory(RectTransform container)
+    public OrderFactory(RectTransform container) : base(container)
     {
-        _container = container;
+
     }
 
-    public void LoadResources()
+    public override void LoadResources()
     {
-        _orderPrefab = Resources.Load<Order>(Path);
+        if (_prefab == null) _prefab = Resources.Load<Order>(Path);
     }
 
-    public MonoBehaviour Create()
+    public override MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
     {
-        return Create(Vector2.zero, Quaternion.identity, null);
-    }
-
-    public MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
-    {
-        var order = MonoBehaviour.Instantiate(_orderPrefab, pos, rotation, _container);
-
-        order.transform.localRotation = rotation;
-        order.transform.localPosition = Vector3.zero;
+        var order = base.Create(pos, rotation, parent);
 
         var layoutRootForRebuild = order.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRootForRebuild);
@@ -40,39 +28,17 @@ public class OrderFactory : IFactory
     }
 }
 
-public class DeliveryOrderFactory : IFactory
+public class DeliveryOrderFactory : BaseFactory
 {
     private const string Path = "DeliveryOrder";
 
-    private DeliveryOrder _orderPrefab;
-
-    private RectTransform _container;
-
-    public DeliveryOrderFactory(RectTransform container)
+    public DeliveryOrderFactory(RectTransform container) : base (container)
     {
-        _container = container;
+
     }
 
-    public void LoadResources()
+    public override void LoadResources()
     {
-        _orderPrefab = Resources.Load<DeliveryOrder>(Path);
-    }
-
-    public MonoBehaviour Create()
-    {
-        return Create(Vector2.zero, Quaternion.identity, null);
-    }
-
-    public MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
-    {
-        var order = MonoBehaviour.Instantiate(_orderPrefab, pos, rotation, _container);
-
-        order.transform.localRotation = rotation;
-        order.transform.localPosition = Vector3.zero;
-
-        //var layoutRootForRebuild = order.transform.GetChild(1).GetChild(1).GetChild(0).GetComponent<RectTransform>();
-        //LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRootForRebuild);
-
-        return order;
+        _prefab = Resources.Load<DeliveryOrder>(Path);
     }
 }

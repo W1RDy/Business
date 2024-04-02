@@ -1,35 +1,16 @@
 ﻿using UnityEngine;
 
-public class PCFactory : IFactory
+public class PCFactory : BaseFactory
 {
     private const string Path = "PC";
 
-    private PC _pcPrefab;
-
-    private RectTransform _container;
-
-    public PCFactory(RectTransform container)
+    public PCFactory(RectTransform container) : base(container)
     {
-        _container = container;
+
     }
 
-    public void LoadResources()
+    public override void LoadResources()
     {
-        _pcPrefab = Resources.Load<PC>(Path);
-    }
-
-    public MonoBehaviour Create()
-    {
-        return Create(Vector2.zero, Quaternion.identity, null);
-    }
-
-    public MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
-    {
-        var goods = MonoBehaviour.Instantiate(_pcPrefab, pos, rotation, _container);
-
-        goods.transform.localRotation = rotation;
-        goods.transform.localPosition = Vector3.zero;
-
-        return goods;
+        if (_prefab == null) _prefab = Resources.Load<PC>(Path);
     }
 }

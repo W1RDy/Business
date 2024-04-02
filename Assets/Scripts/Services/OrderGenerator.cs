@@ -39,7 +39,7 @@ public class OrderGenerator : MonoBehaviour
         return _orders[randomIndex];
     }
 
-    public Order GenerateOrder()
+    public void GenerateOrder()
     {
         var order = _pool.Get();
         var id = _idGenerator.GetID();
@@ -48,7 +48,5 @@ public class OrderGenerator : MonoBehaviour
         order.Init(id, GetOrderConfig());
 
         _orderService.AddOrder(order);
-
-        return order;
     }
 }

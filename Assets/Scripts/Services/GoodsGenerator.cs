@@ -28,7 +28,7 @@ public class GoodsGenerator : IService
         }
     }
 
-    public bool GetRandomBrokenState()
+    private bool GetRandomBrokenState()
     {
         var randomIndex = Random.Range(0, 101);
 
