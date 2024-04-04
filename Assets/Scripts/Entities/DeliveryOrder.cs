@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<DeliveryOrder>
@@ -38,6 +39,10 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     private DeliveryOrderView _deliveryOrderView;
 
+    [SerializeField] private UIAnimation _appearAnimation;
+    [SerializeField] private UIAnimation _disappearAnimation;
+    private EntityAnimationsController _animController;
+
     #endregion
 
     public bool IsApplied { get; private set; }
@@ -51,10 +56,13 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     private Pool<DeliveryOrder> _pool;
 
-    private void Awake()
+    public void InitInstance()
     {
+        Release();
+
         _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
         _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText);
+        InitAnimations();
     }
 
     private void Start()
@@ -63,7 +71,9 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
     }
 
-    public void Init(int id, int cost, int time, GoodsType goodsType)
+    private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
+
+    public void InitVariant(int id, int cost, int time, GoodsType goodsType)
     {
         if (_goodsGenerator == null) _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
 
@@ -116,6 +126,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
     {
         IsFree = false;
         gameObject.SetActive(true);
+
+        _animController.PlayAppearAnimation();
     }
 
     public void Release()
@@ -128,7 +140,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     public void ThrowOut()
     {
-        CancelOrder();
+        Action callback = () => CancelOrder();
+        _animController.PlayDisappearAnimation(callback);
     }
 }
 

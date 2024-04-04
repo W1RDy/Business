@@ -657,6 +657,8 @@ MonoBehaviour:
   _priceText: {fileID: 8176050282060794601}
   _timeText: {fileID: 1058058287880062558}
   _amountText: {fileID: 1168688727417954552}
+  _appearAnimation: {fileID: 11400000, guid: 14d6c6031fcb8f6488e6afd74c03855f, type: 2}
+  _disappearAnimation: {fileID: 11400000, guid: f9317fd717b75b24dba6dcf4a8a0646b, type: 2}
 --- !u!1 &3672960569346792970
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60d22fbcfec38c45854ca413fd19d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _throwableObj: {fileID: 1790697467583919186}
 --- !u!1 &7690621148442912082
 GameObject:

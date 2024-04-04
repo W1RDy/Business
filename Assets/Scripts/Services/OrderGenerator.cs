@@ -45,7 +45,7 @@ public class OrderGenerator : MonoBehaviour
         var id = _idGenerator.GetID();
         Debug.Log(id);
 
-        order.Init(id, GetOrderConfig());
+        order.InitVariant(id, GetOrderConfig());
 
         _orderService.AddOrder(order);
     }

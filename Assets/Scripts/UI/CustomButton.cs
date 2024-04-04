@@ -8,6 +8,8 @@ public abstract class CustomButton : MonoBehaviour
 
     protected ButtonService _buttonService;
 
+    [SerializeField] private UIAnimation _animation;
+
     protected virtual void Start()
     {
         Init();
@@ -19,9 +21,18 @@ public abstract class CustomButton : MonoBehaviour
 
         _button = GetComponent<Button>();
         _button.onClick.AddListener(ClickCallback);
+
+        if (_animation)
+        {
+            _animation = Instantiate(_animation);
+            if (_animation is UIScaleAnimation _scaleAnimation) _scaleAnimation.SetParametres(transform); 
+        }
     }
 
-    protected virtual void ClickCallback() { }
+    protected virtual void ClickCallback()
+    {
+        if (_animation) _animation.Play();
+    }
 
     private void OnDestroy()
     {

@@ -57,7 +57,7 @@ public class Delivery : MonoBehaviour
         if (deliveryOrder == null)
         {
             deliveryOrder = _pool.Get();
-            deliveryOrder.Init(ID, Cost, Time, _deliveryConfigInstance.GoodsType);
+            deliveryOrder.InitVariant(ID, Cost, Time, _deliveryConfigInstance.GoodsType);
             _orderService.AddOrder(deliveryOrder);
 
             _compositeOrder.AddOrder(deliveryOrder);

@@ -37,7 +37,7 @@ public class PCGenerator : IService
         else
         {
             pc = _pool.Get();
-            pc.Init(pcConfigInstance, isBroken);
+            pc.InitVariant(pcConfigInstance, isBroken);
 
             _pcService.AddPC(pc);
         }

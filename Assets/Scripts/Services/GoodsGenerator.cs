@@ -46,7 +46,7 @@ public class GoodsGenerator : IService
         else
         {
             goods = _pool.Get();
-            goods.Init(goodsConfigInstance, isBroken, amount);
+            goods.InitVariant(goodsConfigInstance, isBroken, amount);
 
             _goodsService.AddGoods(goods);
         }

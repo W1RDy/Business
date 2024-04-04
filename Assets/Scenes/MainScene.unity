@@ -464,6 +464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 4
+  _openAnimation: {fileID: 0}
+  _closeAnimation: {fileID: 0}
 --- !u!1 &114222137
 GameObject:
   m_ObjectHideFlags: 0
@@ -2599,6 +2601,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 0
+  _openAnimation: {fileID: 11400000, guid: 3fe30eb64c846b64c85a40a474b12b72, type: 2}
+  _closeAnimation: {fileID: 11400000, guid: 18ca6fa49da083a4da17d10e97d83ffa, type: 2}
 --- !u!224 &642005813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2982,6 +2986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd4ff5b56ee714f42bedc90e729d26c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
 --- !u!1 &667096718
 GameObject:
   m_ObjectHideFlags: 0
@@ -3116,6 +3121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda0f63e01bb7554387e95c3afea5330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 0}
   _window: {fileID: 114013206}
   _connectedTab: {fileID: 896942033}
 --- !u!1 &671119682
@@ -3172,6 +3178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 5
+  _openAnimation: {fileID: 11400000, guid: 80b46d487b049a74688d0f82ba0a8e73, type: 2}
+  _closeAnimation: {fileID: 11400000, guid: 18ca6fa49da083a4da17d10e97d83ffa, type: 2}
 --- !u!1001 &681874339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4227,6 +4235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda0f63e01bb7554387e95c3afea5330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 0}
   _window: {fileID: 1596205504}
   _connectedTab: {fileID: 667096723}
 --- !u!1 &898538481
@@ -4693,6 +4702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be1c256c250c2784cb79ee029d7aae54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _coinsValue: 20
   _buttonText: {fileID: 880340736}
 --- !u!114 &956808934
@@ -4833,6 +4843,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -66.75
       objectReference: {fileID: 0}
+    - target: {fileID: 2740450967621702868, guid: fa90728d30611264787ad52f2d800064, type: 3}
+      propertyPath: _animation
+      value: 
+      objectReference: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
     - target: {fileID: 2823736377095511844, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -5532,6 +5546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f939e2607a2e29409ec6cc8312936b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 1820471388}
 --- !u!114 &1082925576
 MonoBehaviour:
@@ -6433,6 +6448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15b551b8dac8825418085499edcb5bd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _timeValue: 5
   _buttonText: {fileID: 192710336}
 --- !u!1 &1278916734
@@ -6745,6 +6761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35a675ff50e6284c8e8e24341e2db6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _orderClass: {fileID: 1896856299}
   _stateText: {fileID: 1904984490}
 --- !u!1 &1369660149
@@ -6799,6 +6816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f939e2607a2e29409ec6cc8312936b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 2063184570}
 --- !u!114 &1369660152
 MonoBehaviour:
@@ -8101,6 +8119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
+  _openAnimation: {fileID: 0}
+  _closeAnimation: {fileID: 0}
 --- !u!1 &1600358979
 GameObject:
   m_ObjectHideFlags: 0
@@ -8809,6 +8829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
+  _openAnimation: {fileID: 11400000, guid: 3fe30eb64c846b64c85a40a474b12b72, type: 2}
+  _closeAnimation: {fileID: 11400000, guid: 18ca6fa49da083a4da17d10e97d83ffa, type: 2}
 --- !u!224 &1820471389
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9257,6 +9279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0323b4175784a2418754c925aaffd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 1820471388}
 --- !u!114 &1899306495
 MonoBehaviour:
@@ -9392,6 +9415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0323b4175784a2418754c925aaffd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 671119684}
 --- !u!114 &1900003554
 MonoBehaviour:
@@ -9907,6 +9931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0323b4175784a2418754c925aaffd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 2063184570}
 --- !u!114 &2004350499
 MonoBehaviour:
@@ -10253,6 +10278,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+  _openAnimation: {fileID: 11400000, guid: 3fe30eb64c846b64c85a40a474b12b72, type: 2}
+  _closeAnimation: {fileID: 11400000, guid: 18ca6fa49da083a4da17d10e97d83ffa, type: 2}
 --- !u!1 &2108374797
 GameObject:
   m_ObjectHideFlags: 0
@@ -10539,6 +10566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f939e2607a2e29409ec6cc8312936b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _window: {fileID: 671119684}
 --- !u!224 &2640198130487864550 stripped
 RectTransform:
@@ -10601,6 +10629,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -66.75
       objectReference: {fileID: 0}
+    - target: {fileID: 2740450967621702868, guid: fa90728d30611264787ad52f2d800064, type: 3}
+      propertyPath: _animation
+      value: 
+      objectReference: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
     - target: {fileID: 2823736377095511844, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

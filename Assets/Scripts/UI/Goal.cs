@@ -32,7 +32,13 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
     public bool IsFree => !gameObject.activeInHierarchy;
     public Goal Element => this;
 
-    public void Init(int id, int cost, int time)
+    public void InitInstance()
+    {
+        Release();
+        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText);
+    }
+
+    public void InitVariant(int id, int cost, int time)
     {
         _id = id;
         _cost = cost;
@@ -40,7 +46,6 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
 
         _remainTime = time;
 
-        if (_view == null) _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText);
         _view.SetView(id, cost, time, time);
     }
 

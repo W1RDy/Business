@@ -1,5 +1,7 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 {
@@ -31,6 +33,10 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     [SerializeField] private TextMeshProUGUI _amountText;
 
+    [SerializeField] private UIAnimation _appearAnimation;
+    [SerializeField] private UIAnimation _disappearAnimation;
+    private EntityAnimationsController _animController;
+
     private PCView _view;
 
     #endregion
@@ -41,7 +47,13 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     private Pool<PC> _pool;
 
-    public void Init(PCConfig config, bool isBroken)
+    public void InitInstance()
+    {
+        Release();
+        InitAnimations();
+    }
+
+    public void InitVariant(PCConfig config, bool isBroken)
     {
         _config = config;
         _isBroken = isBroken;
@@ -54,12 +66,17 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     private void Start()
     {
         _pool = ServiceLocator.Instance.Get<Pool<PC>>();
+
     }
+
+    private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
 
     public void Activate()
     {
         IsFree = false;
         gameObject.SetActive(true);
+
+        _animController.PlayAppearAnimation();
     }
 
     public void Release()
@@ -71,6 +88,10 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     public void ThrowOut()
     {
         Amount -= 1;
-        if (Amount == 0) _pool.Release(this);
+        if (Amount == 0)
+        {
+            Action callback = () => _pool.Release(this);
+            _animController.PlayDisappearAnimation(callback);
+        }
     }
 }

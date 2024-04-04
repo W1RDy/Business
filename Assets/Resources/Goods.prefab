@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7c389fc13c0c043899b6fe30e83e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _goods: {fileID: 877243323409300393}
   _text: {fileID: 7005430415955092573}
 --- !u!1 &1118346842646315014
@@ -530,6 +531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b60d22fbcfec38c45854ca413fd19d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _throwableObj: {fileID: 877243323409300393}
 --- !u!1 &1301224905791262716
 GameObject:
@@ -720,6 +722,8 @@ MonoBehaviour:
   _descriptionText: {fileID: 5995313775036126931}
   _timeText: {fileID: 6480964937098811425}
   _amountText: {fileID: 7828527291989972558}
+  _appearAnimation: {fileID: 11400000, guid: 14d6c6031fcb8f6488e6afd74c03855f, type: 2}
+  _disappearAnimation: {fileID: 11400000, guid: f9317fd717b75b24dba6dcf4a8a0646b, type: 2}
 --- !u!1 &4165780290427432467
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,8 +795,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: 9.5}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 115, y: 9.5}
+  m_SizeDelta: {x: 234, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7377242381158025386
 CanvasRenderer:

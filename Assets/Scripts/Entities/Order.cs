@@ -20,6 +20,14 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
     #endregion
 
+    #region View
+
+    [SerializeField] private UIAnimation _appearAnimation;
+    [SerializeField] private UIAnimation _disappearAnimation;
+    private EntityAnimationsController _animController;
+
+    #endregion
+
     private bool _isApplied;
     public bool IsApplied => _isApplied;
 
@@ -37,27 +45,14 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     private Pool<Goal> _goalPool;
     private Pool<Order> _orderPool;
 
-    private bool _isInitialized;
     private bool _isFree;
     public bool IsFree => _isFree;
     public Order Element => this;
 
-
-    public void Init(int id, OrderConfig orderConfig)
+    public void InitInstance()
     {
-        if (!_isInitialized) InitDependency();
-
-        _orderConfig = orderConfig;
-        _id = id;
-
-        _view.SetView(_orderConfig.Cost, _orderConfig.Time);
-
-        _remainTime = _orderConfig.Time;
-    }
-
-    private void InitDependency()
-    {
-        _isInitialized = true;
+        gameObject.SetActive(false);
+        _isFree = true;
 
         _view = GetComponent<OrderView>();
 
@@ -70,8 +65,29 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
         _timeController.OnTimeChanged += TimeChangedDelegate;
 
-        _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
-        _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
+        InitAnimations();
+    }
+
+    public void InitVariant(int id, OrderConfig orderConfig)
+    {
+        if (_goalPool == null)
+        {
+            _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
+            _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
+        }
+
+        _orderConfig = orderConfig;
+        _id = id;
+
+        _view.SetView(_orderConfig.Cost, _orderConfig.Time);
+
+        _remainTime = _orderConfig.Time;
+    }
+
+    private void InitAnimations()
+    {
+        Debug.Log(gameObject);
+        _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
     }
 
     public void ApplyOrder()
@@ -82,7 +98,7 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
             _isApplied = true;
 
             _goal = _goalPool.Get();
-            _goal.Init(ID, Cost, Time);
+            _goal.InitVariant(ID, Cost, Time);
 
             _view.ChangeApplyState(true);
         }
@@ -146,21 +162,19 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     {
         gameObject.SetActive(true);
         _isFree = false;
+
+        if (_animController != null) _animController.PlayAppearAnimation();
     }
 
     public void Release()
     {
         gameObject.SetActive(false);
+        _orderService.RemoveOrder(this);
 
-        if (_isInitialized)
+        if (_isApplied)
         {
-            _orderService.RemoveOrder(this);
-
-            if (_isApplied)
-            {
-                _activeOrderService.RemoveOrder(this);
-                _goalPool.Release(_goal);
-            }
+            _activeOrderService.RemoveOrder(this);
+            _goalPool.Release(_goal);
         }
 
         _isFree = true;
@@ -170,6 +184,10 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     public void ThrowOut()
     {
         if (_isApplied) CancelOrder();
-        else _orderPool.Release(this);
+        else
+        {
+            Action callback = () => _orderPool.Release(this);
+            _animController.PlayDisappearAnimation(callback);
+        }
     }
 }

@@ -14,4 +14,6 @@ public interface IPoolElement<T> where T : MonoBehaviour
     public T Element { get; }
     public void Activate();
     public void Release();
+
+    public void InitInstance();
 }

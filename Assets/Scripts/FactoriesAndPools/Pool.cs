@@ -29,8 +29,7 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
         {
             var poolElement = Create();
 
-            if (poolElement != null) poolElement.Release();
-            else throw new System.ArgumentException(typeof(T) + " doesn't realize IPoolElement interface!");
+            if (poolElement == null) throw new System.ArgumentException(typeof(T) + " doesn't realize IPoolElement interface!");
         }
     }
 
@@ -39,6 +38,7 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
         if (_elementsList.Count == _startPoolSize) _startPoolSize++;
 
         var element = _factory.Create() as T;
+        element.InitInstance();
 
         _elementsList.Add(element);
         return element;

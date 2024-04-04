@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
@@ -21,7 +22,7 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
             _amount = value;
             _view.SetAmount(value);
         }
-    }    
+    }
 
     #endregion
 
@@ -35,6 +36,10 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
 
     private GoodsView _view;
 
+    [SerializeField] private UIAnimation _appearAnimation;
+    [SerializeField] private UIAnimation _disappearAnimation;
+    private EntityAnimationsController _animController;
+
     #endregion
 
     public bool IsBroken { get; private set; }
@@ -45,15 +50,24 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     private PCGenerator _pcGenerator;
     private Pool<Goods> _pool;
 
-    public void Init(GoodsConfig config, bool isBroken, int amount)
+    public void InitInstance()
+    {
+        Release();
+
+        _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
+        InitAnimations();
+    }
+
+    public void InitVariant(GoodsConfig config, bool isBroken, int amount)
     {
         _config = config;
         IsBroken = isBroken;
 
-        if (_view == null) _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
         Amount = amount;
         _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount);
     }
+
+    private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
 
     private void Start()
     {
@@ -65,13 +79,19 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     {
         _pcGenerator.GeneratePC(_config.GoodsType, IsBroken);
         Amount -= 1;
-        if (Amount == 0) _pool.Release(this);
+        if (Amount == 0)
+        {
+            Action callback = () => _pool.Release(this);
+            _animController.PlayDisappearAnimation(callback);
+        }
     }
 
     public void Activate()
     {
         IsFree = false;
         gameObject.SetActive(true);
+
+        _animController.PlayAppearAnimation();
     }
 
     public void Release()
@@ -83,7 +103,11 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     public void ThrowOut()
     {
         Amount -= 1;
-        if (Amount == 0) _pool.Release(this);
+        if (Amount == 0)
+        {
+            Action callback = () => _pool.Release(this);
+            _animController.PlayDisappearAnimation(callback);
+        }
     }
 }
 
