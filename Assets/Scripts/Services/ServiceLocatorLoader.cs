@@ -12,6 +12,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     [SerializeField] private Window[] _windows;
 
+    [SerializeField] private CoinsDistributor _coinsDistributor;
+
     #region PoolsTransforms
 
     [SerializeField] private RectTransform _orderPoolContainer;
@@ -33,6 +35,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private GoodsConfig[] _goodsConfigs;
     [SerializeField] private PCConfig[] _pcConfigs;
 
+
     private void Awake()
     {
         Bind();
@@ -45,6 +48,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
         BindCoinsCounters();
         BindRewardHandler();
+
+        BindCoinsDistributor();
 
         BindOrdersServices();
         BindDeliveryCompositeOrder();
@@ -60,6 +65,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrderProgressChecker();
 
         BindButtonService();
+    }
+
+    private void BindCoinsDistributor()
+    {
+        ServiceLocator.Instance.Register(_coinsDistributor);
     }
 
     private void BindOrderProgressChecker()

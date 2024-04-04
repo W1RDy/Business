@@ -30,6 +30,15 @@ namespace CoinsCounter
             }
         }
 
+        public void ChangeCoins(int value)
+        {
+            if (_coins > -1)
+            {
+                _coins = value;
+                UpdateIndicator();
+            }
+        }
+
         protected void UpdateIndicator()
         {
             _coinsIndicator.SetCoins(_coins);

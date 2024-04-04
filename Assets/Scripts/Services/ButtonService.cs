@@ -9,6 +9,7 @@ public class ButtonService : IService
 
     private HandsCoinsCounter _handCoinsCounter;
     private BankCoinsCounter _bankCoinsCounter;
+    private CoinsDistributor _coinsDistributor;
 
     private WindowActivator _windowActivator;
 
@@ -22,6 +23,7 @@ public class ButtonService : IService
 
         _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
+        _coinsDistributor = ServiceLocator.Instance.Get<CoinsDistributor>();
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
@@ -88,6 +90,12 @@ public class ButtonService : IService
             _handCoinsCounter.RemoveCoins(value);
             _bankCoinsCounter.AddCoins(value);
         }
+    }
+
+    public void DistributeCoins()
+    {
+        _coinsDistributor.ApplyDistributing();
+        ClosePeriodWindow();
     }
 
     public void SendOrder(IOrder order)
