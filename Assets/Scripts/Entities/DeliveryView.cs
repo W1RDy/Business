@@ -22,8 +22,8 @@ public class DeliveryView : MonoBehaviour
 
     public void SetView(int cost, int time, string title, string description)
     {
-        _costText.text = "Price: " + cost.ToString();
-        _timeText.text = "Time: " + time.ToString();
+        _costText.text = "- " + cost.ToString();
+        _timeText.text = "+ " + time.ToString();
 
         _titleText.text = title;
         _descriptionText.text = description;

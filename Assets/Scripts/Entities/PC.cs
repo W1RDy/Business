@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class PC : MonoBehaviour, IPoolElement<PC>
+public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 {
     #region Values
 
@@ -39,6 +39,8 @@ public class PC : MonoBehaviour, IPoolElement<PC>
     public bool IsFree { get; private set; } 
     public PC Element => this;
 
+    private Pool<PC> _pool;
+
     public void Init(PCConfig config, bool isBroken)
     {
         _config = config;
@@ -47,6 +49,11 @@ public class PC : MonoBehaviour, IPoolElement<PC>
         if (_view == null) _view = new PCView(_titleText, _descriptionText, _amountText);
         Amount = 1;
         _view.SetView(_config.Title, _config.Description, Amount);
+    }
+
+    private void Start()
+    {
+        _pool = ServiceLocator.Instance.Get<Pool<PC>>();
     }
 
     public void Activate()
@@ -59,5 +66,11 @@ public class PC : MonoBehaviour, IPoolElement<PC>
     {
         IsFree = true;
         gameObject.SetActive(false);
+    }
+
+    public void ThrowOut()
+    {
+        Amount -= 1;
+        if (Amount == 0) _pool.Release(this);
     }
 }

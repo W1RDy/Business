@@ -22,7 +22,7 @@ public class GoalFactory : BaseFactory
     {
         var goal = base.Create(pos, rotation, parent);
 
-        var layoutRootForRebuild = goal.transform.GetChild(2).GetComponent<RectTransform>();
+        var layoutRootForRebuild = goal.transform.GetChild(1).GetComponent<RectTransform>();
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRootForRebuild);
 
         return goal;

@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
+public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<DeliveryOrder>
 {
     #region Values
 
@@ -21,7 +21,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
             Cost = value * (Cost / Mathf.Clamp(_amount, 1, int.MaxValue));
             _amount = value;
 
-            _deliveryOrderView.SetView(Cost, value);
+            _deliveryOrderView.SetView(Cost, Time, value);
         }
     }
 
@@ -33,6 +33,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     #region View
 
     [SerializeField] private TextMeshProUGUI _priceText;
+    [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _amountText;
 
     private DeliveryOrderView _deliveryOrderView;
@@ -53,7 +54,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
     private void Awake()
     {
         _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
-        _deliveryOrderView = new DeliveryOrderView(_priceText, _amountText);
+        _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText);
     }
 
     private void Start()
@@ -124,22 +125,30 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IPoolElement<DeliveryOrder>
         gameObject.SetActive(false);
         if (_goodsGenerator != null) _deliveryOrderService.RemoveOrder(this);
     }
+
+    public void ThrowOut()
+    {
+        CancelOrder();
+    }
 }
 
 public class DeliveryOrderView
 {
     private TextMeshProUGUI _costText;
+    private TextMeshProUGUI _timeText;
     private TextMeshProUGUI _amountText;
 
-    public DeliveryOrderView(TextMeshProUGUI priceText, TextMeshProUGUI amountText)
+    public DeliveryOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, TextMeshProUGUI amountText)
     {
         _costText = priceText;
+        _timeText = timeText;
         _amountText = amountText;
     }
 
-    public void SetView(int cost, int amount)
+    public void SetView(int cost, int time, int amount)
     {
-        _costText.text = "Cost: " + cost.ToString();
+        _costText.text = "- " + cost.ToString();
+        _timeText.text = "+ " + time.ToString();
         _amountText.text = "X" + amount.ToString();
     }
 }

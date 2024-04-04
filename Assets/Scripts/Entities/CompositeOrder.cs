@@ -132,7 +132,7 @@ public class CompositeOrderView
 
     public void SetView(string orderType, int price, int time)
     {
-        _priceText.text = orderType + " price: " + price;
+        _priceText.text = orderType + " cost: " + price;
         _timeText.text = orderType + " time: " + time;
     }
 

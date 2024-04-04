@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Goods : MonoBehaviour, IPoolElement<Goods>
+public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
 {
     #region Values
 
@@ -79,6 +79,12 @@ public class Goods : MonoBehaviour, IPoolElement<Goods>
         IsFree = true;
         gameObject.SetActive(false);
     }
+
+    public void ThrowOut()
+    {
+        Amount -= 1;
+        if (Amount == 0) _pool.Release(this);
+    }
 }
 
 public class GoodsView
@@ -108,7 +114,7 @@ public class GoodsView
 
     public void SetTime(int time)
     {
-        _timeText.text = "Time: " + time.ToString();
+        _timeText.text = "+ " + time.ToString();
     }
 
     public void SetAmount(int amount)

@@ -122,8 +122,8 @@ public class ButtonService : IService
         AddTime(goods.Time);
     }
 
-    public void ThrowOut(IOrder order)
+    public void ThrowOut(IThrowable throwable)
     {
-        order.CancelOrder();
+        throwable.ThrowOut();
     }
 }

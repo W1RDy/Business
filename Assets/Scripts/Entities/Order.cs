@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderView))]
-public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
+public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 {
     #region Values
 
@@ -93,8 +93,6 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
         if (_isApplied)
         {
             Debug.Log("Order canceled");
-            _isApplied = false;
-
             _orderPool.Release(this);
         }
     }
@@ -113,7 +111,6 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
         if (_isApplied)
         {
             Debug.Log("Order completed");
-            _isApplied = false;
             _rewardHandler.ApplyRewardForOrder(this);
 
             _orderPool.Release(this);
@@ -154,15 +151,25 @@ public class Order : MonoBehaviour, IOrder, IPoolElement<Order>
     public void Release()
     {
         gameObject.SetActive(false);
-        _isFree = true;
-        _isApplied = false;
 
         if (_isInitialized)
         {
-            _activeOrderService.RemoveOrder(this);
             _orderService.RemoveOrder(this);
 
-            _goalPool.Release(_goal);
+            if (_isApplied)
+            {
+                _activeOrderService.RemoveOrder(this);
+                _goalPool.Release(_goal);
+            }
         }
+
+        _isFree = true;
+        _isApplied = false;
+    }
+
+    public void ThrowOut()
+    {
+        if (_isApplied) CancelOrder();
+        else _orderPool.Release(this);
     }
 }
