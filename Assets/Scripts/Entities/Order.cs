@@ -49,33 +49,39 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     public bool IsFree => _isFree;
     public Order Element => this;
 
+    private Action InitDelegate;
+
     public void InitInstance()
     {
-        gameObject.SetActive(false);
-        _isFree = true;
+        InitDelegate = () =>
+        {
+            gameObject.SetActive(false);
+            _isFree = true;
 
-        _view = GetComponent<OrderView>();
+            _view = GetComponent<OrderView>();
 
-        _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
-        _timeController = ServiceLocator.Instance.Get<TimeController>();
-        _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-        _orderService = ServiceLocator.Instance.Get<OrderService>();
+            _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
+            _timeController = ServiceLocator.Instance.Get<TimeController>();
+            _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
+            _orderService = ServiceLocator.Instance.Get<OrderService>();
 
-        TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
+            _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
+            _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
 
-        _timeController.OnTimeChanged += TimeChangedDelegate;
+            TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
 
-        InitAnimations();
+            _timeController.OnTimeChanged += TimeChangedDelegate;
+
+            InitAnimations();
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
     public void InitVariant(int id, OrderConfig orderConfig)
     {
-        if (_goalPool == null)
-        {
-            _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
-            _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
-        }
-
         _orderConfig = orderConfig;
         _id = id;
 

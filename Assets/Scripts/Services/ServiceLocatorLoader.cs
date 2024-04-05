@@ -67,6 +67,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrderProgressChecker();
 
         BindButtonService();
+
+        ServiceLocator.Instance.RegisterService();
     }
 
     private void BindResultsService()

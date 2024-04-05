@@ -56,27 +56,34 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     private Pool<DeliveryOrder> _pool;
 
+    private Action InitDelegate;
+
     public void InitInstance()
     {
-        Release();
+        InitDelegate = () =>
+        {
+            Release();
 
-        _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
-        _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText);
-        InitAnimations();
-    }
+            _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
+            _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText);
 
-    private void Start()
-    {
-        _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
-        _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
+            _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
+            _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
+
+            _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
+
+            InitAnimations();
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
 
     public void InitVariant(int id, int cost, int time, GoodsType goodsType)
     {
-        if (_goodsGenerator == null) _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
-
         ID = id;
         Cost = cost;
         Time = time;

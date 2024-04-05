@@ -51,12 +51,26 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     private PCGenerator _pcGenerator;
     private Pool<Goods> _pool;
 
+    private Action InitDelegate;
+
     public void InitInstance()
     {
-        Release();
+        InitDelegate = () => 
+        {
+            Release();
 
-        _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
-        InitAnimations();
+            _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
+
+            _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
+            _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
+
+            _goodsService = ServiceLocator.Instance.Get<GoodsService>();
+            InitAnimations();
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
     public void InitVariant(GoodsConfig config, bool isBroken, int amount)
@@ -69,14 +83,6 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
-
-    private void Start()
-    {
-        _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
-        _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
-
-        _goodsService = ServiceLocator.Instance.Get<GoodsService>();
-    }
 
     public void ConstructPC()
     {

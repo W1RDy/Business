@@ -9,6 +9,9 @@ public class ServiceLocator : MonoBehaviour
 
     private Dictionary<Type, IService> _services = new Dictionary<Type, IService>();
 
+    public event Action ServiceRegistered;
+    public bool IsRegistered { get; private set; }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -42,5 +45,14 @@ public class ServiceLocator : MonoBehaviour
         var type = typeof(T);
 
         return (T)_services[type];
+    }
+
+    public void RegisterService()
+    {
+        if (!IsRegistered)
+        {
+            IsRegistered = true;
+            ServiceRegistered?.Invoke();
+        }
     }
 }

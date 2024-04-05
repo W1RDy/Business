@@ -48,10 +48,27 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     private PCService _service;
     private Pool<PC> _pool;
 
+    private Action InitDelegate;
+
     public void InitInstance()
     {
-        Release();
-        InitAnimations();
+        InitDelegate = () =>
+        {
+            Release();
+
+            _service = ServiceLocator.Instance.Get<PCService>();
+            _pool = ServiceLocator.Instance.Get<Pool<PC>>();
+
+
+            InitAnimations();
+
+            _view = new PCView(_titleText, _descriptionText, _amountText);
+
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
     public void InitVariant(PCConfig config, bool isBroken)
@@ -59,15 +76,8 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
         _config = config;
         _isBroken = isBroken;
 
-        if (_view == null) _view = new PCView(_titleText, _descriptionText, _amountText);
         Amount = 1;
         _view.SetView(_config.Title, _config.Description, Amount);
-    }
-
-    private void Start()
-    {
-        _service = ServiceLocator.Instance.Get<PCService>();
-        _pool = ServiceLocator.Instance.Get<Pool<PC>>();
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
