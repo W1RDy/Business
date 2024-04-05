@@ -6,5 +6,6 @@
     DeliveryWindow,
     InventoryWindow,
     BasketWindow,
-    ResultsOfTheMonth
+    ResultsOfTheMonth,
+    ProblemWindow
 }

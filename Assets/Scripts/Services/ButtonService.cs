@@ -85,22 +85,10 @@ public class ButtonService : IService
         _handCoinsCounter.RemoveCoins(value);
     }
 
-    public void DebitCoinsFromBank(int value)
+    public void WasteCoinsByProblems(int value)
     {
-        if (_bankCoinsCounter.Coins >= value)
-        {
-            _bankCoinsCounter.RemoveCoins(value);
-            _handCoinsCounter.AddCoins(value);
-        }
-    }
-
-    public void PutCoinsOnBunk(int value)
-    {
-        if (_handCoinsCounter.Coins >= value)
-        {
-            _handCoinsCounter.RemoveCoins(value);
-            _bankCoinsCounter.AddCoins(value);
-        }
+        RemoveHandsCoins(value);
+        CloseWindow(WindowType.ProblemWindow);
     }
 
     public void DistributeCoins()

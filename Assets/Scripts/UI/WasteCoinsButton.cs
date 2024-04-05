@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class HandsCoinsButton : CustomButton
+public class WasteCoinsButton : CustomButton
 {
     [SerializeField] private int _coinsValue;
 
@@ -17,11 +17,16 @@ public class HandsCoinsButton : CustomButton
     protected override void ClickCallback()
     {
         base.ClickCallback();
-        _buttonService.RemoveHandsCoins(_coinsValue);
+        _buttonService.WasteCoinsByProblems(_coinsValue);
+    }
+
+    public void SetCoinsValue(int value)
+    {
+        _coinsValue = value;
     }
 
     private void SetText()
     {
-        _buttonText.text = "Waste " + _coinsValue + " coins";
+        _buttonText.text = "Ok";
     }
 }

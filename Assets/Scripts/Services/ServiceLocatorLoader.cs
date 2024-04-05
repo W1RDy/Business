@@ -34,6 +34,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     [SerializeField] private GoodsConfig[] _goodsConfigs;
     [SerializeField] private PCConfig[] _pcConfigs;
+    [SerializeField] private ProblemConfig[] _problemConfigs;
 
 
     private void Awake()
@@ -54,6 +55,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrdersServices();
         BindDeliveryCompositeOrder();
 
+        BindProblemGenerator();
         BindResultsService();
 
         BindPeriodController();
@@ -69,6 +71,12 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindProblemGenerator()
+    {
+        var problemGenerator = new ProblemsGenerator(_problemConfigs);
+        ServiceLocator.Instance.Register(problemGenerator);
     }
 
     private void BindResultsService()
