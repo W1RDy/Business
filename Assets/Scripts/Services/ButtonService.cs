@@ -8,12 +8,10 @@ public class ButtonService : IService
     private TimeController _timeController;
 
     private HandsCoinsCounter _handCoinsCounter;
-    private CoinsDistributor _coinsDistributor;
 
     private WindowActivator _windowActivator;
 
     private ActiveOrderService _activeOrderService;
-
     private OrderProgressChecker _orderProgressChecker;
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
@@ -23,7 +21,6 @@ public class ButtonService : IService
         _timeController = ServiceLocator.Instance.Get<TimeController>();
 
         _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-        _coinsDistributor = ServiceLocator.Instance.Get<CoinsDistributor>();
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
@@ -52,7 +49,7 @@ public class ButtonService : IService
 
     public void ClosePeriodFinishWindow()
     {
-        CloseWindow(WindowType.DistributeCoinsWindow);
+        CloseWindow(WindowType.FinishPeriodWindow);
         _timeController.UpdateMonth();
         _resultsOfTheMonthService.ActivateNewResults();
     }
@@ -60,7 +57,7 @@ public class ButtonService : IService
     public void CloseResultsWindow()
     {
         CloseWindow(WindowType.ResultsOfTheMonth);
-        OpenWindow(WindowType.DistributeCoinsWindow);
+        OpenWindow(WindowType.FinishPeriodWindow);
     }
 
     public void OpenInventoryWindow()
@@ -90,9 +87,10 @@ public class ButtonService : IService
         _resultsOfTheMonthService.UpdateResults(0, -value, 0, 0);
     }
 
-    public void DistributeCoins()
+    public void DistributeCoins(int time, CoinsDistributor coinsDistributor)
     {
-        _coinsDistributor.ApplyDistributing();
+        if (time > 0) AddTime(time);
+        coinsDistributor.ApplyDistributing();
         if (_timeController.PeriodFinished()) ClosePeriodFinishWindow();
         else CloseWindow(WindowType.DistributeCoinsWindow);
     }

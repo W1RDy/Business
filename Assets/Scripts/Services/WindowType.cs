@@ -7,5 +7,6 @@
     InventoryWindow,
     BasketWindow,
     ResultsOfTheMonth,
-    ProblemWindow
+    ProblemWindow,
+    FinishPeriodWindow
 }

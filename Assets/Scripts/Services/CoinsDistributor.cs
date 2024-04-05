@@ -7,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CoinsDistributor : MonoBehaviour, IService
+public class CoinsDistributor : MonoBehaviour
 {
     #region View
 
