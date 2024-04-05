@@ -54,6 +54,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrdersServices();
         BindDeliveryCompositeOrder();
 
+        BindResultsService();
+
         BindPeriodController();
         BindTimeController();
 
@@ -65,6 +67,14 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrderProgressChecker();
 
         BindButtonService();
+    }
+
+    private void BindResultsService()
+    {
+        var resultService = new ResultsOfTheMonthService();
+        resultService.ActivateNewResults();
+
+        ServiceLocator.Instance.Register(resultService);
     }
 
     private void BindCoinsDistributor()

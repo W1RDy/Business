@@ -5,5 +5,6 @@
     GoodsWindow,
     DeliveryWindow,
     InventoryWindow,
-    BasketWindow
+    BasketWindow,
+    ResultsOfTheMonth
 }

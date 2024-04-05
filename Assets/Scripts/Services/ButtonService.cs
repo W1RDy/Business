@@ -17,6 +17,8 @@ public class ButtonService : IService
 
     private OrderProgressChecker _orderProgressChecker;
 
+    private ResultsOfTheMonthService _resultsOfTheMonthService;
+
     public ButtonService() 
     {
         _timeController = ServiceLocator.Instance.Get<TimeController>();
@@ -30,6 +32,8 @@ public class ButtonService : IService
         _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
 
         _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
+
+        _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
     }
 
     public void AddTime(int time)
@@ -53,6 +57,13 @@ public class ButtonService : IService
     {
         CloseWindow(WindowType.PeriodFinish);
         _timeController.UpdateMonth();
+        _resultsOfTheMonthService.ActivateNewResults();
+    }
+
+    public void CloseResultsWindow()
+    {
+        CloseWindow(WindowType.ResultsOfTheMonth);
+        OpenWindow(WindowType.PeriodFinish);
     }
 
     public void OpenInventoryWindow()
@@ -100,6 +111,7 @@ public class ButtonService : IService
 
     public void SendOrder(IOrder order)
     {
+        _resultsOfTheMonthService.UpdateResults(0, 0, order.Cost, 0);
         _orderProgressChecker.CompleteOrder(order as Order);
     }
 
@@ -112,6 +124,8 @@ public class ButtonService : IService
         }
         else if (_handCoinsCounter.Coins >= order.Cost)
         {
+            _resultsOfTheMonthService.UpdateResults(-order.Cost, 0, 0, 0);
+
             Debug.Log(order.Cost);
             AddTime(order.Time);
             RemoveHandsCoins(order.Cost);

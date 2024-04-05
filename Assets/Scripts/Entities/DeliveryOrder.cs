@@ -118,8 +118,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         if (IsApplied)
         {
             IsApplied = false;
-            _pool.Release(this);
-            
+            _pool.Release(this); 
+
             _goodsGenerator.GenerateGoods(_goodsType, Amount);
             _compositeOrder.RemoveOrder(this);
         }
