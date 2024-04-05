@@ -7,10 +7,10 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
     #region Values
 
     public int ID { get; private set; }
-
     public int Cost { get; private set; }
-
     public int Time { get; private set; }
+
+    private int _price;
 
     private int _amount;
 
@@ -19,7 +19,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         get => _amount;
         set 
         {
-            Cost = value * (Cost / Mathf.Clamp(_amount, 1, int.MaxValue));
+            Cost = value * _price;
             _amount = value;
 
             _deliveryOrderView.SetView(Cost, Time, value);
@@ -80,9 +80,12 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         ID = id;
         Cost = cost;
         Time = time;
+        _price = Cost;
+
         _goodsType = goodsType;
 
         Amount = 1;
+
     }
 
     public void ApplyOrder()

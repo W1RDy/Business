@@ -47,6 +47,7 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     public bool IsFree { get; private set; }
     public Goods Element => this;
 
+    private GoodsService _goodsService;
     private PCGenerator _pcGenerator;
     private Pool<Goods> _pool;
 
@@ -73,6 +74,8 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     {
         _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
         _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
+
+        _goodsService = ServiceLocator.Instance.Get<GoodsService>();
     }
 
     public void ConstructPC()
@@ -98,6 +101,8 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     {
         IsFree = true;
         gameObject.SetActive(false);
+
+        if (_goodsService != null) _goodsService.RemoveGoods(this);
     }
 
     public void ThrowOut()

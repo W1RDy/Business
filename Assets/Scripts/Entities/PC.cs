@@ -45,6 +45,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     public bool IsFree { get; private set; } 
     public PC Element => this;
 
+    private PCService _service;
     private Pool<PC> _pool;
 
     public void InitInstance()
@@ -65,8 +66,8 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     private void Start()
     {
+        _service = ServiceLocator.Instance.Get<PCService>();
         _pool = ServiceLocator.Instance.Get<Pool<PC>>();
-
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
@@ -83,6 +84,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     {
         IsFree = true;
         gameObject.SetActive(false);
+        if (_service != null) _service.RemovePC(this);
     }
 
     public void ThrowOut()

@@ -42,7 +42,11 @@ public class GoodsGenerator : IService
 
         var goods = _goodsService.GetGoods((int)goodsType);
 
-        if (goods != null) goods.Amount += amount;
+        if (goods != null)
+        {
+            Debug.Log("Increase Goods");
+            goods.Amount += amount;
+        }
         else
         {
             goods = _pool.Get();
