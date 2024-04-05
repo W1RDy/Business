@@ -9,6 +9,13 @@ public class OrderView : MonoBehaviour
     [SerializeField] private ApplyOrderButton _applyOrderButton;
     [SerializeField] private SendOrderButton _sendOrderButton;
 
+    private ButtonChanger _buttonChanger;
+
+    private void Awake()
+    {
+        _buttonChanger = new ButtonChanger(_applyOrderButton, _sendOrderButton);
+    }
+
     public void SetView(int coinsValue, int timeValue)
     {
         SetCoins(coinsValue);
@@ -30,15 +37,8 @@ public class OrderView : MonoBehaviour
         _applyOrderButton.ChangeState(isApplied);
     }
 
-    public void ChangeViewForComplete()
+    public void ChangeButton(bool activateDefaultButton)
     {
-        _applyOrderButton.gameObject.SetActive(false);
-        _sendOrderButton.gameObject.SetActive(true);
-    }
-
-    public void ChangeViewForProcess()
-    {
-        _applyOrderButton.gameObject.SetActive(true);
-        _sendOrderButton.gameObject.SetActive(false);
+        _buttonChanger.ChangeButtons(activateDefaultButton);
     }
 }

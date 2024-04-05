@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CoinsCounter
 {
@@ -15,13 +16,13 @@ namespace CoinsCounter
             _coinsIndicator = coinsIndicator;
         }
 
-        public void AddCoins(int value)
+        public virtual void AddCoins(int value)
         {
             _coins += value;
             UpdateIndicator();
         }
 
-        public void RemoveCoins(int value)
+        public virtual void RemoveCoins(int value)
         {
             if (_coins >= value)
             {
@@ -30,7 +31,7 @@ namespace CoinsCounter
             }
         }
 
-        public void ChangeCoins(int value)
+        public virtual void ChangeCoins(int value)
         {
             if (_coins > -1)
             {
@@ -47,10 +48,30 @@ namespace CoinsCounter
 
     public class HandsCoinsCounter : CoinsCounter
     {
+        public event Action CoinsChanged;
+
         public HandsCoinsCounter(CoinsIndicator coinsIndicator) : base(coinsIndicator) 
         {
             _coins = 50;
             UpdateIndicator();
+        }
+
+        public override void AddCoins(int value)
+        {
+            base.AddCoins(value);
+            CoinsChanged?.Invoke();
+        }
+
+        public override void RemoveCoins(int value)
+        {
+            base.RemoveCoins(value);
+            CoinsChanged?.Invoke();
+        }
+
+        public override void ChangeCoins(int value)
+        {
+            base.ChangeCoins(value);
+            CoinsChanged?.Invoke();
         }
     }
 

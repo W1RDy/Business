@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _problemDescription: The goods are awful.
   _coinsRequirement: 20
+  _chance: 50
+  _chancesUpdateValue: 25

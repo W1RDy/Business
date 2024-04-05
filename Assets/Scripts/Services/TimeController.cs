@@ -38,7 +38,7 @@ public class TimeController : IService
 
         _time = Mathf.Clamp(_time + time, 0, _maxTime);
 
-        if (_time == _maxTime)
+        if (PeriodFinished())
         {
             _periodController.FinishPeriod();
         }
@@ -56,5 +56,10 @@ public class TimeController : IService
         _time = 0;
 
         _timeIndicator.SetTime(_time);
+    }
+
+    public bool PeriodFinished()
+    {
+        return _time >= _maxTime;
     }
 }

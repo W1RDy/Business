@@ -8,7 +8,6 @@ public class ButtonService : IService
     private TimeController _timeController;
 
     private HandsCoinsCounter _handCoinsCounter;
-    private BankCoinsCounter _bankCoinsCounter;
     private CoinsDistributor _coinsDistributor;
 
     private WindowActivator _windowActivator;
@@ -24,13 +23,11 @@ public class ButtonService : IService
         _timeController = ServiceLocator.Instance.Get<TimeController>();
 
         _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-        _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
         _coinsDistributor = ServiceLocator.Instance.Get<CoinsDistributor>();
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
         _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-
         _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
 
         _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
@@ -53,9 +50,9 @@ public class ButtonService : IService
         _windowActivator.DeactivateWindow(windowType);
     }
 
-    public void ClosePeriodWindow()
+    public void ClosePeriodFinishWindow()
     {
-        CloseWindow(WindowType.PeriodFinish);
+        CloseWindow(WindowType.DistributeCoinsWindow);
         _timeController.UpdateMonth();
         _resultsOfTheMonthService.ActivateNewResults();
     }
@@ -63,7 +60,7 @@ public class ButtonService : IService
     public void CloseResultsWindow()
     {
         CloseWindow(WindowType.ResultsOfTheMonth);
-        OpenWindow(WindowType.PeriodFinish);
+        OpenWindow(WindowType.DistributeCoinsWindow);
     }
 
     public void OpenInventoryWindow()
@@ -89,12 +86,15 @@ public class ButtonService : IService
     {
         RemoveHandsCoins(value);
         CloseWindow(WindowType.ProblemWindow);
+
+        _resultsOfTheMonthService.UpdateResults(0, -value, 0, 0);
     }
 
     public void DistributeCoins()
     {
         _coinsDistributor.ApplyDistributing();
-        ClosePeriodWindow();
+        if (_timeController.PeriodFinished()) ClosePeriodFinishWindow();
+        else CloseWindow(WindowType.DistributeCoinsWindow);
     }
 
     public void SendOrder(IOrder order)

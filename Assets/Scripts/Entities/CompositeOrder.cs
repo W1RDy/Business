@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CoinsCounter;
+using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -20,36 +22,43 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     [SerializeField] private TextMeshProUGUI _timeText;
 
     [SerializeField] private ApplyOrderButton _applyOrderButton;
+    [SerializeField] private OpenDistributeCoinsButton _openDistributeCoinsButton;
 
     private CompositeOrderView _view;
 
     #endregion
 
     public bool IsApplied {get; private set;}
-    private bool _isInitialized;
 
     private IDGenerator _idGenerator;
+    private HandsCoinsCounter _handCoinsCounter;
 
-    public void Awake()
+    private Action InitDelegate;
+
+    public void InitInstance()
     {
-        if (!_isInitialized) InitializeDependency();
+        InitDelegate = () =>
+        {
+            _view = new CompositeOrderView(_priceText, _timeText, _applyOrderButton, _openDistributeCoinsButton);
+            _idGenerator = new IDGenerator();
+
+            _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+            _handCoinsCounter.CoinsChanged += ChangeButtons;
+
+            _view.SetView("Delivery", 0, 0);
+
+            ID = _idGenerator.GetID();
+
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate?.Invoke();
     }
 
-    private void InitializeDependency()
+    public void ChangeButtons()
     {
-        _isInitialized = true;
-
-        _view = new CompositeOrderView(_priceText, _timeText, _applyOrderButton);
-        _idGenerator = new IDGenerator();
-
-        _view.SetView("Delivery", 0, 0);
-    }
-
-    public void Init()
-    {
-        if (!_isInitialized) InitializeDependency();
-
-        ID = _idGenerator.GetID();
+        _view.ChangeButtons(_handCoinsCounter.Coins >= Cost);
     }
 
     public void AddOrder(IOrder order)
@@ -59,6 +68,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost += order.Cost;
         Time += order.Time;
 
+        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
         _view.ChangeState(false);
     }
@@ -70,6 +80,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost -= order.Cost;
         Time -= order.Time;
 
+        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
     }
 
@@ -81,6 +92,7 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost += newOrder.Cost;
         Time += newOrder.Time;
 
+        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
         _view.ChangeState(false);
     }
@@ -113,6 +125,11 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         }
         IsApplied = false;
     }
+
+    public void OnDestroy()
+    {
+        _handCoinsCounter.CoinsChanged -= ChangeButtons;
+    }
 }
 
 public class CompositeOrderView
@@ -121,13 +138,19 @@ public class CompositeOrderView
     private TextMeshProUGUI _timeText;
 
     private ApplyOrderButton _applyButton;
+    private OpenDistributeCoinsButton _openDistributeButton;
 
-    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, ApplyOrderButton applyOrderButton)
+    ButtonChanger _buttonsChanger;
+
+    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, ApplyOrderButton applyOrderButton, OpenDistributeCoinsButton openDistributeCoinsButton)
     {
         _priceText = priceText;
         _timeText = timeText;
 
         _applyButton = applyOrderButton;
+        _openDistributeButton = openDistributeCoinsButton;
+
+        _buttonsChanger = new ButtonChanger(_applyButton, _openDistributeButton);
     }
 
     public void SetView(string orderType, int price, int time)
@@ -139,5 +162,10 @@ public class CompositeOrderView
     public void ChangeState(bool isApplied)
     {
         _applyButton.ChangeState(isApplied);
+    }
+
+    public void ChangeButtons(bool activateDefaultButton)
+    {
+        _buttonsChanger.ChangeButtons(activateDefaultButton);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
 public class ProblemsGenerator : IService
 {
@@ -9,16 +9,25 @@ public class ProblemsGenerator : IService
 
     public ProblemsGenerator(ProblemConfig[] problemConfigs)
     {
-        _problemConfigs = problemConfigs;
+        InitConfigsInstnces(problemConfigs);
 
         _problemWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.ProblemWindow) as ProblemWindow;
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
     }
 
+    private void InitConfigsInstnces(ProblemConfig[] problemConfigs)
+    {
+        _problemConfigs = new ProblemConfig[problemConfigs.Length];
+
+        for (int i = 0; i < problemConfigs.Length; i++)
+        {
+            _problemConfigs[i] = ScriptableObject.Instantiate(problemConfigs[i]);
+        }
+    }
+
     private ProblemConfig GetRandomProblem()
     {
-        var randomIndex = Random.Range(0, _problemConfigs.Length);
-        return _problemConfigs[randomIndex];
+        return RandomizerWithChances<ProblemConfig>.Randomize(_problemConfigs);
     }
 
     public void GenerateProblem()

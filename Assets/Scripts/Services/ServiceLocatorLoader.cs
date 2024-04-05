@@ -118,7 +118,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindDeliveryCompositeOrder()
     {
-        _compositeDeliveryOrder.Init();
+        _compositeDeliveryOrder.InitInstance();
 
         ServiceLocator.Instance.Register(_compositeDeliveryOrder);
     }

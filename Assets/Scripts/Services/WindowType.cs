@@ -1,6 +1,6 @@
 ﻿public enum WindowType
 {
-    PeriodFinish,
+    DistributeCoinsWindow,
     OrdersWindow,
     GoodsWindow,
     DeliveryWindow,

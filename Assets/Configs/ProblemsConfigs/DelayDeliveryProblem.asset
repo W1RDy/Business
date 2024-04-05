@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _problemDescription: The delivery is delayed, we need to solve this somehow
   _coinsRequirement: 10
+  _chance: 50
+  _chancesUpdateValue: 25
