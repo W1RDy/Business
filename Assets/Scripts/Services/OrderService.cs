@@ -10,7 +10,6 @@ public class OrderService : IService
     {
         if (_ordersDict.ContainsKey(order.ID)) throw new System.ArgumentException("Order with id " +  order.ID + " already exists!");
         _ordersDict.Add(order.ID, order);
-        Debug.Log(_ordersDict.Count);
     }
 
     public void RemoveOrder(IOrder order)

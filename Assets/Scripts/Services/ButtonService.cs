@@ -12,8 +12,10 @@ public class ButtonService : IService
 
     private WindowActivator _windowActivator;
 
-    private ActiveOrderService _activeOrderService;
     private OrderProgressChecker _orderProgressChecker;
+    private OrderApplyHandler _orderApplyHandler;
+
+    private SuggestionGenerator _suggestionGenerator;
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
 
@@ -26,16 +28,18 @@ public class ButtonService : IService
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
-        _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
         _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
+        _orderApplyHandler = new OrderApplyHandler();
+
+        _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
 
         _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
     }
 
-    public void AddTime(int time)
+    public void TryAddTime(int time)
     {
-        _timeController.AddTime(time);
-        _gameLifeController.SkipDays();
+        _suggestionGenerator.GenerateSuggestion("SkipTime", time);
+        OpenWindow(WindowType.SuggestionWindow);
     }
 
     #region WindowsControl
@@ -93,7 +97,7 @@ public class ButtonService : IService
 
     public void DistributeCoins(int time, CoinsDistributor coinsDistributor)
     {
-        if (time > 0) AddTime(time);
+        if (time > 0) TryAddTime(time);
         coinsDistributor.ApplyDistributing();
         if (_timeController.PeriodFinished()) ClosePeriodFinishWindow();
         else CloseWindow(WindowType.DistributeCoinsWindow);
@@ -107,20 +111,7 @@ public class ButtonService : IService
 
     public void ApplyOrder(IOrder order)
     {
-        if (order as Order != null)
-        {
-            order.ApplyOrder();
-            _activeOrderService.AddOrder(order);
-        }
-        else if (_handCoinsCounter.Coins >= order.Cost)
-        {
-            _resultsOfTheMonthService.UpdateResults(-order.Cost, 0, 0, 0);
-
-            Debug.Log(order.Cost);
-            AddTime(order.Time);
-            RemoveHandsCoins(order.Cost);
-            order.ApplyOrder();
-        }
+        _orderApplyHandler.ApplyOrder(order);
     }
 
     public void AddDeliveryOrder(Delivery delivery)
@@ -131,11 +122,21 @@ public class ButtonService : IService
     public void ConstructPC(Goods goods)
     {
         goods.ConstructPC();
-        AddTime(goods.Time);
+        TryAddTime(goods.Time);
     }
 
     public void ThrowOut(IThrowable throwable)
     {
         throwable.ThrowOut();
+    }
+
+    public void ConfirmSuggestion(Suggestion suggestion)
+    {
+        suggestion.ApplySuggestion();
+    }
+
+    public void CancelSuggestion(Suggestion suggestion)
+    {
+        suggestion.SkipSuggestion();
     }
 }

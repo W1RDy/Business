@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: BrightnessAnimation 1
   m_EditorClassIdentifier: 
   _darknessEnd: 0
-  _time: 2
+  _time: 1

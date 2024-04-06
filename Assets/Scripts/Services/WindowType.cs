@@ -10,5 +10,6 @@ public enum WindowType
     BasketWindow,
     ResultsOfTheMonth,
     ProblemWindow,
-    FinishPeriodWindow
+    FinishPeriodWindow,
+    SuggestionWindow
 }

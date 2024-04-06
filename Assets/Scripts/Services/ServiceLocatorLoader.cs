@@ -12,6 +12,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     [SerializeField] private RandomController _problemsRandomController;
     [SerializeField] private GameLifeController _gameLifeController;
+    [SerializeField] private SuggestionsService _suggestionsService;
 
     [SerializeField] private Window[] _windows;
 
@@ -47,6 +48,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindWindowService();
         BindWindowActivator();
 
+        BindSuggestionControllers();
+
         BindCoinsCounters();
         BindRewardHandler();
 
@@ -56,9 +59,9 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindProblemGenerator();
         BindResultsService();
 
+        BindGameLifeController();
         BindPeriodController();
         BindTimeController();
-        BindGameLifeController();
 
         BindPools();
 
@@ -70,6 +73,14 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindSuggestionControllers()
+    {
+        ServiceLocator.Instance.Register(_suggestionsService);
+
+        var suggestionGenerator = new SuggestionGenerator();
+        ServiceLocator.Instance.Register(suggestionGenerator);
     }
 
     private void BindGameLifeController()

@@ -94,7 +94,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
     private void InitAnimations()
     {
-        Debug.Log(gameObject);
         _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
     }
 
@@ -102,7 +101,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     {
         if (!_isApplied)
         {
-            Debug.Log("Order applied");
             _isApplied = true;
 
             _goal = _goalPool.Get();
@@ -116,7 +114,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     {
         if (_isApplied)
         {
-            Debug.Log("Order canceled");
             _orderPool.Release(this);
         }
     }
@@ -133,7 +130,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     {
         if (_isApplied)
         {
-            Debug.Log("Order completed");
             _rewardHandler.ApplyRewardForOrder(this);
 
             _orderPool.Release(this);

@@ -20,6 +20,7 @@ public class TimeController : IService
 
     private PeriodController _periodController;
     private ProblemsGenerator _problemsGenerator;
+    private GameLifeController _gameLifeController;
 
     public event Action<int> OnTimeChanged;
 
@@ -31,6 +32,7 @@ public class TimeController : IService
 
         _periodController = ServiceLocator.Instance.Get<PeriodController>();
         _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
+        _gameLifeController = ServiceLocator.Instance.Get<GameLifeController>();
     }
 
     public void AddTime(int time)
@@ -48,6 +50,8 @@ public class TimeController : IService
 
         OnTimeChanged?.Invoke(_time - previousTime);
         _problemsGenerator.TryGenerateProblem();
+
+        _gameLifeController.SkipDays();
     }
 
     public void UpdateMonth()

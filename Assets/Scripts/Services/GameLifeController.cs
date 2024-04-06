@@ -20,7 +20,6 @@ public class GameLifeController : MonoBehaviour, IService
     {
         InitDelegate = () =>
         {
-            Debug.Log("Init");
             _timeController = ServiceLocator.Instance.Get<TimeController>();
 
             _darknessAnimationInstance = Instantiate(_darknessAnimation);
@@ -45,5 +44,4 @@ public class GameLifeController : MonoBehaviour, IService
     {
         _brightnessAnimationInstance.Play(() => _clicksBlocker.UnblockClicks());
     }
-
 }

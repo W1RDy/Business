@@ -69,7 +69,6 @@ public class OrderGenerator : MonoBehaviour
 
         var order = _pool.Get();
         var id = _idGenerator.GetID();
-        Debug.Log(id);
 
         order.InitVariant(id, config);
 
