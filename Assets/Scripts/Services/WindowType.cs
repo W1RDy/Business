@@ -1,4 +1,6 @@
-﻿public enum WindowType
+﻿using System;
+
+public enum WindowType
 {
     DistributeCoinsWindow,
     OrdersWindow,

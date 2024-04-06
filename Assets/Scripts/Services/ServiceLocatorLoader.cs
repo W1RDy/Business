@@ -10,6 +10,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private CoinsIndicator _handsCoinsIndicator;
     [SerializeField] private CoinsIndicator _bankCoinsIndicator;
 
+    [SerializeField] private RandomController _problemsRandomController;
+
     [SerializeField] private Window[] _windows;
 
     #region PoolsTransforms
@@ -71,7 +73,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindProblemGenerator()
     {
-        var problemGenerator = new ProblemsGenerator(_problemConfigs);
+        var problemGenerator = new ProblemsGenerator(_problemConfigs, _problemsRandomController);
         ServiceLocator.Instance.Register(problemGenerator);
     }
 

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa90a6118b4605d49af4b9b36b0fe74d, type: 3}
-  m_Name: DelayDeliveryProblem
+  m_Script: {fileID: 11500000, guid: d73ae69f61b7d63458bcb03b5327288b, type: 3}
+  m_Name: MiddleOrder
   m_EditorClassIdentifier: 
-  _problemDescription: The delivery is delayed, we need to solve this somehow
-  _coinsRequirement: 10
-  _chance: 12
-  _chancesUpdateValue: 2
+  _cost: 20
+  _time: 10
+  _chance: 30
+  _chancesUpdateValue: 0
+  _neededGoods: 1

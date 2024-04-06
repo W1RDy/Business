@@ -46,7 +46,7 @@ public class TimeController : IService
         _timeIndicator.SetTime(_time);
 
         OnTimeChanged?.Invoke(_time - previousTime);
-        _problemsGenerator.GenerateProblem();
+        _problemsGenerator.TryGenerateProblem();
     }
 
     public void UpdateMonth()

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-public static class RandomizerWithChances<T> where T : IRandomizable<T> 
+public static class RandomizerWithChances<T> where T : IRandomizable
 {
     public static T Randomize(T[] randomizables)
     {
@@ -18,16 +18,6 @@ public static class RandomizerWithChances<T> where T : IRandomizable<T>
             }
         }
 
-        UpdateChances(result.ChancesUpdateValue, result, randomizables);
         return result;
-    }
-
-    private static void UpdateChances(float changeValue, T result, T[] randomizables)
-    {
-        foreach (var randomizable in randomizables)
-        {
-            if (!randomizable.Equals(result)) randomizable.UpdateChance(changeValue);
-            else result.UpdateChance(-result.ChancesUpdateValue * (randomizables.Length - 1));
-        }
     }
 }

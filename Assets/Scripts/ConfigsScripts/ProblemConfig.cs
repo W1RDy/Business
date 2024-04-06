@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "Problem", menuName = "Problems/New Problem")]
-public class ProblemConfig : ScriptableObject, IRandomizable<ProblemConfig>
+public class ProblemConfig : ScriptableObject, IRandomizable
 {
     [SerializeField] private string _problemDescription;
     [SerializeField] private int _coinsRequirement;
@@ -13,8 +13,8 @@ public class ProblemConfig : ScriptableObject, IRandomizable<ProblemConfig>
     public int CoinsRequirement => _coinsRequirement;
     public float Chance => _chance;
     public float ChancesUpdateValue => _chancesUpdateValue;
-
-    public ProblemConfig Value => this;
+    public bool IsBlocked { get; set; }
+    public int BlockedCounts { get; set; }
 
     public void UpdateChance(float changeValue)
     {

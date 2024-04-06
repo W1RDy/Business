@@ -87,7 +87,7 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
         _orderConfig = orderConfig;
         _id = id;
 
-        _view.SetView(_orderConfig.Cost, _orderConfig.Time);
+        _view.SetView(_orderConfig.Cost, _orderConfig.Time, NeededGoods, ID);
 
         _remainTime = _orderConfig.Time;
     }
@@ -186,6 +186,7 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
         _isFree = true;
         _isApplied = false;
+        _view.ChangeApplyState(_isApplied);
     }
 
     public void ThrowOut()
