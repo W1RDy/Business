@@ -9,7 +9,6 @@ public class ResultsOfTheMonthService : IService
 
     public void UpdateResults(int purchase, int emergency, int orders, int bank)
     {
-        Debug.Log(purchase);
         _currentResults.UpdateResult(purchase, emergency, orders, bank);
     }
 

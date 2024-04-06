@@ -49,8 +49,8 @@ public class OrderApplyHandler
     {
         _rememberedSuggestion = _suggestionGenerator.GenerateSuggestion("SkipTime", order.Time);
 
-        _rememberedSuggestion.SuggestionApplied += ConfirmOrderApplying;
-        _rememberedSuggestion.SuggestionSkipped += CancelOrderApplying;
+        _rememberedSuggestion.Applied += ConfirmOrderApplying;
+        _rememberedSuggestion.Skipped += CancelOrderApplying;
 
         _buttonService.OpenWindow(WindowType.SuggestionWindow);
     }
@@ -69,8 +69,8 @@ public class OrderApplyHandler
 
             if (_rememberedSuggestion != null)
             {
-                _rememberedSuggestion.SuggestionApplied -= ConfirmOrderApplying;
-                _rememberedSuggestion.SuggestionSkipped -= CancelOrderApplying;
+                _rememberedSuggestion.Applied -= ConfirmOrderApplying;
+                _rememberedSuggestion.Skipped -= CancelOrderApplying;
                 _rememberedSuggestion = null;
             }
         }

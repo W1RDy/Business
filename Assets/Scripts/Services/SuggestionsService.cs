@@ -15,7 +15,7 @@ public class SuggestionsService : MonoBehaviour, IService
     {
         foreach (var suggestion in _suggestions)
         {
-            _suggestionsDict.Add(suggestion.Id, Instantiate(suggestion));
+            _suggestionsDict.Add(suggestion.ID, Instantiate(suggestion));
         }
     }
 

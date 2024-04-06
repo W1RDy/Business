@@ -23,7 +23,7 @@ public class SuggestionGenerator : IService
     public Suggestion GenerateSuggestion(string id, int parameter1)
     {
         var suggestion = _suggestionsService.GetSuggestion(id);
-        if (suggestion is SkipTimeSuggestion skipTimeSuggestion) skipTimeSuggestion.SetSuggestionParameters(parameter1);
+        if (suggestion is SkipTimeSuggestion skipTimeSuggestion) skipTimeSuggestion.SetParameters(parameter1);
 
         _suggestionWindow.SetSuggestion(suggestion);
         return suggestion;

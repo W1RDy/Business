@@ -5,27 +5,25 @@ using UnityEngine;
 public class ProblemWindow : Window
 {
     private int _coinsCost;
+    private HandsCoinsCounter _coinsCounter;
 
     [SerializeField] private TextMeshProUGUI _coinsText;
+    [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _problemText;
 
     [SerializeField] private WasteCoinsButton _wasteCoinsButton;
     [SerializeField] private OpenDistributeCoinsButton _openDistributeCoinsButton;
 
-    private ButtonChanger _buttonChanger;
+    private EventsViewController _problemsViewController;
 
-    private HandsCoinsCounter _coinsCounter;
-
-    public void InitProblem(ProblemConfig problemConfig)
+    public void SetProblem(ProblemConfig problemConfig)
     {
-        _coinsCost = problemConfig.CoinsRequirement;
-
-        _problemText.text = problemConfig.ProblemDescription;
-
+        _coinsCost = problemConfig.CoinsRequirements;
         _wasteCoinsButton.SetCoinsValue(_coinsCost);
-        _coinsText.text = "-" + _coinsCost;
+        var buttonChanger = new ButtonChanger(_wasteCoinsButton, _openDistributeCoinsButton);
 
-        _buttonChanger = new ButtonChanger(_wasteCoinsButton, _openDistributeCoinsButton);
+        _problemsViewController = new EventsViewController(_problemText, _timeText, _coinsText, buttonChanger);
+        _problemsViewController.SetEvent(problemConfig);
 
         _coinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
         _coinsCounter.CoinsChanged += ChangeButtonDelegate;
@@ -33,12 +31,7 @@ public class ProblemWindow : Window
 
     public void ChangeButtonDelegate()
     {
-        ChangeButton(_coinsCounter.Coins >= _coinsCost);
-    }
-
-    public void ChangeButton(bool activateDefaultButton)
-    {
-        _buttonChanger.ChangeButtons(activateDefaultButton);
+        _problemsViewController.ChangeButtons(_coinsCounter.Coins >= _coinsCost);
     }
 
     public void OnDisable()

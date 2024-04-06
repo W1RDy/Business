@@ -132,11 +132,11 @@ public class ButtonService : IService
 
     public void ConfirmSuggestion(Suggestion suggestion)
     {
-        suggestion.ApplySuggestion();
+        suggestion.Apply();
     }
 
     public void CancelSuggestion(Suggestion suggestion)
     {
-        suggestion.SkipSuggestion();
+        suggestion.Skip();
     }
 }

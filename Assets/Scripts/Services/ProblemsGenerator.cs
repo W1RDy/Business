@@ -44,7 +44,7 @@ public class ProblemsGenerator : IService
         var problemConfig = GetRandomProblem();
         if (problemConfig != null)
         {
-            _problemWindow.InitProblem(problemConfig);
+            _problemWindow.SetProblem(problemConfig);
 
             _windowActivator.ActivateWindow(WindowType.ProblemWindow);
         }

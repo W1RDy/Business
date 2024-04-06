@@ -1,23 +1,23 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Suggestion : ScriptableObject
+public abstract class Suggestion : ScriptableObject, IEvent
 {
     [SerializeField] private string _id;
-    [SerializeField] private string _text;
-    public string Text => _text;
-    public string Id => _id;
+    [SerializeField] private string _description;
+    public string Description => _description;
+    public string ID => _id;
 
-    public event Action SuggestionApplied;
-    public event Action SuggestionSkipped;
+    public event Action Applied;
+    public event Action Skipped;
 
-    public virtual void ApplySuggestion()
+    public virtual void Apply()
     {
-        SuggestionApplied?.Invoke();
+        Applied?.Invoke();
     }
 
-    public virtual void SkipSuggestion()
+    public virtual void Skip()
     {
-        SuggestionSkipped?.Invoke();
+        Skipped?.Invoke();
     }
 }
