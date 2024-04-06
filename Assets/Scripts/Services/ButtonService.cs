@@ -6,6 +6,7 @@ using UnityEngine;
 public class ButtonService : IService
 {
     private TimeController _timeController;
+    private GameLifeController _gameLifeController;
 
     private HandsCoinsCounter _handCoinsCounter;
 
@@ -19,6 +20,7 @@ public class ButtonService : IService
     public ButtonService() 
     {
         _timeController = ServiceLocator.Instance.Get<TimeController>();
+        _gameLifeController = ServiceLocator.Instance.Get<GameLifeController>();
 
         _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
 
@@ -33,6 +35,7 @@ public class ButtonService : IService
     public void AddTime(int time)
     {
         _timeController.AddTime(time);
+        _gameLifeController.SkipDays();
     }
 
     #region WindowsControl
@@ -50,6 +53,7 @@ public class ButtonService : IService
     public void ClosePeriodFinishWindow()
     {
         CloseWindow(WindowType.FinishPeriodWindow);
+        _gameLifeController.ContinueNewDay();
         _timeController.UpdateMonth();
         _resultsOfTheMonthService.ActivateNewResults();
     }

@@ -11,6 +11,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private CoinsIndicator _bankCoinsIndicator;
 
     [SerializeField] private RandomController _problemsRandomController;
+    [SerializeField] private GameLifeController _gameLifeController;
 
     [SerializeField] private Window[] _windows;
 
@@ -36,7 +37,6 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private PCConfig[] _pcConfigs;
     [SerializeField] private ProblemConfig[] _problemConfigs;
 
-
     private void Awake()
     {
         Bind();
@@ -58,6 +58,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
         BindPeriodController();
         BindTimeController();
+        BindGameLifeController();
 
         BindPools();
 
@@ -69,6 +70,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindGameLifeController()
+    {
+        ServiceLocator.Instance.Register(_gameLifeController);
     }
 
     private void BindProblemGenerator()
