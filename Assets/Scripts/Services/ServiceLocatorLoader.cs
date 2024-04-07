@@ -58,6 +58,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonChangeController();
         BindConditionChecker();
 
+        BindOrderCompleteHandler();
         BindOrdersServices();
         BindDeliveryCompositeOrder();
 
@@ -78,6 +79,12 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindOrderCompleteHandler()
+    {
+        var orderCompleteHandler = new OrderCompleteHandler();
+        ServiceLocator.Instance.Register(orderCompleteHandler);
     }
 
     private void BindConditionChecker()
@@ -196,10 +203,12 @@ public class ServiceLocatorLoader : MonoBehaviour
         var ordersService = new OrderService();
         var activeOrderService = new ActiveOrderService();
         var deliveryOrderService = new DeliveryOrderService();
+        var rememberedOrderService = new RememberedOrderService();
 
         ServiceLocator.Instance.Register(ordersService);
         ServiceLocator.Instance.Register(activeOrderService);
         ServiceLocator.Instance.Register(deliveryOrderService);
+        ServiceLocator.Instance.Register(rememberedOrderService);
     }
 
     private void BindPeriodController()

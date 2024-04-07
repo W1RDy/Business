@@ -6,6 +6,8 @@ using System.Linq;
 
 public class ResultsViewController
 {
+    private TextMeshProUGUI _titleText;
+
     private TextMeshProUGUI _costsText1;
     private TextMeshProUGUI _costsText2;
 
@@ -20,9 +22,11 @@ public class ResultsViewController
     private Color _positiveColor;
     private Color _negativeColor;
 
-    public ResultsViewController(TextMeshProUGUI costsText1, TextMeshProUGUI costsText2, TextMeshProUGUI incomeText1, TextMeshProUGUI incomeText2,
+    public ResultsViewController(TextMeshProUGUI titleText, TextMeshProUGUI costsText1, TextMeshProUGUI costsText2, TextMeshProUGUI incomeText1, TextMeshProUGUI incomeText2,
         TextMeshProUGUI summaryTimeText, TextMeshProUGUI summaryCoinsText, Color positiveColor, Color negativeColor)
     {
+        _titleText = titleText;
+
         _costsText1 = costsText1;
         _costsText2 = costsText2;
 
@@ -53,6 +57,8 @@ public class ResultsViewController
 
     private void ShowResultsOfTheMonth(ResultsOfTheMonth resultsOfTheMonth)
     {
+        _titleText.text = "Results of the month";
+
         _costsText1.text = "Purchase costs: " + resultsOfTheMonth.PurchaseCosts.ToString();
         _costsText2.text = "Emergency costs: " + resultsOfTheMonth.EmergencyCosts.ToString();
 
@@ -69,8 +75,10 @@ public class ResultsViewController
 
     private void ShowResultsOfTheGame(ResultsOfTheGame resultsOfTheGame)
     {
+        _titleText.text = "Results of the game";
+
         _costsText1.text = "Expenses: " + resultsOfTheGame.Expenses.ToString();
-        _incomeText1.text = "Income: " + resultsOfTheGame.Income.ToString();
+        _incomeText1.text = "Income: +" + resultsOfTheGame.Income.ToString();
         _summaryTimeText.text = "Time: " + resultsOfTheGame.Time.ToString() + " months";
 
         TurnOnTexts(_costsText1, _incomeText1, _summaryTimeText);

@@ -17,3 +17,4 @@ MonoBehaviour:
   _deliveryDescription: Fast delivery, high quality. But high price.
   _deliveryCost: 40
   _deliveryTime: 3
+  _goodsType: 2

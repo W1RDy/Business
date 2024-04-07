@@ -26,10 +26,22 @@ public class ApplyOrderButton : OrdersControlButton, IChangeButton
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        OnOrderChanged = () => _conditionChecker.CheckHandsCoinsConditions();
+        OnOrderChanged = () => _buttonChangeController.ChangeButton(this);
+        _buttonChangeController.ChangeButton(this);
+        if (_order as Order != null && _order.IsApplied) Debug.Log(CheckChangeCondition());
+
         _order.OrderChanged += OnOrderChanged;
 
         _buttonChangeController.AddChangeButton(this);
+    }
+
+    private void OnEnable()
+    {
+        if (_buttonChangeController != null)
+        {
+            if (_order as Order != null && _order.IsApplied) Debug.Log(CheckChangeCondition());
+            _buttonChangeController.ChangeButton(this);
+        }
     }
 
     protected override void ClickCallback()
@@ -49,18 +61,22 @@ public class ApplyOrderButton : OrdersControlButton, IChangeButton
         _button.interactable = !isApplied;
         var text = isApplied ? "Applied" : "Apply";
         SetText(text);
+        _buttonChangeController.ChangeButton(this);
     }
 
     public bool CheckChangeCondition()
     {
-        if (_order is Order standartOrder) return _conditionChecker.IsHasInInventory(standartOrder.NeededGoods);
+        if (_order is Order standartOrder) return _order.IsApplied && _conditionChecker.IsHasInInventory(standartOrder.NeededGoods);
         if (_order is CompositeOrder compositeOrder) return !_conditionChecker.IsEnoughCoins(compositeOrder.Cost);
         return false;
     }
 
     public void OnDestroy()
     {
-        _buttonChangeController.RemoveChangeButton(this);
-        _order.OrderChanged -= OnOrderChanged;
+        if (_buttonChangeController != null)
+        {
+            _buttonChangeController.RemoveChangeButton(this);
+            _order.OrderChanged -= OnOrderChanged;
+        }
     }
 }

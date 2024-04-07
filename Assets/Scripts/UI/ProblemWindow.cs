@@ -10,7 +10,7 @@ public class ProblemWindow : Window
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _problemText;
 
-    [SerializeField] private WasteCoinsButton _wasteCoinsButton;
+    [SerializeField] private ProblemButton _problemButton;
     [SerializeField] private OpenDistributeCoinsButton _openDistributeCoinsButton;
 
     private EventsViewController _problemsViewController;
@@ -18,7 +18,8 @@ public class ProblemWindow : Window
     public void SetProblem(ProblemConfig problemConfig)
     {
         _coinsCost = problemConfig.CoinsRequirements;
-        _wasteCoinsButton.SetCoinsValue(_coinsCost);
+        _problemButton.SetProblem(problemConfig);
+        _problemButton.SetCoinsValue(_coinsCost);
 
         _problemsViewController = new EventsViewController(_problemText, _timeText, _coinsText);
         _problemsViewController.SetEvent(problemConfig);

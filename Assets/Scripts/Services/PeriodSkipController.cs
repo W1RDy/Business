@@ -13,15 +13,16 @@ public class PeriodSkipController : MonoBehaviour, IService
 
     [SerializeField] private ClicksBlocker _clicksBlocker;
 
-    private TimeController _timeController;
+    private GamesConditionChecker _conditionChecker;
+
     private Action InitDelegate;
     
     private void Start()
     {
         InitDelegate = () =>
         {
-            _timeController = ServiceLocator.Instance.Get<TimeController>();
-
+            _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
+            
             _darknessAnimationInstance = Instantiate(_darknessAnimation);
             _brightnessAnimationInstance = Instantiate(_brightnessAnimation);
 
@@ -37,7 +38,10 @@ public class PeriodSkipController : MonoBehaviour, IService
     public void SkipDays()
     {
         _clicksBlocker.BlockClicks();
-        _darknessAnimationInstance.Play(() => { if (!_timeController.PeriodFinished()) ContinueNewDay(); });
+        _darknessAnimationInstance.Play(() => 
+        {
+            if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay(); 
+        });
     }
 
     public void ContinueNewDay()

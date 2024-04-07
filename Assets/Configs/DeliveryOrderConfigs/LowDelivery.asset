@@ -17,4 +17,4 @@ MonoBehaviour:
   _deliveryDescription: Slow delivery, bad quality. But low price.
   _deliveryCost: 10
   _deliveryTime: 8
-  _goodsType: 2
+  _goodsType: 0

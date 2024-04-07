@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52c76603f85e2c542ada8ee06057d0dd, type: 3}
-  m_Name: MediumQualityPC
+  m_Name: BrokenReturnedPC
   m_EditorClassIdentifier: 
-  _id: 3
-  _goodsType: 1
-  _title: MediumQualityPC
-  _description: Suit for low poly games.
-  _isReturned: 0
-  _isBroken: 0
+  _id: 5
+  _goodsType: 0
+  _title: ReturnedBrokenPC
+  _description: The computer was claimed to be of low quality, but it looks like
+    you were tricked with some details
+  _isReturned: 1
+  _isBroken: 1

@@ -1,4 +1,6 @@
-﻿public class CloseButton : WindowControlButton
+﻿using System;
+
+public class CloseButton : WindowControlButton
 {
     protected override void ClickCallback()
     {
@@ -6,7 +8,7 @@
         CloseWindow();
     }
 
-    private void CloseWindow()
+    protected virtual void CloseWindow()
     {
         if (_windowType == WindowType.DistributeCoinsWindow) _buttonService.ClosePeriodFinishWindow();
         else if (_windowType == WindowType.Results) _buttonService.CloseResultsWindow();

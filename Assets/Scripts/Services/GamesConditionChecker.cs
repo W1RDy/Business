@@ -6,14 +6,12 @@ public class GamesConditionChecker : IService
 {
     private int _minCoins = 40;
 
-    private GameController _gameController;
+    private TimeController _timeController;
 
     private BankCoinsCounter _bankCoinsCounter;
     private HandsCoinsCounter _handsCoinsCounter;
 
     private PCService _pcService;
-
-    private ButtonChangeController _buttonChangeController;
 
     private Action InitDelegate;
     public event Action<int> HandsCoinsCheck;
@@ -22,16 +20,11 @@ public class GamesConditionChecker : IService
     {
         InitDelegate = () =>
         {
-            _gameController = ServiceLocator.Instance.Get<GameController>();
+            _timeController = ServiceLocator.Instance.Get<TimeController>();
+
             _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
             _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
             _pcService = ServiceLocator.Instance.Get<PCService>();
-            _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
-
-            _handsCoinsCounter.CoinsChanged += CheckLoseCondition;
-            _handsCoinsCounter.CoinsChanged += CheckHandsCoinsConditions;
-            _bankCoinsCounter.CoinsChanged += CheckLoseCondition;
-            _pcService.ItemsUpdated += CheckInventoryConditions;
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -39,40 +32,23 @@ public class GamesConditionChecker : IService
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void CheckLoseCondition()
+    public bool IsGameFinished()
     {
-        if (_handsCoinsCounter.Coins + _bankCoinsCounter.Coins <= _minCoins)
-        {
-            _gameController.FinishGame();
-            Unsubscribe();
-        }
-    }
-
-    public void CheckHandsCoinsConditions()
-    {
-        _buttonChangeController.ChangeButtonsToDistributeButtons();
-    }
-
-    public void CheckInventoryConditions()
-    {
-        _buttonChangeController.ChangeButtonsToSendButtons();
+        return _handsCoinsCounter.Coins + _bankCoinsCounter.Coins <= _minCoins;
     }
 
     public bool IsHasInInventory(GoodsType goodsType)
     {
-        return _pcService.HasPC((int)goodsType);
+        return _pcService.HasPCByThisGoodsOrOver(goodsType);
     }
 
     public bool IsEnoughCoins(int coins)
     {
-        return _handsCoinsCounter.Coins >= coins;
+        return _handsCoinsCounter.Coins >= Mathf.Abs(coins);
     }
 
-    private void Unsubscribe()
+    public bool IsPeriodFinished()
     {
-        _handsCoinsCounter.CoinsChanged -= CheckLoseCondition;
-        _handsCoinsCounter.CoinsChanged -= CheckHandsCoinsConditions;
-        _bankCoinsCounter.CoinsChanged -= CheckLoseCondition;
-        _pcService.ItemsUpdated -= CheckInventoryConditions;
+        return _timeController.PeriodFinished();
     }
 }

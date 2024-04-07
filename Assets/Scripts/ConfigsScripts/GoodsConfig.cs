@@ -19,7 +19,7 @@ public class GoodsConfig : ScriptableObject
 
 public enum GoodsType
 {
-    HighQuality,
+    LowQuality,
     MediumQuality,
-    LowQuality
+    HighQuality
 }

@@ -7,7 +7,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 {
     #region Values
 
-    public int ID => (int)_config.GoodsType;
+    public int ID { get; private set; }
 
     private PCConfig _config;
 
@@ -23,6 +23,8 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     }
 
     public GoodsType QualityType => _config.GoodsType;
+
+    public bool IsBroken => _config.IsBroken;
 
     #endregion
 
@@ -73,6 +75,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     public void InitVariant(PCConfig config, bool isBroken)
     {
+        ID = config.ID;
         _config = config;
         _isBroken = isBroken;
 

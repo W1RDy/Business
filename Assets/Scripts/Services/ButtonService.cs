@@ -18,6 +18,7 @@ public class ButtonService : IService
     private SuggestionGenerator _suggestionGenerator;
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
+    private GameController _gameController;
 
     public ButtonService() 
     {
@@ -34,6 +35,8 @@ public class ButtonService : IService
         _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
 
         _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
+
+        _gameController = ServiceLocator.Instance.Get<GameController>();
     }
 
     public void TryAddTime(int time)
@@ -138,5 +141,10 @@ public class ButtonService : IService
     public void CancelSuggestion(Suggestion suggestion)
     {
         suggestion.Skip();
+    }
+
+    public void RestartGame()
+    {
+        _gameController.RestartGame();
     }
 }

@@ -7,7 +7,7 @@ public class PCGenerator : IService
 
     private Pool<PC> _pool;
 
-    private Dictionary<GoodsType, PCConfig> _configsDictionary = new Dictionary<GoodsType, PCConfig>();
+    private Dictionary<(GoodsType goodsType, bool isBroken, bool isReused), PCConfig> _configsDictionary = new Dictionary<(GoodsType goodsType, bool isBroken, bool isReused), PCConfig>();
 
     public PCGenerator(PCConfig[] goodsConfigs)
     {
@@ -23,15 +23,17 @@ public class PCGenerator : IService
         {
             var pcConfigInstance = ScriptableObject.Instantiate(pcConfig);
 
-            _configsDictionary.Add(pcConfigInstance.GoodsType, pcConfigInstance);
+            _configsDictionary.Add((pcConfigInstance.GoodsType, pcConfigInstance.IsBroken, pcConfigInstance.IsReturned), pcConfigInstance);
         }
     }
 
-    public void GeneratePC(GoodsType goodsType, bool isBroken)
+    public void GeneratePC(GoodsType goodsType, bool isBroken, bool isReused)
     {
-        var pcConfigInstance = _configsDictionary[goodsType];
+        Debug.Log(isBroken);
+        if (isBroken) goodsType = GoodsType.LowQuality;
+        var pcConfigInstance = _configsDictionary[(goodsType, isBroken, isReused)];
 
-        var pc = _pcService.GetPC((int)goodsType);
+        var pc = _pcService.GetPC(pcConfigInstance.ID);
 
         if (pc != null) pc.Amount++;
         else
@@ -41,5 +43,12 @@ public class PCGenerator : IService
 
             _pcService.AddPC(pc);
         }
+    }
+
+    public void GenerateReusedPC(GoodsType goodsType)
+    {
+        var newGoodsIndexType = ((int)goodsType - 1);
+        if (newGoodsIndexType < 0) GeneratePC(GoodsType.LowQuality, true, true);
+        else GeneratePC((GoodsType)newGoodsIndexType, false, true);
     }
 }

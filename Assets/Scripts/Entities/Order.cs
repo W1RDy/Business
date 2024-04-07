@@ -18,6 +18,8 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     public int Time => _orderConfig.Time;
     public GoodsType NeededGoods => _orderConfig.NeededGoods;
 
+    public OrderConfig OrderConfig => _orderConfig;
+
     #endregion
 
     #region View
@@ -38,6 +40,8 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
     private ActiveOrderService _activeOrderService;
     private OrderService _orderService;
+    private OrderCompleteHandler _orderCompleteHandler;
+    private RememberedOrderService _rememberedOrderService;
 
     private Action<int> TimeChangedDelegate;
 
@@ -65,6 +69,8 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
             _timeController = ServiceLocator.Instance.Get<TimeController>();
             _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
             _orderService = ServiceLocator.Instance.Get<OrderService>();
+            _orderCompleteHandler = ServiceLocator.Instance.Get<OrderCompleteHandler>();
+            _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
 
             _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
             _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
@@ -122,8 +128,9 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
         if (_isApplied)
         {
             _rewardHandler.ApplyRewardForOrder(this);
-
+            _rememberedOrderService.RememberOrder(this);
             _orderPool.Release(this);
+            _orderCompleteHandler.CompleteOrder(this);
         }
     }
 

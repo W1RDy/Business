@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c76603f85e2c542ada8ee06057d0dd, type: 3}
   m_Name: LowQualityPC
   m_EditorClassIdentifier: 
-  _goodsType: 2
+  _id: 1
+  _goodsType: 0
   _title: LowQualityPC
   _description: Suit for simple office work.
+  _isReturned: 0
+  _isBroken: 0

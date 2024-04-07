@@ -9,6 +9,8 @@ public class ResultsWindow : Window
 
     [Header("Texts")]
 
+    [SerializeField] private TextMeshProUGUI _titleText;
+
     [SerializeField] private TextMeshProUGUI _costsText1;
     [SerializeField] private TextMeshProUGUI _costsText2;
 
@@ -30,7 +32,7 @@ public class ResultsWindow : Window
     public void SetResults(IResults results)
     {
         if (_resultsViewController == null)
-            _resultsViewController = new ResultsViewController(_costsText1, _costsText2, _incomeText1, _incomeText2, _summaryTimeText, _summaryCoinsText, _positiveColor, _negativeColor);
+            _resultsViewController = new ResultsViewController(_titleText, _costsText1, _costsText2, _incomeText1, _incomeText2, _summaryTimeText, _summaryCoinsText, _positiveColor, _negativeColor);
 
         _resultsViewController.SetResults(results);
     }

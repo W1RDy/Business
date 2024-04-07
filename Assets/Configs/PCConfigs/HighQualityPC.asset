@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52c76603f85e2c542ada8ee06057d0dd, type: 3}
   m_Name: HighQualityPC
   m_EditorClassIdentifier: 
-  _goodsType: 0
+  _id: 0
+  _goodsType: 2
   _title: HighQualityPC
   _description: WOOOW
+  _isReturned: 0
+  _isBroken: 0

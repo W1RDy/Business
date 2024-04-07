@@ -1,10 +1,31 @@
-﻿using System;
+﻿using CoinsCounter;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonChangeController : IService
 {
     private Dictionary<Type, List<IChangeButton>> _buttons = new Dictionary<Type, List<IChangeButton>>();
+
+    private Action InitDelegate;
+
+    public ButtonChangeController()
+    {
+        InitDelegate = () =>
+        {
+            var gameController = ServiceLocator.Instance.Get<GameController>();
+            var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+            var pcService = ServiceLocator.Instance.Get<PCService>();
+
+            handsCoinsCounter.CoinsChanged += ChangeByCoinsChangeCondition;
+            gameController.GameFinished += ChangeByFinishGameCondition;
+            pcService.ItemsUpdated += ChangeByNewItemCondition;
+
+            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+        };
+        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
+        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+    }
 
     public void AddChangeButton(IChangeButton button)
     {
@@ -25,23 +46,36 @@ public class ButtonChangeController : IService
         }
     }
 
-    public void ChangeButtonsToSendButtons()
-    {
-        ChangeButtons(typeof(SendOrderButton));
-    }
-
-    public void ChangeButtonsToDistributeButtons()
+    public void ChangeByCoinsChangeCondition()
     {
         ChangeButtons(typeof(OpenDistributeCoinsButton));
     }
 
+    public void ChangeByNewItemCondition()
+    {
+        ChangeButtons(typeof(SendOrderButton));
+    }
+
+    public void ChangeByFinishGameCondition()
+    {
+        ChangeButtons(typeof(RestartButton));
+    }
+
     public void ChangeButtons(Type buttonForChangeType)
     {
-        foreach (var button in _buttons[buttonForChangeType])
+        if (_buttons.TryGetValue(buttonForChangeType, out var buttons))
         {
-            if (button.CheckChangeCondition()) ChangeButton(button as CustomButton, button.ButtonForChange);
-            else ChangeButton(button.ButtonForChange, button as CustomButton);
+            foreach (var button in buttons)
+            {
+                ChangeButton(button);
+            }
         }
+    }
+
+    public void ChangeButton(IChangeButton button)
+    {
+        if (button.CheckChangeCondition()) ChangeButton(button as CustomButton, button.ButtonForChange);
+        else ChangeButton(button.ButtonForChange, button as CustomButton);
     }
 
     private void ChangeButton(CustomButton from, CustomButton to)

@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
 {
@@ -42,7 +43,7 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
 
     #endregion
 
-    public bool IsBroken { get; private set; }
+    public int _brokenGoodsCount;
 
     public bool IsFree { get; private set; }
     public Goods Element => this;
@@ -73,10 +74,10 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void InitVariant(GoodsConfig config, bool isBroken, int amount)
+    public void InitVariant(GoodsConfig config, int brokenGoodsCount, int amount)
     {
         _config = config;
-        IsBroken = isBroken;
+        _brokenGoodsCount = brokenGoodsCount;
 
         Amount = amount;
         _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount);
@@ -86,13 +87,22 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
 
     public void ConstructPC()
     {
-        _pcGenerator.GeneratePC(_config.GoodsType, IsBroken);
+        _pcGenerator.GeneratePC(_config.GoodsType, IsBreakGoods(), false);
         Amount -= 1;
         if (Amount == 0)
         {
             Action callback = () => _pool.Release(this);
             _animController.PlayDisappearAnimation(callback);
         }
+    }
+
+    private bool IsBreakGoods()
+    {
+        int randomGoodsIndex = Random.Range(1, Amount);
+
+        var isBroken = randomGoodsIndex <= _brokenGoodsCount;
+        if (isBroken) _brokenGoodsCount -= 1;
+        return isBroken;
     }
 
     public void Activate()

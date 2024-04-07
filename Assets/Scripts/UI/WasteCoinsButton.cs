@@ -19,7 +19,7 @@ public class WasteCoinsButton : CustomButton, IChangeButton
         base.Init();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
         _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
-
+        _changeController.ChangeButton(this);
         _changeController.AddChangeButton(this);
 
         SetText();
@@ -29,6 +29,11 @@ public class WasteCoinsButton : CustomButton, IChangeButton
     {
         base.ClickCallback();
         _buttonService.WasteCoinsByProblems(_coinsValue);
+    }
+
+    private void OnEnable()
+    {
+        if (_changeController != null) _changeController.ChangeButton(this);
     }
 
     public void SetCoinsValue(int value)
@@ -43,11 +48,14 @@ public class WasteCoinsButton : CustomButton, IChangeButton
 
     public bool CheckChangeCondition()
     {
-        return _conditionsChecker.IsEnoughCoins(_coinsValue);
+        return !_conditionsChecker.IsEnoughCoins(_coinsValue);
     }
 
     private void OnDestroy()
     {
-        _changeController.RemoveChangeButton(this);
+        if ( _changeController != null )
+        {
+            _changeController.RemoveChangeButton(this);
+        }
     }
 }

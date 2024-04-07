@@ -28,17 +28,25 @@ public class GoodsGenerator : IService
         }
     }
 
-    private bool GetRandomBrokenState()
+    private int GetRandomBrokenGoodsCount(GoodsType goodsType, int amount)
     {
-        var randomIndex = Random.Range(0, 101);
+        if (goodsType != GoodsType.LowQuality) return 0;
 
-        return randomIndex > 70;
+        int counts = 0;
+        for (int i = 0; i < amount; i++)
+        {
+            if ((float)counts / amount >= 0.6f) break;
+
+            var randomIndex = Random.Range(0, 101);
+            if (randomIndex > 70) counts++;
+        }
+        return counts;
     }
 
     public void GenerateGoods(GoodsType goodsType, int amount)
     {
         var goodsConfigInstance = _configsDictionary[goodsType];
-        var isBroken = GetRandomBrokenState();
+        var brokenGoodsCount = GetRandomBrokenGoodsCount(goodsType, amount);
 
         var goods = _goodsService.GetGoods((int)goodsType);
 
@@ -50,7 +58,7 @@ public class GoodsGenerator : IService
         else
         {
             goods = _pool.Get();
-            goods.InitVariant(goodsConfigInstance, isBroken, amount);
+            goods.InitVariant(goodsConfigInstance, brokenGoodsCount, amount);
 
             _goodsService.AddGoods(goods);
         }

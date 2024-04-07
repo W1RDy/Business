@@ -30,5 +30,32 @@ public class PCService : IService
         return null;
     }
 
-    public bool HasPC(int id) => _pcDict.ContainsKey(id);
+    public PC GetPCByQuality(GoodsType goodsType)
+    {
+        int goodsTypeIndex = (int)goodsType;
+        PC minSuitableQualityPC = null;
+
+        foreach (var pc in _pcDict.Values)
+        {
+            if (pc.IsBroken) continue;
+
+            if ((int)pc.QualityType >= goodsTypeIndex && (minSuitableQualityPC == null || (int)pc.QualityType < (int)minSuitableQualityPC.QualityType))
+            {
+                minSuitableQualityPC = pc;
+            }
+        }
+        return minSuitableQualityPC;
+    }
+
+    public bool HasPCByThisGoodsOrOver(GoodsType goodsType)
+    {
+        int goodsTypeIndex = (int)goodsType;
+        foreach (var pc in _pcDict.Values)
+        {
+            if (pc.IsBroken) continue;
+            
+            if ((int)pc.QualityType >= goodsTypeIndex) return true;
+        }
+        return false;
+    }
 }

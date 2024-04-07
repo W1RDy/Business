@@ -16,4 +16,4 @@ MonoBehaviour:
   _time: 10
   _chance: 10
   _chancesUpdateValue: 0
-  _neededGoods: 0
+  _neededGoods: 2

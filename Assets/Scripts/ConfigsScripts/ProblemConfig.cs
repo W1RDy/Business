@@ -6,7 +6,7 @@ public class ProblemConfig : ScriptableObject, IRandomizable, IEventWithCoinsPar
 {
     [SerializeField] private string _id;
     [SerializeField] private string _description;
-    [SerializeField] private int _coinsRequirement;
+    [SerializeField] protected int _coinsRequirement;
 
     [SerializeField] private float _chance;
     [SerializeField] private float _chancesUpdateValue;
@@ -22,7 +22,7 @@ public class ProblemConfig : ScriptableObject, IRandomizable, IEventWithCoinsPar
 
     public event Action Applied;
 
-    public void Apply()
+    public virtual void Apply()
     {
         Applied?.Invoke();
     }

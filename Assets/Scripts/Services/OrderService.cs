@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OrderService : IService
 {
-    private Dictionary<int, IOrder> _ordersDict = new Dictionary<int, IOrder>();
+    protected Dictionary<int, IOrder> _ordersDict = new Dictionary<int, IOrder>();
 
     public void AddOrder(IOrder order)
     {
@@ -51,4 +51,34 @@ public class ActiveOrderService : OrderService
 public class DeliveryOrderService : OrderService
 {
 
+}
+
+public class RememberedOrderService : IService
+{
+    private Queue<OrderConfig> _rememberedOrder = new Queue<OrderConfig>();
+
+    public void RememberOrder(Order order)
+    {
+        _rememberedOrder.Enqueue(ScriptableObject.Instantiate(order.OrderConfig));
+    }
+
+    public void ClearLastOrdersExcept(int savingsOrdersCount)
+    {
+        while (_rememberedOrder.Count > savingsOrdersCount)
+        {
+            _rememberedOrder.Dequeue();
+        } 
+        Debug.Log(_rememberedOrder.Count);
+    }
+
+    public OrderConfig PopOrder()
+    {
+        var order = _rememberedOrder.Dequeue();
+        return order;
+    }
+
+    public int GetOrdersCount()
+    {
+        return _rememberedOrder.Count;
+    }
 }
