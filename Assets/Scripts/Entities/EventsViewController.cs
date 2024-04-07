@@ -7,19 +7,11 @@ public class EventsViewController
     private TextMeshProUGUI _requirementTimeText;
     private TextMeshProUGUI _requirementCoinsText;
 
-    private ButtonChanger _buttonChanger;
-
     public EventsViewController(TextMeshProUGUI descriptionText, TextMeshProUGUI requirementTimeText, TextMeshProUGUI requirementCoinsText)
     {
         _descriptionText = descriptionText;
         _requirementTimeText = requirementTimeText;
         _requirementCoinsText = requirementCoinsText;
-    }
-
-    public EventsViewController(TextMeshProUGUI descriptionText, TextMeshProUGUI requirementTimeText, TextMeshProUGUI requirementCoinsText, ButtonChanger buttonChanger)
-        : this(descriptionText, requirementTimeText, requirementCoinsText)
-    {
-        _buttonChanger = buttonChanger;
     }
 
     public void SetEvent(IEvent entityEvent)
@@ -38,11 +30,5 @@ public class EventsViewController
             _requirementCoinsText.text = "-" + eventWithCoins.CoinsRequirements;
         }
         else _requirementCoinsText.transform.parent.gameObject.SetActive(false);
-    }
-
-    public void ChangeButtons(bool isChangeOnDefaultButton)
-    {
-        if (_buttonChanger == null) throw new NullReferenceException("ButtonChanger doesn't initialize! Initialize ButtonChanger or don't use this method!");
-        _buttonChanger.ChangeButtons(isChangeOnDefaultButton);
     }
 }

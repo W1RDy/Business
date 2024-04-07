@@ -11,7 +11,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private CoinsIndicator _bankCoinsIndicator;
 
     [SerializeField] private RandomController _problemsRandomController;
-    [SerializeField] private GameLifeController _gameLifeController;
+    [SerializeField] private PeriodSkipController _periodSkipController;
     [SerializeField] private SuggestionsService _suggestionsService;
 
     [SerializeField] private Window[] _windows;
@@ -48,10 +48,15 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindWindowService();
         BindWindowActivator();
 
+        BindGameController();
+        
         BindSuggestionControllers();
 
         BindCoinsCounters();
         BindRewardHandler();
+
+        BindButtonChangeController();
+        BindConditionChecker();
 
         BindOrdersServices();
         BindDeliveryCompositeOrder();
@@ -59,7 +64,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindProblemGenerator();
         BindResultsService();
 
-        BindGameLifeController();
+        BindPeriodSkipController();
         BindPeriodController();
         BindTimeController();
 
@@ -75,6 +80,24 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.Instance.RegisterService();
     }
 
+    private void BindConditionChecker()
+    {
+        var conditionChecker = new GamesConditionChecker();
+        ServiceLocator.Instance.Register(conditionChecker);
+    }
+
+    private void BindButtonChangeController()
+    {
+        var buttonChangeController = new ButtonChangeController();
+        ServiceLocator.Instance.Register(buttonChangeController);
+    }
+
+    private void BindGameController()
+    {
+        var gameController = new GameController();
+        ServiceLocator.Instance.Register(gameController);
+    }
+
     private void BindSuggestionControllers()
     {
         ServiceLocator.Instance.Register(_suggestionsService);
@@ -83,9 +106,9 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.Instance.Register(suggestionGenerator);
     }
 
-    private void BindGameLifeController()
+    private void BindPeriodSkipController()
     {
-        ServiceLocator.Instance.Register(_gameLifeController);
+        ServiceLocator.Instance.Register(_periodSkipController);
     }
 
     private void BindProblemGenerator()
@@ -100,6 +123,10 @@ public class ServiceLocatorLoader : MonoBehaviour
         resultService.ActivateNewResults();
 
         ServiceLocator.Instance.Register(resultService);
+
+        var resultsActivator = new ResultsActivator();
+
+        ServiceLocator.Instance.Register(resultsActivator);
     }
 
     private void BindOrderProgressChecker()

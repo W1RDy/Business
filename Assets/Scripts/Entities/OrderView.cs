@@ -12,13 +12,6 @@ public class OrderView : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _indexText;
 
-    private ButtonChanger _buttonChanger;
-
-    private void Awake()
-    {
-        _buttonChanger = new ButtonChanger(_applyOrderButton, _sendOrderButton);
-    }
-
     public void SetView(int coinsValue, int timeValue, GoodsType goodsType, int id)
     {
         _indexText.text = "order " + id;
@@ -50,10 +43,5 @@ public class OrderView : MonoBehaviour
     public void ChangeApplyState(bool isApplied)
     {
         _applyOrderButton.ChangeState(isApplied);
-    }
-
-    public void ChangeButton(bool activateDefaultButton)
-    {
-        _buttonChanger.ChangeButtons(activateDefaultButton);
     }
 }

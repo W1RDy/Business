@@ -11,6 +11,8 @@ namespace CoinsCounter
 
         private CoinsIndicator _coinsIndicator;
 
+        public event Action CoinsChanged;
+
         public CoinsCounter(CoinsIndicator coinsIndicator)
         {
             _coinsIndicator = coinsIndicator;
@@ -20,6 +22,7 @@ namespace CoinsCounter
         {
             _coins += value;
             UpdateIndicator();
+            InvokeCoinsEvent();
         }
 
         public virtual void RemoveCoins(int value)
@@ -28,6 +31,7 @@ namespace CoinsCounter
             {
                 _coins = Mathf.Clamp(_coins - value, 0, _coins);
                 UpdateIndicator();
+                InvokeCoinsEvent();
             }
         }
 
@@ -37,6 +41,7 @@ namespace CoinsCounter
             {
                 _coins = value;
                 UpdateIndicator();
+                InvokeCoinsEvent();
             }
         }
 
@@ -44,34 +49,19 @@ namespace CoinsCounter
         {
             _coinsIndicator.SetCoins(_coins);
         }
+
+        protected void InvokeCoinsEvent()
+        {
+            CoinsChanged?.Invoke();
+        }
     }
 
     public class HandsCoinsCounter : CoinsCounter
     {
-        public event Action CoinsChanged;
-
         public HandsCoinsCounter(CoinsIndicator coinsIndicator) : base(coinsIndicator) 
         {
             _coins = 50;
             UpdateIndicator();
-        }
-
-        public override void AddCoins(int value)
-        {
-            base.AddCoins(value);
-            CoinsChanged?.Invoke();
-        }
-
-        public override void RemoveCoins(int value)
-        {
-            base.RemoveCoins(value);
-            CoinsChanged?.Invoke();
-        }
-
-        public override void ChangeCoins(int value)
-        {
-            base.ChangeCoins(value);
-            CoinsChanged?.Invoke();
         }
     }
 
@@ -87,6 +77,7 @@ namespace CoinsCounter
         {
             _coins *= 2;
             UpdateIndicator();
+            InvokeCoinsEvent();
         }
     }
 }

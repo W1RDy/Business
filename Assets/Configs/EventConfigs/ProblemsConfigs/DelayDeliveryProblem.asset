@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa90a6118b4605d49af4b9b36b0fe74d, type: 3}
   m_Name: DelayDeliveryProblem
   m_EditorClassIdentifier: 
-  _problemDescription: The delivery is delayed, we need to solve this somehow
+  _id: DeliveryProblem
+  _description: Delivery is delaying. We need solve this problem.
   _coinsRequirement: 10
   _chance: 12
   _chancesUpdateValue: 2

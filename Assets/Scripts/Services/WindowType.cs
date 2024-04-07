@@ -8,7 +8,7 @@ public enum WindowType
     DeliveryWindow,
     InventoryWindow,
     BasketWindow,
-    ResultsOfTheMonth,
+    Results,
     ProblemWindow,
     FinishPeriodWindow,
     SuggestionWindow

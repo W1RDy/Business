@@ -6,14 +6,14 @@ public class PCService : IService
 {
     [SerializeField] private Dictionary<int, PC> _pcDict = new Dictionary<int, PC>();
 
-    public event Action<GoodsType> ItemsUpdated;
+    public event Action ItemsUpdated;
 
     public void AddPC(PC pc)
     {
         if (_pcDict.ContainsKey(pc.ID)) throw new System.ArgumentException("PC with id " + pc.ID + " already exists!");
         _pcDict.Add(pc.ID, pc);
 
-        ItemsUpdated?.Invoke(pc.QualityType);
+        ItemsUpdated?.Invoke();
     }
 
     public void RemovePC(PC pc)
@@ -21,7 +21,7 @@ public class PCService : IService
         if (!_pcDict.ContainsKey(pc.ID)) throw new System.ArgumentException("Goods with id " + pc.ID + " doesn't exist!");
         _pcDict.Remove(pc.ID);
 
-        ItemsUpdated?.Invoke(pc.QualityType);
+        ItemsUpdated?.Invoke();
     }
 
     public PC GetPC(int id)

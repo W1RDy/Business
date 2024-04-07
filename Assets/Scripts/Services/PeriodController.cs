@@ -7,7 +7,7 @@ public class PeriodController : IService
 {
     private BankCoinsCounter _bankCoinsCounter;
 
-    private WindowActivator _windowActivator;
+    private ResultsActivator _resultsActivator;
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
 
@@ -15,7 +15,7 @@ public class PeriodController : IService
     {
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 
-        _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
+        _resultsActivator = ServiceLocator.Instance.Get<ResultsActivator>();
 
         _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
     }
@@ -28,6 +28,6 @@ public class PeriodController : IService
 
         _resultsOfTheMonthService.UpdateResults(0, 0, 0, endCoins - startCoins);
 
-        _windowActivator.ActivateWindow(WindowType.ResultsOfTheMonth);
+        _resultsActivator.ActivateResultsOfTheMonth();
     }
 }

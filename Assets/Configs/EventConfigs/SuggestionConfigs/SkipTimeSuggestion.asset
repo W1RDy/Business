@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SkipTimeSuggestion
   m_EditorClassIdentifier: 
   _id: SkipTime
-  _text: The time will be skipped!
+  _description: The time will be skipped.

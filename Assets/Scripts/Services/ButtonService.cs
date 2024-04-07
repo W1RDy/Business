@@ -6,7 +6,7 @@ using UnityEngine;
 public class ButtonService : IService
 {
     private TimeController _timeController;
-    private GameLifeController _gameLifeController;
+    private PeriodSkipController _gameLifeController;
 
     private HandsCoinsCounter _handCoinsCounter;
 
@@ -22,7 +22,7 @@ public class ButtonService : IService
     public ButtonService() 
     {
         _timeController = ServiceLocator.Instance.Get<TimeController>();
-        _gameLifeController = ServiceLocator.Instance.Get<GameLifeController>();
+        _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
 
         _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
 
@@ -64,7 +64,7 @@ public class ButtonService : IService
 
     public void CloseResultsWindow()
     {
-        CloseWindow(WindowType.ResultsOfTheMonth);
+        CloseWindow(WindowType.Results);
         OpenWindow(WindowType.FinishPeriodWindow);
     }
 

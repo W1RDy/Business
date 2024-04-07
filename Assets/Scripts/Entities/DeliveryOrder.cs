@@ -57,6 +57,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
     private Pool<DeliveryOrder> _pool;
 
     private Action InitDelegate;
+    public event Action OrderChanged;
 
     public void InitInstance()
     {

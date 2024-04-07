@@ -22,14 +22,21 @@ public class ResultsOfTheMonthService : IService
     {
         return _currentResults;
     }
+
+    public List<ResultsOfTheMonth> GetResults() 
+    {
+        return _results; 
+    }
 }
 
-public class ResultsOfTheMonth
+public class ResultsOfTheMonth : IResults
 {
     public int PurchaseCosts { get; private set; }
     public int EmergencyCosts { get; private set; }
     public int OrderIncome { get; private set; }
     public int BankIncome { get; private set; }
+
+    public int Summary { get; private set; }
 
     public ResultsOfTheMonth()
     {
@@ -45,5 +52,36 @@ public class ResultsOfTheMonth
         EmergencyCosts += emergency;
         OrderIncome += order;
         BankIncome += bank;
+    }
+
+    public void SummarizeResults()
+    {
+        CalculateSummary();
+    }
+
+    private void CalculateSummary()
+    {
+        Summary = PurchaseCosts + EmergencyCosts + OrderIncome + BankIncome; 
+    }
+}
+
+public class ResultsOfTheGame : IResults
+{
+    public int Expenses { get; private set; }
+    public int Income { get; private set; }
+    public int Time {  get; private set; }
+
+    public ResultsOfTheGame()
+    {
+        Expenses = 0;
+        Income = 0;
+        Time = 0;
+    }
+
+    public void UpdateResult(int expenses, int income, int time)
+    {
+        Expenses += expenses;
+        Income += income;
+        Time += time;
     }
 }

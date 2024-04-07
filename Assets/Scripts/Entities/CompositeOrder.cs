@@ -31,9 +31,9 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     public bool IsApplied {get; private set;}
 
     private IDGenerator _idGenerator;
-    private HandsCoinsCounter _handCoinsCounter;
 
     private Action InitDelegate;
+    public event Action OrderChanged;
 
     public void InitInstance()
     {
@@ -41,9 +41,6 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             _view = new CompositeOrderView(_priceText, _timeText, _applyOrderButton, _openDistributeCoinsButton);
             _idGenerator = new IDGenerator();
-
-            _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            _handCoinsCounter.CoinsChanged += ChangeButtons;
 
             _view.SetView("Delivery", 0, 0);
 
@@ -56,11 +53,6 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         if (ServiceLocator.Instance.IsRegistered) InitDelegate?.Invoke();
     }
 
-    public void ChangeButtons()
-    {
-        _view.ChangeButtons(_handCoinsCounter.Coins >= Cost);
-    }
-
     public void AddOrder(IOrder order)
     {
         _orders.Add(order);
@@ -68,9 +60,9 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost += order.Cost;
         Time += order.Time;
 
-        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
         _view.ChangeState(false);
+        OrderChanged?.Invoke();
     }
 
     public void RemoveOrder(IOrder order)
@@ -80,8 +72,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost -= order.Cost;
         Time -= order.Time;
 
-        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
+        OrderChanged?.Invoke();
     }
 
     public void ChangeOrder(int oldCost, int oldTime, IOrder newOrder)
@@ -92,9 +84,9 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Cost += newOrder.Cost;
         Time += newOrder.Time;
 
-        ChangeButtons();
         _view.SetView("Delivery", Cost, Time);
         _view.ChangeState(false);
+        OrderChanged?.Invoke();
     }
 
     public void ApplyOrder()
@@ -125,11 +117,6 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         }
         IsApplied = false;
     }
-
-    public void OnDestroy()
-    {
-        _handCoinsCounter.CoinsChanged -= ChangeButtons;
-    }
 }
 
 public class CompositeOrderView
@@ -140,8 +127,6 @@ public class CompositeOrderView
     private ApplyOrderButton _applyButton;
     private OpenDistributeCoinsButton _openDistributeButton;
 
-    ButtonChanger _buttonsChanger;
-
     public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, ApplyOrderButton applyOrderButton, OpenDistributeCoinsButton openDistributeCoinsButton)
     {
         _priceText = priceText;
@@ -149,8 +134,6 @@ public class CompositeOrderView
 
         _applyButton = applyOrderButton;
         _openDistributeButton = openDistributeCoinsButton;
-
-        _buttonsChanger = new ButtonChanger(_applyButton, _openDistributeButton);
     }
 
     public void SetView(string orderType, int price, int time)
@@ -162,10 +145,5 @@ public class CompositeOrderView
     public void ChangeState(bool isApplied)
     {
         _applyButton.ChangeState(isApplied);
-    }
-
-    public void ChangeButtons(bool activateDefaultButton)
-    {
-        _buttonsChanger.ChangeButtons(activateDefaultButton);
     }
 }

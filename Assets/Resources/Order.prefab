@@ -137,6 +137,7 @@ MonoBehaviour:
   _animation: {fileID: 0}
   _orderClass: {fileID: 3717929654221527168}
   _stateText: {fileID: 6308376009405937003}
+  _buttonForChange: {fileID: 4779684463396161378}
 --- !u!1 &1194198328891196045
 GameObject:
   m_ObjectHideFlags: 0

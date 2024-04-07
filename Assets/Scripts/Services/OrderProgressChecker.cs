@@ -3,37 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderProgressChecker : IDisposable, IService
+public class OrderProgressChecker : IService
 {
-    private PCService _pcSerivce;
-    private ActiveOrderService _activeOrderService;
-
-    private Action<GoodsType> UpdateOrdersDelegate;
+    private GamesConditionChecker _conditionChecker;
 
     public OrderProgressChecker()
     {
-        _pcSerivce = ServiceLocator.Instance.Get<PCService>();
-        _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-
-        UpdateOrdersDelegate = goodsType => UpdateOrders(goodsType);
-
-        _pcSerivce.ItemsUpdated += UpdateOrdersDelegate;
+        _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
     }
 
     public bool IsCanComplete(Order order)
     {
-        return _pcSerivce.HasPC((int)order.NeededGoods);
-    }
-
-    private void UpdateOrders(GoodsType goodsType)
-    {
-        foreach (var orderInterface in _activeOrderService.GetOrdersByGoods(goodsType))
-        {
-            var order = orderInterface as Order;
-
-            var isReadyForComplete = IsCanComplete(order);
-            order.ChangeOrderState(isReadyForComplete);
-        }
+        return _conditionChecker.IsHasInInventory(order.NeededGoods);
     }
 
     public void CompleteOrder(Order order)
@@ -42,11 +23,5 @@ public class OrderProgressChecker : IDisposable, IService
         {
             order.CompleteOrder();
         }
-    }
-
-    public void Dispose()
-    {
-        Debug.Log("Unsubscribe");
-        _pcSerivce.ItemsUpdated -= UpdateOrdersDelegate;
     }
 }

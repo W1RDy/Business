@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameLifeController : MonoBehaviour, IService
+public class PeriodSkipController : MonoBehaviour, IService
 {
     [SerializeField] private UIDarknessAnimation _darknessAnimation;
     [SerializeField] private UIDarknessAnimation _brightnessAnimation;

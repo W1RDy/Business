@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa90a6118b4605d49af4b9b36b0fe74d, type: 3}
   m_Name: BadGoodsQualityProblem
   m_EditorClassIdentifier: 
-  _problemDescription: The goods are awful.
+  _id: GoodsProblem
+  _description: This goods are awful!
   _coinsRequirement: 20
   _chance: 8
   _chancesUpdateValue: 4

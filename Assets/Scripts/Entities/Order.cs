@@ -26,8 +26,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     [SerializeField] private UIAnimation _disappearAnimation;
     private EntityAnimationsController _animController;
 
-    [SerializeField] private ButtonChanger _buttonChanger;
-
     #endregion
 
     private bool _isApplied;
@@ -52,6 +50,7 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     public Order Element => this;
 
     private Action InitDelegate;
+    public event Action OrderChanged; 
 
     public void InitInstance()
     {
@@ -115,14 +114,6 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
         if (_isApplied)
         {
             _orderPool.Release(this);
-        }
-    }
-
-    public void ChangeOrderState(bool isReadyForComplete)
-    {
-        if (_isApplied)
-        {
-            _view.ChangeButton(!isReadyForComplete);
         }
     }
 
