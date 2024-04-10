@@ -12,6 +12,8 @@ public class DeliveryConfig : ScriptableObject
 
     [SerializeField] private GoodsType _goodsType;
 
+    [SerializeField] private Sprite _icon;
+
     public DeliveryType DeliveryType => _deliveryType;
     public string DeliveryTitle => _deliveryTitle;
     public string DeliveryDescription => _deliveryDescription;
@@ -20,6 +22,8 @@ public class DeliveryConfig : ScriptableObject
     public int DeliveryTime => _deliveryTime;
 
     public GoodsType GoodsType => _goodsType;
+
+    public Sprite Icon => _icon;
 }
 
 public enum DeliveryType

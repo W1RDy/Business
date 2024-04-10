@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class OrderView : MonoBehaviour
@@ -12,12 +13,18 @@ public class OrderView : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _indexText;
 
+    [SerializeField] private Icon _icon;
+    private IconComponentsRandomizer _iconRandomizer;
+
+    
     public void SetView(int coinsValue, int timeValue, GoodsType goodsType, int id)
     {
+        if (_iconRandomizer == null) _iconRandomizer = ServiceLocator.Instance.Get<IconComponentsRandomizer>();
         _indexText.text = "order " + id;
         SetCoins(coinsValue);
         SetTime(timeValue);
         SetQuality(goodsType);
+        SetIcon();
     }
 
     public void SetCoins(int coinsValue)
@@ -43,5 +50,11 @@ public class OrderView : MonoBehaviour
     public void ChangeApplyState(bool isApplied)
     {
         _applyOrderButton.ChangeState(isApplied);
+    }
+
+    public void SetIcon()
+    {
+        var iconComponents = _iconRandomizer.RandomizeComponents();
+        _icon.SetNewIconImage(iconComponents);
     }
 }

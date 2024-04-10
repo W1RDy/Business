@@ -1,7 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 {
@@ -35,8 +35,13 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     [SerializeField] private TextMeshProUGUI _amountText;
 
+    [SerializeField] private TextMeshProUGUI _brokenText;
+
     [SerializeField] private UIAnimation _appearAnimation;
     [SerializeField] private UIAnimation _disappearAnimation;
+
+    [SerializeField] private Image _iconSpace;
+ 
     private EntityAnimationsController _animController;
 
     private PCView _view;
@@ -64,7 +69,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
             InitAnimations();
 
-            _view = new PCView(_titleText, _descriptionText, _amountText);
+            _view = new PCView(_titleText, _descriptionText, _amountText, _brokenText, _iconSpace);
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -80,7 +85,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
         _isBroken = isBroken;
 
         Amount = 1;
-        _view.SetView(_config.Title, _config.Description, Amount);
+        _view.SetView(_config.Title, _config.Description, Amount, _isBroken, _config.Icon);
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);

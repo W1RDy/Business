@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Delivery : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class Delivery : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private TextMeshProUGUI _descriptionText;
 
+    [SerializeField] private Image _icon;
+
     private DeliveryView _view;
 
     #endregion
@@ -40,8 +43,8 @@ public class Delivery : MonoBehaviour
     {
         _deliveryConfigInstance = Instantiate(_deliveryConfig);
 
-        _view = new DeliveryView(_costText, _timeText, _titleText, _descriptionText);
-        _view.SetView(Cost, Time, _deliveryConfig.DeliveryTitle, _deliveryConfig.DeliveryDescription);
+        _view = new DeliveryView(_costText, _timeText, _titleText, _descriptionText, _icon);
+        _view.SetView(Cost, Time, _deliveryConfig.DeliveryTitle, _deliveryConfig.DeliveryDescription, _deliveryConfig.Icon);
     }
 
     private void Start()
@@ -57,7 +60,7 @@ public class Delivery : MonoBehaviour
         if (deliveryOrder == null)
         {
             deliveryOrder = _pool.Get();
-            deliveryOrder.InitVariant(ID, Cost, Time, _deliveryConfigInstance.GoodsType);
+            deliveryOrder.InitVariant(ID, Cost, Time, _deliveryConfigInstance.GoodsType, _deliveryConfigInstance.Icon);
             _orderService.AddOrder(deliveryOrder);
 
             _compositeOrder.AddOrder(deliveryOrder);

@@ -16,3 +16,4 @@ MonoBehaviour:
   _title: LowQuality
   _description: Very hard for build.
   _buildTime: 3
+  _icon: {fileID: 21300000, guid: 13ea77137b88fbd47a392440da2b25c7, type: 3}

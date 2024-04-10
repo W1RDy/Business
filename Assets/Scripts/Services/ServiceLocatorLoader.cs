@@ -14,6 +14,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private PeriodSkipController _periodSkipController;
     [SerializeField] private SuggestionsService _suggestionsService;
 
+    [SerializeField] private IconComponentsRandomizer _iconComponentsRandomizer;
+
     [SerializeField] private Window[] _windows;
 
     #region PoolsTransforms
@@ -58,6 +60,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonChangeController();
         BindConditionChecker();
 
+        BindIconComponentsRandomizer();
+
         BindOrderCompleteHandler();
         BindOrdersServices();
         BindDeliveryCompositeOrder();
@@ -79,6 +83,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindIconComponentsRandomizer()
+    {
+        ServiceLocator.Instance.Register(_iconComponentsRandomizer);
     }
 
     private void BindOrderCompleteHandler()

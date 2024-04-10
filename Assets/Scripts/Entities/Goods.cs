@@ -1,6 +1,8 @@
 ﻿using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
@@ -35,6 +37,8 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _amountText;
 
+    [SerializeField] private Image _icon;
+
     private GoodsView _view;
 
     [SerializeField] private UIAnimation _appearAnimation;
@@ -60,7 +64,7 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
         {
             Release();
 
-            _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText);
+            _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText, _icon);
 
             _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
             _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
@@ -80,7 +84,7 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
         _brokenGoodsCount = brokenGoodsCount;
 
         Amount = amount;
-        _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount);
+        _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount, config.Icon);
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
@@ -140,21 +144,25 @@ public class GoodsView
     private TextMeshProUGUI _timeText;
     private TextMeshProUGUI _amountText;
 
-    public GoodsView(TextMeshProUGUI titleText, TextMeshProUGUI descriptionText, TextMeshProUGUI timeText, TextMeshProUGUI amountText)
+    private Image _icon;
+
+    public GoodsView(TextMeshProUGUI titleText, TextMeshProUGUI descriptionText, TextMeshProUGUI timeText, TextMeshProUGUI amountText, Image icon)
     {
         _titleText = titleText;
         _descriptionText = descriptionText;
         _timeText = timeText;
         _amountText = amountText;
+        _icon = icon;
     }
 
-    public void SetView(string title, string description, int time, int amount)
+    public void SetView(string title, string description, int time, int amount, Sprite icon)
     {
         _titleText.text = title;
         _descriptionText.text = description;
 
         SetTime(time);
         SetAmount(amount);
+        SetIcon(icon);
     }
 
     public void SetTime(int time)
@@ -165,5 +173,10 @@ public class GoodsView
     public void SetAmount(int amount)
     {
         _amountText.text = "X" + amount;
+    }
+
+    public void SetIcon(Sprite icon)
+    {
+        _icon.sprite = icon;
     }
 }

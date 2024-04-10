@@ -10,11 +10,15 @@ public class GoodsConfig : ScriptableObject
 
     [SerializeField] private int _buildTime;
 
+    [SerializeField] private Sprite _icon;
+
     public GoodsType GoodsType => _goodsType;
     public string Title => _title;
     public string Description => _description;
 
     public int BuildTime => _buildTime;
+
+    public Sprite Icon => _icon;
 }
 
 public enum GoodsType

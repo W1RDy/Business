@@ -14,6 +14,8 @@ public class PCConfig : ScriptableObject
     [SerializeField] private bool _isReturned;
     [SerializeField] private bool _isBroken;
 
+    [SerializeField] private Sprite _icon;
+
     public int ID => _id;
 
     public GoodsType GoodsType => _goodsType;
@@ -22,4 +24,6 @@ public class PCConfig : ScriptableObject
     public string Description => _description;
     public bool IsReturned => _isReturned;
     public bool IsBroken => _isBroken;
+
+    public Sprite Icon => _icon;
 }

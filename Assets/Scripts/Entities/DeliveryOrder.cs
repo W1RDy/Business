@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<DeliveryOrder>
 {
@@ -37,6 +38,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _amountText;
 
+    [SerializeField] private Image _icon;
+
     private DeliveryOrderView _deliveryOrderView;
 
     [SerializeField] private UIAnimation _appearAnimation;
@@ -66,7 +69,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
             Release();
 
             _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
-            _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText);
+            _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText, _icon);
 
             _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
             _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
@@ -83,7 +86,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);
 
-    public void InitVariant(int id, int cost, int time, GoodsType goodsType)
+    public void InitVariant(int id, int cost, int time, GoodsType goodsType, Sprite icon)
     {
         ID = id;
         Cost = cost;
@@ -93,7 +96,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         _goodsType = goodsType;
 
         Amount = 1;
-
+        _deliveryOrderView.SetIcon(icon);
     }
 
     public void ApplyOrder()
@@ -161,12 +164,14 @@ public class DeliveryOrderView
     private TextMeshProUGUI _costText;
     private TextMeshProUGUI _timeText;
     private TextMeshProUGUI _amountText;
+    private Image _icon;
 
-    public DeliveryOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, TextMeshProUGUI amountText)
+    public DeliveryOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, TextMeshProUGUI amountText, Image icon)
     {
         _costText = priceText;
         _timeText = timeText;
         _amountText = amountText;
+        _icon = icon;
     }
 
     public void SetView(int cost, int time, int amount)
@@ -174,5 +179,10 @@ public class DeliveryOrderView
         _costText.text = "- " + cost.ToString();
         _timeText.text = "+ " + time.ToString();
         _amountText.text = "X" + amount.ToString();
+    }
+
+    public void SetIcon(Sprite icon)
+    {
+        _icon.sprite = icon;
     }
 }

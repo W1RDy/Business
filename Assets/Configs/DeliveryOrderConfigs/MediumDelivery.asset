@@ -18,3 +18,4 @@ MonoBehaviour:
   _deliveryCost: 20
   _deliveryTime: 5
   _goodsType: 1
+  _icon: {fileID: 21300000, guid: 92a57602bf424d94bb663b04297e51d6, type: 3}

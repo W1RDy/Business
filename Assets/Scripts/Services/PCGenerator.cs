@@ -29,7 +29,6 @@ public class PCGenerator : IService
 
     public void GeneratePC(GoodsType goodsType, bool isBroken, bool isReused)
     {
-        Debug.Log(isBroken);
         if (isBroken) goodsType = GoodsType.LowQuality;
         var pcConfigInstance = _configsDictionary[(goodsType, isBroken, isReused)];
 
