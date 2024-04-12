@@ -7,14 +7,12 @@ public class OrderApplyHandler
     private ActiveOrderService _activeOrderService;
     private ResultsOfTheMonthService _resultsOfTheMonthService;
     private HandsCoinsCounter _handCoinsCounter;
-    private SuggestionGenerator _suggestionGenerator;
 
     private ButtonService _buttonService;
 
     private Action InitDelegate;
-    private Action ConfirmRememberedOrder;
 
-    private Suggestion _rememberedSuggestion;
+    private ConfirmHandler _confirmHandler;
 
     public OrderApplyHandler()
     {
@@ -24,7 +22,7 @@ public class OrderApplyHandler
             _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
             _buttonService = ServiceLocator.Instance.Get<ButtonService>();
             _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
+            _confirmHandler = new ConfirmHandler();
             
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -32,51 +30,15 @@ public class OrderApplyHandler
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void ApplyOrder(IOrder order)
+    public void ApplyOrder(IOrderWithCallbacks order)
     {
-        RememberOrder(order);
+        var action = GetConfirmRememberedOrderAction(order);
 
-        if (order as Order != null) ConfirmOrderApplying();
-        else OpenSuggestionWindow(order);
+        if (order is Order standartOrder) action.Invoke();
+        else _confirmHandler.ConfirmAction(action, order.Time);
     }
 
-    private void RememberOrder(IOrder order)
-    {
-        ConfirmRememberedOrder = GetConfirmRememberedOrderAction(order);
-    }
-
-    private void OpenSuggestionWindow(IOrder order)
-    {
-        _rememberedSuggestion = _suggestionGenerator.GenerateSuggestion("SkipTime", order.Time);
-
-        _rememberedSuggestion.Applied += ConfirmOrderApplying;
-        _rememberedSuggestion.Skipped += CancelOrderApplying;
-
-        _buttonService.OpenWindow(WindowType.SuggestionWindow);
-    }
-
-    private void ConfirmOrderApplying()
-    {
-        ConfirmRememberedOrder?.Invoke();
-        CancelOrderApplying();
-    }
-
-    private void CancelOrderApplying()
-    {
-        if (ConfirmRememberedOrder != null)
-        {
-            ConfirmRememberedOrder = null;
-
-            if (_rememberedSuggestion != null)
-            {
-                _rememberedSuggestion.Applied -= ConfirmOrderApplying;
-                _rememberedSuggestion.Skipped -= CancelOrderApplying;
-                _rememberedSuggestion = null;
-            }
-        }
-    }
-
-    private Action GetConfirmRememberedOrderAction(IOrder order)
+    private Action GetConfirmRememberedOrderAction(IOrderWithCallbacks order)
     {
         if (order is Order standartOrder)
         {

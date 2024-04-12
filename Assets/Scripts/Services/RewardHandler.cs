@@ -12,7 +12,7 @@ public class RewardHandler : IService
         _coinCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
     }
 
-    public void ApplyRewardForOrder(IOrder order)
+    public void ApplyRewardForOrder(IOrderWithCallbacks order)
     {
         _coinCounter.AddCoins(order.Cost);
     }

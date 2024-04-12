@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 
-public class CloseResultsButton : CloseButton, IChangeButton
+public class CloseResultsButton : CloseButton, IButtonWithNewButton
 {
     [SerializeField] private CustomButton _buttonForChange;
+    [SerializeField] private ChangeCondition[] _changeConditions;
+
+    public ChangeCondition[] ChangeConditions => _changeConditions;
     public CustomButton ButtonForChange => _buttonForChange;
 
     private ButtonChangeController _buttonChangeController;
@@ -14,18 +17,18 @@ public class CloseResultsButton : CloseButton, IChangeButton
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        _buttonChangeController.ChangeButton(this);
+        _buttonChangeController.ChangeButtonToNewButton(this);
         _buttonChangeController.AddChangeButton(this);
     }
 
-    public bool CheckChangeCondition()
+    public bool CheckButtonChangeCondition()
     {
         return _conditionChecker.IsGameFinished();
     }
 
     private void OnEnable()
     {
-        if (_buttonChangeController != null) _buttonChangeController.ChangeButton(this);
+        if (_buttonChangeController != null) _buttonChangeController.ChangeButtonToNewButton(this);
     }
 
     public void OnDestroy()

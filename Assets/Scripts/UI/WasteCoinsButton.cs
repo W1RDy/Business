@@ -2,13 +2,16 @@
 using TMPro;
 using UnityEngine;
 
-public class WasteCoinsButton : CustomButton, IChangeButton
+public class WasteCoinsButton : CustomButton, IButtonWithNewButton
 {
     [SerializeField] private int _coinsValue;
 
     [SerializeField] private TextMeshProUGUI _buttonText;
 
     [SerializeField] private CustomButton _buttonForChange;
+    [SerializeField] private ChangeCondition[] _changeConditions;
+
+    public ChangeCondition[] ChangeConditions => _changeConditions;
     public CustomButton ButtonForChange => _buttonForChange;
 
     private GamesConditionChecker _conditionsChecker;
@@ -19,7 +22,7 @@ public class WasteCoinsButton : CustomButton, IChangeButton
         base.Init();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
         _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
-        _changeController.ChangeButton(this);
+        _changeController.ChangeButtonToNewButton(this);
         _changeController.AddChangeButton(this);
 
         SetText();
@@ -33,7 +36,7 @@ public class WasteCoinsButton : CustomButton, IChangeButton
 
     private void OnEnable()
     {
-        if (_changeController != null) _changeController.ChangeButton(this);
+        if (_changeController != null) _changeController.ChangeButtonToNewButton(this);
     }
 
     public void SetCoinsValue(int value)
@@ -46,7 +49,7 @@ public class WasteCoinsButton : CustomButton, IChangeButton
         _buttonText.text = "Ok";
     }
 
-    public bool CheckChangeCondition()
+    public bool CheckButtonChangeCondition()
     {
         return !_conditionsChecker.IsEnoughCoins(_coinsValue);
     }

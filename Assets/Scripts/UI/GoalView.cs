@@ -8,10 +8,13 @@ public class GoalView
 
     private Image _timeProgressImage;
     private TextMeshProUGUI _remainingTimeText;
+    private TextMeshProUGUI _remainingQuality;
 
     private TextMeshProUGUI _rewardText;
+    private SendOrderButton _sendButton;
 
-    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText)
+    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText, TextMeshProUGUI remainingQuality, 
+        SendOrderButton sendButton)
     {
         _titleText = titleText;
 
@@ -19,13 +22,17 @@ public class GoalView
         _remainingTimeText = remainingTimeText;
 
         _rewardText = rewardText;
+
+        _remainingQuality = remainingQuality;
+        _sendButton = sendButton;
     }
 
-    public void SetView(int id, int cost, int remainTime, int time)
+    public void SetView(int id, int cost, int remainTime, int time, GoodsType goodsType)
     {
         SetId(id);
         SetCost(cost);
         SetTime(remainTime, time);
+        SetQualityText(goodsType);
     }
 
     public void SetId(int id)
@@ -49,5 +56,20 @@ public class GoalView
         if (timeProgress > 0.6f) _timeProgressImage.color = Color.green;
         else if (timeProgress > 0.3f) _timeProgressImage.color = Color.yellow;
         else _timeProgressImage.color = Color.red;
+    }
+
+    public void SetQualityText(GoodsType goodsType)
+    {
+        string qualityText;
+        if (goodsType == GoodsType.LowQuality) qualityText = "low +";
+        else if (goodsType == GoodsType.MediumQuality) qualityText = "medium +";
+        else qualityText = "high";
+
+        _remainingQuality.text = qualityText;
+    }
+
+    public void SetButtonState(bool toActiveState)
+    {
+        _sendButton.ChangeStates(toActiveState);   
     }
 }

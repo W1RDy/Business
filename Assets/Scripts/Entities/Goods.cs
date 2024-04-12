@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
+public class Goods : MonoBehaviour, IRemembable, IThrowable, IPoolElement<Goods>
 {
     #region Values
 

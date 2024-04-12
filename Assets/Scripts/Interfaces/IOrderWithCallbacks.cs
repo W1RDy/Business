@@ -8,10 +8,15 @@ public interface IOrder
     public int ID { get; }
     public int Cost { get; }
     public int Time { get; }
-    public bool IsApplied { get; }
-    public event Action OrderChanged;
 
     public void ApplyOrder();
     public void CancelOrder();
     public void CompleteOrder();
+}
+
+public interface IOrderWithCallbacks : IOrder
+{
+    public bool IsApplied { get; }
+    public event Action OrderValuesChanged;
+    public event Action OrderStateChanged;
 }

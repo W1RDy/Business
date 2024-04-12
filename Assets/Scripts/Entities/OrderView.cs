@@ -8,9 +8,6 @@ public class OrderView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _qualityText;
 
-    [SerializeField] private ApplyOrderButton _applyOrderButton;
-    [SerializeField] private SendOrderButton _sendOrderButton;
-
     [SerializeField] private TextMeshProUGUI _indexText;
 
     [SerializeField] private Icon _icon;
@@ -40,16 +37,11 @@ public class OrderView : MonoBehaviour
     public void SetQuality(GoodsType goodsType)
     {
         string quality;
-        if (goodsType == GoodsType.LowQuality) quality = "low";
-        else if (goodsType == GoodsType.MediumQuality) quality = "medium";
+        if (goodsType == GoodsType.LowQuality) quality = "low +";
+        else if (goodsType == GoodsType.MediumQuality) quality = "medium +";
         else quality = "high";
 
         _qualityText.text = quality;
-    }
-
-    public void ChangeApplyState(bool isApplied)
-    {
-        _applyOrderButton.ChangeState(isApplied);
     }
 
     public void SetIcon()

@@ -14,6 +14,7 @@ public class ButtonService : IService
 
     private OrderProgressChecker _orderProgressChecker;
     private OrderApplyHandler _orderApplyHandler;
+    private PCConstructHandler _pcConstructHandler;
 
     private SuggestionGenerator _suggestionGenerator;
 
@@ -31,6 +32,7 @@ public class ButtonService : IService
 
         _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
         _orderApplyHandler = new OrderApplyHandler();
+        _pcConstructHandler = new PCConstructHandler();
 
         _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
 
@@ -106,13 +108,13 @@ public class ButtonService : IService
         else CloseWindow(WindowType.DistributeCoinsWindow);
     }
 
-    public void SendOrder(IOrder order)
+    public void SendOrder(IOrderWithCallbacks order)
     {
         _resultsOfTheMonthService.UpdateResults(0, 0, order.Cost, 0);
         _orderProgressChecker.CompleteOrder(order as Order);
     }
 
-    public void ApplyOrder(IOrder order)
+    public void ApplyOrder(IOrderWithCallbacks order)
     {
         _orderApplyHandler.ApplyOrder(order);
     }
@@ -124,8 +126,7 @@ public class ButtonService : IService
 
     public void ConstructPC(Goods goods)
     {
-        goods.ConstructPC();
-        TryAddTime(goods.Time);
+        _pcConstructHandler.ConstructPC(goods);
     }
 
     public void ThrowOut(IThrowable throwable)

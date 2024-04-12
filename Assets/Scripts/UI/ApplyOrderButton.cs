@@ -4,20 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ApplyOrderButton : OrdersControlButton, IChangeButton
+public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButtonWithStates
 {
     [SerializeField] private CustomButton _buttonForChange;
+    [SerializeField] private ChangeCondition[] _changeConditions;
+
+    public ChangeCondition[] ChangeConditions => _changeConditions;
     public CustomButton ButtonForChange => _buttonForChange;
 
     private ButtonChangeController _buttonChangeController;
 
     private GamesConditionChecker _conditionChecker;
-    private Action OnOrderChanged;
+    private Action OnOrderValuesChanged;
+    private Action OnOrderStateChanged;
 
+    private bool _isInitialized;
+ 
     protected override void Start()
     {
-        base.Start();
-        ChangeState(false);
+        if (!_isInitialized)
+        {
+            _isInitialized = true;
+            base.Start();
+        }
     }
 
     protected override void Init()
@@ -26,22 +35,18 @@ public class ApplyOrderButton : OrdersControlButton, IChangeButton
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        OnOrderChanged = () => _buttonChangeController.ChangeButton(this);
-        _buttonChangeController.ChangeButton(this);
-        if (_order as Order != null && _order.IsApplied) Debug.Log(CheckChangeCondition());
-
-        _order.OrderChanged += OnOrderChanged;
+        OnOrderValuesChanged = () => _buttonChangeController.ChangeButtonToNewButton(this);
+        OnOrderStateChanged = () => _buttonChangeController.ChangeButtonStates(this);
+            
+        _order.OrderValuesChanged += OnOrderValuesChanged;
+        _order.OrderStateChanged += OnOrderStateChanged;
 
         _buttonChangeController.AddChangeButton(this);
     }
 
-    private void OnEnable()
+    public void InitializeButton()
     {
-        if (_buttonChangeController != null)
-        {
-            if (_order as Order != null && _order.IsApplied) Debug.Log(CheckChangeCondition());
-            _buttonChangeController.ChangeButton(this);
-        }
+        Start();
     }
 
     protected override void ClickCallback()
@@ -55,16 +60,15 @@ public class ApplyOrderButton : OrdersControlButton, IChangeButton
         _buttonService.ApplyOrder(_order);
     }
 
-    public void ChangeState(bool isApplied)
+    public void ChangeStates(bool isApplied)
     {
         if (_button == null) Start();
         _button.interactable = !isApplied;
         var text = isApplied ? "Applied" : "Apply";
         SetText(text);
-        _buttonChangeController.ChangeButton(this);
     }
 
-    public bool CheckChangeCondition()
+    public bool CheckButtonChangeCondition()
     {
         if (_order is Order standartOrder) return _order.IsApplied && _conditionChecker.IsHasInInventory(standartOrder.NeededGoods);
         if (_order is CompositeOrder compositeOrder) return !_conditionChecker.IsEnoughCoins(compositeOrder.Cost);
@@ -76,7 +80,14 @@ public class ApplyOrderButton : OrdersControlButton, IChangeButton
         if (_buttonChangeController != null)
         {
             _buttonChangeController.RemoveChangeButton(this);
-            _order.OrderChanged -= OnOrderChanged;
+            _order.OrderValuesChanged -= OnOrderValuesChanged;
+            _order.OrderStateChanged -= OnOrderStateChanged;
         }
+    }
+
+    public bool CheckStatesChangeCondition()
+    {
+        if (_order as CompositeOrder != null) Debug.Log("Condition");
+        return _order.IsApplied;
     }
 }

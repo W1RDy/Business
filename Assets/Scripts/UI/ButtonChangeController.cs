@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ButtonChangeController : IService
 {
-    private Dictionary<Type, List<IChangeButton>> _buttons = new Dictionary<Type, List<IChangeButton>>();
+    private Dictionary<ChangeCondition, List<IChangeButton>> _buttons = new Dictionary<ChangeCondition, List<IChangeButton>>();
 
     private Action InitDelegate;
 
@@ -30,52 +30,65 @@ public class ButtonChangeController : IService
     public void AddChangeButton(IChangeButton button)
     {
         List<IChangeButton> buttonsList;
-        if (!_buttons.TryGetValue(button.ButtonForChange.GetType(), out buttonsList))
+        foreach (var changeCondition in button.ChangeConditions)
         {
-            _buttons[button.ButtonForChange.GetType()] = buttonsList = new List<IChangeButton>();
+            if (!_buttons.TryGetValue(changeCondition, out buttonsList))
+            {
+                _buttons[changeCondition] = buttonsList = new List<IChangeButton>();
+            }
+            buttonsList.Add(button);
         }
-        buttonsList.Add(button);
     }
 
     public void RemoveChangeButton(IChangeButton button)
     {
-        if (_buttons.ContainsKey(button.ButtonForChange.GetType()))
+        foreach (var changeCondition in button.ChangeConditions)
         {
-            _buttons[button.ButtonForChange.GetType()].Remove(button);
-            if (_buttons[button.ButtonForChange.GetType()].Count == 0) _buttons.Remove(button.ButtonForChange.GetType());
+            if (_buttons.ContainsKey(changeCondition))
+            {
+                _buttons[changeCondition].Remove(button);
+                if (_buttons[changeCondition].Count == 0) _buttons.Remove(changeCondition);
+            }
         }
     }
 
     public void ChangeByCoinsChangeCondition()
     {
-        ChangeButtons(typeof(OpenDistributeCoinsButton));
+        ChangeButtons(ChangeCondition.CoinsChanged);
     }
 
     public void ChangeByNewItemCondition()
     {
-        ChangeButtons(typeof(SendOrderButton));
+        ChangeButtons(ChangeCondition.InventoryChanged);
     }
 
     public void ChangeByFinishGameCondition()
     {
-        ChangeButtons(typeof(RestartButton));
+        ChangeButtons(ChangeCondition.GameFinished);
     }
 
-    public void ChangeButtons(Type buttonForChangeType)
+    public void ChangeButtons(ChangeCondition changeCondition)
     {
-        if (_buttons.TryGetValue(buttonForChangeType, out var buttons))
+        if (_buttons.TryGetValue(changeCondition, out var buttons))
         {
             foreach (var button in buttons)
             {
-                ChangeButton(button);
+                if (button is IButtonWithNewButton buttonWithNewButton) ChangeButtonToNewButton(buttonWithNewButton);
+                if (button is IButtonWithStates buttonWithStates) ChangeButtonStates(buttonWithStates);
             }
         }
     }
 
-    public void ChangeButton(IChangeButton button)
+    public void ChangeButtonToNewButton(IButtonWithNewButton button)
     {
-        if (button.CheckChangeCondition()) ChangeButton(button as CustomButton, button.ButtonForChange);
+        if (button.CheckButtonChangeCondition()) ChangeButton(button as CustomButton, button.ButtonForChange);
         else ChangeButton(button.ButtonForChange, button as CustomButton);
+    }
+
+    public void ChangeButtonStates(IButtonWithStates button)
+    {
+        if (button.CheckStatesChangeCondition()) button.ChangeStates(true);
+        else button.ChangeStates(false);
     }
 
     private void ChangeButton(CustomButton from, CustomButton to)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CompositeOrder : MonoBehaviour, IOrder, IService
+public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, IService
 {
     private List<IOrder> _orders = new List<IOrder>();
 
@@ -22,7 +22,6 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     [SerializeField] private TextMeshProUGUI _timeText;
 
     [SerializeField] private ApplyOrderButton _applyOrderButton;
-    [SerializeField] private OpenDistributeCoinsButton _openDistributeCoinsButton;
 
     private CompositeOrderView _view;
 
@@ -33,13 +32,14 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
     private IDGenerator _idGenerator;
 
     private Action InitDelegate;
-    public event Action OrderChanged;
+    public event Action OrderValuesChanged;
+    public event Action OrderStateChanged;
 
     public void InitInstance()
     {
         InitDelegate = () =>
         {
-            _view = new CompositeOrderView(_priceText, _timeText, _applyOrderButton, _openDistributeCoinsButton);
+            _view = new CompositeOrderView(_priceText, _timeText);
             _idGenerator = new IDGenerator();
 
             _view.SetView("Delivery", 0, 0);
@@ -47,6 +47,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
             ID = _idGenerator.GetID();
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
+
+            _applyOrderButton.InitializeButton();
         };
 
         ServiceLocator.Instance.ServiceRegistered += InitDelegate;
@@ -61,8 +63,9 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Time += order.Time;
 
         _view.SetView("Delivery", Cost, Time);
-        _view.ChangeState(false);
-        OrderChanged?.Invoke();
+        OrderValuesChanged?.Invoke();
+        Debug.Log(StateIsChanged());
+        if (StateIsChanged()) OrderStateChanged?.Invoke();
     }
 
     public void RemoveOrder(IOrder order)
@@ -73,11 +76,13 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Time -= order.Time;
 
         _view.SetView("Delivery", Cost, Time);
-        OrderChanged?.Invoke();
+        OrderValuesChanged?.Invoke();
+        if (StateIsChanged()) OrderStateChanged?.Invoke();
     }
 
     public void ChangeOrder(int oldCost, int oldTime, IOrder newOrder)
     {
+        Debug.Log("ChangeOrder");
         Cost -= oldCost;
         Time -= oldTime;
 
@@ -85,8 +90,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         Time += newOrder.Time;
 
         _view.SetView("Delivery", Cost, Time);
-        _view.ChangeState(false);
-        OrderChanged?.Invoke();
+        OrderValuesChanged?.Invoke();
+        if (StateIsChanged()) OrderStateChanged?.Invoke();
     }
 
     public void ApplyOrder()
@@ -96,8 +101,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.ApplyOrder();
         }
-        IsApplied = _orders.Count > 0;
-        _view.ChangeState(true);
+        IsApplied = true;
+        OrderStateChanged?.Invoke();
     }
 
     public void CancelOrder()
@@ -106,7 +111,8 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.CancelOrder();
         }
-        IsApplied = false;
+        IsApplied = true;
+        OrderStateChanged?.Invoke();
     }
 
     public void CompleteOrder()
@@ -115,7 +121,15 @@ public class CompositeOrder : MonoBehaviour, IOrder, IService
         {
             order.CompleteOrder();
         }
-        IsApplied = false;
+        IsApplied = true;
+        OrderStateChanged?.Invoke();
+    }
+
+    private bool StateIsChanged()
+    {
+        var oldAppliedState = IsApplied;
+        IsApplied = _orders.Count == 0;
+        return oldAppliedState == IsApplied;
     }
 }
 
@@ -124,26 +138,16 @@ public class CompositeOrderView
     private TextMeshProUGUI _priceText;
     private TextMeshProUGUI _timeText;
 
-    private ApplyOrderButton _applyButton;
-    private OpenDistributeCoinsButton _openDistributeButton;
 
-    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText, ApplyOrderButton applyOrderButton, OpenDistributeCoinsButton openDistributeCoinsButton)
+    public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText)
     {
         _priceText = priceText;
         _timeText = timeText;
-
-        _applyButton = applyOrderButton;
-        _openDistributeButton = openDistributeCoinsButton;
     }
 
     public void SetView(string orderType, int price, int time)
     {
         _priceText.text = orderType + " cost: " + price;
         _timeText.text = orderType + " time: " + time;
-    }
-
-    public void ChangeState(bool isApplied)
-    {
-        _applyButton.ChangeState(isApplied);
     }
 }

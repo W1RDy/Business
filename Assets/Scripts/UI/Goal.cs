@@ -20,12 +20,12 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
 
     [SerializeField] private Image _timeProgressImage;
     [SerializeField] private TextMeshProUGUI _remainingTimeText;
+    [SerializeField] private TextMeshProUGUI _remainingQualityText;
 
     [SerializeField] private TextMeshProUGUI _rewardText;
+    [SerializeField] private SendOrderButton _sendButton;
 
     private GoalView _view;
-
-
 
     #endregion
 
@@ -35,18 +35,19 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
     public void InitInstance()
     {
         Release();
-        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText);
+        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText, _sendButton);
     }
 
-    public void InitVariant(int id, int cost, int time)
+    public void InitVariant(Order order)
     {
-        _id = id;
-        _cost = cost;
-        _time = time;
+        _id = order.ID;
+        _cost = order.Cost;
+        _time = order.Time;
 
-        _remainTime = time;
+        _remainTime = order.Time;
 
-        _view.SetView(id, cost, time, time);
+        _view.SetView(_id, _cost, _remainTime, _time, order.NeededGoods);
+        _sendButton.SetOrder(order);
     }
 
     public void SetRemainTime(int remainTime)

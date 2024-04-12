@@ -33,7 +33,6 @@ public abstract class UIAnimation : ScriptableObject
 
     public virtual void Kill()
     {
-        Debug.Log("Kill");
         _sequence.Kill();
         _finishCallback?.Invoke();
         Release();

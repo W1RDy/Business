@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderView))]
-public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
+public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable, IPoolElement<Order>
 {
     #region Values
 
@@ -54,7 +54,8 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
     public Order Element => this;
 
     private Action InitDelegate;
-    public event Action OrderChanged; 
+    public event Action OrderValuesChanged;
+    public event Action OrderStateChanged;
 
     public void InitInstance()
     {
@@ -109,9 +110,9 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
             _isApplied = true;
 
             _goal = _goalPool.Get();
-            _goal.InitVariant(ID, Cost, Time);
+            _goal.InitVariant(this);
 
-            _view.ChangeApplyState(true);
+            OrderStateChanged?.Invoke();
         }
     }
 
@@ -129,7 +130,10 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
         {
             _rewardHandler.ApplyRewardForOrder(this);
             _rememberedOrderService.RememberOrder(this);
-            _orderPool.Release(this);
+
+            Action callback = () => _orderPool.Release(this);
+            _animController.PlayDisappearAnimation(callback);
+
             _orderCompleteHandler.CompleteOrder(this);
         }
     }
@@ -180,7 +184,7 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
 
         _isFree = true;
         _isApplied = false;
-        _view.ChangeApplyState(_isApplied);
+        OrderStateChanged?.Invoke();
     }
 
     public void ThrowOut()
