@@ -9,7 +9,9 @@ public class OrderGenerator : MonoBehaviour
     [SerializeField] private OrderConfig[] _orders;
     [SerializeField] private int _maxOrdersCount;
 
-    [SerializeField] private RandomController _randomController; 
+    [SerializeField] private RandomController _randomController;
+
+    [SerializeField] private Window _ordersWindow;
 
     private Pool<Order> _pool;
 
@@ -47,8 +49,12 @@ public class OrderGenerator : MonoBehaviour
         {
             if (!_randomController.IsBlocked)
             {
-                GenerateOrder();
-                if (_orderService.GetOrdersCount() == _maxOrdersCount) _randomController.BlockController();
+                if (_orderService.GetOrdersCount() == _maxOrdersCount)
+                {
+                    _randomController.BlockController();
+                    return;
+                }
+                _ordersWindow.SetOnWindowsChangedCallback(GenerateOrder);
             }
             else if (_orderService.GetOrdersCount() < _maxOrdersCount) _randomController.UnblockController();
 

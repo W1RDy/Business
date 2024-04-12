@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class Window : MonoBehaviour
     [SerializeField] private UIAnimation _openAnimation;
     [SerializeField] private UIAnimation _closeAnimation;
     private bool _animationIsInitialized;
+
+    private Action _onWindowsChanged;
 
     private void InitAnimations()
     {
@@ -29,7 +32,7 @@ public class Window : MonoBehaviour
         if (_openAnimation)
         {
             if (!_animationIsInitialized) InitAnimations();
-            _openAnimation.Play();
+            _openAnimation.Play(_onWindowsChanged);
         }
     }
 
@@ -37,9 +40,26 @@ public class Window : MonoBehaviour
     {
         if (_closeAnimation)
         {
-            _closeAnimation.Play(() => gameObject.SetActive(false));
+            _closeAnimation.Play(() =>
+            {
+                gameObject.SetActive(false);
+                _onWindowsChanged?.Invoke();
+            });
         }
         else gameObject.SetActive(false);
+    }
+
+    public void SetOnWindowsChangedCallback(Action onWindowsChanged)
+    {
+        if (_openAnimation.IsFinished && _closeAnimation.IsFinished) onWindowsChanged?.Invoke(); 
+        else if (_onWindowsChanged == null)
+        {
+            _onWindowsChanged = () =>
+            {
+                onWindowsChanged?.Invoke();
+                _onWindowsChanged = null;
+            };
+        }
     }
 
     private void OnDisable()

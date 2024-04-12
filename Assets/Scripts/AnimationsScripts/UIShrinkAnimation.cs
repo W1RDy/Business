@@ -24,8 +24,8 @@ public class UIShrinkAnimation : UIScaleAnimation
         _finishCallback = () =>
         {
             _isFinished = true;
-            callback?.Invoke();
             _transform.localScale = startScale;
+            callback?.Invoke();
         };
 
         _sequence = DOTween.Sequence();
