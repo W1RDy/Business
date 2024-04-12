@@ -16,6 +16,10 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     [SerializeField] private IconComponentsRandomizer _iconComponentsRandomizer;
 
+    [SerializeField] private AudioDataConfigs _audioDataConfigs;
+    [SerializeField] private AudioPlayer _audioPlayerPrefab;
+    private AudioPlayer _audioPlayer;
+
     [SerializeField] private Window[] _windows;
 
     #region PoolsTransforms
@@ -47,6 +51,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void Bind()
     {
+        BindAudioServices();
+
         BindWindowService();
         BindWindowActivator();
 
@@ -83,6 +89,16 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindAudioServices()
+    {
+        var audioService = new AudioService(_audioDataConfigs);
+
+        _audioPlayer = Instantiate(_audioPlayerPrefab);
+        _audioPlayer.Init(audioService);
+
+        ServiceLocator.Instance.Register(_audioPlayer);
     }
 
     private void BindIconComponentsRandomizer()
