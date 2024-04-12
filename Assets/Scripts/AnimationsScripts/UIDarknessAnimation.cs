@@ -16,23 +16,20 @@ public class UIDarknessAnimation : UIAnimation
         _image = _darknessView;
     }
 
-    public override void Play()
-    {
-        Play(null);
-    }
-
     public override void Play(Action callback)
     {
-        IsFinished = false;
+        base.Play(callback);
+        _isFinished = false;
 
-        var fadeSequence = DOTween.Sequence();
+        _sequence = DOTween.Sequence();
 
-        fadeSequence
+        _sequence
             .Append(_image.DOFade(_darknessEnd, _time))
-            .AppendCallback(() =>
-            {
-                IsFinished = true;
-                callback?.Invoke();
-            });
+            .AppendCallback(() => _finishCallback.Invoke());
+    }
+
+    protected override void Release()
+    {
+        _image.color = new Color (_image.color.r, _image.color.g, _image.color.b, _darknessEnd);
     }
 }

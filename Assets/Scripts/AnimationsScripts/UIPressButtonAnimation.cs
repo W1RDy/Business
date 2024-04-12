@@ -11,28 +11,28 @@ public class UIPressButtonAnimation : UIScaleAnimation
     [SerializeField] private float _intervalTime;
     [SerializeField] private float _increaseTime;
 
-    public override void Play()
-    {
-        Play(null);
-    }
+    private Vector2 _startScale;
 
     public override void Play(Action callback)
     {
-        IsFinished = false;
+        base.Play(callback);
+        _isFinished = false;
         if (_sizeChangeValue < 0) throw new System.ArgumentException("Ivalid argument. SizeChangeValue can't be negative!");
 
-        var startScale = new Vector2(_transform.localScale.x, _transform.localScale.y);
-        var shrinkedScale = startScale.Sum(-_sizeChangeValue);
+        _startScale = new Vector2(_transform.localScale.x, _transform.localScale.y);
+        var shrinkedScale = _startScale.Sum(-_sizeChangeValue);
 
-        var scaleSequence = DOTween.Sequence();
+        _sequence = DOTween.Sequence();
 
-        scaleSequence
+        _sequence
             .Append(_transform.DOScale(new Vector3(shrinkedScale.x, shrinkedScale.y, 1), _shrinkTime))
             .AppendInterval(_intervalTime)
-            .Append(_transform.DOScale(new Vector3(startScale.x, startScale.y, 1), _increaseTime))
-            .AppendCallback(() => {
-                IsFinished = true;
-                callback?.Invoke();
-            });
+            .Append(_transform.DOScale(new Vector3(_startScale.x, _startScale.y, 1), _increaseTime))
+            .AppendCallback(() => _finishCallback.Invoke());
+    }
+
+    protected override void Release()
+    {
+        _transform.localScale = new Vector3(_startScale.x, _startScale.y, 1);
     }
 }

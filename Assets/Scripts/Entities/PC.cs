@@ -114,4 +114,9 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
             _animController.PlayDisappearAnimation(callback);
         }
     }
+
+    private void OnDisable()
+    {
+        if (_animController != null) _animController.KillAnimation();
+    }
 }

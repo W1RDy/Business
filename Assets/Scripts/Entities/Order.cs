@@ -192,4 +192,9 @@ public class Order : MonoBehaviour, IOrder, IThrowable, IPoolElement<Order>
             _animController.PlayDisappearAnimation(callback);
         }
     }
+
+    private void OnDisable()
+    {
+        if (_animController != null) _animController.KillAnimation();
+    }
 }

@@ -36,4 +36,10 @@ public class EntityAnimationsController
         if (_entity.activeInHierarchy) _disappearAnimation.Play(callback);
         else callback?.Invoke();
     }
+
+    public void KillAnimation()
+    {
+        if (!_appearAnimation.IsFinished) _appearAnimation.Kill();
+        else if (!_disappearAnimation.IsFinished) _disappearAnimation.Kill();
+    }
 }

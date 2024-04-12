@@ -41,4 +41,9 @@ public abstract class CustomButton : MonoBehaviour
             _button.onClick.RemoveListener(ClickCallback);
         }
     }
+
+    private void OnDisable()
+    {
+        if (_animation != null && !_animation.IsFinished) _animation.Kill();
+    }
 }

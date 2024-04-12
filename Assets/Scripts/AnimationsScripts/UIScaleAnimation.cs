@@ -8,9 +8,4 @@ public abstract class UIScaleAnimation : UIAnimation
     {
         _transform = transform;
     }
-
-    public override void Play()
-    {
-
-    }
 }

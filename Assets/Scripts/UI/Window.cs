@@ -41,4 +41,10 @@ public class Window : MonoBehaviour
         }
         else gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        if (_openAnimation != null && !_openAnimation.IsFinished) _openAnimation.Kill();
+        else if (_closeAnimation != null && !_closeAnimation.IsFinished) _closeAnimation.Kill();
+    }
 }

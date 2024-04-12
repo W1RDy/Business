@@ -134,6 +134,11 @@ public class Goods : MonoBehaviour, IThrowable, IPoolElement<Goods>
             _animController.PlayDisappearAnimation(callback);
         }
     }
+
+    private void OnDisable()
+    {
+        if (_animController != null) _animController.KillAnimation();
+    }
 }
 
 public class GoodsView

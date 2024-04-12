@@ -10,29 +10,33 @@ public class UIShrinkAnimation : UIScaleAnimation
     [SerializeField] protected float _iterationTime = 0.2f;
 
     [SerializeField] private float _sizeChangeValue;
-
-    public override void Play()
-    {
-        Play(null);
-    }
+    private float _size;
 
     public override void Play(Action callback)
     {
-        IsFinished = false;
+        if (!IsFinished) Kill();
+        _isFinished = false;
 
         var startScale = _transform.localScale;
-        var size = startScale.x - _sizeChangeValue;
+        _size = startScale.x - _sizeChangeValue;
+        if (_sizeChangeValue < 0) _size = 0;
 
-        if (_sizeChangeValue < 0) size = 0;
+        _finishCallback = () =>
+        {
+            _isFinished = true;
+            callback?.Invoke();
+            _transform.localScale = startScale;
+        };
 
-        var scaleSequence = DOTween.Sequence();
+        _sequence = DOTween.Sequence();
 
-        scaleSequence
-            .Append(_transform.DOScale(size, _iterationTime))
-            .AppendCallback(() => {
-                IsFinished = true;
-                callback?.Invoke();
-                _transform.localScale = startScale;
-            });
+        _sequence
+            .Append(_transform.DOScale(_size, _iterationTime))
+            .AppendCallback(() => _finishCallback.Invoke());
+    }
+
+    protected override void Release()
+    {
+        _transform.localScale = new Vector3(_size, _size, _transform.localScale.z);
     }
 }

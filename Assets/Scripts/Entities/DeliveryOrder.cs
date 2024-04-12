@@ -157,6 +157,11 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         Action callback = () => CancelOrder();
         _animController.PlayDisappearAnimation(callback);
     }
+
+    private void OnDisable()
+    {
+        if (_animController != null) _animController.KillAnimation();
+    }
 }
 
 public class DeliveryOrderView

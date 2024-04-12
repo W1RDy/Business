@@ -10,27 +10,27 @@ public class UIIncreaseAnimation : UIScaleAnimation
     [SerializeField] private float _startSize;
     [SerializeField] private float _sizeChangeValue = -1;
 
-    public override void Play()
-    {
-        Play(null);
-    }
+    private float _endSize;
 
     public override void Play(Action callback)
     {
-        IsFinished = false;
+        base.Play(callback);
+        _isFinished = false;
 
-        var size = _startSize + _sizeChangeValue;
-        if (_sizeChangeValue < 0) size = _transform.localScale.x;
+        _endSize = _startSize + _sizeChangeValue;
+        if (_sizeChangeValue < 0) _endSize = _transform.localScale.x;
 
-        var scaleSequence = DOTween.Sequence();
+        _sequence = DOTween.Sequence();
 
         _transform.localScale = new Vector2(_startSize, _startSize);
 
-        scaleSequence
-            .Append(_transform.DOScale(size, _iterationTime))
-            .AppendCallback(() => {
-                IsFinished = true;
-                callback?.Invoke();
-            });
+        _sequence
+            .Append(_transform.DOScale(_endSize, _iterationTime))
+            .AppendCallback(() => _finishCallback.Invoke());
+    }
+
+    protected override void Release()
+    {
+        _transform.localScale = new Vector3(_endSize, _endSize, _transform.localScale.z);
     }
 }

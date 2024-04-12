@@ -8,27 +8,28 @@ public class UIExcessIncreaseAnimation : UIScaleAnimation
 {
     [SerializeField] protected float _iterationTime = 0.2f;
 
-    public override void Play()
-    {
-        Play(null);
-    }
+    private float _startScale;
 
     public override void Play(Action callback)
     {
-        IsFinished = false;
+        base.Play(callback);
 
-        var startScale = _transform.localScale;
+        _isFinished = false;
 
-        var scaleSequence = DOTween.Sequence();
+        _startScale = _transform.localScale.x;
+
+        _sequence = DOTween.Sequence();
 
         _transform.localScale = Vector2.zero;
 
-        scaleSequence
-            .Append(_transform.DOScale(startScale.x + 0.3f, _iterationTime))
-            .Append(_transform.DOScale(startScale.x, _iterationTime))
-            .AppendCallback(() => {
-                IsFinished = true;
-                callback?.Invoke();
-            });
+        _sequence
+            .Append(_transform.DOScale(_startScale + 0.3f, _iterationTime))
+            .Append(_transform.DOScale(_startScale, _iterationTime))
+            .AppendCallback(() => _finishCallback.Invoke());
+    }
+
+    protected override void Release()
+    {
+        _transform.localScale = new Vector3(_startScale, _startScale, _transform.localScale.z);
     }
 }
