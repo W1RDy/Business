@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<T>
@@ -50,7 +51,8 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
         {
             if (element.IsFree)
             {
-                element.Element.transform.SetParent(_parent);
+                ChangeParentWithScaleSaving(element.Element, _parent);
+
                 element.Activate();
                 return element.Element;
             }
@@ -66,6 +68,13 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
     public void Release(T element)
     {
         element.Release();
-        element.transform.SetParent(_poolContainer);
+        ChangeParentWithScaleSaving(element, _poolContainer);
+    }
+
+    private void ChangeParentWithScaleSaving(T element, Transform parent)
+    {
+        var scale = element.Element.transform.localScale;
+        element.transform.SetParent(parent);
+        element.Element.transform.localScale = scale;
     }
 }

@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -12.5}
+  m_SizeDelta: {x: 0, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5155430534668345876
 CanvasRenderer:
@@ -460,7 +460,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 486, y: 0}
+  m_AnchoredPosition: {x: 515.58, y: 0}
   m_SizeDelta: {x: 0, y: 217}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7343963611260155967
@@ -1084,8 +1084,6 @@ MonoBehaviour:
   _coinsText: {fileID: 2773414661508038231}
   _timeText: {fileID: 1989022724506744047}
   _qualityText: {fileID: 8676791149686537308}
-  _applyOrderButton: {fileID: 2508203212792788431}
-  _sendOrderButton: {fileID: 4779684463396161378}
   _indexText: {fileID: 8621260876613837468}
   _icon: {fileID: 4379182192510266173}
 --- !u!1 &4556112532767059995
@@ -1124,8 +1122,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4.1}
-  m_SizeDelta: {x: 64.35, y: 123.525}
+  m_AnchoredPosition: {x: 0, y: 6}
+  m_SizeDelta: {x: 71.5, y: 109.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1909393045463213159
 CanvasRenderer:
@@ -1155,7 +1153,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 310f890fa847d413787ecf9ccb0dd296, type: 3}
+  m_Sprite: {fileID: -430033078, guid: 24c03b738f8aa4247a1db829aaa157e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

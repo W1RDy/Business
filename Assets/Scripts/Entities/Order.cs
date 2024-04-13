@@ -117,6 +117,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
             _goal.InitVariant(this);
 
             OrderStateChanged?.Invoke();
+            OrderValuesChanged?.Invoke();
         }
     }
 

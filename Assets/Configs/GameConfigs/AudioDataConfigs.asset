@@ -18,22 +18,25 @@ MonoBehaviour:
     _volume: 0.5
   - _index: Click
     _audioClip: {fileID: 8300000, guid: 368b2116f28d26e4996fd730eb77e336, type: 3}
-    _volume: 0.5
-  - _index: Coins
+    _volume: 1.3
+  - _index: EarnCoins
     _audioClip: {fileID: 8300000, guid: 8804414ff0a3c004c9a678bf3f7e4188, type: 3}
     _volume: 0.5
+  - _index: WasteCoins
+    _audioClip: {fileID: 8300000, guid: 7bb22ea8a8a255245b1323607b955b69, type: 3}
+    _volume: 0.5
   - _index: CompleteTask
-    _audioClip: {fileID: 8300000, guid: 44684c9a2e187f84b9a2b94bcb6658ef, type: 3}
+    _audioClip: {fileID: 8300000, guid: 8344272eb93b37d43bf9faf260deb988, type: 3}
     _volume: 0.5
   - _index: FinishPeriod
     _audioClip: {fileID: 8300000, guid: 446640c450ed4064aa5fe42521cfe824, type: 3}
-    _volume: 0.5
+    _volume: 1
   - _index: Notification
     _audioClip: {fileID: 8300000, guid: ba0749fdbf03bfb4f8c05437694f79b2, type: 3}
     _volume: 0.5
   - _index: SkipTime
     _audioClip: {fileID: 8300000, guid: 8e19f06e9144b584e8f13830ee24b8e2, type: 3}
-    _volume: 0.5
+    _volume: 1.5
   - _index: Cancel
     _audioClip: {fileID: 8300000, guid: d9805855aafb5f44796d4417ea6adcf1, type: 3}
-    _volume: 0.5
+    _volume: 1

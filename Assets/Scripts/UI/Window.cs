@@ -12,8 +12,6 @@ public class Window : MonoBehaviour
     [SerializeField] private UIAnimation _closeAnimation;
     private bool _animationIsInitialized;
 
-    private Action _onWindowsChanged;
-
     private void InitAnimations()
     {
         _animationIsInitialized = true;
@@ -33,7 +31,7 @@ public class Window : MonoBehaviour
         {
             if (!_animationIsInitialized) InitAnimations();
             InteruptActivatedAnimations();
-            _openAnimation.Play(_onWindowsChanged);
+            _openAnimation.Play();
         }
     }
 
@@ -45,23 +43,9 @@ public class Window : MonoBehaviour
             _closeAnimation.Play(() =>
             {
                 gameObject.SetActive(false);
-                _onWindowsChanged?.Invoke();
             });
         }
         else gameObject.SetActive(false);
-    }
-
-    public void SetOnWindowsChangedCallback(Action onWindowsChanged)
-    {
-        if (_openAnimation.IsFinished && _closeAnimation.IsFinished) onWindowsChanged?.Invoke(); 
-        else if (_onWindowsChanged == null)
-        {
-            _onWindowsChanged = () =>
-            {
-                onWindowsChanged?.Invoke();
-                _onWindowsChanged = null;
-            };
-        }
     }
 
     private void InteruptActivatedAnimations()

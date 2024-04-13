@@ -49,12 +49,12 @@ public class OrderGenerator : MonoBehaviour
         {
             if (!_randomController.IsBlocked)
             {
+                GenerateOrder();
                 if (_orderService.GetOrdersCount() == _maxOrdersCount)
                 {
                     _randomController.BlockController();
                     return;
                 }
-                _ordersWindow.SetOnWindowsChangedCallback(GenerateOrder);
             }
             else if (_orderService.GetOrdersCount() < _maxOrdersCount) _randomController.UnblockController();
 
