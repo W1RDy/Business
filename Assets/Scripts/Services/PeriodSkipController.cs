@@ -18,7 +18,9 @@ public class PeriodSkipController : MonoBehaviour, IService
     private Action InitDelegate;
 
     private AudioPlayer _audioPlayer;
-    
+
+    private ProblemsGenerator _problemsGenerator;
+
     private void Start()
     {
         InitDelegate = () =>
@@ -32,6 +34,7 @@ public class PeriodSkipController : MonoBehaviour, IService
             _brightnessAnimationInstance.SetParameters(_darknessView);
 
             _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
+            _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -51,6 +54,7 @@ public class PeriodSkipController : MonoBehaviour, IService
 
     public void ContinueNewDay()
     {
+        _problemsGenerator.TryGenerateProblem();
         _brightnessAnimationInstance.Play(() => _clicksBlocker.UnblockClicks());
     }
 }

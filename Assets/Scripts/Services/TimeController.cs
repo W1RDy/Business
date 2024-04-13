@@ -19,7 +19,6 @@ public class TimeController : IService
     private TimeIndicator _timeIndicator;
 
     private PeriodController _periodController;
-    private ProblemsGenerator _problemsGenerator;
     private PeriodSkipController _gameLifeController;
 
     public event Action<int> OnTimeChanged;
@@ -31,7 +30,6 @@ public class TimeController : IService
         _timeIndicator.Init(_maxTime);
 
         _periodController = ServiceLocator.Instance.Get<PeriodController>();
-        _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
         _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
     }
 
@@ -49,8 +47,6 @@ public class TimeController : IService
         _timeIndicator.SetTime(_time);
 
         OnTimeChanged?.Invoke(_time - previousTime);
-        _problemsGenerator.TryGenerateProblem();
-
         _gameLifeController.SkipDays();
     }
 

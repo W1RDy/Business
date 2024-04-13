@@ -68,7 +68,6 @@ public class RememberedOrderService : IService
         {
             _rememberedOrder.Dequeue();
         } 
-        Debug.Log(_rememberedOrder.Count);
     }
 
     public OrderConfig PopOrder()
