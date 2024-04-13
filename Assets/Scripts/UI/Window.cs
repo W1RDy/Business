@@ -32,6 +32,7 @@ public class Window : MonoBehaviour
         if (_openAnimation)
         {
             if (!_animationIsInitialized) InitAnimations();
+            InteruptActivatedAnimations();
             _openAnimation.Play(_onWindowsChanged);
         }
     }
@@ -40,6 +41,7 @@ public class Window : MonoBehaviour
     {
         if (_closeAnimation)
         {
+            InteruptActivatedAnimations();
             _closeAnimation.Play(() =>
             {
                 gameObject.SetActive(false);
@@ -62,9 +64,14 @@ public class Window : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void InteruptActivatedAnimations()
     {
         if (_openAnimation != null && !_openAnimation.IsFinished) _openAnimation.Kill();
         else if (_closeAnimation != null && !_closeAnimation.IsFinished) _closeAnimation.Kill();
+    }
+
+    private void OnDisable()
+    {
+        InteruptActivatedAnimations();
     }
 }

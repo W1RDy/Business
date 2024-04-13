@@ -55,6 +55,7 @@ public class PeriodSkipController : MonoBehaviour, IService
     public void ContinueNewDay()
     {
         _problemsGenerator.TryGenerateProblem();
-        _brightnessAnimationInstance.Play(() => _clicksBlocker.UnblockClicks());
+        _clicksBlocker.UnblockClicks();
+        _brightnessAnimationInstance.Play();
     }
 }
