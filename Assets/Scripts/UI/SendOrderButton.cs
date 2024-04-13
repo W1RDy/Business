@@ -65,7 +65,6 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
 
     public bool CheckStatesChangeCondition()
     {
-        Debug.Log(_conditionChecker.IsHasInInventory((_order as Order).NeededGoods));
         return _conditionChecker.IsHasInInventory((_order as Order).NeededGoods);
     }
 

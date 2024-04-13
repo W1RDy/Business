@@ -139,6 +139,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     {
         if (_isApplied)
         {
+            Debug.Log("CompleteOrder");
             _rewardHandler.ApplyRewardForOrder(this);
             _rememberedOrderService.RememberOrder(this);
 

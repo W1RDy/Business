@@ -28,6 +28,9 @@ public abstract class UIAnimation : ScriptableObject
         {
             callback?.Invoke();
             _isFinished = true;
+
+            Release();
+            _finishCallback = null;
         };
     }
 
@@ -35,7 +38,6 @@ public abstract class UIAnimation : ScriptableObject
     {
         _sequence.Kill();
         _finishCallback?.Invoke();
-        Release();
     }
 
     protected virtual void Release()

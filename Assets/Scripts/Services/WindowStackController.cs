@@ -19,14 +19,12 @@ public class WindowStackController : MonoBehaviour
     public void AddWindowToStack(Window window)
     {
         _stackSize = Mathf.Clamp(++_stackSize, 0, _maxStackSize);
-        Debug.Log(_stackSize);
         _windowsStack.Push(window);
     }
 
     public Window PopWindow()
     {
         _stackSize = Mathf.Clamp(--_stackSize, 0, _maxStackSize);
-        Debug.Log(_stackSize);
         var window = _windowsStack.Pop();
         if (StackIsEmpty()) ClearStack();
 
@@ -45,14 +43,12 @@ public class WindowStackController : MonoBehaviour
 
     private void ClearStack()
     {
-        Debug.Log("Clear");
         _stackSize = 0;
 
         if (_windowsStack.Count == 0) return;
 
         foreach (var window in _windowsStack)
         {
-            Debug.Log(window);
             window.DeactivateWindow();
         }
         _windowsStack.Clear();

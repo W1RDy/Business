@@ -28,7 +28,7 @@ public class UIPressButtonAnimation : UIScaleAnimation
             .Append(_transform.DOScale(new Vector3(shrinkedScale.x, shrinkedScale.y, 1), _shrinkTime))
             .AppendInterval(_intervalTime)
             .Append(_transform.DOScale(new Vector3(_startScale.x, _startScale.y, 1), _increaseTime))
-            .AppendCallback(() => _finishCallback.Invoke());
+            .AppendCallback(() => _finishCallback?.Invoke());
     }
 
     protected override void Release()

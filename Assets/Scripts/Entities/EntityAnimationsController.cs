@@ -10,17 +10,14 @@ public class EntityAnimationsController
 
     public EntityAnimationsController(UIAnimation appearAnimation, UIAnimation disappearAnimation, GameObject entity)
     {
-        _appearAnimation = appearAnimation;
-        _disappearAnimation = disappearAnimation;
-
         _entity = entity;
-        InitAnimations();
+        InitAnimations(appearAnimation, disappearAnimation);
     }
 
-    private void InitAnimations()
+    private void InitAnimations(UIAnimation appearAnimation, UIAnimation disappearAnimation)
     {
-        _appearAnimation = ScriptableObject.Instantiate(_appearAnimation);
-        _disappearAnimation = ScriptableObject.Instantiate(_disappearAnimation);
+        _appearAnimation = ScriptableObject.Instantiate(appearAnimation);
+        _disappearAnimation = ScriptableObject.Instantiate(disappearAnimation);
 
         if (_appearAnimation is UIScaleAnimation appearScaleAnimation) appearScaleAnimation.SetParametres(_entity.transform);
         if (_disappearAnimation is UIScaleAnimation disappearScaleAnimation) disappearScaleAnimation.SetParametres(_entity.transform);

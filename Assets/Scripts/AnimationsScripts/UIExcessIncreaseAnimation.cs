@@ -9,6 +9,7 @@ public class UIExcessIncreaseAnimation : UIScaleAnimation
     [SerializeField] protected float _iterationTime = 0.2f;
 
     private float _startScale;
+    private Vector3 _rememberedSize;
 
     public override void Play(Action callback)
     {
@@ -16,6 +17,7 @@ public class UIExcessIncreaseAnimation : UIScaleAnimation
 
         _isFinished = false;
 
+        _rememberedSize = _transform.localScale;
         _startScale = _transform.localScale.x;
 
         _sequence = DOTween.Sequence();
@@ -25,11 +27,11 @@ public class UIExcessIncreaseAnimation : UIScaleAnimation
         _sequence
             .Append(_transform.DOScale(_startScale + 0.3f, _iterationTime))
             .Append(_transform.DOScale(_startScale, _iterationTime))
-            .AppendCallback(() => _finishCallback.Invoke());
+            .AppendCallback(() => _finishCallback?.Invoke());
     }
 
     protected override void Release()
     {
-        _transform.localScale = new Vector3(_startScale, _startScale, _transform.localScale.z);
+        _transform.localScale = new Vector3(_rememberedSize.x, _rememberedSize.y, 1);
     }
 }

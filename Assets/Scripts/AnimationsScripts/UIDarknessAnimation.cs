@@ -28,14 +28,14 @@ public class UIFadeAnimationWithText : UIAnimation
         {
             _sequence
                 .Append(image.DOFade(_fadeEnd, _time))
-                .AppendCallback(() => _finishCallback.Invoke());
+                .AppendCallback(() => _finishCallback?.Invoke());
         }
         else if (_colorable.ColorableObj is TextMeshProUGUI text)
         {
             Debug.Log("TextChange");
             _sequence
                 .Append(text.DOFade(_fadeEnd, _time))
-                .AppendCallback(() => _finishCallback.Invoke());
+                .AppendCallback(() => _finishCallback?.Invoke());
         }
         _sequence.Play();
     }

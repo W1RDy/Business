@@ -20,7 +20,6 @@ public class ProblemsGenerator : IService
             _problemWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.ProblemWindow) as ProblemWindow;
             _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
             _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
-            Debug.Log(_rememberedOrderService);
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
