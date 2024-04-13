@@ -1,19 +1,20 @@
 ﻿using DG.Tweening;
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "Darkness Animation", menuName = "UIAnimations/New Darkness Animation")]
-public class UIDarknessAnimation : UIAnimation
+[CreateAssetMenu(fileName = "Fade Animation", menuName = "UIAnimations/New Fade Animation")]
+public class UIFadeAnimationWithText : UIAnimation
 {
-    [SerializeField] private float _darknessEnd;
+    [SerializeField] private float _fadeEnd;
     [SerializeField] private float _time;
 
-    private Image _image;
+    private IColorable _colorable;
 
-    public void SetParameters(Image _darknessView)
+    public void SetParameters(IColorable _colorable)
     {
-        _image = _darknessView;
+        this._colorable = _colorable;
     }
 
     public override void Play(Action callback)
@@ -23,13 +24,24 @@ public class UIDarknessAnimation : UIAnimation
 
         _sequence = DOTween.Sequence();
 
-        _sequence
-            .Append(_image.DOFade(_darknessEnd, _time))
-            .AppendCallback(() => _finishCallback.Invoke());
+        if (_colorable.ColorableObj is Image image)
+        {
+            _sequence
+                .Append(image.DOFade(_fadeEnd, _time))
+                .AppendCallback(() => _finishCallback.Invoke());
+        }
+        else if (_colorable.ColorableObj is TextMeshProUGUI text)
+        {
+            Debug.Log("TextChange");
+            _sequence
+                .Append(text.DOFade(_fadeEnd, _time))
+                .AppendCallback(() => _finishCallback.Invoke());
+        }
+        _sequence.Play();
     }
 
     protected override void Release()
     {
-        _image.color = new Color (_image.color.r, _image.color.g, _image.color.b, _darknessEnd);
+        _colorable.Color = new Color (_colorable.Color.r, _colorable.Color.g, _colorable.Color.b, _fadeEnd);
     }
 }

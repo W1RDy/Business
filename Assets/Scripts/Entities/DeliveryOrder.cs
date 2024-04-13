@@ -56,6 +56,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
     private DeliveryOrderService _deliveryOrderService;
 
     private GoodsGenerator _goodsGenerator;
+    private NotificationController _notificationController;
 
     private Pool<DeliveryOrder> _pool;
 
@@ -74,6 +75,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
             _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
 
             _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
+            _notificationController = ServiceLocator.Instance.Get<NotificationController>();
 
             InitAnimations();
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
@@ -96,6 +98,8 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
         Amount = 1;
         _deliveryOrderView.SetIcon(icon);
+
+        _notificationController.AddNotification(this);
     }
 
     public void ApplyOrder()
@@ -112,8 +116,15 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
         IsApplied = false;
         if (Amount == 1)
         {
-            _pool.Release(this);
-            _compositeOrder.RemoveOrder(this);
+            _notificationController.RemoveNotification(this);
+
+            Action callback = () =>
+            {
+                _pool.Release(this);
+                _compositeOrder.RemoveOrder(this);
+            };
+
+            _animController.PlayDisappearAnimation(callback);
         }
         else
         {
@@ -132,6 +143,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
             _goodsGenerator.GenerateGoods(_goodsType, Amount);
             _compositeOrder.RemoveOrder(this);
+            _notificationController.RemoveNotification(this);
         }
     }
 
@@ -153,8 +165,7 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     public void ThrowOut()
     {
-        Action callback = () => CancelOrder();
-        _animController.PlayDisappearAnimation(callback);
+        CancelOrder();
     }
 
     private void OnDisable()

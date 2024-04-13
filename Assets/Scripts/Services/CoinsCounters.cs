@@ -9,21 +9,23 @@ namespace CoinsCounter
 
         public int Coins => _coins;
 
+        protected CoinsChangeView _changeView;
         private CoinsIndicator _coinsIndicator;
 
         public event Action CoinsChanged;
 
-        public CoinsCounter(CoinsIndicator coinsIndicator)
+        public CoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView coinsChangeView)
         {
             _coinsIndicator = coinsIndicator;
+            _changeView = coinsChangeView;
         }
 
         public virtual void AddCoins(int value)
         {
             _coins += value;
             UpdateIndicator();
+            _changeView.ActivateChangeView(value);
             InvokeCoinsEvent();
-
         }
 
         public virtual void RemoveCoins(int value)
@@ -31,6 +33,7 @@ namespace CoinsCounter
             if (_coins >= value)
             {
                 _coins = Mathf.Clamp(_coins - value, 0, _coins);
+                _changeView.ActivateChangeView(-value);
                 UpdateIndicator();
                 InvokeCoinsEvent();
             }
@@ -40,7 +43,10 @@ namespace CoinsCounter
         {
             if (_coins > -1)
             {
+                var difference = value - _coins;
                 _coins = value;
+
+                _changeView.ActivateChangeView(difference);
                 UpdateIndicator();
                 InvokeCoinsEvent();
             }
@@ -61,7 +67,7 @@ namespace CoinsCounter
     {
         private AudioPlayer _audioPlayer;
 
-        public HandsCoinsCounter(CoinsIndicator coinsIndicator) : base(coinsIndicator) 
+        public HandsCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView) 
         {
             _coins = 50;
             UpdateIndicator();
@@ -89,7 +95,7 @@ namespace CoinsCounter
 
     public class BankCoinsCounter : CoinsCounter
     {
-        public BankCoinsCounter(CoinsIndicator coinsIndicator) : base(coinsIndicator)
+        public BankCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView)
         {
             _coins = 1000;
             UpdateIndicator();

@@ -42,6 +42,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     private OrderService _orderService;
     private OrderCompleteHandler _orderCompleteHandler;
     private RememberedOrderService _rememberedOrderService;
+    private NotificationController _notificationController;
 
     private Action<int> TimeChangedDelegate;
 
@@ -74,6 +75,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
             _orderService = ServiceLocator.Instance.Get<OrderService>();
             _orderCompleteHandler = ServiceLocator.Instance.Get<OrderCompleteHandler>();
             _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
+            _notificationController = ServiceLocator.Instance.Get<NotificationController>();
 
             _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
             _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
@@ -100,6 +102,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         _view.SetView(_orderConfig.Cost, _orderConfig.Time, NeededGoods, ID);
 
         _remainTime = _orderConfig.Time;
+        _notificationController.AddNotification(this);
     }
 
     private void InitAnimations()
@@ -115,6 +118,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 
             _goal = _goalPool.Get();
             _goal.InitVariant(this);
+
+            _notificationController.RemoveNotification(this);
 
             OrderStateChanged?.Invoke();
             OrderValuesChanged?.Invoke();
@@ -200,6 +205,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         if (_isApplied) CancelOrder();
         else
         {
+            _notificationController.RemoveNotification(this);
+
             Action callback = () => _orderPool.Release(this);
             _animController.PlayDisappearAnimation(callback);
         }

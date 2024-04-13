@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d3226ffd2b6d3ec4fb7fdeb4018c7eb8, type: 3}
-  m_Name: DarknessAnimation
+  m_Name: TextAppearAnimation
   m_EditorClassIdentifier: 
   _fadeEnd: 1
-  _time: 1
+  _time: 0.5

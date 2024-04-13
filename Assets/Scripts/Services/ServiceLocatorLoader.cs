@@ -9,6 +9,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private TimeIndicator _timeIndicator;
     [SerializeField] private CoinsIndicator _handsCoinsIndicator;
     [SerializeField] private CoinsIndicator _bankCoinsIndicator;
+    [SerializeField] private CoinsChangeView _handsCoinsChangeView;
+    [SerializeField] private CoinsChangeView _bankCoinsChangeView;
 
     [SerializeField] private RandomController _problemsRandomController;
     [SerializeField] private PeriodSkipController _periodSkipController;
@@ -44,6 +46,9 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private PCConfig[] _pcConfigs;
     [SerializeField] private ProblemConfig[] _problemConfigs;
 
+    [SerializeField] private Notification _ordersNotification;
+    [SerializeField] private Notification _deliveryOrdersNotification;
+
     private void Awake()
     {
         Bind();
@@ -52,6 +57,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     private void Bind()
     {
         BindAudioServices();
+        BindNotificationServices();
 
         BindWindowService();
         BindWindowActivator();
@@ -89,6 +95,14 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindNotificationServices()
+    {
+        var notificationService = new NotificationService(new Notification[] {_ordersNotification, _deliveryOrdersNotification});
+
+        var notificationController = new NotificationController(notificationService);
+        ServiceLocator.Instance.Register(notificationController);
     }
 
     private void BindAudioServices()
@@ -268,8 +282,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindCoinsCounters()
     {
-        var bankCoinsCounter = new BankCoinsCounter(_bankCoinsIndicator);
-        var handCoinsCounter = new HandsCoinsCounter(_handsCoinsIndicator);
+        var bankCoinsCounter = new BankCoinsCounter(_bankCoinsIndicator, _bankCoinsChangeView);
+        var handCoinsCounter = new HandsCoinsCounter(_handsCoinsIndicator, _handsCoinsChangeView);
 
         ServiceLocator.Instance.Register(bankCoinsCounter);
         ServiceLocator.Instance.Register(handCoinsCounter);

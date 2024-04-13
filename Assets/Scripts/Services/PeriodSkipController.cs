@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class PeriodSkipController : MonoBehaviour, IService
 {
-    [SerializeField] private UIDarknessAnimation _darknessAnimation;
-    [SerializeField] private UIDarknessAnimation _brightnessAnimation;
-    private UIDarknessAnimation _darknessAnimationInstance;
-    private UIDarknessAnimation _brightnessAnimationInstance;
+    [SerializeField] private UIFadeAnimationWithText _darknessAnimation;
+    [SerializeField] private UIFadeAnimationWithText _brightnessAnimation;
+    private UIFadeAnimationWithText _darknessAnimationInstance;
+    private UIFadeAnimationWithText _brightnessAnimationInstance;
 
-    [SerializeField] private Image _darknessView;
+    [SerializeField] private CustomImage _darknessView;
 
     [SerializeField] private ClicksBlocker _clicksBlocker;
 
