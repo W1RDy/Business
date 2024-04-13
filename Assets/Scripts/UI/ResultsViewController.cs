@@ -22,6 +22,8 @@ public class ResultsViewController
     private Color _positiveColor;
     private Color _negativeColor;
 
+    private AudioPlayer _audioPlayer;
+
     public ResultsViewController(TextMeshProUGUI titleText, TextMeshProUGUI costsText1, TextMeshProUGUI costsText2, TextMeshProUGUI incomeText1, TextMeshProUGUI incomeText2,
         TextMeshProUGUI summaryTimeText, TextMeshProUGUI summaryCoinsText, Color positiveColor, Color negativeColor)
     {
@@ -47,6 +49,8 @@ public class ResultsViewController
 
         _incomeText1.color = _positiveColor;
         _incomeText2.color = _positiveColor;
+
+        _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
     }
 
     public void SetResults(IResults results)
@@ -71,6 +75,7 @@ public class ResultsViewController
         _summaryCoinsText.color = resultsOfTheMonth.Summary >= 0 ? _positiveColor : _negativeColor;
 
         TurnOnTexts(_costsText1, _costsText2, _incomeText1, _incomeText2, _summaryCoinsText);
+        _audioPlayer.PlaySound("FinishPeriod");
     }
 
     private void ShowResultsOfTheGame(ResultsOfTheGame resultsOfTheGame)
@@ -82,6 +87,7 @@ public class ResultsViewController
         _summaryTimeText.text = "Time: " + resultsOfTheGame.Time.ToString() + " months";
 
         TurnOnTexts(_costsText1, _incomeText1, _summaryTimeText);
+        _audioPlayer.PlaySound("FinishPeriod");
     }
 
     private void TurnOnTexts(params TextMeshProUGUI[] turningOnTexts)

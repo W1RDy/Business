@@ -13,14 +13,6 @@ public class AudioButton : CustomButton, IButtonWithStates
     [SerializeField] private ChangeCondition[] _changeConditions;
     public ChangeCondition[] ChangeConditions => _changeConditions;
 
-    private AudioPlayer _audioPlayer;
-
-    protected override void Init()
-    {
-        base.Init();
-        _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
-    }
-
     public void ChangeStates(bool toActiveState)
     {
         var icon = toActiveState ? _activatedAudioIcon : _deactivatedAudioIcon;

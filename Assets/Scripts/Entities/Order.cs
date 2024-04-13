@@ -57,6 +57,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     public event Action OrderValuesChanged;
     public event Action OrderStateChanged;
 
+    private AudioPlayer _audioPlayer;
+
     public void InitInstance()
     {
         InitDelegate = () =>
@@ -79,6 +81,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
             TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
 
             _timeController.OnTimeChanged += TimeChangedDelegate;
+
+            _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();  
 
             InitAnimations();
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
@@ -121,6 +125,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         if (_isApplied)
         {
             _orderPool.Release(this);
+            _audioPlayer.PlaySound("Cancel");
         }
     }
 
@@ -135,6 +140,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
             _animController.PlayDisappearAnimation(callback);
 
             _orderCompleteHandler.CompleteOrder(this);
+
+            _audioPlayer.PlaySound("CompleteTask");
         }
     }
 

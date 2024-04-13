@@ -47,7 +47,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -141,4 +141,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f2df9063934aaf478654ef5aab28b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultMusicIndex: Desperate
+  _defaultMusicIndex: MainTheme

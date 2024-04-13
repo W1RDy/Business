@@ -16,6 +16,8 @@ public class PeriodSkipController : MonoBehaviour, IService
     private GamesConditionChecker _conditionChecker;
 
     private Action InitDelegate;
+
+    private AudioPlayer _audioPlayer;
     
     private void Start()
     {
@@ -28,6 +30,8 @@ public class PeriodSkipController : MonoBehaviour, IService
 
             _darknessAnimationInstance.SetParameters(_darknessView);
             _brightnessAnimationInstance.SetParameters(_darknessView);
+
+            _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -42,6 +46,7 @@ public class PeriodSkipController : MonoBehaviour, IService
         {
             if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay(); 
         });
+        _audioPlayer.PlaySound("SkipTime");
     }
 
     public void ContinueNewDay()

@@ -7,6 +7,7 @@ public abstract class CustomButton : MonoBehaviour
     protected Button _button;
 
     protected ButtonService _buttonService;
+    protected AudioPlayer _audioPlayer;
 
     [SerializeField] private UIAnimation _animation;
 
@@ -27,11 +28,13 @@ public abstract class CustomButton : MonoBehaviour
             _animation = Instantiate(_animation);
             if (_animation is UIScaleAnimation _scaleAnimation) _scaleAnimation.SetParametres(transform); 
         }
+        _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
     }
 
     protected virtual void ClickCallback()
     {
         if (_animation) _animation.Play();
+        _audioPlayer.PlaySound("Click");
     }
 
     private void OnDestroy()

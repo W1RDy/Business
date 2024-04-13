@@ -13,6 +13,27 @@ MonoBehaviour:
   m_Name: AudioDataConfigs
   m_EditorClassIdentifier: 
   _audioConfigs:
-  - _index: Desperate
-    _audioClip: {fileID: 8300000, guid: 1fa365c2325f1664aabfb99e036eb20a, type: 3}
+  - _index: MainTheme
+    _audioClip: {fileID: 8300000, guid: 90bc9440773e1174286beb680d0d88ca, type: 3}
+    _volume: 0.5
+  - _index: Click
+    _audioClip: {fileID: 8300000, guid: 368b2116f28d26e4996fd730eb77e336, type: 3}
+    _volume: 0.5
+  - _index: Coins
+    _audioClip: {fileID: 8300000, guid: 8804414ff0a3c004c9a678bf3f7e4188, type: 3}
+    _volume: 0.5
+  - _index: CompleteTask
+    _audioClip: {fileID: 8300000, guid: 44684c9a2e187f84b9a2b94bcb6658ef, type: 3}
+    _volume: 0.5
+  - _index: FinishPeriod
+    _audioClip: {fileID: 8300000, guid: 446640c450ed4064aa5fe42521cfe824, type: 3}
+    _volume: 0.5
+  - _index: Notification
+    _audioClip: {fileID: 8300000, guid: ba0749fdbf03bfb4f8c05437694f79b2, type: 3}
+    _volume: 0.5
+  - _index: SkipTime
+    _audioClip: {fileID: 8300000, guid: 8e19f06e9144b584e8f13830ee24b8e2, type: 3}
+    _volume: 0.5
+  - _index: Cancel
+    _audioClip: {fileID: 8300000, guid: d9805855aafb5f44796d4417ea6adcf1, type: 3}
     _volume: 0.5

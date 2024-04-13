@@ -23,6 +23,7 @@ namespace CoinsCounter
             _coins += value;
             UpdateIndicator();
             InvokeCoinsEvent();
+
         }
 
         public virtual void RemoveCoins(int value)
@@ -58,10 +59,31 @@ namespace CoinsCounter
 
     public class HandsCoinsCounter : CoinsCounter
     {
+        private AudioPlayer _audioPlayer;
+
         public HandsCoinsCounter(CoinsIndicator coinsIndicator) : base(coinsIndicator) 
         {
             _coins = 50;
             UpdateIndicator();
+            _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
+        }
+
+        public override void AddCoins(int value)
+        {
+            base.AddCoins(value);
+            _audioPlayer.PlaySound("EarnCoins");
+        }
+
+        public override void RemoveCoins(int value)
+        {
+            base.RemoveCoins(value);
+            _audioPlayer.PlaySound("WasteCoins");
+        }
+
+        public override void ChangeCoins(int value)
+        {
+            base.ChangeCoins(value);
+            _audioPlayer.PlaySound("EarnCoins");
         }
     }
 
