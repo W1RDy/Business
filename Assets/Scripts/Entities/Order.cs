@@ -204,6 +204,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         _isFree = true;
         _isApplied = false;
         OrderStateChanged?.Invoke();
+        OrderValuesChanged?.Invoke();
     }
 
     public void ThrowOut()

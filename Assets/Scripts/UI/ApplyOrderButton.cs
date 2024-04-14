@@ -87,7 +87,6 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
 
     public bool CheckStatesChangeCondition()
     {
-        if (_order as CompositeOrder != null) Debug.Log("Condition");
         return _order.IsApplied;
     }
 }

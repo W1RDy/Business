@@ -23,9 +23,12 @@ namespace CoinsCounter
         public virtual void AddCoins(int value)
         {
             _coins += value;
-            UpdateIndicator();
-            _changeView.ActivateChangeView(value);
-            InvokeCoinsEvent();
+            if (value != 0)
+            {
+                UpdateIndicator();
+                _changeView.ActivateChangeView(value);
+                InvokeCoinsEvent();
+            }
         }
 
         public virtual void RemoveCoins(int value)
@@ -33,9 +36,12 @@ namespace CoinsCounter
             if (_coins >= value)
             {
                 _coins = Mathf.Clamp(_coins - value, 0, _coins);
-                _changeView.ActivateChangeView(-value);
-                UpdateIndicator();
-                InvokeCoinsEvent();
+                if (value != 0)
+                {
+                    _changeView.ActivateChangeView(-value);
+                    UpdateIndicator();
+                    InvokeCoinsEvent();
+                }
             }
         }
 
@@ -46,9 +52,12 @@ namespace CoinsCounter
                 var difference = value - _coins;
                 _coins = value;
 
-                _changeView.ActivateChangeView(difference);
-                UpdateIndicator();
-                InvokeCoinsEvent();
+                if (difference != 0)
+                {
+                    _changeView.ActivateChangeView(difference);
+                    UpdateIndicator();
+                    InvokeCoinsEvent();
+                }
             }
         }
 
@@ -77,19 +86,20 @@ namespace CoinsCounter
         public override void AddCoins(int value)
         {
             base.AddCoins(value);
-            _audioPlayer.PlaySound("EarnCoins");
+            if (value != 0) _audioPlayer.PlaySound("EarnCoins");
         }
 
         public override void RemoveCoins(int value)
         {
             base.RemoveCoins(value);
-            _audioPlayer.PlaySound("WasteCoins");
+            if (value != 0) _audioPlayer.PlaySound("WasteCoins");
         }
 
         public override void ChangeCoins(int value)
         {
+            var difference = _coins - value;
             base.ChangeCoins(value);
-            _audioPlayer.PlaySound("EarnCoins");
+            if (difference != 0) _audioPlayer.PlaySound("EarnCoins");
         }
     }
 
@@ -103,7 +113,10 @@ namespace CoinsCounter
 
         public void DoubleCoins()
         {
+            var prevCoins = _coins;
             _coins *= 2;
+
+            if (prevCoins != _coins) _changeView.ActivateChangeView(_coins - prevCoins);
             UpdateIndicator();
             InvokeCoinsEvent();
         }
