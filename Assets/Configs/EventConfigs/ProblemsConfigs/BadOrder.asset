@@ -15,6 +15,6 @@ MonoBehaviour:
   _id: BadOrder
   _description: The client returned the computer and demanded money. The computer
     really does not meet the stated quality
-  _coinsRequirement: 0
+  _coinsRequirementInterval: 0a00000028000000
   _chance: 4
   _chancesUpdateValue: 8

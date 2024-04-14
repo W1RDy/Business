@@ -59,6 +59,17 @@ public class RandomController : MonoBehaviour
         }
     }
 
+    public void ChangeChances(float[] chances)
+    {
+        if (_randomizables.Length != chances.Length) throw new System.ArgumentException("Chances length doesn't equal randomizables length!");
+
+        for (int i = 0; i < _randomizables.Length; i++)
+        {
+            _randomizables[i].ChangeChance(chances[i]);
+            UpdateViewChances(_randomizables[i]);
+        }
+    }
+
     public IRandomizable GetRandomizableWithChances()
     {
         if (IsBlocked)

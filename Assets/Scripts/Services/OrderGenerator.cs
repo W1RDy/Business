@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class OrderGenerator : MonoBehaviour, IService
+public class OrderGenerator : MonoBehaviour, IService, ISubscribable
 {
     [SerializeField] private OrderConfig[] _orders;
+    private OrderConfig[] _orderInstances;
+
     [SerializeField] private int _maxOrdersCount;
     [SerializeField] private int _maxOrdersCountInPeriod;
     private int _remainOrdersInPeriod;
@@ -23,25 +26,34 @@ public class OrderGenerator : MonoBehaviour, IService
     [SerializeField] private float _timeBetweenGenerate;
     private float _timePassed;
 
+    private DifficultyController _difficultyController;
+    private Action _onDifficultyChanged;
+
+    private SubscribeController _subscribeController;
+
     private void Start()
     {
         _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
         _idGenerator = new IDGeneratorWithMinID(3, 1);
+        _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
 
         InitOrderConfigs();
         ActivateOrderGenerator();
+
+        Subscribe();
     }
 
     private void InitOrderConfigs()
     {
-        var orderInstances = new OrderConfig[_orders.Length];
+        _orderInstances = new OrderConfig[_orders.Length];
 
-        for (int i = 0; i < orderInstances.Length; i++)
+        for (int i = 0; i < _orderInstances.Length; i++)
         {
-            orderInstances[i] = Instantiate(_orders[i]);
+            _orderInstances[i] = Instantiate(_orders[i]);
         }
-        _randomController.Init(orderInstances);
+        _randomController.Init(_orderInstances);
     }
 
     private void Update()
@@ -73,11 +85,15 @@ public class OrderGenerator : MonoBehaviour, IService
         _remainOrdersInPeriod = _maxOrdersCountInPeriod;
     }
 
-    private OrderConfig GetOrderConfig()
+    private OrderInstanceConfig GetOrderConfig()
     {
         var order = _randomController.GetRandomizableWithChances() as OrderConfig;
+
+        order.InitConfigValues();
+        var orderInstance = new OrderInstanceConfig(order.Cost, order.Time, order.NeededGoods);
+
         _randomController.BlockRandomizable(order);
-        return order;
+        return orderInstance;
     }
 
     public void GenerateOrder()
@@ -91,5 +107,38 @@ public class OrderGenerator : MonoBehaviour, IService
 
         _orderService.AddOrder(order);
         _remainOrdersInPeriod--;
+    }
+
+    private void ChangeOrderGenerateChancesByDifficulty()
+    {
+        _randomController.ChangeChances(_difficultyController.OrderChances);
+    }
+
+    private void ChangeOrdersValuesByDifficulty()
+    {
+        foreach (var orderInstance in _orderInstances)
+        {
+            orderInstance.CostDifficultyValue = _difficultyController.OrdersRewardValue;
+            orderInstance.TimeDifficultyValue = _difficultyController.OrdersTimeValue;
+        }
+    }
+
+    public void Subscribe()
+    {
+        _subscribeController.AddSubscribable(this);
+
+        _onDifficultyChanged = () =>
+        {
+            ChangeOrderGenerateChancesByDifficulty();
+            ChangeOrdersValuesByDifficulty();
+        };
+
+        _difficultyController.DifficultyChanged += _onDifficultyChanged;
+        _onDifficultyChanged.Invoke();
+    }
+
+    public void Unsubscribe()
+    {
+        _difficultyController.DifficultyChanged -= _onDifficultyChanged;
     }
 }

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: GoodsProblem
   _description: This goods are awful!
-  _coinsRequirement: 20
+  _coinsRequirementInterval: 1400000019000000
   _chance: 8
   _chancesUpdateValue: 4

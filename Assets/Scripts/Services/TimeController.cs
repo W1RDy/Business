@@ -14,6 +14,8 @@ public class TimeController : IService
 
     private int _currentMonth = 1;
 
+    public int CurrentMonth => _currentMonth;
+
     #endregion
 
     private TimeIndicator _timeIndicator;
@@ -22,7 +24,7 @@ public class TimeController : IService
     private PeriodSkipController _gameLifeController;
 
     public event Action<int> OnTimeChanged;
-
+    public event Action OnPeriodChanged;
 
     public TimeController(TimeIndicator timeIndicator)
     {
@@ -57,6 +59,7 @@ public class TimeController : IService
         _time = 0;
 
         _timeIndicator.SetTime(_time);
+        OnPeriodChanged?.Invoke();
     }
 
     public bool PeriodFinished()

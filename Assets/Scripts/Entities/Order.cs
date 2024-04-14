@@ -8,7 +8,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 {
     #region Values
 
-    [SerializeField] private OrderConfig _orderConfig;
+    private OrderInstanceConfig _orderConfig;
 
     private int _id;
     private int _remainTime;
@@ -18,7 +18,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     public int Time => _orderConfig.Time;
     public GoodsType NeededGoods => _orderConfig.NeededGoods;
 
-    public OrderConfig OrderConfig => _orderConfig;
+    public OrderInstanceConfig OrderConfig => _orderConfig;
 
     #endregion
 
@@ -96,7 +96,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void InitVariant(int id, OrderConfig orderConfig, IIDGenerator idGenerator)
+    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)
     {
         _orderConfig = orderConfig;
         _id = id;

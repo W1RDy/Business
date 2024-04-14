@@ -3,15 +3,20 @@
 [CreateAssetMenu(fileName = "Problem", menuName = "Problems/New Problem With Order")]
 public class ProblemWithOrder : ProblemConfig
 {
-    public OrderConfig ProblemedOrder { get; private set; }
+    public OrderInstanceConfig ProblemedOrder { get; private set; }
 
     private PCGenerator _pcGenerator;
 
-    public void SetParameters(OrderConfig problemedOrder)
+    public override void InitProblemValues()
+    {
+        
+    }
+
+    public void SetParameters(OrderInstanceConfig problemedOrder)
     {
         if (_pcGenerator == null) _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
         ProblemedOrder = problemedOrder;
-        _coinsRequirement = problemedOrder.Cost;
+        _coins = problemedOrder.Cost;
     }
 
     public override void Apply()

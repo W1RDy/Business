@@ -35,7 +35,7 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
     public void InitInstance()
     {
         Release();
-        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText, _sendButton);
+        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText);
     }
 
     public void InitVariant(Order order)

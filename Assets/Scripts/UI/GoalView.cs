@@ -11,10 +11,8 @@ public class GoalView
     private TextMeshProUGUI _remainingQuality;
 
     private TextMeshProUGUI _rewardText;
-    private SendOrderButton _sendButton;
 
-    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText, TextMeshProUGUI remainingQuality, 
-        SendOrderButton sendButton)
+    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText, TextMeshProUGUI remainingQuality)
     {
         _titleText = titleText;
 
@@ -24,7 +22,6 @@ public class GoalView
         _rewardText = rewardText;
 
         _remainingQuality = remainingQuality;
-        _sendButton = sendButton;
     }
 
     public void SetView(int id, int cost, int remainTime, int time, GoodsType goodsType)
@@ -66,10 +63,5 @@ public class GoalView
         else qualityText = "high";
 
         _remainingQuality.text = qualityText;
-    }
-
-    public void SetButtonState(bool toActiveState)
-    {
-        _sendButton.ChangeStates(toActiveState);   
     }
 }

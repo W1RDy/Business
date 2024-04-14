@@ -33,6 +33,7 @@ public abstract class CustomButton : MonoBehaviour
 
     protected virtual void ClickCallback()
     {
+        Debug.Log("CustomClick");
         if (_animation) _animation.Play();
         _audioPlayer.PlaySound("Click");
     }

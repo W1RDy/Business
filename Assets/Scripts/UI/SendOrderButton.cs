@@ -17,7 +17,6 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
 
     protected override void Init()
     {
-        base.Init();
         if (_order != null && !_isInitialized) SetOrder(_order); 
     }
     
@@ -26,7 +25,7 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
         if (!_isInitialized)
         {
             _isInitialized = true;
-            Init();
+            base.Init();
 
             SetText("Send");
 
@@ -42,6 +41,7 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     protected override void ClickCallback()
     {
         base.ClickCallback();
+        Debug.Log(transform.parent.parent.name);
         Debug.Log("Click");
         SendOrder();
     }

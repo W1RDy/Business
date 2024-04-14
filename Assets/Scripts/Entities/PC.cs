@@ -107,6 +107,7 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
 
     public void ThrowOut()
     {
+        Debug.Log(Amount);
         Amount -= 1;
         if (Amount == 0)
         {

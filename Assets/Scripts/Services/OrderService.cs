@@ -55,11 +55,11 @@ public class DeliveryOrderService : OrderService
 
 public class RememberedOrderService : IService
 {
-    private Queue<OrderConfig> _rememberedOrder = new Queue<OrderConfig>();
+    private Queue<OrderInstanceConfig> _rememberedOrder = new Queue<OrderInstanceConfig>();
 
     public void RememberOrder(Order order)
     {
-        _rememberedOrder.Enqueue(ScriptableObject.Instantiate(order.OrderConfig));
+        _rememberedOrder.Enqueue(order.OrderConfig);
     }
 
     public void ClearLastOrdersExcept(int savingsOrdersCount)
@@ -70,7 +70,7 @@ public class RememberedOrderService : IService
         } 
     }
 
-    public OrderConfig PopOrder()
+    public OrderInstanceConfig PopOrder()
     {
         var order = _rememberedOrder.Dequeue();
         return order;

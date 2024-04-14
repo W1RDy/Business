@@ -6,4 +6,5 @@
     public int BlockedCounts { get; set; }
 
     public void UpdateChance(float changeValue);
+    public void ChangeChance(float newChance);
 }

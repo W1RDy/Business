@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73ae69f61b7d63458bcb03b5327288b, type: 3}
   m_Name: HighOrder
   m_EditorClassIdentifier: 
-  _cost: 40
-  _time: 10
+  _costInterval: 140000001e000000
+  _timeInterval: 0a0000000f000000
   _chance: 10
   _chancesUpdateValue: 0
   _neededGoods: 2
