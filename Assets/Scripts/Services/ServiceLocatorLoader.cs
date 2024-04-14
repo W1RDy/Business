@@ -17,6 +17,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private SuggestionsService _suggestionsService;
 
     [SerializeField] private IconComponentsRandomizer _iconComponentsRandomizer;
+    [SerializeField] private OrderGenerator _orderGenerator;
 
     [SerializeField] private AudioDataConfigs _audioDataConfigs;
     [SerializeField] private AudioPlayer _audioPlayerPrefab;
@@ -77,6 +78,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindOrderCompleteHandler();
         BindOrdersServices();
         BindDeliveryCompositeOrder();
+        BindOrderGenerator();
 
         BindProblemGenerator();
         BindResultsService();
@@ -235,6 +237,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         var rewardHandler = new RewardHandler();
 
         ServiceLocator.Instance.Register(rewardHandler);
+    }
+
+    private void BindOrderGenerator()
+    {
+        ServiceLocator.Instance.Register(_orderGenerator);
     }
 
     private void BindOrdersServices()

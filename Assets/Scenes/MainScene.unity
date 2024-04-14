@@ -6239,6 +6239,7 @@ MonoBehaviour:
   _periodSkipController: {fileID: 1924889488}
   _suggestionsService: {fileID: 1819322213}
   _iconComponentsRandomizer: {fileID: 32872871}
+  _orderGenerator: {fileID: 1894162349}
   _audioDataConfigs: {fileID: 11400000, guid: a1fe5f172b1a9be47b7bf3d57966ca74, type: 2}
   _audioPlayerPrefab: {fileID: 6660564155923859586, guid: a14bdd45e9dadc449a01694ce3a7cc22, type: 3}
   _windows:
@@ -16329,6 +16330,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 664394fbad93f77439086f5470618f23, type: 2}
   - {fileID: 11400000, guid: d169424bd1217c742899f1aedd532ef8, type: 2}
   _maxOrdersCount: 3
+  _maxOrdersCountInPeriod: 2
   _randomController: {fileID: 801267723}
   _ordersWindow: {fileID: 1820471388}
   _timeBetweenGenerate: 3

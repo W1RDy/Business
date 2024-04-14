@@ -4,10 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class OrderGenerator : MonoBehaviour
+public class OrderGenerator : MonoBehaviour, IService
 {
     [SerializeField] private OrderConfig[] _orders;
     [SerializeField] private int _maxOrdersCount;
+    [SerializeField] private int _maxOrdersCountInPeriod;
+    private int _remainOrdersInPeriod;
 
     [SerializeField] private RandomController _randomController;
 
@@ -28,6 +30,7 @@ public class OrderGenerator : MonoBehaviour
         _idGenerator = new IDGeneratorWithMinID(3, 1);
 
         InitOrderConfigs();
+        ActivateOrderGenerator();
     }
 
     private void InitOrderConfigs()
@@ -43,23 +46,31 @@ public class OrderGenerator : MonoBehaviour
 
     private void Update()
     {
-        _timePassed += Time.deltaTime;
-
-        if (_timePassed >= _timeBetweenGenerate)
+        if (_remainOrdersInPeriod > 0)
         {
-            if (!_randomController.IsBlocked)
-            {
-                GenerateOrder();
-                if (_orderService.GetOrdersCount() == _maxOrdersCount)
-                {
-                    _randomController.BlockController();
-                    return;
-                }
-            }
-            else if (_orderService.GetOrdersCount() < _maxOrdersCount) _randomController.UnblockController();
+            _timePassed += Time.deltaTime;
 
-            _timePassed = 0;
+            if (_timePassed >= _timeBetweenGenerate)
+            {
+                if (!_randomController.IsBlocked)
+                {
+                    GenerateOrder();
+                    if (_orderService.GetOrdersCount() == _maxOrdersCount)
+                    {
+                        _randomController.BlockController();
+                        return;
+                    }
+                }
+                else if (_orderService.GetOrdersCount() < _maxOrdersCount) _randomController.UnblockController();
+
+                _timePassed = 0;
+            }
         }
+    }
+
+    public void ActivateOrderGenerator()
+    {
+        _remainOrdersInPeriod = _maxOrdersCountInPeriod;
     }
 
     private OrderConfig GetOrderConfig()
@@ -79,5 +90,6 @@ public class OrderGenerator : MonoBehaviour
         order.InitVariant(id, config, _idGenerator);
 
         _orderService.AddOrder(order);
+        _remainOrdersInPeriod--;
     }
 }

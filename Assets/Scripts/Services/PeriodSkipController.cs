@@ -20,6 +20,7 @@ public class PeriodSkipController : MonoBehaviour, IService
     private AudioPlayer _audioPlayer;
 
     private ProblemsGenerator _problemsGenerator;
+    private OrderGenerator _orderGenerator;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public class PeriodSkipController : MonoBehaviour, IService
 
             _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
             _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
+            _orderGenerator = ServiceLocator.Instance.Get<OrderGenerator>();
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -55,6 +57,7 @@ public class PeriodSkipController : MonoBehaviour, IService
     public void ContinueNewDay()
     {
         _problemsGenerator.TryGenerateProblem();
+        _orderGenerator.ActivateOrderGenerator();
         _clicksBlocker.UnblockClicks();
         _brightnessAnimationInstance.Play();
     }
