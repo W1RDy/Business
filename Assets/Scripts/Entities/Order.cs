@@ -60,6 +60,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 
     private AudioPlayer _audioPlayer;
 
+    private IIDGenerator _idGenerator;
+
     public void InitInstance()
     {
         InitDelegate = () =>
@@ -94,7 +96,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void InitVariant(int id, OrderConfig orderConfig)
+    public void InitVariant(int id, OrderConfig orderConfig, IIDGenerator idGenerator)
     {
         _orderConfig = orderConfig;
         _id = id;
@@ -103,6 +105,8 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 
         _remainTime = _orderConfig.Time;
         _notificationController.AddNotification(this);
+
+        _idGenerator = idGenerator;
     }
 
     private void InitAnimations()
@@ -189,6 +193,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     {
         gameObject.SetActive(false);
         _orderService.RemoveOrder(this);
+        _idGenerator.ReleaseID(ID);
 
         if (_isApplied)
         {

@@ -16,7 +16,7 @@ public class OrderGenerator : MonoBehaviour
     private Pool<Order> _pool;
 
     private OrderService _orderService;
-    private IDGenerator _idGenerator;
+    private IIDGenerator _idGenerator;
 
     [SerializeField] private float _timeBetweenGenerate;
     private float _timePassed;
@@ -25,7 +25,7 @@ public class OrderGenerator : MonoBehaviour
     {
         _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
-        _idGenerator = new IDGenerator();
+        _idGenerator = new IDGeneratorWithMinID(3, 1);
 
         InitOrderConfigs();
     }
@@ -76,7 +76,7 @@ public class OrderGenerator : MonoBehaviour
         var order = _pool.Get();
         var id = _idGenerator.GetID();
 
-        order.InitVariant(id, config);
+        order.InitVariant(id, config, _idGenerator);
 
         _orderService.AddOrder(order);
     }

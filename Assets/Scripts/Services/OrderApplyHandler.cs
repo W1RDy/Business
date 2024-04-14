@@ -56,6 +56,7 @@ public class OrderApplyHandler
                 {
                     _resultsOfTheMonthService.UpdateResults(-order.Cost, 0, 0, 0);
                     _buttonService.RemoveHandsCoins(order.Cost);
+                    _buttonService.CloseWindow(WindowType.BasketWindow);
                     order.ApplyOrder();
                 }
             };

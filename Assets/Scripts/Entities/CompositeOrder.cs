@@ -29,7 +29,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
 
     public bool IsApplied {get; private set;}
 
-    private IDGenerator _idGenerator;
+    private IIDGenerator _idGenerator;
 
     private Action InitDelegate;
     public event Action OrderValuesChanged;
@@ -40,11 +40,12 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         InitDelegate = () =>
         {
             _view = new CompositeOrderView(_priceText, _timeText);
-            _idGenerator = new IDGenerator();
+            _idGenerator = new IDGenerator(2);
 
             _view.SetView("Delivery", 0, 0);
 
             ID = _idGenerator.GetID();
+            Debug.Log(ID);
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
 
@@ -137,7 +138,6 @@ public class CompositeOrderView
 {
     private TextMeshProUGUI _priceText;
     private TextMeshProUGUI _timeText;
-
 
     public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText)
     {
