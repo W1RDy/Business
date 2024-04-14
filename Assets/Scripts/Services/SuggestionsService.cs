@@ -4,7 +4,7 @@ using UnityEngine;
 public class SuggestionsService : MonoBehaviour, IService
 {
     [SerializeField] private Suggestion[] _suggestions;
-    private Dictionary<string, Suggestion> _suggestionsDict = new Dictionary<string, Suggestion>();
+    private Dictionary<ConfirmType, Suggestion> _suggestionsDict = new Dictionary<ConfirmType, Suggestion>();
 
     private void Awake()
     {
@@ -15,12 +15,12 @@ public class SuggestionsService : MonoBehaviour, IService
     {
         foreach (var suggestion in _suggestions)
         {
-            _suggestionsDict.Add(suggestion.ID, Instantiate(suggestion));
+            _suggestionsDict.Add((ConfirmType)int.Parse(suggestion.ID), Instantiate(suggestion));
         }
     }
 
-    public Suggestion GetSuggestion(string id)
+    public Suggestion GetSuggestion(ConfirmType confirmType)
     {
-        return _suggestionsDict[id];
+        return _suggestionsDict[confirmType];
     }
 }

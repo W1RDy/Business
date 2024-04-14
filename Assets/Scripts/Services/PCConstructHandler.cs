@@ -16,6 +16,6 @@ public class PCConstructHandler
             goods.ConstructPC();
         };
 
-        _confirmHandler.ConfirmAction(action, goods.Time);
+        _confirmHandler.ConfirmAction(action, ConfirmType.SkipTime, goods.Time);
     }
 }

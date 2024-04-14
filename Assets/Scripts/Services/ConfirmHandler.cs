@@ -24,10 +24,16 @@ public class ConfirmHandler
         if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
     }
 
-    public void ConfirmAction(Action action, int skipTime)
+    public void ConfirmAction(Action action, ConfirmType confirmType, int skipTime, int wasteCoins)
     {
         RememberActionForSuggestion(action);
-        OpenSuggestionWindow(skipTime);
+        OpenSuggestionWindow(confirmType, skipTime, wasteCoins);
+    }
+
+    public void ConfirmAction(Action action, ConfirmType confirmType, int skipTime)
+    {
+        if (confirmType != ConfirmType.SkipTime) throw new System.ArgumentException("Should add wasteCoins parameter");
+        ConfirmAction(action, confirmType, skipTime, 0);
     }
 
     private void RememberActionForSuggestion(Action action)
@@ -35,14 +41,17 @@ public class ConfirmHandler
         _rememberedAction = action;
     }
 
-    public void OpenSuggestionWindow(int skipTime)
+    private void OpenSuggestionWindow(ConfirmType confirmType, int skipTime, int wasteCoins)
     {
-        _suggestion = _suggestionGenerator.GenerateSuggestion("SkipTime", skipTime);
+        _suggestion = _suggestionGenerator.GenerateSuggestion(confirmType, skipTime, wasteCoins);
 
         _suggestion.Applied += ConfirmSuggestion;
         _suggestion.Skipped += CancelSuggestion;
 
-        _buttonService.OpenWindow(WindowType.SuggestionWindow);
+        if (confirmType == ConfirmType.DistributeCoins)
+            _buttonService.OpenWindow(WindowType.DistributeSuggestionWindow);
+        else
+            _buttonService.OpenWindow(WindowType.SuggestionWindow);
     }
 
     private void ConfirmSuggestion()
@@ -65,4 +74,11 @@ public class ConfirmHandler
             }
         }
     }
+}
+
+public enum ConfirmType
+{
+    SkipTime,
+    SkipTimeAndWasteCoins,
+    DistributeCoins
 }

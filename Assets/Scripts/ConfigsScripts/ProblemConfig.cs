@@ -34,10 +34,10 @@ public class ProblemConfig : ScriptableObject, IRandomizable, IEventWithCoinsPar
 
     public virtual void InitProblemValues()
     {
-        SetParameters(GetValueFromInterval(_coinsRequirementInterval, CoinsDifficultyValue));
+        SetCoinsParameters(GetValueFromInterval(_coinsRequirementInterval, CoinsDifficultyValue));
     }
 
-    public void SetParameters(int coins)
+    public void SetCoinsParameters(int coins)
     {
         _coins = coins;
     }

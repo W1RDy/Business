@@ -145,6 +145,11 @@ public class RandomController : MonoBehaviour
             }
         }
     }
+
+    public void ChangeMinBlocksCount(int minBlocksCount)
+    {
+        _minBlocksCount = minBlocksCount;
+    }
 }
 
 [Serializable]

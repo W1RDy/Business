@@ -10,7 +10,7 @@ public class SkipTimeSuggestion : Suggestion, IEventWithTimeParameters
 
     private TimeController _timeController;
 
-    public void SetParameters(int time)
+    public void SetTimeParameters(int time)
     {
         _time = time;
         if (_timeController == null) _timeController = ServiceLocator.Instance.Get<TimeController>(); 

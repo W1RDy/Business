@@ -6,6 +6,6 @@ public class ApplyDistributeButton : CustomButton
 
     protected override void ClickCallback()
     {
-        _buttonService.DistributeCoins(0, _coinsDistributor);
+        _buttonService.DistributeCoins(_coinsDistributor);
     }
 }

@@ -10,7 +10,7 @@ public class WindowActivator : IService
     public WindowActivator()
     {
         _windowService = ServiceLocator.Instance.Get<WindowService>();
-        _windowStackController = new WindowStackController(2);
+        _windowStackController = new WindowStackController(3);
     }
 
     public void ActivateWindow(WindowType windowType)

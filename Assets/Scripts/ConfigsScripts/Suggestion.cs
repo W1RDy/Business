@@ -3,10 +3,10 @@ using UnityEngine;
 
 public abstract class Suggestion : ScriptableObject, IEvent
 {
-    [SerializeField] private string _id;
+    [SerializeField] private ConfirmType confirmType;
     [SerializeField] private string _description;
     public string Description => _description;
-    public string ID => _id;
+    public string ID => ((int)confirmType).ToString();
 
     public event Action Applied;
     public event Action Skipped;

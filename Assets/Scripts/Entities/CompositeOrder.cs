@@ -22,6 +22,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
     [SerializeField] private TextMeshProUGUI _timeText;
 
     [SerializeField] private ApplyOrderButton _applyOrderButton;
+    [SerializeField] private OpenDistributeSuggestionButton _openDistributeSuggestionButton;
 
     private CompositeOrderView _view;
 
@@ -50,6 +51,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
 
             _applyOrderButton.InitializeButton();
+            _openDistributeSuggestionButton.InitVariant(this);
         };
 
         ServiceLocator.Instance.ServiceRegistered += InitDelegate;

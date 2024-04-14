@@ -13,12 +13,12 @@ public interface IEventWithTimeParameters : IEvent
 {
     public int TimeRequirements { get; }
 
-    public void SetParameters(int time);
+    public void SetTimeParameters(int time);
 }
 
 public interface IEventWithCoinsParameters : IEvent
 {
     public int CoinsRequirements { get; }
 
-    public void SetParameters(int coins);
+    public void SetCoinsParameters(int coins);
 }

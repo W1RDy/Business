@@ -2,7 +2,7 @@
 
 public enum WindowType
 {
-    DistributeCoinsWindow,
+    DistributeSuggestionWindow,
     OrdersWindow,
     GoodsWindow,
     DeliveryWindow,

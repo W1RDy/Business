@@ -1,4 +1,5 @@
 using CoinsCounter;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -26,6 +27,8 @@ public class CoinsDistributor : MonoBehaviour
     private HandsCoinsCounter _handsCoinsCounter;
     private BankCoinsCounter _bankCoinsCounter;
 
+    public event Action OnCoinsTryiedDistribute;
+
     private void Awake()
     {
         _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
@@ -50,6 +53,12 @@ public class CoinsDistributor : MonoBehaviour
         _handCoins = sumCoins - _bankCoins;
 
         _view.ChangeView(_handCoins, _bankCoins, distributeValue);
+        OnCoinsTryiedDistribute?.Invoke();
+    }
+
+    public int GetCurrentHandCoins()
+    {
+        return _handCoins;
     }
 
     public void ApplyDistributing()

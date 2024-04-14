@@ -43,7 +43,7 @@ public class ButtonService : IService
 
     public void TryAddTime(int time)
     {
-        _suggestionGenerator.GenerateSuggestion("SkipTime", time);
+        _suggestionGenerator.GenerateSuggestion(ConfirmType.SkipTime, time);
         OpenWindow(WindowType.SuggestionWindow);
     }
 
@@ -100,12 +100,19 @@ public class ButtonService : IService
         _resultsOfTheMonthService.UpdateResults(0, -value, 0, 0);
     }
 
-    public void DistributeCoins(int time, CoinsDistributor coinsDistributor)
+    public void DistributeCoins(CoinsDistributor coinsDistributor)
     {
-        if (time > 0) TryAddTime(time);
+        DistributeCoinsBySuggestion(null, coinsDistributor);
+    }
+
+    public void DistributeCoinsBySuggestion(Suggestion suggestion, CoinsDistributor coinsDistributor)
+    {
         coinsDistributor.ApplyDistributing();
+
         if (_timeController.PeriodFinished()) ClosePeriodFinishWindow();
-        else CloseWindow(WindowType.DistributeCoinsWindow);
+        else CloseWindow(WindowType.DistributeSuggestionWindow);
+
+        if (suggestion != null) suggestion.Apply();
     }
 
     public void SendOrder(IOrderWithCallbacks order)

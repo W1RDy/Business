@@ -97,6 +97,11 @@ public class ProblemsGenerator : IService, ISubscribable
         }
     }
 
+    private void ChangeMinSkipsBetweenProblemsByDifficulty()
+    {
+        _randomController.ChangeMinBlocksCount(_difficultyController.MinSkipsBetweenProblems);
+    }
+
     public void Subscribe()
     {
         _subscribeController.AddSubscribable(this);
@@ -105,6 +110,7 @@ public class ProblemsGenerator : IService, ISubscribable
         {
             ChangeGenerateChancesByDifficulty();
             ChangeProblemsCostByDifficulty();
+            ChangeMinSkipsBetweenProblemsByDifficulty();
         };
 
         _difficultyController.DifficultyChanged += _onDifficultyChanged;

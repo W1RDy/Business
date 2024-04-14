@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa90a6118b4605d49af4b9b36b0fe74d, type: 3}
-  m_Name: BadGoodsQualityProblem
+  m_Script: {fileID: 11500000, guid: f10eb188931fb814b8301fb474ecf7c5, type: 3}
+  m_Name: SkipTimeAndWasteCoinsSuggestion
   m_EditorClassIdentifier: 
-  _id: GoodsProblem
-  _description: This goods are awful!
-  _coinsRequirementInterval: 1e00000023000000
-  _chance: 8
-  _chancesUpdateValue: 4
+  confirmType: 1
+  _description: The time will be skipped. The coins will be wasted.

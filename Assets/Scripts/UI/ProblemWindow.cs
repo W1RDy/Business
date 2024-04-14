@@ -11,7 +11,7 @@ public class ProblemWindow : Window
     [SerializeField] private TextMeshProUGUI _problemText;
 
     [SerializeField] private ProblemButton _problemButton;
-    [SerializeField] private OpenDistributeCoinsButton _openDistributeCoinsButton;
+    [SerializeField] private OpenDistributeSuggestionButton _openDistributeCoinsButton;
 
     private EventsViewController _problemsViewController;
 
@@ -20,6 +20,8 @@ public class ProblemWindow : Window
         _coinsCost = problemConfig.CoinsRequirements;
         _problemButton.SetProblem(problemConfig);
         _problemButton.SetCoinsValue(_coinsCost);
+
+        _openDistributeCoinsButton.InitVariant(problemConfig);
 
         _problemsViewController = new EventsViewController(_problemText, _timeText, _coinsText);
         _problemsViewController.SetEvent(problemConfig);

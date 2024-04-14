@@ -9,6 +9,8 @@ namespace CoinsCounter
 
         public int Coins => _coins;
 
+        protected DifficultyController _difficultyController;
+
         protected CoinsChangeView _changeView;
         private CoinsIndicator _coinsIndicator;
 
@@ -18,6 +20,7 @@ namespace CoinsCounter
         {
             _coinsIndicator = coinsIndicator;
             _changeView = coinsChangeView;
+            _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         }
 
         public virtual void AddCoins(int value)
@@ -78,7 +81,7 @@ namespace CoinsCounter
 
         public HandsCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView) 
         {
-            _coins = 50;
+            _coins = _difficultyController.StartCoinsInHands;
             UpdateIndicator();
             _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
         }
@@ -107,7 +110,7 @@ namespace CoinsCounter
     {
         public BankCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView)
         {
-            _coins = 1000;
+            _coins = _difficultyController.StartCoinsInBank;
             UpdateIndicator();
         }
 

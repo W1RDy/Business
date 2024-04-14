@@ -18,7 +18,10 @@ public class WindowStackController : MonoBehaviour
 
     public void AddWindowToStack(Window window)
     {
-        _stackSize = Mathf.Clamp(++_stackSize, 0, _maxStackSize);
+        if (!_windowsStack.Contains(window))
+        {
+            _stackSize = Mathf.Clamp(++_stackSize, 0, _maxStackSize);
+        }
         _windowsStack.Push(window);
     }
 

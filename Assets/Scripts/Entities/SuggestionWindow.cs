@@ -13,7 +13,7 @@ public class SuggestionWindow : Window
     private EventsViewController _suggestionViewController;
     private Suggestion _suggestion;
 
-    public void SetSuggestion(Suggestion suggestion)
+    public virtual void SetSuggestion(Suggestion suggestion)
     {
         if (_suggestionViewController == null) _suggestionViewController = new EventsViewController(_suggestionText, _suggestionTimeText, _sggestionCoinsText);
         _suggestion = suggestion;

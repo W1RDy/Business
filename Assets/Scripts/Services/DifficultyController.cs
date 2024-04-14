@@ -10,6 +10,11 @@ public class DifficultyController : MonoBehaviour, IService
     [SerializeField] private int _coinsCountWithMaxDifficulty;
     [SerializeField] private int _monthsCountWithMaxDifficulty;
 
+    [SerializeField] private int _startCoinsInHands;
+    [SerializeField] private int _startCoinsInBank;
+
+    public int StartCoinsInHands => _startCoinsInHands;
+    public int StartCoinsInBank => _startCoinsInBank;
 
     private float _oldDifficultyValue;
 
@@ -20,12 +25,16 @@ public class DifficultyController : MonoBehaviour, IService
     [SerializeField] private float _ordersTimeValue;
     [SerializeField] private float _problemCostValue;
 
+    [SerializeField] private int _minSkipsBetweenProblems;
+
     public float[] ProblemChances => _problemChances;
     public float[] OrderChances => _orderChances;
 
     public float OrdersRewardValue => _ordersRewardValue;
     public float OrdersTimeValue => _ordersTimeValue;
     public float ProblemCostValue => _problemCostValue;
+
+    public int MinSkipsBetweenProblems => _minSkipsBetweenProblems;
 
     private DifficultyCalculator _difficultyCalculator;
 
@@ -35,7 +44,7 @@ public class DifficultyController : MonoBehaviour, IService
     {
         _oldDifficultyValue = _difficulty;
         _difficultyCalculator = new DifficultyCalculator(_coinsCountWithMaxDifficulty, _monthsCountWithMaxDifficulty);
-        _difficultyCalculator.DifficultyCanBeChanged += ChangeDifficultyDelegate;
+        //_difficultyCalculator.DifficultyCanBeChanged += ChangeDifficultyDelegate;
     }
 
 #if UNITY_EDITOR
@@ -59,6 +68,7 @@ public class DifficultyController : MonoBehaviour, IService
         ChangeRewardValue(_difficulty);
         ChangeTimeValue(_difficulty);
         ChangeProblemsCostValue(_difficulty);
+        ChangeMinSkipsBetweenProblems(_difficulty);
 
         DifficultyChanged?.Invoke();
     }
@@ -81,7 +91,7 @@ public class DifficultyController : MonoBehaviour, IService
         }
         else
         {
-            _problemChances = new float[3] { 40, 25, 20 };
+            _problemChances = new float[3] { 40, 30, 25 };
         }
     }
 
@@ -114,6 +124,18 @@ public class DifficultyController : MonoBehaviour, IService
     private void ChangeProblemsCostValue(float difficulty)
     {
         _problemCostValue = 1 * (difficulty + 1);
+    }
+
+    private void ChangeMinSkipsBetweenProblems(float difficulty)
+    {
+        if (difficulty < 0.6f)
+        {
+            _minSkipsBetweenProblems = 3;
+        }
+        else
+        {
+            _minSkipsBetweenProblems = 1;
+        }
     }
 
     private void OnDestroy()
