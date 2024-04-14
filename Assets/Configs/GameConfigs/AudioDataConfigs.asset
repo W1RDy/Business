@@ -33,7 +33,7 @@ MonoBehaviour:
     _volume: 1
   - _index: Notification
     _audioClip: {fileID: 8300000, guid: ba0749fdbf03bfb4f8c05437694f79b2, type: 3}
-    _volume: 0.5
+    _volume: 2.5
   - _index: SkipTime
     _audioClip: {fileID: 8300000, guid: 8e19f06e9144b584e8f13830ee24b8e2, type: 3}
     _volume: 1.5

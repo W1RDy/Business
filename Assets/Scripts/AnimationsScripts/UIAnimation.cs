@@ -15,6 +15,8 @@ public abstract class UIAnimation : ScriptableObject
     protected bool _isFinished = true;
     public bool IsFinished => _isFinished;
 
+    public bool IsKillAnimation { get; set; }
+
     public virtual void Play()
     {
         Play(null);
@@ -22,14 +24,14 @@ public abstract class UIAnimation : ScriptableObject
 
     public virtual void Play(Action callback)
     {
-        if (!IsFinished) Kill();
+        if (!IsFinished || IsKillAnimation) Kill();
 
         _finishCallback = () =>
         {
-            callback?.Invoke();
             _isFinished = true;
-
             Release();
+
+            callback?.Invoke();
             _finishCallback = null;
         };
     }
@@ -42,6 +44,6 @@ public abstract class UIAnimation : ScriptableObject
 
     protected virtual void Release()
     {
-
+        IsKillAnimation = false;
     }
 }

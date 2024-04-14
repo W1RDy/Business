@@ -33,6 +33,7 @@ public class UIPressButtonAnimation : UIScaleAnimation
 
     protected override void Release()
     {
+        base.Release();
         _transform.localScale = new Vector3(_startScale.x, _startScale.y, 1);
     }
 }

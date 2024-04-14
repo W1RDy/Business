@@ -32,7 +32,6 @@ public class UIFadeAnimationWithText : UIAnimation
         }
         else if (_colorable.ColorableObj is TextMeshProUGUI text)
         {
-            Debug.Log("TextChange");
             _sequence
                 .Append(text.DOFade(_fadeEnd, _time))
                 .AppendCallback(() => _finishCallback?.Invoke());
@@ -42,6 +41,7 @@ public class UIFadeAnimationWithText : UIAnimation
 
     protected override void Release()
     {
+        base.Release();
         _colorable.Color = new Color (_colorable.Color.r, _colorable.Color.g, _colorable.Color.b, _fadeEnd);
     }
 }

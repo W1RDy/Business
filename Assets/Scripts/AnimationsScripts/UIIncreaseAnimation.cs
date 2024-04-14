@@ -33,6 +33,7 @@ public class UIIncreaseAnimation : UIScaleAnimation
 
     protected override void Release()
     {
+        base.Release();
         _transform.localScale = new Vector3(_rememberedSize.x, _rememberedSize.y, 1);
     }
 }

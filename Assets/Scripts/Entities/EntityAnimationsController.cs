@@ -36,7 +36,14 @@ public class EntityAnimationsController
 
     public void KillAnimation()
     {
-        if (!_appearAnimation.IsFinished) _appearAnimation.Kill();
-        else if (!_disappearAnimation.IsFinished) _disappearAnimation.Kill();
+        if (!_appearAnimation.IsFinished)
+        {
+            _appearAnimation.Kill();
+            _disappearAnimation.IsKillAnimation = true;
+        }
+        else if (!_disappearAnimation.IsFinished)
+        {
+            _disappearAnimation.Kill();
+        }
     }
 }
