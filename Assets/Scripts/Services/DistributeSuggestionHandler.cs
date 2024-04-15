@@ -7,11 +7,14 @@ public class DistributeSuggestionHandler
     private ConfirmHandler _confirmHandler;
     private int _distributeTimeSkip;
 
+    private ClicksBlocker _clicksBlocker;
+
     public DistributeSuggestionHandler(int distributeTimeSkip)
     {
         _confirmHandler = new ConfirmHandler();
         _distributeTimeSkip = distributeTimeSkip;
         _buttonService = ServiceLocator.Instance.Get<ButtonService>();
+        _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
     }
 
     public void OpenDistibuteSuggestion(IOrderWithCallbacks order)
@@ -29,6 +32,7 @@ public class DistributeSuggestionHandler
         Action action = () =>
         {
             _buttonService.CloseWindow(WindowType.ProblemWindow);
+            _clicksBlocker.UnblockClicks();
             _event.Apply();
         };
         _confirmHandler.ConfirmAction(action, ConfirmType.DistributeCoins, _distributeTimeSkip, _event.CoinsRequirements);

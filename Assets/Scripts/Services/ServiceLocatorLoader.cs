@@ -16,6 +16,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private PeriodSkipController _periodSkipController;
     [SerializeField] private SuggestionsService _suggestionsService;
 
+    [SerializeField] private ClicksBlocker _clicksBlocker;
+
     [SerializeField] private DifficultyController _difficultyController;
     [SerializeField] private SubscribeController _subscribeController;
 
@@ -66,6 +68,7 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindAudioServices();
         BindNotificationServices();
 
+        BindClicksBlocker();
         BindWindowService();
         BindWindowActivator();
 
@@ -103,6 +106,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindClicksBlocker()
+    {
+        ServiceLocator.Instance.Register(_clicksBlocker);
     }
 
     private void BindDifficultyController()

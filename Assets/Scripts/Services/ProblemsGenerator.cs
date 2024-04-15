@@ -8,6 +8,7 @@ public class ProblemsGenerator : IService, ISubscribable
     private ProblemWindow _problemWindow;
     private WindowActivator _windowActivator;
     private RandomController _randomController;
+    private ClicksBlocker _clicksBlocker;
 
     private RememberedOrderService _rememberedOrderService;
     private Action InitDelegate;
@@ -29,6 +30,7 @@ public class ProblemsGenerator : IService, ISubscribable
             _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
             _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
             _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+            _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
 
             Subscribe();
 
@@ -79,7 +81,7 @@ public class ProblemsGenerator : IService, ISubscribable
         if (problemConfig != null)
         {
             _problemWindow.SetProblem(problemConfig);
-
+            _clicksBlocker.BlockClicks();
             _windowActivator.ActivateWindow(WindowType.ProblemWindow);
         }
     }

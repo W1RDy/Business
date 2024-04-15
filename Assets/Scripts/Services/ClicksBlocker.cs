@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ClicksBlocker : MonoBehaviour
+public class ClicksBlocker : MonoBehaviour, IService
 {
     [SerializeField] private Image _clickBlocker;
+    private int _blocksCount = 0;
 
     public void BlockClicks()
     {
+        _blocksCount++;
         _clickBlocker.enabled = true;
     }
 
     public void UnblockClicks()
     {
-        _clickBlocker.enabled = false;
+        _blocksCount--;
+        if (_blocksCount <= 0)
+        {
+            _blocksCount = 0;
+            _clickBlocker.enabled = false;
+        }
     }
 }
