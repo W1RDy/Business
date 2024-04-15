@@ -7,6 +7,7 @@ public class OrderApplyHandler
     private ActiveOrderService _activeOrderService;
     private ResultsOfTheMonthService _resultsOfTheMonthService;
     private HandsCoinsCounter _handCoinsCounter;
+    private ConfirmHandler _confirmHandler;
 
     private ButtonService _buttonService;
 
@@ -20,6 +21,7 @@ public class OrderApplyHandler
             _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
             _buttonService = ServiceLocator.Instance.Get<ButtonService>();
             _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+            _confirmHandler = new ConfirmHandler();
             
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -32,6 +34,13 @@ public class OrderApplyHandler
         var action = GetConfirmRememberedOrderAction(order);
 
         action.Invoke();
+    }
+
+    public void ApplyWithConfitm(IOrderWithCallbacks order)
+    {
+        var action = GetConfirmRememberedOrderAction(order);
+        _confirmHandler.ConfirmAction(action, ConfirmType.SkipTimeAndWasteCoins, order.Time, order.Cost);
+
     }
 
     private Action GetConfirmRememberedOrderAction(IOrderWithCallbacks order)

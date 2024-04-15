@@ -63,7 +63,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         _orders.Add(order);
 
         Cost += order.Cost;
-        Time += order.Time;
+        if (order.Time > Time) Time = order.Time;
 
         _view.SetView("Delivery", Cost, Time);
         OrderValuesChanged?.Invoke();
@@ -76,11 +76,21 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         _orders.Remove(order);
 
         Cost -= order.Cost;
-        Time -= order.Time;
+        if (order.Time == Time) Time = FindMaxTime();
 
         _view.SetView("Delivery", Cost, Time);
         OrderValuesChanged?.Invoke();
         if (StateIsChanged()) OrderStateChanged?.Invoke();
+    }
+
+    private int FindMaxTime()
+    {
+        int time = 0;
+        foreach (var order in _orders)
+        {
+            if (order.Time > time) time = order.Time;
+        }
+        return time;
     }
 
     public void ChangeOrder(int oldCost, int oldTime, IOrder newOrder)

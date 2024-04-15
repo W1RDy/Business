@@ -15,5 +15,5 @@ MonoBehaviour:
   _goodsType: 1
   _title: MediumGoods
   _description: Some normal.
-  _buildTime: 2
+  _buildTime: 1
   _icon: {fileID: 21300000, guid: 92a57602bf424d94bb663b04297e51d6, type: 3}

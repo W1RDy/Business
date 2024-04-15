@@ -126,6 +126,11 @@ public class ButtonService : IService
         _orderApplyHandler.ApplyOrder(order);
     }
 
+    public void ApplyOrderWithConfirm(IOrderWithCallbacks order)
+    {
+        _orderApplyHandler.ApplyWithConfitm(order);
+    }
+
     public void AddDeliveryOrder(Delivery delivery)
     {
         delivery.AddDeliveryOrder();

@@ -113,29 +113,31 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void ChangeRewardValue(float difficulty)
     {
-        _ordersRewardValue = 1 * (difficulty + 1);
+        _ordersRewardValue = difficulty + 1;
     }
 
     private void ChangeTimeValue(float difficulty)
     {
-        _ordersTimeValue = 1 * (difficulty + 1);
+        _ordersTimeValue = 2 / (difficulty + 1);
     }
 
     private void ChangeProblemsCostValue(float difficulty)
     {
-        _problemCostValue = 1 * (difficulty + 1);
+        _problemCostValue = (difficulty * 2) + 1;
     }
 
     private void ChangeMinSkipsBetweenProblems(float difficulty)
     {
-        if (difficulty < 0.6f)
+
+        if (difficulty < 0.4f)
         {
             _minSkipsBetweenProblems = 3;
         }
-        else
+        else if (difficulty < 0.6f)
         {
-            _minSkipsBetweenProblems = 1;
+            _minSkipsBetweenProblems = 2;
         }
+        else _minSkipsBetweenProblems = 1;
     }
 
     private void OnDestroy()

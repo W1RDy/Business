@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrderView : MonoBehaviour
 {
@@ -13,7 +14,13 @@ public class OrderView : MonoBehaviour
     [SerializeField] private Icon _icon;
     private IconComponentsRandomizer _iconRandomizer;
 
-    
+    [SerializeField] private Image[] _borders;
+
+    [SerializeField] private Color _positiveColor;
+    [SerializeField] private Color _negativeColor;
+
+    private bool _isGoodBorders;
+
     public void SetView(int coinsValue, int timeValue, GoodsType goodsType, int id)
     {
         if (_iconRandomizer == null) _iconRandomizer = ServiceLocator.Instance.Get<IconComponentsRandomizer>();
@@ -22,6 +29,7 @@ public class OrderView : MonoBehaviour
         SetTime(timeValue);
         SetQuality(goodsType);
         SetIcon();
+        ChangeBorders(true);
     }
 
     public void SetCoins(int coinsValue)
@@ -48,5 +56,17 @@ public class OrderView : MonoBehaviour
     {
         var iconComponents = _iconRandomizer.RandomizeComponents();
         _icon.SetNewIconImage(iconComponents);
+    }
+
+    public void ChangeBorders(bool isGoodView)
+    {
+        if (_isGoodBorders != isGoodView)
+        {
+            foreach (var border in _borders)
+            {
+                border.color = isGoodView ? _positiveColor : _negativeColor;
+            }
+            _isGoodBorders = isGoodView;
+        }
     }
 }

@@ -12,11 +12,13 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 
     private int _id;
     private int _remainTime;
+    private int _remainWaiting;
 
     public int ID => _id;
     public int Cost => _orderConfig.Cost;
     public int Time => _orderConfig.Time;
     public GoodsType NeededGoods => _orderConfig.NeededGoods;
+    public int RemainWaiting => _remainWaiting;
 
     public OrderInstanceConfig OrderConfig => _orderConfig;
 
@@ -100,6 +102,7 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     {
         _orderConfig = orderConfig;
         _id = id;
+        _remainWaiting = 2;
 
         _view.SetView(_orderConfig.Cost, _orderConfig.Time, NeededGoods, ID);
 
@@ -128,6 +131,24 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
             OrderStateChanged?.Invoke();
             OrderValuesChanged?.Invoke();
         }
+    }
+
+    public void UpdateOrderUrgency()
+    {
+        if (!_isApplied)
+        {
+            _remainWaiting--;
+            if (_remainWaiting == 2)
+            {
+                _view.ChangeBorders(true);
+            }
+            else if (_remainWaiting == 1)
+            {
+                _view.ChangeBorders(false);
+            }
+            else if (_remainWaiting <= 0) ThrowOut();
+        }
+        else _view.ChangeBorders(true);
     }
 
     public void CancelOrder()

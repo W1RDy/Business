@@ -15,7 +15,7 @@ MonoBehaviour:
   _deliveryType: 0
   _deliveryTitle: Low delivery
   _deliveryDescription: Slow delivery, bad quality. But low price.
-  _deliveryCost: 10
-  _deliveryTime: 8
+  _deliveryCost: 20
+  _deliveryTime: 6
   _goodsType: 0
   _icon: {fileID: 21300000, guid: 13ea77137b88fbd47a392440da2b25c7, type: 3}

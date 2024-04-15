@@ -117,7 +117,7 @@ namespace CoinsCounter
         public void DoubleCoins()
         {
             var prevCoins = _coins;
-            _coins *= 2;
+            _coins = (int)Mathf.Ceil(_coins * 1.5f);
 
             if (prevCoins != _coins) _changeView.ActivateChangeView(_coins - prevCoins);
             UpdateIndicator();

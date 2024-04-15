@@ -57,7 +57,8 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
 
     private void ApplyOrder()
     {
-        _buttonService.ApplyOrder(_order);
+        if (_order as Order != null) _buttonService.ApplyOrder(_order);
+        if (_order as CompositeOrder != null) _buttonService.ApplyOrderWithConfirm(_order);
     }
 
     public void ChangeStates(bool isApplied)

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0095d724bf5ea458e02f9e7e676ad2, type: 3}
   m_Name: MiddleOrder
   m_EditorClassIdentifier: 
-  _costInterval: 0f00000014000000
-  _timeInterval: 080000000a000000
+  _costInterval: 3200000046000000
+  _timeInterval: 060000000a000000
   _chance: 30
   _chancesUpdateValue: 0
   _neededGoods: 1
