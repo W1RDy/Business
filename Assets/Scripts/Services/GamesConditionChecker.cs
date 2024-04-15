@@ -10,6 +10,7 @@ public class GamesConditionChecker : IService
 
     private BankCoinsCounter _bankCoinsCounter;
     private HandsCoinsCounter _handsCoinsCounter;
+    private GameController _gameController;
 
     private PCService _pcService;
 
@@ -25,6 +26,7 @@ public class GamesConditionChecker : IService
             _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
             _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
             _pcService = ServiceLocator.Instance.Get<PCService>();
+            _gameController = ServiceLocator.Instance.Get<GameController>();
 
             ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
         };
@@ -34,6 +36,11 @@ public class GamesConditionChecker : IService
 
     public bool IsGameFinished()
     {
+        return _gameController.IsFinished;
+    }
+
+    public bool IsEnoughCoinsForMinCoins()
+    {
         return _handsCoinsCounter.Coins + _bankCoinsCounter.Coins <= _minCoins;
     }
 
@@ -42,9 +49,14 @@ public class GamesConditionChecker : IService
         return _pcService.HasPCByThisGoodsOrOver(goodsType);
     }
 
-    public bool IsEnoughCoins(int coins)
+    public bool IsEnoughCoinsInHands(int coins)
     {
         return _handsCoinsCounter.Coins >= Mathf.Abs(coins);
+    }
+
+    public bool IsEnoughCoins(int coins)
+    {
+        return _bankCoinsCounter.Coins + _handsCoinsCounter.Coins  >= coins;
     }
 
     public bool IsPeriodFinished()

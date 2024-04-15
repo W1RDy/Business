@@ -72,7 +72,7 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
     public bool CheckButtonChangeCondition()
     {
         if (_order is Order standartOrder) return _order.IsApplied && _conditionChecker.IsHasInInventory(standartOrder.NeededGoods);
-        if (_order is CompositeOrder compositeOrder) return !_conditionChecker.IsEnoughCoins(compositeOrder.Cost);
+        if (_order is CompositeOrder compositeOrder) return !_conditionChecker.IsEnoughCoinsInHands(compositeOrder.Cost);
         return false;
     }
 

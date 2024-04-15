@@ -8,7 +8,7 @@ public class ButtonService : IService
     private TimeController _timeController;
     private PeriodSkipController _gameLifeController;
 
-    private HandsCoinsCounter _handCoinsCounter;
+    private WasteCoinsHandler _wasteCoinsHandler;
 
     private WindowActivator _windowActivator;
 
@@ -26,7 +26,7 @@ public class ButtonService : IService
         _timeController = ServiceLocator.Instance.Get<TimeController>();
         _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
 
-        _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _wasteCoinsHandler = new WasteCoinsHandler();
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 
@@ -87,17 +87,10 @@ public class ButtonService : IService
 
     #endregion
 
-    public void RemoveHandsCoins(int value)
-    {
-        _handCoinsCounter.RemoveCoins(value);
-    }
-
     public void WasteCoinsByProblems(int value)
     {
-        RemoveHandsCoins(value);
+        _wasteCoinsHandler.WasteCoins(value);
         CloseWindow(WindowType.ProblemWindow);
-
-        _resultsOfTheMonthService.UpdateResults(0, -value, 0, 0);
     }
 
     public void DistributeCoins(CoinsDistributor coinsDistributor)

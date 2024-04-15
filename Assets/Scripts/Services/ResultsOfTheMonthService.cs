@@ -14,8 +14,8 @@ public class ResultsOfTheMonthService : IService
 
     public void ActivateNewResults()
     {
-        if (_currentResults != null) _results.Add(_currentResults);
         _currentResults = new ResultsOfTheMonth();
+        _results.Add(_currentResults);
     }
 
     public ResultsOfTheMonth GetResultsOfTheMonth()
@@ -75,7 +75,7 @@ public class ResultsOfTheGame : IResults
     {
         Expenses = 0;
         Income = 0;
-        Time = 0;
+        Time = -1;
     }
 
     public void UpdateResult(int expenses, int income, int time)

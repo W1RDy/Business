@@ -11,6 +11,8 @@ public class GameController : IService
     private ResultsActivator _resultsActivator;
     private GamesConditionChecker _conditionsChecker;
 
+    public bool IsFinished { get; private set; }
+
     private Action InitDelegate;
 
     public GameController()
@@ -34,11 +36,12 @@ public class GameController : IService
 
     private void TryFinishGame()
     {
-        if (_conditionsChecker.IsGameFinished()) FinishGame();
+        if (_conditionsChecker.IsEnoughCoinsForMinCoins()) FinishGame();
     }
 
     public void FinishGame()
     {
+        IsFinished = true;
         GameFinished?.Invoke();
         _resultsActivator.ActivateResultsOfTheGame();
     }

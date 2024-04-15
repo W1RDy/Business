@@ -9,10 +9,11 @@ public class WasteCoinsButton : CustomButton, IButtonWithNewButton
     [SerializeField] private TextMeshProUGUI _buttonText;
 
     [SerializeField] private CustomButton _buttonForChange;
+    [SerializeField] private CustomButton _secondButtonForChange;
     [SerializeField] private ChangeCondition[] _changeConditions;
 
     public ChangeCondition[] ChangeConditions => _changeConditions;
-    public CustomButton ButtonForChange => _buttonForChange;
+    public CustomButton ButtonForChange {get; private set;}
 
     private GamesConditionChecker _conditionsChecker;
     private ButtonChangeController _changeController;
@@ -22,6 +23,8 @@ public class WasteCoinsButton : CustomButton, IButtonWithNewButton
         base.Init();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
         _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
+
+        ButtonForChange = _buttonForChange;
         _changeController.ChangeButtonToNewButton(this);
         _changeController.AddChangeButton(this);
 
@@ -51,7 +54,14 @@ public class WasteCoinsButton : CustomButton, IButtonWithNewButton
 
     public bool CheckButtonChangeCondition()
     {
-        return !_conditionsChecker.IsEnoughCoins(_coinsValue);
+        if (_secondButtonForChange != null && !_conditionsChecker.IsEnoughCoins(_coinsValue))
+        {
+            ButtonForChange = _secondButtonForChange;
+            return true;
+        }
+
+        //if (ButtonForChange != _buttonForChange) ButtonForChange = _buttonForChange;
+        return !_conditionsChecker.IsEnoughCoinsInHands(_coinsValue);
     }
 
     private void OnDestroy()

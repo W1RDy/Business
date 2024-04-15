@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class DistributeSuggestionHandler
+public class DistributeSuggestionHandler 
 {
     private ButtonService _buttonService;
     private ConfirmHandler _confirmHandler;
@@ -24,6 +24,7 @@ public class DistributeSuggestionHandler
             _buttonService.ApplyOrder(order);
             order.CompleteOrder();
         };
+
         _confirmHandler.ConfirmAction(action, ConfirmType.DistributeCoins, order.Time + _distributeTimeSkip, order.Cost);
     }
 
@@ -35,6 +36,7 @@ public class DistributeSuggestionHandler
             _clicksBlocker.UnblockClicks();
             _event.Apply();
         };
+
         _confirmHandler.ConfirmAction(action, ConfirmType.DistributeCoins, _distributeTimeSkip, _event.CoinsRequirements);
     }
 }

@@ -7,17 +7,17 @@ public class SkipTimeAndWasteCoinsSuggestion : SkipTimeSuggestion, IEventWithCoi
     private int _coins;
     public int CoinsRequirements => _coins;
 
-    private HandsCoinsCounter _coinsCounter;
+    private WasteCoinsHandler _wasteCoinsHandler;
 
     public void SetCoinsParameters(int coins)
     {
         _coins = coins;
-        if (_coinsCounter == null) _coinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        if (_wasteCoinsHandler == null) _wasteCoinsHandler = new WasteCoinsHandler();
     }
 
     public override void Apply()
     {
         base.Apply();
-        _coinsCounter.RemoveCoins(_coins);
+        _wasteCoinsHandler.WasteCoins(_coins);
     }
 }
