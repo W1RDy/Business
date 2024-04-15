@@ -18,6 +18,6 @@ public class SkipTimeAndWasteCoinsSuggestion : SkipTimeSuggestion, IEventWithCoi
     public override void Apply()
     {
         base.Apply();
-        _wasteCoinsHandler.WasteCoins(_coins);
+        _wasteCoinsHandler.WasteCoins(this);
     }
 }

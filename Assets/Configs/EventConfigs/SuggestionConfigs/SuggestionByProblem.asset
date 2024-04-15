@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a0095d724bf5ea458e02f9e7e676ad2, type: 3}
-  m_Name: MiddleOrder
+  m_Script: {fileID: 11500000, guid: 14934d6b10213054cbee2c670058ebd1, type: 3}
+  m_Name: SuggestionByProblem
   m_EditorClassIdentifier: 
-  _costInterval: 3c00000050000000
-  _timeInterval: 060000000a000000
-  _chance: 30
-  _chancesUpdateValue: 0
-  _neededGoods: 1
+  confirmType: 3
+  _description: How much coins safe in bank and how much in wallet?

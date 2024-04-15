@@ -87,12 +87,6 @@ public class ButtonService : IService
 
     #endregion
 
-    public void WasteCoinsByProblems(int value)
-    {
-        _wasteCoinsHandler.WasteCoins(value);
-        CloseWindow(WindowType.ProblemWindow);
-    }
-
     public void DistributeCoins(CoinsDistributor coinsDistributor)
     {
         DistributeCoinsBySuggestion(null, coinsDistributor);

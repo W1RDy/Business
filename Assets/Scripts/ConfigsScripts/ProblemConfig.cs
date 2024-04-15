@@ -27,9 +27,12 @@ public class ProblemConfig : ScriptableObject, IRandomizable, IEventWithCoinsPar
 
     public event Action Applied;
 
+    private WasteCoinsHandler _wasteCoinsHandler;
+
     public virtual void Apply()
     {
         Applied?.Invoke();
+        _wasteCoinsHandler.WasteCoins(this);
     }
 
     public virtual void InitProblemValues()
@@ -40,6 +43,7 @@ public class ProblemConfig : ScriptableObject, IRandomizable, IEventWithCoinsPar
     public void SetCoinsParameters(int coins)
     {
         _coins = coins;
+        if (_wasteCoinsHandler == null) _wasteCoinsHandler = new WasteCoinsHandler();
     }
 
     public void UpdateChance(float changeValue)

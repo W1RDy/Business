@@ -2433,11 +2433,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 310396166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 940ce6f403211d64284be379b210c552, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c0a3fc7b1d3ff64ba16bc9bd0f48a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _coinsValue: 0
   _buttonText: {fileID: 1625661289}
   _buttonForChange: {fileID: 901604942}
   _secondButtonForChange: {fileID: 1505106161}
@@ -13447,7 +13446,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 170, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1402424598
@@ -15268,7 +15267,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 170, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593328552
@@ -16963,6 +16962,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78662fe89e8f2ee4f8f885a9975f039c, type: 2}
   - {fileID: 11400000, guid: 75692d960e2831b4f9f5d70a7fe2e44f, type: 2}
   - {fileID: 11400000, guid: 8c28c19eb5fd2264594c7fd8a34cfa5c, type: 2}
+  - {fileID: 11400000, guid: 7701570a63286b74a9c69b1bd180cfb8, type: 2}
 --- !u!4 &1819322214
 Transform:
   m_ObjectHideFlags: 0

@@ -36,6 +36,15 @@ public class SuggestionGenerator : IService
         return suggestion;
     }
 
+    public Suggestion GenerateSuggestionByProblem(ProblemConfig problem)
+    {
+        var suggestion = _suggestionsService.GetSuggestion(ConfirmType.SolveProblemWithDistributeCoins) as SuggestionByProblem;
+        suggestion.SetProblem(problem);
+        _distributeCoinsWindow.SetSuggestion(suggestion);
+
+        return suggestion;
+    }
+
     public Suggestion GenerateSuggestion(ConfirmType confirmType, int timeParameter)
     {
         return GenerateSuggestion(confirmType, timeParameter, 0);

@@ -34,9 +34,8 @@ public class DistributeSuggestionHandler
         {
             _buttonService.CloseWindow(WindowType.ProblemWindow);
             _clicksBlocker.UnblockClicks();
-            _event.Apply();
         };
 
-        _confirmHandler.ConfirmAction(action, ConfirmType.DistributeCoins, _distributeTimeSkip, _event.CoinsRequirements);
+        _confirmHandler.ConfirmAction(action, _event as ProblemConfig);
     }
 }

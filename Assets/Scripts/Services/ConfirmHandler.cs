@@ -36,6 +36,12 @@ public class ConfirmHandler
         ConfirmAction(action, confirmType, skipTime, 0);
     }
 
+    public void ConfirmAction(Action action, ProblemConfig problem)
+    {
+        RememberActionForSuggestion(action);
+        OpenSuggestionWindowByProblem(problem);
+    }
+
     private void RememberActionForSuggestion(Action action)
     {
         _rememberedAction = action;
@@ -52,6 +58,16 @@ public class ConfirmHandler
             _buttonService.OpenWindow(WindowType.DistributeSuggestionWindow);
         else
             _buttonService.OpenWindow(WindowType.SuggestionWindow);
+    }
+
+    private void OpenSuggestionWindowByProblem(ProblemConfig problem)
+    {
+        _suggestion = _suggestionGenerator.GenerateSuggestionByProblem(problem);
+
+        _suggestion.Applied += ConfirmSuggestion;
+        _suggestion.Skipped += CancelSuggestion;
+
+        _buttonService.OpenWindow(WindowType.DistributeSuggestionWindow);
     }
 
     private void ConfirmSuggestion()
@@ -80,5 +96,6 @@ public enum ConfirmType
 {
     SkipTime,
     SkipTimeAndWasteCoins,
-    DistributeCoins
+    DistributeCoins,
+    SolveProblemWithDistributeCoins
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProblemWindow : Window
 {
-    private int _coinsCost;
-
     [SerializeField] private TextMeshProUGUI _coinsText;
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _problemText;
@@ -17,9 +15,7 @@ public class ProblemWindow : Window
 
     public void SetProblem(ProblemConfig problemConfig)
     {
-        _coinsCost = problemConfig.CoinsRequirements;
         _problemButton.SetProblem(problemConfig);
-        _problemButton.SetCoinsValue(_coinsCost);
 
         _openDistributeCoinsButton.InitVariant(problemConfig);
 

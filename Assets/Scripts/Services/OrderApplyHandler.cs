@@ -5,7 +5,6 @@ using UnityEngine;
 public class OrderApplyHandler
 {
     private ActiveOrderService _activeOrderService;
-    private ResultsOfTheMonthService _resultsOfTheMonthService;
     private HandsCoinsCounter _handCoinsCounter;
     private ConfirmHandler _confirmHandler;
 
@@ -18,7 +17,6 @@ public class OrderApplyHandler
         InitDelegate = () =>
         {
             _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-            _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
             _buttonService = ServiceLocator.Instance.Get<ButtonService>();
             _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
             _confirmHandler = new ConfirmHandler();
@@ -59,7 +57,6 @@ public class OrderApplyHandler
             {
                 if (_handCoinsCounter.Coins >= order.Cost)
                 {
-                    _resultsOfTheMonthService.UpdateResults(-order.Cost, 0, 0, 0);
                     _buttonService.CloseWindow(WindowType.BasketWindow);
                     order.ApplyOrder();
                 }
