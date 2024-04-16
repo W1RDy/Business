@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class GamesConditionChecker : IService
+public class GamesConditionChecker : ClassForInitialization, IService
 {
     private int _minCoins = 40;
 
@@ -13,25 +13,18 @@ public class GamesConditionChecker : IService
     private GameController _gameController;
 
     private PCService _pcService;
-
-    private Action InitDelegate;
     public event Action<int> HandsCoinsCheck;
 
-    public GamesConditionChecker()
+    public GamesConditionChecker() : base() { }
+
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _timeController = ServiceLocator.Instance.Get<TimeController>();
+        _timeController = ServiceLocator.Instance.Get<TimeController>();
 
-            _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
-            _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            _pcService = ServiceLocator.Instance.Get<PCService>();
-            _gameController = ServiceLocator.Instance.Get<GameController>();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
+        _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _pcService = ServiceLocator.Instance.Get<PCService>();
+        _gameController = ServiceLocator.Instance.Get<GameController>();
     }
 
     public bool IsGameFinished()

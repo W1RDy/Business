@@ -6,9 +6,9 @@ public class ThrowOutButton : CustomButton
     [SerializeField] private MonoBehaviour _throwableObj;
     private IThrowable _throwable;
 
-    protected override void Start()
+    public override void Init()
     {
-        base.Start();
+        base.Init();
         if (_throwableObj is IThrowable throwable) _throwable = throwable;
         else throw new System.ArgumentException(_throwableObj.name + " doesn't realize IThrowable interface!");
     }

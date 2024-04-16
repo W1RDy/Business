@@ -1,21 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class ResultsCalculator
+public class ResultsCalculator : ClassForInitialization
 { 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
-    private Action InitDelegate;
 
-    public ResultsCalculator()
+    public ResultsCalculator () : base () { }
+
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate?.Invoke();
+        _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
     }
 
     public int CalculateSummary(ResultsOfTheMonth results)

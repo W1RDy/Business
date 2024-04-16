@@ -13,31 +13,21 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     private GamesConditionChecker _conditionChecker;
 
     private Action OnOrderChanged;
-    private bool _isInitialized;
 
-    protected override void Init()
+    public override void Init()
     {
-        if (_order != null && !_isInitialized) SetOrder(_order); 
+        base.Init();
+
+        SetText("Send");
+
+        _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
+        _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
+
+        OnOrderChanged = () => _changeController.ChangeButtonStates(this);
+
+        _changeController.AddChangeButton(this);
     }
     
-    private void InitializeInstance()
-    {
-        if (!_isInitialized)
-        {
-            _isInitialized = true;
-            base.Init();
-
-            SetText("Send");
-
-            _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
-            _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
-
-            OnOrderChanged = () => _changeController.ChangeButtonStates(this);
-
-            _changeController.AddChangeButton(this);
-        }
-    }
-
     protected override void ClickCallback()
     {
         base.ClickCallback();
@@ -47,7 +37,6 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     public void SetOrder(IOrderWithCallbacks order)
     {
         _order = order;
-        InitializeInstance();
         _order.OrderStateChanged += OnOrderChanged;
     }
 

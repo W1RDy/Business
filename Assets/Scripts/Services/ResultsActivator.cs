@@ -1,25 +1,18 @@
 ﻿using System;
 
-public class ResultsActivator : IService
+public class ResultsActivator : ClassForInitialization, IService
 {
     private ResultsWindow _resultsWindow;
     private ResultsCalculator _calculator;
     private WindowActivator _windowActivator;
 
-    private Action InitDelegate;
+    public ResultsActivator() : base() { }
 
-    public ResultsActivator()
+    public override void Init()
     {
         _calculator = new ResultsCalculator();
-
-        InitDelegate = () =>
-        {
-            _resultsWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.Results) as ResultsWindow;
-            _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _resultsWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.Results) as ResultsWindow;
+        _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
     }
 
     public void ActivateResultsOfTheMonth()

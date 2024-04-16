@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
+public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
 {
     #region Values
 
@@ -55,27 +55,18 @@ public class PC : MonoBehaviour, IThrowable, IPoolElement<PC>
     private PCService _service;
     private Pool<PC> _pool;
 
-    private Action InitDelegate;
-
-    public void InitInstance()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            Release();
+        base.Init();
+        Release();
 
-            _service = ServiceLocator.Instance.Get<PCService>();
-            _pool = ServiceLocator.Instance.Get<Pool<PC>>();
+        _service = ServiceLocator.Instance.Get<PCService>();
+        _pool = ServiceLocator.Instance.Get<Pool<PC>>();
 
 
-            InitAnimations();
+        InitAnimations();
 
-            _view = new PCView(_titleText, _descriptionText, _amountText, _brokenText, _iconSpace);
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _view = new PCView(_titleText, _descriptionText, _amountText, _brokenText, _iconSpace);
     }
 
     public void InitVariant(PCConfig config, bool isBroken)

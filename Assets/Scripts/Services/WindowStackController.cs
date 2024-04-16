@@ -27,11 +27,15 @@ public class WindowStackController : MonoBehaviour
 
     public Window PopWindow()
     {
-        _stackSize = Mathf.Clamp(--_stackSize, 0, _maxStackSize);
-        var window = _windowsStack.Pop();
-        if (StackIsEmpty()) ClearStack();
+        if (_windowsStack.Count > 0)
+        {
+            _stackSize = Mathf.Clamp(--_stackSize, 0, _maxStackSize);
+            var window = _windowsStack.Pop();
+            if (StackIsEmpty()) ClearStack();
 
-        return window;
+            return window;
+        }
+        return null;
     }
 
     public Window PeekWindow()

@@ -5,7 +5,7 @@ public class RestartButton : CustomButton
 {
     [SerializeField] private TextMeshProUGUI _buttonText;
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         SetText("Restart");

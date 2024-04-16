@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Window : MonoBehaviour
+public class Window : ObjectForInitializationWithChildren
 {
     [SerializeField] private WindowType _type;
     public WindowType Type => _type;

@@ -19,7 +19,7 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
     private ProblemConfig _problem;
     private ClicksBlocker _clicksBlocker;
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
@@ -27,7 +27,6 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
         _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
 
         ButtonForChange = _buttonForChange;
-        _changeController.ChangeButtonToNewButton(this);
         _changeController.AddChangeButton(this);
 
         SetText();
@@ -36,7 +35,7 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
     public void SetProblem(ProblemConfig problem)
     {
         _problem = problem;
-        if (_changeController != null) _changeController.ChangeButtonToNewButton(this);
+        _changeController.ChangeButtonToNewButton(this);
     }
 
     protected override void ClickCallback()

@@ -3,28 +3,21 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonChangeController : IService
+public class ButtonChangeController : ClassForInitialization, IService
 {
     private Dictionary<ChangeCondition, List<IChangeButton>> _buttons = new Dictionary<ChangeCondition, List<IChangeButton>>();
 
-    private Action InitDelegate;
+    public ButtonChangeController() : base() { }
 
-    public ButtonChangeController()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            var gameController = ServiceLocator.Instance.Get<GameController>();
-            var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            var pcService = ServiceLocator.Instance.Get<PCService>();
+        var gameController = ServiceLocator.Instance.Get<GameController>();
+        var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        var pcService = ServiceLocator.Instance.Get<PCService>();
 
-            handsCoinsCounter.CoinsChanged += ChangeByCoinsChangeCondition;
-            gameController.GameFinished += ChangeByFinishGameCondition;
-            pcService.ItemsUpdated += ChangeByNewItemCondition;
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        handsCoinsCounter.CoinsChanged += ChangeByCoinsChangeCondition;
+        gameController.GameFinished += ChangeByFinishGameCondition;
+        pcService.ItemsUpdated += ChangeByNewItemCondition;
     }
 
     public void AddChangeButton(IChangeButton button)

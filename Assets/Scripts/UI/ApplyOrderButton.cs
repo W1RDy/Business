@@ -18,20 +18,10 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
     private Action OnOrderValuesChanged;
     private Action OnOrderStateChanged;
 
-    private bool _isInitialized;
- 
-    protected override void Start()
-    {
-        if (!_isInitialized)
-        {
-            _isInitialized = true;
-            base.Start();
-        }
-    }
-
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
+        if (_order as CompositeOrder != null) Debug.Log("InitButton");
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
@@ -42,11 +32,6 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _order.OrderStateChanged += OnOrderStateChanged;
 
         _buttonChangeController.AddChangeButton(this);
-    }
-
-    public void InitializeButton()
-    {
-        Start();
     }
 
     protected override void ClickCallback()
@@ -63,7 +48,6 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
 
     public void ChangeStates(bool isApplied)
     {
-        if (_button == null) Start();
         _button.interactable = !isApplied;
         var text = isApplied ? "Applied" : "Apply";
         SetText(text);

@@ -9,9 +9,9 @@ public class OpenDistributeSuggestionButton : OpenButton
     [SerializeField] private TextMeshProUGUI _buttonText;
     private DistributeSuggestionHandler _distributeSuggestionHandler;
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         _distributeSuggestionHandler = new DistributeSuggestionHandler(3);
         SetText("Get from bank");
     }

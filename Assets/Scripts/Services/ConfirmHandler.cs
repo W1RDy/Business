@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class ConfirmHandler
+public class ConfirmHandler : ClassForInitialization
 {
     private SuggestionGenerator _suggestionGenerator;
 
@@ -9,19 +9,12 @@ public class ConfirmHandler
     private Action _rememberedAction;
     private Suggestion _suggestion;
 
-    private Action InitDelegate;
+    public ConfirmHandler() : base() { }
 
-    public ConfirmHandler()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _buttonService = ServiceLocator.Instance.Get<ButtonService>();
-            _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _buttonService = ServiceLocator.Instance.Get<ButtonService>();
+        _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
     }
 
     public void ConfirmAction(Action action, ConfirmType confirmType, int skipTime, int wasteCoins)

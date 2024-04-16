@@ -1,27 +1,20 @@
 ﻿using System;
 
-public class SuggestionGenerator : IService
+public class SuggestionGenerator : ClassForInitialization, IService
 {
     private SuggestionWindow _suggestionWindow;
     private DistributeCoinWindow _distributeCoinsWindow;
     private SuggestionsService _suggestionsService;
 
-    private Action InitDelegate;
+    public SuggestionGenerator() : base() { }
 
-    public SuggestionGenerator()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            var windowService = ServiceLocator.Instance.Get<WindowService>();
-            _suggestionWindow = windowService.GetWindow(WindowType.SuggestionWindow) as SuggestionWindow;
-            _distributeCoinsWindow = windowService.GetWindow(WindowType.DistributeSuggestionWindow) as DistributeCoinWindow;
+        var windowService = ServiceLocator.Instance.Get<WindowService>();
+        _suggestionWindow = windowService.GetWindow(WindowType.SuggestionWindow) as SuggestionWindow;
+        _distributeCoinsWindow = windowService.GetWindow(WindowType.DistributeSuggestionWindow) as DistributeCoinWindow;
 
-            _suggestionsService = ServiceLocator.Instance.Get<SuggestionsService>();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _suggestionsService = ServiceLocator.Instance.Get<SuggestionsService>();
     }
 
     public Suggestion GenerateSuggestion(ConfirmType confirmType, int timeParameter, int coinsParameter)

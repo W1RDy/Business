@@ -11,7 +11,7 @@ public abstract class OrdersControlButton : CustomButton
 
     protected IOrderWithCallbacks _order;
 
-    protected override void Start()
+    public override void Init()
     {
         if (_orderClass)
         {
@@ -19,7 +19,7 @@ public abstract class OrdersControlButton : CustomButton
             else throw new System.ArgumentException(_orderClass.name + " doesn't realize interface IOrder");
         }
 
-        base.Start();
+        base.Init();
     }
 
     protected virtual void SetText(string text)

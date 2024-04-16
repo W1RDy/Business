@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PeriodSkipController : MonoBehaviour, IService
+public class PeriodSkipController : ObjectForInitialization, IService
 {
     [SerializeField] private UIFadeAnimationWithText _darknessAnimation;
     [SerializeField] private UIFadeAnimationWithText _brightnessAnimation;
@@ -14,36 +14,27 @@ public class PeriodSkipController : MonoBehaviour, IService
     [SerializeField] private ClicksBlocker _clicksBlocker;
 
     private GamesConditionChecker _conditionChecker;
-
-    private Action InitDelegate;
-
     private AudioPlayer _audioPlayer;
 
     private ProblemsGenerator _problemsGenerator;
     private OrderGenerator _orderGenerator;
     private OrderUrgencyUpdater _orderUrgencyUpdater;
 
-    private void Start()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
-            
-            _darknessAnimationInstance = Instantiate(_darknessAnimation);
-            _brightnessAnimationInstance = Instantiate(_brightnessAnimation);
+        base.Init();
+        _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-            _darknessAnimationInstance.SetParameters(_darknessView);
-            _brightnessAnimationInstance.SetParameters(_darknessView);
+        _darknessAnimationInstance = Instantiate(_darknessAnimation);
+        _brightnessAnimationInstance = Instantiate(_brightnessAnimation);
 
-            _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
-            _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
-            _orderGenerator = ServiceLocator.Instance.Get<OrderGenerator>();
-            _orderUrgencyUpdater = new OrderUrgencyUpdater();
+        _darknessAnimationInstance.SetParameters(_darknessView);
+        _brightnessAnimationInstance.SetParameters(_darknessView);
 
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
+        _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
+        _orderGenerator = ServiceLocator.Instance.Get<OrderGenerator>();
+        _orderUrgencyUpdater = new OrderUrgencyUpdater();
     }
 
     public void SkipDays()

@@ -6,7 +6,7 @@ using UnityEditor.iOS.Xcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Goal : MonoBehaviour, IPoolElement<Goal>
+public class Goal : ObjectForInitialization, IPoolElement<Goal>
 {
     private int _id;
     private int _cost;
@@ -32,8 +32,9 @@ public class Goal : MonoBehaviour, IPoolElement<Goal>
     public bool IsFree => !gameObject.activeInHierarchy;
     public Goal Element => this;
 
-    public void InitInstance()
+    public override void Init()
     {
+        base.Init();
         Release();
         _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText);
     }

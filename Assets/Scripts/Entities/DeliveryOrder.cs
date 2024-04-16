@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<DeliveryOrder>
+public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolElement<DeliveryOrder>
 {
     #region Values
 
@@ -60,29 +60,21 @@ public class DeliveryOrder : MonoBehaviour, IOrder, IThrowable, IPoolElement<Del
 
     private Pool<DeliveryOrder> _pool;
 
-    private Action InitDelegate;
-
-    public void InitInstance()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            Release();
+        base.Init();
+        Release();
 
-            _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
-            _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText, _icon);
+        _deliveryOrderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
+        _deliveryOrderView = new DeliveryOrderView(_priceText, _timeText, _amountText, _icon);
 
-            _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
-            _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
+        _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
+        _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
 
-            _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
-            _notificationController = ServiceLocator.Instance.Get<NotificationController>();
+        _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
+        _notificationController = ServiceLocator.Instance.Get<NotificationController>();
 
-            InitAnimations();
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        InitAnimations();
     }
 
     private void InitAnimations() => _animController = new EntityAnimationsController(_appearAnimation, _disappearAnimation, gameObject);

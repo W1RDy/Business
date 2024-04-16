@@ -10,7 +10,7 @@ public class TimeButton : CustomButton
 
     [SerializeField] private TextMeshProUGUI _buttonText;
 
-    protected override void Init() 
+    public override void Init() 
     {
         base.Init();
 

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public abstract class CustomButton : MonoBehaviour
+public abstract class CustomButton : ObjectForInitialization
 {
     protected Button _button;
 
@@ -11,13 +11,9 @@ public abstract class CustomButton : MonoBehaviour
 
     [SerializeField] private UIAnimation _animation;
 
-    protected virtual void Start()
+    public override void Init()
     {
-        Init();
-    }
-
-    protected virtual void Init()
-    {
+        base.Init();
         _buttonService = ServiceLocator.Instance.Get<ButtonService>();
 
         _button = GetComponent<Button>();

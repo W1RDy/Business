@@ -1,21 +1,14 @@
 ﻿using System;
 
-public class OrderCompleteHandler : IService
+public class OrderCompleteHandler : ClassForInitialization, IService
 {
     private PCService _pcService;
 
-    private Action InitDelegate;
+    public OrderCompleteHandler() : base() { }
 
-    public OrderCompleteHandler()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _pcService = ServiceLocator.Instance.Get<PCService>();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _pcService = ServiceLocator.Instance.Get<PCService>();
     }
 
     public void CompleteOrder(Order order)

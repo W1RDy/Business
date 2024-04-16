@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(OrderView))]
-public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable, IPoolElement<Order>
+public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, IThrowable, IPoolElement<Order>
 {
     #region Values
 
@@ -56,7 +56,6 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
     public bool IsFree => _isFree;
     public Order Element => this;
 
-    private Action InitDelegate;
     public event Action OrderValuesChanged;
     public event Action OrderStateChanged;
 
@@ -64,38 +63,33 @@ public class Order : MonoBehaviour, IRemembable, IOrderWithCallbacks, IThrowable
 
     private IIDGenerator _idGenerator;
 
-    public void InitInstance()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            gameObject.SetActive(false);
-            _isFree = true;
+        base.Init();
 
-            _view = GetComponent<OrderView>();
+        gameObject.SetActive(false);
+        _isFree = true;
 
-            _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
-            _timeController = ServiceLocator.Instance.Get<TimeController>();
-            _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-            _orderService = ServiceLocator.Instance.Get<OrderService>();
-            _orderCompleteHandler = ServiceLocator.Instance.Get<OrderCompleteHandler>();
-            _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
-            _notificationController = ServiceLocator.Instance.Get<NotificationController>();
+        _view = GetComponent<OrderView>();
 
-            _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
-            _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
+        _rewardHandler = ServiceLocator.Instance.Get<RewardHandler>();
+        _timeController = ServiceLocator.Instance.Get<TimeController>();
+        _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
+        _orderService = ServiceLocator.Instance.Get<OrderService>();
+        _orderCompleteHandler = ServiceLocator.Instance.Get<OrderCompleteHandler>();
+        _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
+        _notificationController = ServiceLocator.Instance.Get<NotificationController>();
 
-            TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
+        _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
+        _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
 
-            _timeController.OnTimeChanged += TimeChangedDelegate;
+        TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
 
-            _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();  
+        _timeController.OnTimeChanged += TimeChangedDelegate;
 
-            InitAnimations();
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
+        _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
 
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        InitAnimations();
     }
 
     public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)

@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-public class OrderApplyHandler
+public class OrderApplyHandler : ClassForInitialization
 {
     private ActiveOrderService _activeOrderService;
     private HandsCoinsCounter _handCoinsCounter;
@@ -10,21 +10,14 @@ public class OrderApplyHandler
 
     private ButtonService _buttonService;
 
-    private Action InitDelegate;
+    public OrderApplyHandler() : base() { }
 
-    public OrderApplyHandler()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
-            _buttonService = ServiceLocator.Instance.Get<ButtonService>();
-            _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            _confirmHandler = new ConfirmHandler();
-            
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _activeOrderService = ServiceLocator.Instance.Get<ActiveOrderService>();
+        _buttonService = ServiceLocator.Instance.Get<ButtonService>();
+        _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _confirmHandler = new ConfirmHandler();
     }
 
     public void ApplyOrder(IOrderWithCallbacks order)

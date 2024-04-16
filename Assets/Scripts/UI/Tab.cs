@@ -4,9 +4,9 @@ public class Tab : OpenButton
 {
     [SerializeField] private Tab _connectedTab; 
 
-    protected override void Start()
+    public override void Init()
     {
-        base.Start();
+        base.Init();
         if (_windowType == WindowType.InventoryWindow) OpenWindow();
     }
 

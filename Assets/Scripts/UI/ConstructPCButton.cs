@@ -6,7 +6,7 @@ public class ConstructPCButton : CustomButton
     [SerializeField] protected Goods _goods;
     [SerializeField] protected TextMeshProUGUI _text;
 
-    private void Awake()
+    public override void Init()
     {
         SetText("Construct");
     }

@@ -5,9 +5,9 @@ public class ConfirmSuggestionButton : CloseButton
 {
     [SerializeField] private TextMeshProUGUI _buttonText;
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         SetText("Ok");
     }
 

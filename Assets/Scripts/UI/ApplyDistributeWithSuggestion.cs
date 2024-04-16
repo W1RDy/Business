@@ -16,7 +16,7 @@ public class ApplyDistributeWithSuggestion : CustomButton, IButtonWithStates, IS
 
     public ChangeCondition[] ChangeConditions => throw new System.NotImplementedException();
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();

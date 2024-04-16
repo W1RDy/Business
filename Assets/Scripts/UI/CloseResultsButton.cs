@@ -11,13 +11,12 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
     private ButtonChangeController _buttonChangeController;
     private GamesConditionChecker _conditionChecker;
 
-    protected override void Init()
+    public override void Init()
     {
         base.Init();
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        _buttonChangeController.ChangeButtonToNewButton(this);
         _buttonChangeController.AddChangeButton(this);
     }
 
@@ -28,7 +27,7 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
 
     private void OnEnable()
     {
-        if (_buttonChangeController != null) _buttonChangeController.ChangeButtonToNewButton(this);
+        _buttonChangeController.ChangeButtonToNewButton(this);
     }
 
     public void OnDestroy()

@@ -1,7 +1,7 @@
 using CoinsCounter;
 using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ServiceLocatorLoader : MonoBehaviour
@@ -15,6 +15,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private RandomController _problemsRandomController;
     [SerializeField] private PeriodSkipController _periodSkipController;
     [SerializeField] private SuggestionsService _suggestionsService;
+
+    [SerializeField] private ObjectsInitializator _objectsInitializator;
 
     [SerializeField] private ClicksBlocker _clicksBlocker;
 
@@ -62,6 +64,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void Bind()
     {
+        BindInitializator();
+
         BindSubscribeController();
         BindDifficultyController();
 
@@ -106,6 +110,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindInitializator()
+    {
+        ServiceLocator.Instance.Register(_objectsInitializator);
     }
 
     private void BindClicksBlocker()
@@ -227,8 +236,6 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindDeliveryCompositeOrder()
     {
-        _compositeDeliveryOrder.InitInstance();
-
         ServiceLocator.Instance.Register(_compositeDeliveryOrder);
     }
 

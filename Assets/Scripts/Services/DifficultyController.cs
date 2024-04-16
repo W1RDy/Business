@@ -153,7 +153,7 @@ public class DifficultyController : MonoBehaviour, IService
     }
 }
 
-public class DifficultyCalculator : ISubscribable
+public class DifficultyCalculator : ClassForInitialization, ISubscribable
 {
     private int _maxDifficultyWeight;
     private int _minDifficultyWeight;
@@ -168,30 +168,23 @@ public class DifficultyCalculator : ISubscribable
 
     private SubscribeController _subscribeController;
 
-    private Action InitDelegate;
     public event Action DifficultyCanBeChanged;
 
-    public DifficultyCalculator(int startCoins, int startMonths, int coinsCountWithMaxDifficulty, int monthsCountWithMaxDifficulty)
+    public DifficultyCalculator(int startCoins, int startMonths, int coinsCountWithMaxDifficulty, int monthsCountWithMaxDifficulty) : base()
     {
         _maxDifficultyWeight = CalculateDifficultyWeight(coinsCountWithMaxDifficulty, monthsCountWithMaxDifficulty);
         _minDifficultyWeight = CalculateDifficultyWeight(startCoins, startMonths);
-        Debug.Log(_maxDifficultyWeight);
+    }
 
-        InitDelegate = () =>
-        {
-            _timeController = ServiceLocator.Instance.Get<TimeController>();
+    public override void Init()
+    {
+        _timeController = ServiceLocator.Instance.Get<TimeController>();
 
-            _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-            _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
+        _handCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 
-            _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
-            Subscribe();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        Subscribe();
     }
 
     public float CalculateDifficulty()
@@ -200,7 +193,6 @@ public class DifficultyCalculator : ISubscribable
         var coins = _handCoinsCounter.Coins + _bankCoinsCounter.Coins;
 
         var currentDifficultyWeight = CalculateDifficultyWeight(coins, month);
-        Debug.Log(currentDifficultyWeight);
 
         return Mathf.InverseLerp(_minDifficultyWeight, _maxDifficultyWeight, currentDifficultyWeight);
     }

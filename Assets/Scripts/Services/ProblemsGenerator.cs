@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ProblemsGenerator : IService, ISubscribable
+public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
 {
     private ProblemConfig[] _problemConfigsInstance;
 
@@ -11,33 +11,28 @@ public class ProblemsGenerator : IService, ISubscribable
     private ClicksBlocker _clicksBlocker;
 
     private RememberedOrderService _rememberedOrderService;
-    private Action InitDelegate;
 
     private DifficultyController _difficultyController;
     private Action _onDifficultyChanged;
 
     private SubscribeController _subscribeController;
 
-    public ProblemsGenerator(ProblemConfig[] problemConfigs, RandomController randomController)
+    public ProblemsGenerator(ProblemConfig[] problemConfigs, RandomController randomController) : base()
     {
-        InitDelegate = () =>
-        {
-            _randomController = randomController;
-            InitConfigsInstances(problemConfigs);
+        _randomController = randomController;
+        InitConfigsInstances(problemConfigs);
+    }
 
-            _problemWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.ProblemWindow) as ProblemWindow;
-            _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
-            _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
-            _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
-            _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
-            _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
+    public override void Init()
+    {
+        _problemWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.ProblemWindow) as ProblemWindow;
+        _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
+        _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
+        _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
 
-            Subscribe();
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        Subscribe();
     }
 
     private void InitConfigsInstances(ProblemConfig[] problemConfigs)

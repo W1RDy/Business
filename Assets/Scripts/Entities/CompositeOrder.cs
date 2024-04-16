@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, IService
+public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, IOrderWithCallbacks, IService
 {
     private List<IOrder> _orders = new List<IOrder>();
 
@@ -21,7 +21,6 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
     [SerializeField] private TextMeshProUGUI _priceText;
     [SerializeField] private TextMeshProUGUI _timeText;
 
-    [SerializeField] private ApplyOrderButton _applyOrderButton;
     [SerializeField] private OpenDistributeSuggestionButton _openDistributeSuggestionButton;
 
     private CompositeOrderView _view;
@@ -32,30 +31,21 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
 
     private IIDGenerator _idGenerator;
 
-    private Action InitDelegate;
     public event Action OrderValuesChanged;
     public event Action OrderStateChanged;
 
-    public void InitInstance()
+    public override void Init()
     {
-        InitDelegate = () =>
-        {
-            _view = new CompositeOrderView(_priceText, _timeText);
-            _idGenerator = new IDGenerator(2);
+        Debug.Log("Init");
+        base.Init();
+        _view = new CompositeOrderView(_priceText, _timeText);
+        _idGenerator = new IDGenerator(2);
 
-            _view.SetView("Delivery", 0, 0);
+        _view.SetView("Delivery", 0, 0);
+        IsApplied = true;
+        ID = _idGenerator.GetID();
 
-            ID = _idGenerator.GetID();
-            Debug.Log(ID);
-
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-
-            _applyOrderButton.InitializeButton();
-            _openDistributeSuggestionButton.InitVariant(this);
-        };
-
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate?.Invoke();
+        _openDistributeSuggestionButton.InitVariant(this);
     }
 
     public void AddOrder(IOrder order)
@@ -67,8 +57,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
 
         _view.SetView("Delivery", Cost, Time);
         OrderValuesChanged?.Invoke();
-        Debug.Log(StateIsChanged());
-        if (StateIsChanged()) OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
     public void RemoveOrder(IOrder order)
@@ -80,7 +69,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
 
         _view.SetView("Delivery", Cost, Time);
         OrderValuesChanged?.Invoke();
-        if (StateIsChanged()) OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
     private int FindMaxTime()
@@ -95,7 +84,6 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
 
     public void ChangeOrder(int oldCost, int oldTime, IOrder newOrder)
     {
-        Debug.Log("ChangeOrder");
         Cost -= oldCost;
         Time -= oldTime;
 
@@ -103,8 +91,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         Time += newOrder.Time;
 
         _view.SetView("Delivery", Cost, Time);
-        OrderValuesChanged?.Invoke();
-        if (StateIsChanged()) OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
     public void ApplyOrder()
@@ -114,8 +101,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         {
             order.ApplyOrder();
         }
-        IsApplied = true;
-        OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
     public void CancelOrder()
@@ -124,8 +110,7 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         {
             order.CancelOrder();
         }
-        IsApplied = true;
-        OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
     public void CompleteOrder()
@@ -134,15 +119,17 @@ public class CompositeOrder : MonoBehaviour, IRemembable, IOrderWithCallbacks, I
         {
             order.CompleteOrder();
         }
-        IsApplied = true;
-        OrderStateChanged?.Invoke();
+        TryChangeState();
     }
 
-    private bool StateIsChanged()
+    private void TryChangeState()
     {
+        Debug.Log(IsApplied);
         var oldAppliedState = IsApplied;
         IsApplied = _orders.Count == 0;
-        return oldAppliedState == IsApplied;
+        Debug.Log(IsApplied);
+        Debug.Log(OrderStateChanged);
+        if (oldAppliedState != IsApplied) OrderStateChanged?.Invoke();
     }
 }
 
@@ -159,6 +146,7 @@ public class CompositeOrderView
 
     public void SetView(string orderType, int price, int time)
     {
+        Debug.Log(price);
         _priceText.text = orderType + " cost: " + price;
         _timeText.text = orderType + " time: " + time;
     }

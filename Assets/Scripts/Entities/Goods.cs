@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class Goods : MonoBehaviour, IRemembable, IThrowable, IPoolElement<Goods>
+public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElement<Goods>
 {
     #region Values
 
@@ -56,26 +56,18 @@ public class Goods : MonoBehaviour, IRemembable, IThrowable, IPoolElement<Goods>
     private PCGenerator _pcGenerator;
     private Pool<Goods> _pool;
 
-    private Action InitDelegate;
-
-    public void InitInstance()
+    public override void Init()
     {
-        InitDelegate = () => 
-        {
-            Release();
+        base.Init();
+        Release();
 
-            _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText, _icon);
+        _view = new GoodsView(_titleText, _descriptionText, _timeText, _amountText, _icon);
 
-            _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
-            _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
+        _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
+        _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
 
-            _goodsService = ServiceLocator.Instance.Get<GoodsService>();
-            InitAnimations();
-            ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
-        };
-
-        ServiceLocator.Instance.ServiceRegistered += InitDelegate;
-        if (ServiceLocator.Instance.IsRegistered) InitDelegate.Invoke();
+        _goodsService = ServiceLocator.Instance.Get<GoodsService>();
+        InitAnimations();
     }
 
     public void InitVariant(GoodsConfig config, int brokenGoodsCount, int amount)
