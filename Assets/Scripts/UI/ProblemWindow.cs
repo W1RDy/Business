@@ -8,14 +8,14 @@ public class ProblemWindow : Window
     [SerializeField] private TextMeshProUGUI _timeText;
     [SerializeField] private TextMeshProUGUI _problemText;
 
-    [SerializeField] private ProblemButton _problemButton;
+    [SerializeField] private ConfirmEventWithCoinsButton _problemButton;
     [SerializeField] private OpenDistributeSuggestionButton _openDistributeCoinsButton;
 
     private EventsViewController _problemsViewController;
 
     public void SetProblem(ProblemConfig problemConfig)
     {
-        _problemButton.SetProblem(problemConfig);
+        _problemButton.SetEvent(problemConfig);
 
         _openDistributeCoinsButton.InitVariant(problemConfig);
 

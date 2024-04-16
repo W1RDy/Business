@@ -23,6 +23,7 @@ public class SuggestionWindow : Window
 
     public Suggestion GetSuggestion()
     {
+        Debug.Log((GoodsType)int.Parse(_suggestion.ID));
         return _suggestion;
     }
 }

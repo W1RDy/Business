@@ -91,6 +91,7 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
         Time += newOrder.Time;
 
         _view.SetView("Delivery", Cost, Time);
+        OrderValuesChanged?.Invoke();
         TryChangeState();
     }
 
@@ -124,11 +125,8 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
 
     private void TryChangeState()
     {
-        Debug.Log(IsApplied);
         var oldAppliedState = IsApplied;
         IsApplied = _orders.Count == 0;
-        Debug.Log(IsApplied);
-        Debug.Log(OrderStateChanged);
         if (oldAppliedState != IsApplied) OrderStateChanged?.Invoke();
     }
 }
@@ -146,7 +144,6 @@ public class CompositeOrderView
 
     public void SetView(string orderType, int price, int time)
     {
-        Debug.Log(price);
         _priceText.text = orderType + " cost: " + price;
         _timeText.text = orderType + " time: " + time;
     }

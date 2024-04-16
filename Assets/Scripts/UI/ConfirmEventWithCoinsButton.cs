@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ProblemButton : CustomButton, IButtonWithNewButton
+public class ConfirmEventWithCoinsButton : CustomButton, IButtonWithNewButton
 {
     [SerializeField] private TextMeshProUGUI _buttonText;
 
@@ -16,7 +16,7 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
     private GamesConditionChecker _conditionsChecker;
     private ButtonChangeController _changeController;
 
-    private ProblemConfig _problem;
+    private IEventWithCoinsParameters _coinsEvent;
     private ClicksBlocker _clicksBlocker;
 
     public override void Init()
@@ -32,9 +32,9 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
         SetText();
     }
 
-    public void SetProblem(ProblemConfig problem)
+    public void SetEvent(IEventWithCoinsParameters coinsEvent)
     {
-        _problem = problem;
+        _coinsEvent = coinsEvent;
         _changeController.ChangeButtonToNewButton(this);
     }
 
@@ -42,7 +42,7 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
     {
         base.ClickCallback();
         _clicksBlocker.UnblockClicks();
-        _problem.Apply();
+        _coinsEvent.Apply();
         _buttonService.CloseWindow(WindowType.ProblemWindow);
     }
 
@@ -53,14 +53,15 @@ public class ProblemButton : CustomButton, IButtonWithNewButton
 
     public bool CheckButtonChangeCondition()
     {
-        if (_secondButtonForChange != null && !_conditionsChecker.IsEnoughCoins(_problem.CoinsRequirements))
+        if (_coinsEvent == null) return false;
+        if (_secondButtonForChange != null && !_conditionsChecker.IsEnoughCoins(_coinsEvent.CoinsRequirements))
         {
             ButtonForChange = _secondButtonForChange;
             return true;
         }
 
         //if (ButtonForChange != _buttonForChange) ButtonForChange = _buttonForChange;
-        return !_conditionsChecker.IsEnoughCoinsInHands(_problem.CoinsRequirements);
+        return !_conditionsChecker.IsEnoughCoinsInHands(_coinsEvent.CoinsRequirements);
     }
 
     private void OnDestroy()

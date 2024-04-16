@@ -7,6 +7,8 @@ public class GoodsGenerator : IService
     private GoodsService _goodsService;
 
     private Pool<Goods> _pool;
+    private int _lowPCAmounts;
+    private int _brokenPCAmounts;
 
     private Dictionary<GoodsType, GoodsConfig> _configsDictionary = new Dictionary<GoodsType, GoodsConfig>();
 
@@ -33,12 +35,21 @@ public class GoodsGenerator : IService
         if (goodsType != GoodsType.LowQuality) return 0;
 
         int counts = 0;
+        _lowPCAmounts += amount;
+
+        if (_lowPCAmounts < 4) return 0;
+
         for (int i = 0; i < amount; i++)
         {
-            if ((float)counts / amount >= 0.6f) break;
+            if ((float)counts / amount >= 0.2f) break;
+            else if (_brokenPCAmounts / _lowPCAmounts >= 0.4f) break;
 
             var randomIndex = Random.Range(0, 101);
-            if (randomIndex > 80) counts++;
+            if (randomIndex > 80)
+            {
+                counts++;
+                _brokenPCAmounts++;
+            }
         }
         return counts;
     }

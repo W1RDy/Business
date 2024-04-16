@@ -74,17 +74,14 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
     {
         if (element as IOrder != null || element as Goods != null || element as PC != null)
         {
-            Debug.LogWarning(element.name + "Change parent");
-            Debug.Log("StartScale: " + element.Element.transform.localScale);
+            if (element.Element.transform.localScale.x < 1 || element.Element.transform.localScale.y < 1 || element.Element.transform.localScale.z < 1)
+            {
+                Debug.Log("Bug with scale");
+                element.Element.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
         var scale = element.Element.transform.localScale;
-        element.transform.SetParent(parent);
+        element.Element.transform.SetParent(parent);
         element.Element.transform.localScale = scale;
-        if (element as IOrder != null || element as Goods != null || element as PC != null)
-        {
-            Debug.Log("EndScale: " + element.Element.transform.localScale);
-            if (element.Element.transform.localScale != scale) Debug.LogError("Scales aren't equals!");
-            else Debug.LogWarning("Change succesful!");
-        }
     }
 }

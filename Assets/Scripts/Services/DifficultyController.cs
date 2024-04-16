@@ -88,11 +88,11 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void ChangeProblemChances(float difficulty)
     {
-        if (difficulty < 0.3f)
+        if (difficulty < 0.2f)
         {
             _problemChances = new float[3] { 30, 15, 10 };
         }
-        else if (difficulty < 0.7f)
+        else if (difficulty < 0.6f)
         {
             _problemChances = new float[3] { 40, 20, 15 };
         }
@@ -104,11 +104,11 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void ChangeOrdersChances(float difficulty)
     {
-        if (difficulty < 0.3f)
+        if (difficulty < 0.2f)
         {
             _orderChances = new float[3] { 50, 35, 15 };
         }
-        else if (difficulty < 0.7f)
+        else if (difficulty < 0.6f)
         {
             _orderChances = new float[3] { 30, 45, 25 };
         }
@@ -130,7 +130,8 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void ChangeProblemsCostValue(float difficulty)
     {
-        _problemCostValue = (difficulty * 2.4f) + 1;
+        //_problemCostValue = (difficulty * 2.4f) + 1;
+        _problemCostValue = (difficulty * (difficulty + 1.2f)) + 1;
     }
 
     private void ChangeMinSkipsBetweenProblems(float difficulty)
@@ -149,7 +150,8 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void OnDestroy()
     {
-        _difficultyCalculator.DifficultyCanBeChanged -= ChangeDifficultyDelegate;
+        if (_difficultyCalculator != null)
+            _difficultyCalculator.DifficultyCanBeChanged -= ChangeDifficultyDelegate;
     }
 }
 
@@ -158,8 +160,8 @@ public class DifficultyCalculator : ClassForInitialization, ISubscribable
     private int _maxDifficultyWeight;
     private int _minDifficultyWeight;
 
-    private float _coinsCountWeight = 0.2f;
-    private float _monthsCountWeight = 0.8f;
+    private float _coinsCountWeight = 0.3f;
+    private float _monthsCountWeight = 0.7f;
 
     private TimeController _timeController;
 

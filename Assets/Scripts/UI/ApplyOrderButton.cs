@@ -21,7 +21,6 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
     public override void Init()
     {
         base.Init();
-        if (_order as CompositeOrder != null) Debug.Log("InitButton");
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 

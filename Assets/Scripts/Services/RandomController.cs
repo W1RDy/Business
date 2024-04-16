@@ -85,7 +85,7 @@ public class RandomController : MonoBehaviour
         if (randomizable == null)
         {
             UpdateBlockedRandomizables();
-            UpdateChances(2, null);
+            UpdateChances(3, null);
         }
         else
         {

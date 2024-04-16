@@ -8,11 +8,13 @@ public class ConstructPCButton : CustomButton
 
     public override void Init()
     {
+        base.Init();
         SetText("Construct");
     }
 
     protected override void ClickCallback()
     {
+        base.ClickCallback();
         _buttonService.ConstructPC(_goods);
     }
 

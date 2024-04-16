@@ -7979,7 +7979,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _difficulty: 0
-  _coinsCountWithMaxDifficulty: 20000
+  _coinsCountWithMaxDifficulty: 10000
   _monthsCountWithMaxDifficulty: 15
   _startCoinsInHands: 100
   _startCoinsInBank: 400
@@ -12636,7 +12636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _timeValue: 2
+  _timeValue: 1
   _buttonText: {fileID: 192710336}
 --- !u!1 &1278916734
 GameObject:

@@ -17,4 +17,4 @@ MonoBehaviour:
     really does not meet the stated quality
   _coinsRequirementInterval: 0000000000000000
   _chance: 4
-  _chancesUpdateValue: 8
+  _chancesUpdateValue: 5

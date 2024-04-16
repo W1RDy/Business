@@ -16,4 +16,4 @@ MonoBehaviour:
   _description: Delivery is delaying. We need solve this problem.
   _coinsRequirementInterval: 1e00000032000000
   _chance: 12
-  _chancesUpdateValue: 2
+  _chancesUpdateValue: 1

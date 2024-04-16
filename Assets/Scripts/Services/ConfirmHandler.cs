@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ConfirmHandler : ClassForInitialization
 {
@@ -26,6 +27,7 @@ public class ConfirmHandler : ClassForInitialization
     public void ConfirmAction(Action action, ConfirmType confirmType, int skipTime)
     {
         if (confirmType != ConfirmType.SkipTime) throw new System.ArgumentException("Should add wasteCoins parameter");
+        Debug.Log("ConstructPC");
         ConfirmAction(action, confirmType, skipTime, 0);
     }
 
