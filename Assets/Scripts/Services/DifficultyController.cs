@@ -43,8 +43,15 @@ public class DifficultyController : MonoBehaviour, IService
     private void Start()
     {
         _oldDifficultyValue = _difficulty;
-        _difficultyCalculator = new DifficultyCalculator(_coinsCountWithMaxDifficulty, _monthsCountWithMaxDifficulty);
-        //_difficultyCalculator.DifficultyCanBeChanged += ChangeDifficultyDelegate;
+        _difficultyCalculator = new DifficultyCalculator(_startCoinsInHands + _startCoinsInBank, 1, _coinsCountWithMaxDifficulty, _monthsCountWithMaxDifficulty);
+        _difficultyCalculator.DifficultyCanBeChanged += ChangeDifficultyDelegate;
+        StartCoroutine(WaitWhileSceneLoaded());
+    }
+
+    private IEnumerator WaitWhileSceneLoaded()
+    {
+        yield return new WaitForSeconds(1);
+        ChangeDifficultyDelegate();
     }
 
 #if UNITY_EDITOR
@@ -83,11 +90,11 @@ public class DifficultyController : MonoBehaviour, IService
     {
         if (difficulty < 0.3f)
         {
-            _problemChances = new float[3] { 20, 10, 5 };
+            _problemChances = new float[3] { 30, 15, 10 };
         }
         else if (difficulty < 0.7f)
         {
-            _problemChances = new float[3] { 30, 20, 15 };
+            _problemChances = new float[3] { 40, 20, 15 };
         }
         else
         {
@@ -99,21 +106,21 @@ public class DifficultyController : MonoBehaviour, IService
     {
         if (difficulty < 0.3f)
         {
-            _orderChances = new float[3] { 50, 30, 20 };
+            _orderChances = new float[3] { 50, 35, 15 };
         }
         else if (difficulty < 0.7f)
         {
-            _orderChances = new float[3] { 30, 40, 30 };
+            _orderChances = new float[3] { 30, 45, 25 };
         }
         else
         {
-            _orderChances = new float[3] { 10, 45, 45 };
+            _orderChances = new float[3] { 15, 40, 45 };
         }
     }
 
     private void ChangeRewardValue(float difficulty)
     {
-        _ordersRewardValue = difficulty + 1;
+        _ordersRewardValue = difficulty + 0.8f;
     }
 
     private void ChangeTimeValue(float difficulty)
@@ -123,7 +130,7 @@ public class DifficultyController : MonoBehaviour, IService
 
     private void ChangeProblemsCostValue(float difficulty)
     {
-        _problemCostValue = (difficulty * 2) + 1;
+        _problemCostValue = (difficulty * 2.4f) + 1;
     }
 
     private void ChangeMinSkipsBetweenProblems(float difficulty)
@@ -149,6 +156,7 @@ public class DifficultyController : MonoBehaviour, IService
 public class DifficultyCalculator : ISubscribable
 {
     private int _maxDifficultyWeight;
+    private int _minDifficultyWeight;
 
     private float _coinsCountWeight = 0.2f;
     private float _monthsCountWeight = 0.8f;
@@ -163,9 +171,10 @@ public class DifficultyCalculator : ISubscribable
     private Action InitDelegate;
     public event Action DifficultyCanBeChanged;
 
-    public DifficultyCalculator(int coinsCountWithMaxDifficulty, int monthsCountWithMaxDifficulty)
+    public DifficultyCalculator(int startCoins, int startMonths, int coinsCountWithMaxDifficulty, int monthsCountWithMaxDifficulty)
     {
         _maxDifficultyWeight = CalculateDifficultyWeight(coinsCountWithMaxDifficulty, monthsCountWithMaxDifficulty);
+        _minDifficultyWeight = CalculateDifficultyWeight(startCoins, startMonths);
         Debug.Log(_maxDifficultyWeight);
 
         InitDelegate = () =>
@@ -193,7 +202,7 @@ public class DifficultyCalculator : ISubscribable
         var currentDifficultyWeight = CalculateDifficultyWeight(coins, month);
         Debug.Log(currentDifficultyWeight);
 
-        return (float)currentDifficultyWeight / _maxDifficultyWeight;
+        return Mathf.InverseLerp(_minDifficultyWeight, _maxDifficultyWeight, currentDifficultyWeight);
     }
 
     private int CalculateDifficultyWeight(int coinsCount, int monthsCount)

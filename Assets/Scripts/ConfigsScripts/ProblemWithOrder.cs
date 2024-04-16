@@ -16,7 +16,7 @@ public class ProblemWithOrder : ProblemConfig
     {
         if (_pcGenerator == null) _pcGenerator = ServiceLocator.Instance.Get<PCGenerator>();
         ProblemedOrder = problemedOrder;
-        _coins = problemedOrder.Cost;
+        SetCoinsParameters(problemedOrder.Cost);
     }
 
     public override void Apply()

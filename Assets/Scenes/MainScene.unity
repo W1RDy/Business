@@ -6784,8 +6784,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca9a6e343eee9e941a105e6b87a780af, type: 2}
   - {fileID: 11400000, guid: 9bf2122109918cd4a894fe053d61e5c3, type: 2}
   _problemConfigs:
-  - {fileID: 11400000, guid: 3b9fecc104d8a864b9fad2acf244002b, type: 2}
   - {fileID: 11400000, guid: 10a4293967ecd4740b2fb018d0944ddb, type: 2}
+  - {fileID: 11400000, guid: 3b9fecc104d8a864b9fad2acf244002b, type: 2}
   - {fileID: 11400000, guid: 1d2311368bb373b46b36103913cbdd03, type: 2}
   _ordersNotification: {fileID: 6153828305333895990}
   _deliveryOrdersNotification: {fileID: 621317905}
@@ -7838,7 +7838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _configs: []
-  _minBlocksCount: 2
+  _minBlocksCount: 1
 --- !u!4 &801267724
 Transform:
   m_ObjectHideFlags: 0
@@ -7916,8 +7916,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _difficulty: 0
-  _coinsCountWithMaxDifficulty: 80000
-  _monthsCountWithMaxDifficulty: 50
+  _coinsCountWithMaxDifficulty: 20000
+  _monthsCountWithMaxDifficulty: 15
   _startCoinsInHands: 100
   _startCoinsInBank: 400
   _problemChances:
@@ -17196,9 +17196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orders:
-  - {fileID: 11400000, guid: 56dc0fca8a8c1da41a92cf4bbae88eff, type: 2}
-  - {fileID: 11400000, guid: 664394fbad93f77439086f5470618f23, type: 2}
   - {fileID: 11400000, guid: d169424bd1217c742899f1aedd532ef8, type: 2}
+  - {fileID: 11400000, guid: 664394fbad93f77439086f5470618f23, type: 2}
+  - {fileID: 11400000, guid: 56dc0fca8a8c1da41a92cf4bbae88eff, type: 2}
   _maxOrdersCount: 3
   _maxOrdersCountInPeriod: 2
   _randomController: {fileID: 801267723}

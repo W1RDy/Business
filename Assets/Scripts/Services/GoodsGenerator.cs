@@ -38,7 +38,7 @@ public class GoodsGenerator : IService
             if ((float)counts / amount >= 0.6f) break;
 
             var randomIndex = Random.Range(0, 101);
-            if (randomIndex > 70) counts++;
+            if (randomIndex > 80) counts++;
         }
         return counts;
     }

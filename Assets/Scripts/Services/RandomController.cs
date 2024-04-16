@@ -33,7 +33,9 @@ public class RandomController : MonoBehaviour
 
     public void UpdateChances(float changeValue, IRandomizable result)
     {
+#if !UNITY_EDITOR
         if (changeValue == 0) return;
+#endif
 
         foreach (var randomizable in _randomizables)
         {
@@ -88,9 +90,11 @@ public class RandomController : MonoBehaviour
         else
         {
             if (randomizable.IsBlocked) return GetRandomizableWithChances();
-
-            UpdateBlockedRandomizables();
-            UpdateChances(randomizable.ChancesUpdateValue, randomizable);
+            else
+            {
+                UpdateBlockedRandomizables();
+                UpdateChances(randomizable.ChancesUpdateValue, randomizable);
+            }
         }
 
         return randomizable;
@@ -115,6 +119,7 @@ public class RandomController : MonoBehaviour
         randomizable.IsBlocked = true;
         _blockedRandomizables.Add(randomizable);
 
+
 #if UNITY_EDITOR
 
         foreach (var config in _configs)
@@ -133,12 +138,16 @@ public class RandomController : MonoBehaviour
 
     public void UpdateBlockedRandomizables()
     {
+        if (_blockedRandomizables.Count == 0) return;
+
+        Debug.Log("UpdateBlockedRandomizable");
         var listCopy = new List<IRandomizable>(_blockedRandomizables);
         foreach (var randomizable in listCopy)
         {
             randomizable.BlockedCounts++;
             if (randomizable.BlockedCounts >= MinBlockedCounts)
             {
+                Debug.Log(randomizable.BlockedCounts);
                 randomizable.IsBlocked = false;
                 randomizable.BlockedCounts = 0;
                 _blockedRandomizables.Remove(randomizable);

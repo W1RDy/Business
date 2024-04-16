@@ -14,6 +14,9 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
     [SerializeField] private int _maxOrdersCountInPeriod;
     private int _remainOrdersInPeriod;
 
+    private int _maxSpawnCountInRow = 2;
+    private (GoodsType orderType, int spawnCountInRow) _currentOrderSpawnInfo = (GoodsType.LowQuality, -1);
+
     [SerializeField] private RandomController _randomController;
 
     [SerializeField] private Window _ordersWindow;
@@ -91,9 +94,27 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
 
         order.InitConfigValues();
         var orderInstance = new OrderInstanceConfig(order.Cost, order.Time, order.NeededGoods);
-
-        _randomController.BlockRandomizable(order);
+        CheckSpawnInRow(order);
         return orderInstance;
+    }
+
+    private void CheckSpawnInRow(OrderConfig order)
+    {
+        if (_currentOrderSpawnInfo.spawnCountInRow == -1)
+        {
+            _currentOrderSpawnInfo = (order.NeededGoods, 1);
+            return;
+        }
+
+        if (_currentOrderSpawnInfo.orderType != order.NeededGoods)
+        {
+            _currentOrderSpawnInfo = (order.NeededGoods, 1);
+        }
+        else
+        {
+            _currentOrderSpawnInfo.spawnCountInRow ++;
+            if (_currentOrderSpawnInfo.spawnCountInRow >= _maxSpawnCountInRow) _randomController.BlockRandomizable(order);
+        }
     }
 
     public void GenerateOrder()

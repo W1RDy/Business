@@ -53,6 +53,10 @@ public class ApplyDistributeWithSuggestion : CustomButton, IButtonWithStates, IS
         {
             return coinsSuggestion.CoinsRequirements <= _coinsDistributor.GetCurrentHandCoins();
         }
+        else if (_suggestion is SuggestionByProblem suggestionByProblem)
+        {
+            return suggestionByProblem.ProblemCoins <= _coinsDistributor.GetCurrentHandCoins();
+        }
         return false;
     }
 
