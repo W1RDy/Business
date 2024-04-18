@@ -1,7 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class Window : ObjectForInitializationWithChildren
 {
@@ -10,37 +10,39 @@ public class Window : ObjectForInitializationWithChildren
 
     [SerializeField] private UIAnimation _openAnimation;
     [SerializeField] private UIAnimation _closeAnimation;
-    private bool _animationIsInitialized;
 
-    private void InitAnimations()
+    private UIAnimation _openAnimationInstance;
+    private UIAnimation _closeAnimationInstance;
+
+    public override void Init()
     {
-        _animationIsInitialized = true;
+        base.Init();
 
-        _openAnimation = Instantiate(_openAnimation);
-        _closeAnimation = Instantiate(_closeAnimation);
+        if (_openAnimation != null) _openAnimationInstance = Instantiate(_openAnimation);
+        if (_closeAnimation != null) _closeAnimationInstance = Instantiate(_closeAnimation);
 
-        if (_openAnimation is UIScaleAnimation _openScaleAnimation) _openScaleAnimation.SetParametres(transform);
-        if (_closeAnimation is UIScaleAnimation _closeScaleAnimation) _closeScaleAnimation.SetParametres(transform);
+        if (_openAnimationInstance is UIScaleAnimation _openScaleAnimation) _openScaleAnimation.SetParametres(transform);
+        if (_closeAnimationInstance is UIScaleAnimation _closeScaleAnimation) _closeScaleAnimation.SetParametres(transform);
     }
 
-    public void ActivateWindow()
+    public virtual void ActivateWindow()
     {
         gameObject.SetActive(true);
+        if (_type == WindowType.FinishPeriodWindow) Debug.Log(_openAnimation);
 
-        if (_openAnimation)
+        if (_openAnimationInstance != null)
         {
-            if (!_animationIsInitialized) InitAnimations();
             InteruptActivatedAnimations();
-            _openAnimation.Play();
+            _openAnimationInstance.Play();
         }
     }
 
     public void DeactivateWindow()
     {
-        if (_closeAnimation)
+        if (_closeAnimationInstance != null)
         {
             InteruptActivatedAnimations();
-            _closeAnimation.Play(() =>
+            _closeAnimationInstance.Play(() =>
             {
                 gameObject.SetActive(false);
             });

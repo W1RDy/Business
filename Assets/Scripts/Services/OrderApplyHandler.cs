@@ -51,6 +51,7 @@ public class OrderApplyHandler : ClassForInitialization
                 if (_handCoinsCounter.Coins >= order.Cost)
                 {
                     _buttonService.CloseWindow(WindowType.BasketWindow);
+                    _buttonService.OpenInventoryWindow();
                     order.ApplyOrder();
                 }
             };

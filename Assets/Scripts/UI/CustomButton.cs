@@ -11,12 +11,22 @@ public abstract class CustomButton : ObjectForInitialization
 
     [SerializeField] private UIAnimation _animation;
 
+    private TutorialActivator _tutorialActivator;
+
+    private Color _disabledColor;
+
     public override void Init()
     {
         base.Init();
         _buttonService = ServiceLocator.Instance.Get<ButtonService>();
+        _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
 
         _button = GetComponent<Button>();
+        _disabledColor = _button.colors.disabledColor;
+
+        _tutorialActivator.TutorialActivated += DeactivateClickableByTutorial;
+        _tutorialActivator.TutorialDeactivated += ReturnValuesToDefaultByTutorial;
+
         _button.onClick.AddListener(ClickCallback);
 
         if (_animation)
@@ -33,11 +43,40 @@ public abstract class CustomButton : ObjectForInitialization
         _audioPlayer.PlaySound("Click");
     }
 
+    #region Tutorial
+
+    protected virtual void DeactivateClickableByTutorial()
+    {
+        if (this as OpenButton != null) Debug.Log("Deactivate");
+        var colors = _button.colors;
+        colors.disabledColor = _button.colors.normalColor;
+        _button.interactable = false;
+    }
+
+    protected virtual void ActivateClickableByTutorial()
+    {
+        if (this as OpenButton != null) Debug.Log("Activate");
+        _button.interactable = true;
+        var colors = _button.colors;
+        colors.disabledColor = _disabledColor;
+    }
+
+    private void ReturnValuesToDefaultByTutorial()
+    {
+        ActivateClickableByTutorial();
+        _tutorialActivator.TutorialActivated -= DeactivateClickableByTutorial;
+        _tutorialActivator.TutorialDeactivated -= ReturnValuesToDefaultByTutorial;
+    }
+
+    #endregion 
+
     private void OnDestroy()
     {
         if (_button != null)
         {
             _button.onClick.RemoveListener(ClickCallback);
+            _tutorialActivator.TutorialActivated -= DeactivateClickableByTutorial;
+            _tutorialActivator.TutorialDeactivated -= ReturnValuesToDefaultByTutorial;
         }
     }
 

@@ -307,6 +307,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
+  _tutorialAnimation: {fileID: 0}
+  _tutorialButtonType: 5
+  _isActiveForTutorial: 1
   _goods: {fileID: 877243323409300393}
   _text: {fileID: 7005430415955092573}
 --- !u!1 &1118346842646315014

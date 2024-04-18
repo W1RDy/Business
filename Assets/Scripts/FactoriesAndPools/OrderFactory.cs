@@ -28,6 +28,21 @@ public class OrderFactory : BaseFactory
     }
 }
 
+public class TutorialOrderFactory : OrderFactory
+{
+    private const string Path = "TutorialOrder";
+
+    public TutorialOrderFactory(RectTransform container) : base(container)
+    {
+
+    }
+
+    public override void LoadResources()
+    {
+        if (_prefab == null) _prefab = Resources.Load<Order>(Path);
+    }
+}
+
 public class DeliveryOrderFactory : BaseFactory
 {
     private const string Path = "DeliveryOrder";

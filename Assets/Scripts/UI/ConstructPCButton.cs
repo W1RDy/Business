@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class ConstructPCButton : CustomButton
+public class ConstructPCButton : TutorialButton
 {
     [SerializeField] protected Goods _goods;
     [SerializeField] protected TextMeshProUGUI _text;

@@ -27,6 +27,8 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
         }
     }
 
+    public bool IsTutorialGoods { get; private set; }
+
     #endregion
 
     #region View

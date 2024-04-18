@@ -13,6 +13,7 @@ public class ConfirmSuggestionButton : CloseButton
 
     protected override void ClickCallback()
     {
+        base.ClickCallback();
         _buttonService.CloseWindow(WindowType.SuggestionWindow);
         _buttonService.ConfirmSuggestion((_window as SuggestionWindow).GetSuggestion());
     }

@@ -9,6 +9,7 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
     private WindowActivator _windowActivator;
     private RandomController _randomController;
     private ClicksBlocker _clicksBlocker;
+    private GameController _gameController;
 
     private RememberedOrderService _rememberedOrderService;
 
@@ -31,6 +32,7 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
         _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
+        _gameController = ServiceLocator.Instance.Get<GameController>();
 
         Subscribe();
     }
@@ -72,6 +74,8 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
 
     public void TryGenerateProblem()
     {
+        if (_gameController.IsTutorial) return;
+
         var problemConfig = GetRandomProblem();
         if (problemConfig != null)
         {

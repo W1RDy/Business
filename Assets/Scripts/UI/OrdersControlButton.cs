@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public abstract class OrdersControlButton : CustomButton
+public abstract class OrdersControlButton : TutorialButton
 {
     [SerializeField] protected MonoBehaviour _orderClass;
 

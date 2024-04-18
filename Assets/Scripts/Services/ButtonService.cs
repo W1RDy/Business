@@ -15,6 +15,7 @@ public class ButtonService : IService
     private OrderProgressChecker _orderProgressChecker;
     private OrderApplyHandler _orderApplyHandler;
     private PCConstructHandler _pcConstructHandler;
+    private OpenPeriodFinishWindowHandler _openPeriodFinishWindowHandler;
 
     private SuggestionGenerator _suggestionGenerator;
 
@@ -33,6 +34,7 @@ public class ButtonService : IService
         _orderProgressChecker = ServiceLocator.Instance.Get<OrderProgressChecker>();
         _orderApplyHandler = new OrderApplyHandler();
         _pcConstructHandler = new PCConstructHandler();
+        _openPeriodFinishWindowHandler = new OpenPeriodFinishWindowHandler();
 
         _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
 
@@ -70,7 +72,7 @@ public class ButtonService : IService
     public void CloseResultsWindow()
     {
         CloseWindow(WindowType.Results);
-        OpenWindow(WindowType.FinishPeriodWindow);
+        _openPeriodFinishWindowHandler.OpenFinishPeriodWindow();
     }
 
     public void OpenInventoryWindow()

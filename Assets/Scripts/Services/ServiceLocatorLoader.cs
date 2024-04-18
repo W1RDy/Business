@@ -57,6 +57,11 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private Notification _ordersNotification;
     [SerializeField] private Notification _deliveryOrdersNotification;
 
+    [SerializeField] private TutorialController _tutorialController;
+    [SerializeField] private TutorialSegment[] _tutorialSegments;
+
+    [SerializeField] private GameController _gameController;
+
     private void Awake()
     {
         Bind();
@@ -65,6 +70,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     private void Bind()
     {
         BindInitializator();
+        BindTutorial();
 
         BindSubscribeController();
         BindDifficultyController();
@@ -110,6 +116,20 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindButtonService();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindTutorial()
+    {
+        var tutorialService = new TutorialService(_tutorialSegments);
+        var tutorialButtonService = new ButtonsForTutorialService();
+
+        var tutorialButtonActivator = new ButtonForTutorialActivator(tutorialButtonService);
+
+        ServiceLocator.Instance.Register(tutorialButtonService);
+        ServiceLocator.Instance.Register(tutorialButtonActivator);
+
+        var tutorialActivator = new TutorialActivator(tutorialService, _tutorialController);
+        ServiceLocator.Instance.Register(tutorialActivator);
     }
 
     private void BindInitializator()
@@ -175,8 +195,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindGameController()
     {
-        var gameController = new GameController();
-        ServiceLocator.Instance.Register(gameController);
+        ServiceLocator.Instance.Register(_gameController);
     }
 
     private void BindSuggestionControllers()
@@ -241,16 +260,16 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindPools()
     {
-        var orderPool = new Pool<Order>(new OrderFactory(_orderPoolContainer), _orderPoolContainer, _orderParent, 2);
+        var orderPool = new Pool<Order>(new OrderFactory(_orderPoolContainer), _orderPoolContainer, _orderParent, 1);
         orderPool.Init();
 
-        var goalPool = new Pool<Goal>(new GoalFactory(_goalPoolContainer), _goalPoolContainer, _goalParent, 2);
+        var goalPool = new Pool<Goal>(new GoalFactory(_goalPoolContainer), _goalPoolContainer, _goalParent, 1);
         goalPool.Init();
 
         var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_deliveryOrderPoolContainer), _deliveryOrderPoolContainer, _deliveryOrderParent, 3);
         deliveryOrderPool.Init();
 
-        var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
+        var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 1);
         goodsPool.Init();
 
         var pcPool = new Pool<PC>(new PCFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);

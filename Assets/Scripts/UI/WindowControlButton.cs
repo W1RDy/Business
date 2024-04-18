@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public abstract class WindowControlButton : CustomButton
+public abstract class WindowControlButton : TutorialButton
 {
     [SerializeField] protected Window _window;
 

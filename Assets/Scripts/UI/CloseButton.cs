@@ -5,7 +5,7 @@ public class CloseButton : WindowControlButton
     protected override void ClickCallback()
     {
         base.ClickCallback();
-        CloseWindow();
+        if (this as ConfirmSuggestionButton == null) CloseWindow();
     }
 
     protected virtual void CloseWindow()

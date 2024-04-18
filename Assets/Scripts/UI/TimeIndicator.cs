@@ -23,6 +23,7 @@ public class TimeIndicator : MonoBehaviour
 
     public void UpdateMonth(int month)
     {
-        _monthText.text = month + " month";
+        if (month == 0) _monthText.text = "study month";
+        else _monthText.text = month + " month";
     }
 }

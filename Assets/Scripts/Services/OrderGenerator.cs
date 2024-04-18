@@ -5,9 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class OrderGenerator : MonoBehaviour, IService, ISubscribable
+public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
 {
     [SerializeField] private OrderConfig[] _orders;
+    [SerializeField] private OrderConfig _tutorialOrderConfig; 
     private OrderConfig[] _orderInstances;
 
     [SerializeField] private int _maxOrdersCount;
@@ -25,6 +26,7 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
 
     private OrderService _orderService;
     private IIDGenerator _idGenerator;
+    private GameController _gameController;
 
     [SerializeField] private float _timeBetweenGenerate;
     private float _timePassed;
@@ -34,17 +36,18 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
 
     private SubscribeController _subscribeController;
 
-    private void Start()
+    private bool _isSubscribeToActivating;
+
+    public override void Init()
     {
         _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
         _idGenerator = new IDGeneratorWithMinID(3, 1);
         _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        _gameController = ServiceLocator.Instance.Get<GameController>();
 
         InitOrderConfigs();
-        ActivateOrderGenerator();
-
         Subscribe();
     }
 
@@ -85,7 +88,11 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
 
     public void ActivateOrderGenerator()
     {
-        _remainOrdersInPeriod = _maxOrdersCountInPeriod;
+        if (!_gameController.IsStartingTutorial)
+        {
+            _remainOrdersInPeriod = _maxOrdersCountInPeriod;
+            if (_isSubscribeToActivating) ActivatingUnsubscribe();
+        }
     }
 
     private OrderInstanceConfig GetOrderConfig()
@@ -130,6 +137,22 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
         _remainOrdersInPeriod--;
     }
 
+    public void GenerateTutorialOrder()
+    {
+        _tutorialOrderConfig.CostDifficultyValue = _difficultyController.OrdersRewardValue;
+        _tutorialOrderConfig.TimeDifficultyValue = _difficultyController.OrdersTimeValue;
+
+        _tutorialOrderConfig.InitConfigValues();
+        var config = new OrderInstanceConfig(_tutorialOrderConfig.Cost, _tutorialOrderConfig.Time, _tutorialOrderConfig.NeededGoods);
+
+        var order = _pool.Get();
+        var id = _idGenerator.GetID();
+
+        order.InitVariant(id, config, _idGenerator);
+
+        _orderService.AddOrder(order);
+    }
+
     private void ChangeOrderGenerateChancesByDifficulty()
     {
         _randomController.ChangeChances(_difficultyController.OrderChances);
@@ -154,6 +177,7 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
             ChangeOrdersValuesByDifficulty();
         };
 
+        ActivatingSubscribe();
         _difficultyController.DifficultyChanged += _onDifficultyChanged;
         _onDifficultyChanged.Invoke();
     }
@@ -161,5 +185,19 @@ public class OrderGenerator : MonoBehaviour, IService, ISubscribable
     public void Unsubscribe()
     {
         _difficultyController.DifficultyChanged -= _onDifficultyChanged;
+    }
+
+    private void ActivatingSubscribe()
+    {
+        _isSubscribeToActivating = true;
+        _gameController.GameStarted += ActivateOrderGenerator;
+        _gameController.TutorialLevelStarted += ActivateOrderGenerator;
+    }
+
+    private void ActivatingUnsubscribe()
+    {
+        _isSubscribeToActivating = false;
+        _gameController.GameStarted -= ActivateOrderGenerator;
+        _gameController.TutorialLevelStarted -= ActivateOrderGenerator;
     }
 }

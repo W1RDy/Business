@@ -37,20 +37,20 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     private OrderView _view;
 
-    private RewardHandler _rewardHandler;
+    protected RewardHandler _rewardHandler;
     private TimeController _timeController;
 
-    private ActiveOrderService _activeOrderService;
-    private OrderService _orderService;
-    private OrderCompleteHandler _orderCompleteHandler;
+    protected ActiveOrderService _activeOrderService;
+    protected OrderService _orderService;
+    protected OrderCompleteHandler _orderCompleteHandler;
     private RememberedOrderService _rememberedOrderService;
     private NotificationController _notificationController;
 
     private Action<int> TimeChangedDelegate;
 
-    private Goal _goal;
-    private Pool<Goal> _goalPool;
-    private Pool<Order> _orderPool;
+    protected Goal _goal;
+    protected Pool<Goal> _goalPool;
+    protected Pool<Order> _orderPool;
 
     private bool _isFree;
     public bool IsFree => _isFree;
@@ -59,9 +59,9 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
     public event Action OrderValuesChanged;
     public event Action OrderStateChanged;
 
-    private AudioPlayer _audioPlayer;
+    protected AudioPlayer _audioPlayer;
 
-    private IIDGenerator _idGenerator;
+    protected IIDGenerator _idGenerator;
 
     public override void Init()
     {
@@ -154,7 +154,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         }
     }
 
-    public void CompleteOrder()
+    public virtual void CompleteOrder()
     {
         if (_isApplied)
         {
@@ -204,7 +204,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         if (_animController != null) _animController.PlayAppearAnimation();
     }
 
-    public void Release()
+    public virtual void Release()
     {
         gameObject.SetActive(false);
         _orderService.RemoveOrder(this);

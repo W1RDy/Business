@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class OpenButton : WindowControlButton
+﻿public class OpenButton : WindowControlButton
 {
     protected override void ClickCallback()
     {

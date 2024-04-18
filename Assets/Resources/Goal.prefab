@@ -916,6 +916,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
+  _tutorialAnimation: {fileID: 0}
+  _tutorialButtonType: 6
+  _isActiveForTutorial: 1
   _orderClass: {fileID: 0}
   _stateText: {fileID: 467609343794789472}
   _changeConditions: 01000000

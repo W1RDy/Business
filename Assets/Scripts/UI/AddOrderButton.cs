@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AddOrderButton : CustomButton
+public class AddOrderButton : TutorialButton
 {
     [SerializeField] Delivery delivery;
 
