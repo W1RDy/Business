@@ -37,7 +37,7 @@ public class Window : ObjectForInitializationWithChildren
         }
     }
 
-    public void DeactivateWindow()
+    public virtual void DeactivateWindow()
     {
         if (_closeAnimationInstance != null)
         {

@@ -17,6 +17,8 @@ public class GameController : ObjectForInitialization, IService
     private TutorialActivator _tutorialActivator;
     private GamesConditionChecker _conditionsChecker;
 
+    [SerializeField] private bool _isNeedTutorial;
+
     public bool IsFinished { get; private set; }
     public bool IsStartingTutorial { get; private set; }
     public bool IsTutorial { get; private set; }
@@ -27,7 +29,7 @@ public class GameController : ObjectForInitialization, IService
         _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        IsTutorial = true;
+        IsTutorial = _isNeedTutorial;
         _tutorialActivator.TutorialDeactivated += ChangeGameStateFromTutorial;
 
         var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();

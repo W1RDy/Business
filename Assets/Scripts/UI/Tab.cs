@@ -5,7 +5,7 @@ public class Tab : OpenButton
     public override void Init()
     {
         base.Init();
-        (_window as WindowWithCallbacks).WindowActivated += ChangeInteractableDelegate;
+        (_window as WindowWithCallbacks).WindowChanged += ChangeInteractableDelegate;
         if (_windowType == WindowType.DeliveryWindow) OpenWindow();
     }
 
@@ -17,11 +17,17 @@ public class Tab : OpenButton
 
     private void ChangeInteractableDelegate()
     {
-        ChangeTabInteractable(_window.gameObject.activeSelf);
+        Debug.Log("ChangeInteractable");
+        ChangeTabInteractable(!_window.gameObject.activeSelf);
     }
 
     public void ChangeTabInteractable(bool isInteractable)
     {
         _button.interactable = isInteractable;
+    }
+
+    public void OnDestroy()
+    {
+        (_window as WindowWithCallbacks).WindowChanged -= ChangeInteractableDelegate;
     }
 }

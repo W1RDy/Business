@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-public class ButtonsForTutorialService : ClassForInitialization, IService
+public class ButtonsForTutorialService : ClassForInitialization, IService, ISubscribable
 {
     private GameController _gameController;
     private Dictionary<TutorialButtonType, ITutorialButton> _buttons = new Dictionary<TutorialButtonType, ITutorialButton>();
@@ -12,7 +12,7 @@ public class ButtonsForTutorialService : ClassForInitialization, IService
     public override void Init()
     {
         _gameController = ServiceLocator.Instance.Get<GameController>();
-        _gameController.TutorialLevelStarted += ClearDictionary;
+        Subscribe();
     }
 
     public void AddButton(ITutorialButton tutorialButton)
@@ -30,7 +30,19 @@ public class ButtonsForTutorialService : ClassForInitialization, IService
     {
         _buttons.Clear();
         _isServiceActive = false;
+        Unsubscribe();
+    }
+
+    public void Subscribe()
+    {
+        _gameController.TutorialLevelStarted += ClearDictionary;
+        _gameController.GameStarted += ClearDictionary;
+    }
+
+    public void Unsubscribe()
+    {
         _gameController.TutorialLevelStarted -= ClearDictionary;
+        _gameController.GameStarted -= ClearDictionary;
     }
 }
 

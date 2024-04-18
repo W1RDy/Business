@@ -149,6 +149,7 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
         var id = _idGenerator.GetID();
 
         order.InitVariant(id, config, _idGenerator);
+        order.UpdateOrderUrgency();
 
         _orderService.AddOrder(order);
     }
@@ -185,6 +186,7 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
     public void Unsubscribe()
     {
         _difficultyController.DifficultyChanged -= _onDifficultyChanged;
+        ActivatingUnsubscribe();
     }
 
     private void ActivatingSubscribe()
