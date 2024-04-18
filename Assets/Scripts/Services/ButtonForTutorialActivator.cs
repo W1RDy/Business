@@ -13,7 +13,6 @@ public class ButtonForTutorialActivator : IService
     public ITutorialButton ActivateButton(TutorialButtonType buttonType)
     {
         _currentTutorialButton = _service.GetTutorialButton(buttonType);
-        if (buttonType == TutorialButtonType.ConstructPC) Debug.Log(_currentTutorialButton);
         _currentTutorialButton.ActivateByTutorial();
         return _currentTutorialButton;
     }

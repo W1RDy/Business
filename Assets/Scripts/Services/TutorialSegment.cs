@@ -24,7 +24,6 @@ public class TutorialSegment : MonoBehaviour, ITutorial
 
     public bool ConditionCompleted()
     {
-        if (GetPart(_currentSegmentIndex).transform.name.StartsWith("Confirm")) Debug.Log(GetPart(_currentSegmentIndex).ConditionCompleted());
         return GetPart(_currentSegmentIndex).ConditionCompleted();
     }
 
@@ -43,7 +42,6 @@ public class TutorialSegment : MonoBehaviour, ITutorial
     private void ActivatePart()
     {
         GetPart(_currentSegmentIndex).Activate();
-        Debug.Log(_tutorialSegmentParts[_currentSegmentIndex].transform.name);
     }
 
     private void DeactivatePart()

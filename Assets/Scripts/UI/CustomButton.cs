@@ -47,18 +47,18 @@ public abstract class CustomButton : ObjectForInitialization
 
     protected virtual void DeactivateClickableByTutorial()
     {
-        if (this as OpenButton != null) Debug.Log("Deactivate");
         var colors = _button.colors;
         colors.disabledColor = _button.colors.normalColor;
+        _button.colors = colors;
         _button.interactable = false;
     }
 
     protected virtual void ActivateClickableByTutorial()
     {
-        if (this as OpenButton != null) Debug.Log("Activate");
         _button.interactable = true;
         var colors = _button.colors;
         colors.disabledColor = _disabledColor;
+        _button.colors = colors;
     }
 
     private void ReturnValuesToDefaultByTutorial()
