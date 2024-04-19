@@ -7,6 +7,8 @@ public abstract class TutorialButton : CustomButton, ITutorialButton
     [SerializeField] private TutorialButtonType _tutorialButtonType;
     [SerializeField] protected bool _isActiveForTutorial = false;
 
+    private UIAnimation _tutorialAnimationInstance;
+
     public TutorialButtonType Type => _tutorialButtonType;
 
     public event Action OnClick;
@@ -18,18 +20,24 @@ public abstract class TutorialButton : CustomButton, ITutorialButton
         {
             var tutorialButtonService = ServiceLocator.Instance.Get<ButtonsForTutorialService>();
             tutorialButtonService.AddButton(this);
+
+            if (_tutorialAnimation != null)
+            {
+                _tutorialAnimationInstance = Instantiate( _tutorialAnimation );
+                if (_tutorialAnimationInstance is HighlightAndScaleAnimation highlightAndScaleAnimation) highlightAndScaleAnimation.SetParametres(transform, _button.image); 
+            }
         }
     }
 
     public void ActivateByTutorial()
     {
-        if (_tutorialAnimation) _tutorialAnimation.Play();
+        if (_tutorialAnimationInstance) _tutorialAnimationInstance.Play();
         ActivateClickableByTutorial();
     }
 
     public void DeactivateByTutorial()
     {
-        if (_tutorialAnimation) _tutorialAnimation.Kill();
+        if (_tutorialAnimationInstance) _tutorialAnimationInstance.Kill();
         DeactivateClickableByTutorial();
     }
 

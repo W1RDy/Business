@@ -5430,7 +5430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _tutorialAnimation: {fileID: 0}
+  _tutorialAnimation: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
   _tutorialButtonType: 7
   _isActiveForTutorial: 1
   _window: {fileID: 959521845}
@@ -11967,7 +11967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _tutorialAnimation: {fileID: 0}
+  _tutorialAnimation: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
   _tutorialButtonType: 0
   _isActiveForTutorial: 1
   _window: {fileID: 1820471388}
@@ -14163,7 +14163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _tutorialAnimation: {fileID: 0}
+  _tutorialAnimation: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
   _tutorialButtonType: 4
   _isActiveForTutorial: 1
   _orderClass: {fileID: 1896856299}
@@ -14287,7 +14287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _tutorialAnimation: {fileID: 0}
+  _tutorialAnimation: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
   _tutorialButtonType: 2
   _isActiveForTutorial: 1
   _window: {fileID: 2063184570}
@@ -21154,6 +21154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a7858ce36b8a24794113ef21413178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isNeedTutorial: 1
 --- !u!4 &2030697025
 Transform:
   m_ObjectHideFlags: 0
@@ -22076,7 +22077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
-  _tutorialAnimation: {fileID: 0}
+  _tutorialAnimation: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
   _tutorialButtonType: 3
   _isActiveForTutorial: 1
   _window: {fileID: 671119684}
@@ -22149,6 +22150,10 @@ PrefabInstance:
       propertyPath: _animation
       value: 
       objectReference: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
+    - target: {fileID: 2740450967621702868, guid: fa90728d30611264787ad52f2d800064, type: 3}
+      propertyPath: _tutorialAnimation
+      value: 
+      objectReference: {fileID: 11400000, guid: 28787ff3646fd8f438b4b5eaf69374ba, type: 2}
     - target: {fileID: 2740450967621702868, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: _tutorialButtonType
       value: 8
