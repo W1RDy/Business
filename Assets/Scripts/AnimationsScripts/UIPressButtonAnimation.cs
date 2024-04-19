@@ -15,6 +15,7 @@ public class UIPressButtonAnimation : UIScaleAnimation
 
     public override void Play(Action callback)
     {
+        Debug.Log("StartPressButtonAnimation");
         base.Play(callback);
         _isFinished = false;
         if (_sizeChangeValue < 0) throw new System.ArgumentException("Ivalid argument. SizeChangeValue can't be negative!");
