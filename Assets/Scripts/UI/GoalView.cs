@@ -34,7 +34,7 @@ public class GoalView
 
     public void SetId(int id)
     {
-        _titleText.text = "order " + id;
+        _titleText.text = id.ToString();
     }
 
     public void SetCost(int cost)

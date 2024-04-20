@@ -10,6 +10,7 @@ public class HighlightAndScaleAnimation : UIScaleAnimation
     [SerializeField] private float _segmentDuration = 0.5f;
     [SerializeField] private float _colorSegmentDuration = 0.8f;
 
+    [SerializeField] private Color _startOutlineColor;
     [SerializeField] private Color _endColor;
 
     [SerializeField] private Material _outlineMaterial;
@@ -17,7 +18,6 @@ public class HighlightAndScaleAnimation : UIScaleAnimation
     private float _startScale;
 
     private Sequence _colorSequence;
-    private Color _startOutlineColor;
     private Color _startImageColor;
 
     public void SetParametres(Transform transform, Image image)
@@ -32,8 +32,8 @@ public class HighlightAndScaleAnimation : UIScaleAnimation
         _image.material = _outlineMaterial;
 
         _startScale = _transform.localScale.x;
-        _startOutlineColor = _outlineMaterial.GetColor("_Color");
         _startImageColor = _image.color;
+        _outlineMaterial.SetColor("_Color", _startOutlineColor);
 
         _image.color = Color.white;
 

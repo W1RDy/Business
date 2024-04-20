@@ -15,5 +15,6 @@ MonoBehaviour:
   _changeValue: 0.2
   _segmentDuration: 0.3
   _colorSegmentDuration: 0.8
+  _startOutlineColor: {r: 0, g: 0.2079463, b: 1, a: 1}
   _endColor: {r: 0.0990566, g: 0.8957011, b: 1, a: 1}
   _outlineMaterial: {fileID: 2100000, guid: 739ce89fea0994841812705d2678d1c9, type: 2}

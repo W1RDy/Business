@@ -24,8 +24,8 @@ public class ScaleChanger : MonoBehaviour
     [ContextMenu("ChangeScalesWithProportions")]
     public void ChangeScalesWithSavingProportions()
     {
-        if (_allTransforms != null) _allTransforms = InitTransforms(_transforms, ref _transformsTexts);
-        if (_allEntitiesTransforms != null) _allEntitiesTransforms = InitTransforms(_entitiesTransforms, ref _entitiesTexts);
+        _allTransforms = InitTransforms(_transforms, ref _transformsTexts);
+        _allEntitiesTransforms = InitTransforms(_entitiesTransforms, ref _entitiesTexts);
 
         Undo.RecordObjects(_allTransforms.ToArray(), "change scale and positions transform");
         Undo.RecordObjects(_transformsTexts, "change transform texts");
@@ -35,16 +35,16 @@ public class ScaleChanger : MonoBehaviour
             ChangeParametres(transform, _scaleButtonValue, _scaleFontsValue, _scaleChangeValue);
         }
 
-        Undo.RecordObjects(_entitiesTransforms.ToArray(), "change scale and positions entities transform");
-        Undo.RecordObjects(_entitiesTexts, "change entities texts");
+        //Undo.RecordObjects(_entitiesTransforms.ToArray(), "change scale and positions entities transform");
+        //Undo.RecordObjects(_entitiesTexts, "change entities texts");
 
-        var scaleButtonForEntities = _scaleEntitiesValue / (_scaleChangeValue / _scaleButtonValue);
-        var scaleFontsForEntities = _scaleEntitiesValue / (_scaleChangeValue / _scaleFontsValue);
+        //var scaleButtonForEntities = _scaleEntitiesValue / (_scaleChangeValue / _scaleButtonValue);
+        //var scaleFontsForEntities = _scaleEntitiesValue / (_scaleChangeValue / _scaleFontsValue);
 
-        foreach (var transform in _entitiesTransforms)
-        {
-            ChangeParametres(transform, scaleButtonForEntities, scaleFontsForEntities, _scaleEntitiesValue);
-        }
+        //foreach (var transform in _entitiesTransforms)
+        //{
+        //    ChangeParametres(transform, scaleButtonForEntities, scaleFontsForEntities, _scaleEntitiesValue);
+        //}
     }
 #endif
 
