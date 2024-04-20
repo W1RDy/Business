@@ -43,6 +43,7 @@ public abstract class TutorialButton : CustomButton, ITutorialButton
 
     protected override void ClickCallback()
     {
+        if (_tutorialAnimationInstance) _tutorialAnimationInstance.Kill();
         base.ClickCallback();
         OnClick?.Invoke();
     }

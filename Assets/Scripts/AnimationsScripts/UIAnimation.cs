@@ -25,21 +25,29 @@ public abstract class UIAnimation : ScriptableObject
     public virtual void Play(Action callback)
     {
         if (!IsFinished || IsKillAnimation) Kill();
+        _isFinished = false;
 
         _finishCallback = () =>
         {
-            _isFinished = true;
-            Release();
-
-            callback?.Invoke();
             _finishCallback = null;
+            callback?.Invoke();
         };
+    }
+
+    protected virtual void Finish()
+    {
+        if (!_isFinished)
+        {
+            Release();
+            _finishCallback?.Invoke();
+            _isFinished = true;
+        }
     }
 
     public virtual void Kill()
     {
         _sequence.Kill();
-        _finishCallback?.Invoke();
+        Finish();
     }
 
     protected virtual void Release()

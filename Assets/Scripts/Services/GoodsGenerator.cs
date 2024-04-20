@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,12 +11,17 @@ public class GoodsGenerator : IService
     private int _lowPCAmounts;
     private int _brokenPCAmounts;
 
+    private WindowChildChangedHandler _windowChildChangedHandler;
+
     private Dictionary<GoodsType, GoodsConfig> _configsDictionary = new Dictionary<GoodsType, GoodsConfig>();
 
     public GoodsGenerator(GoodsConfig[] goodsConfigs)
     {
         _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
         _goodsService = ServiceLocator.Instance.Get<GoodsService>();
+
+        var windowService = ServiceLocator.Instance.Get<WindowService>();
+        _windowChildChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.GoodsWindow));
 
         InitDictionary(goodsConfigs);
     }
@@ -55,6 +61,15 @@ public class GoodsGenerator : IService
     }
 
     public void GenerateGoods(GoodsType goodsType, int amount)
+    {
+        Action action = () =>
+        {
+            Generate(goodsType, amount);
+        };
+        _windowChildChangedHandler.ChangeChilds(action);
+    }
+
+    private void Generate(GoodsType goodsType, int amount)
     {
         var goodsConfigInstance = _configsDictionary[goodsType];
         var brokenGoodsCount = GetRandomBrokenGoodsCount(goodsType, amount);

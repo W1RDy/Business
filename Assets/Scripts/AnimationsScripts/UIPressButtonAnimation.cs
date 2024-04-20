@@ -15,7 +15,6 @@ public class UIPressButtonAnimation : UIScaleAnimation
 
     public override void Play(Action callback)
     {
-        Debug.Log("StartPressButtonAnimation");
         base.Play(callback);
         _isFinished = false;
         if (_sizeChangeValue < 0) throw new System.ArgumentException("Ivalid argument. SizeChangeValue can't be negative!");
@@ -29,7 +28,7 @@ public class UIPressButtonAnimation : UIScaleAnimation
             .Append(_transform.DOScale(new Vector3(shrinkedScale.x, shrinkedScale.y, 1), _shrinkTime))
             .AppendInterval(_intervalTime)
             .Append(_transform.DOScale(new Vector3(_startScale.x, _startScale.y, 1), _increaseTime))
-            .AppendCallback(() => _finishCallback?.Invoke());
+            .AppendCallback(Finish);
     }
 
     protected override void Release()

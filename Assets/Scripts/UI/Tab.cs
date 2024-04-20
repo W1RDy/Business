@@ -10,7 +10,7 @@ public class Tab : OpenButton
     {
         base.Init();
         _startColors = _button.colors;
-        (_window as WindowWithCallbacks).WindowChanged += ChangeInteractableDelegate;
+        _window.OnWindowChanged += ChangeInteractableDelegate;
         if (_windowType == WindowType.DeliveryWindow) OpenWindow();
     }
 
@@ -55,6 +55,6 @@ public class Tab : OpenButton
 
     public void OnDestroy()
     {
-        (_window as WindowWithCallbacks).WindowChanged -= ChangeInteractableDelegate;
+        _window.OnWindowChanged -= ChangeInteractableDelegate;
     }
 }

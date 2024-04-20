@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -5,7 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Delivery : MonoBehaviour
+public class Delivery : ObjectForInitialization
 {
     #region Values
 
@@ -38,23 +40,32 @@ public class Delivery : MonoBehaviour
 
     private DeliveryOrderService _orderService;
     private CompositeOrder _compositeOrder;
+    private WindowChildChangedHandler _windowChildChangedHandler;
 
-    private void Awake()
+
+    public override void Init()
     {
+        base.Init();
         _deliveryConfigInstance = Instantiate(_deliveryConfig);
 
         _view = new DeliveryView(_costText, _timeText, _titleText, _descriptionText, _icon);
         _view.SetView(Cost, Time, _deliveryConfig.DeliveryTitle, _deliveryConfig.DeliveryDescription, _deliveryConfig.Icon);
-    }
 
-    private void Start()
-    {
         _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
         _orderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
         _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
+
+        var windowService = ServiceLocator.Instance.Get<WindowService>();
+        _windowChildChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.BasketWindow));
     }
 
     public void AddDeliveryOrder()
+    {
+        Action action = () => AddOrderDelegate();
+        _windowChildChangedHandler.ChangeChilds(action);
+    }
+
+    private void AddOrderDelegate()
     {
         var deliveryOrder = _orderService.GetOrder(ID) as DeliveryOrder;
         if (deliveryOrder == null)

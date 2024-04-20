@@ -28,6 +28,8 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
     private IIDGenerator _idGenerator;
     private GameController _gameController;
 
+    private WindowChildChangedHandler _windowChangedHandler;
+
     [SerializeField] private float _timeBetweenGenerate;
     private float _timePassed;
 
@@ -43,9 +45,13 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
         _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
         _idGenerator = new IDGeneratorWithMinID(3, 1);
+
         _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
+
+        var windowService = ServiceLocator.Instance.Get<WindowService>();
+        _windowChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.OrdersWindow));
 
         InitOrderConfigs();
         Subscribe();
@@ -72,14 +78,14 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
             {
                 if (!_randomController.IsBlocked)
                 {
-                    GenerateOrder();
-                    if (_orderService.GetOrdersCount() == _maxOrdersCount)
+                    _windowChangedHandler.ChangeChilds(GenerateOrder);
+                    if (_orderService.GetOrdersCount() + _windowChangedHandler.ActionCount >= _maxOrdersCount)
                     {
                         _randomController.BlockController();
                         return;
                     }
                 }
-                else if (_orderService.GetOrdersCount() < _maxOrdersCount) _randomController.UnblockController();
+                else if (_orderService.GetOrdersCount() + _windowChangedHandler.ActionCount < _maxOrdersCount) _randomController.UnblockController();
 
                 _timePassed = 0;
             }

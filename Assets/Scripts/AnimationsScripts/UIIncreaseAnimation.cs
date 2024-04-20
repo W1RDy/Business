@@ -28,7 +28,7 @@ public class UIIncreaseAnimation : UIScaleAnimation
 
         _sequence
             .Append(_transform.DOScale(endSize, _iterationTime))
-            .AppendCallback(() => _finishCallback?.Invoke());
+            .AppendCallback(Finish);
     }
 
     protected override void Release()

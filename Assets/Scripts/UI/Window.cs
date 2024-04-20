@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class Window : ObjectForInitializationWithChildren
 
     private UIAnimation _openAnimationInstance;
     private UIAnimation _closeAnimationInstance;
+
+    public bool IsChanging { get; private set; }
+    public event Action OnWindowChanged;
 
     public override void Init()
     {
@@ -33,8 +37,11 @@ public class Window : ObjectForInitializationWithChildren
         if (_openAnimationInstance != null)
         {
             InteruptActivatedAnimations();
+            IsChanging = true;
             _openAnimationInstance.Play();
         }
+        IsChanging = false;
+        OnWindowChanged?.Invoke();
     }
 
     public virtual void DeactivateWindow()
@@ -42,18 +49,24 @@ public class Window : ObjectForInitializationWithChildren
         if (_closeAnimationInstance != null)
         {
             InteruptActivatedAnimations();
-            _closeAnimationInstance.Play(() =>
-            {
-                gameObject.SetActive(false);
-            });
+            IsChanging = true;
+            _closeAnimationInstance.Play(() => gameObject.SetActive(false));
+
         }
         else gameObject.SetActive(false);
+        IsChanging = false;
+        OnWindowChanged?.Invoke();
     }
 
     private void InteruptActivatedAnimations()
     {
-        if (_openAnimation != null && !_openAnimation.IsFinished) _openAnimation.Kill();
-        else if (_closeAnimation != null && !_closeAnimation.IsFinished) _closeAnimation.Kill();
+        if (IsAnimationInProcess(_openAnimationInstance)) _openAnimationInstance.Kill();
+        else if (IsAnimationInProcess(_closeAnimationInstance)) _closeAnimationInstance.Kill();
+    }
+
+    private bool IsAnimationInProcess(UIAnimation animation)
+    {
+        return animation != null && !animation.IsFinished;
     }
 
     private void OnDisable()

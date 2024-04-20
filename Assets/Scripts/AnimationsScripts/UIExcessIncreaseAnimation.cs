@@ -27,7 +27,7 @@ public class UIExcessIncreaseAnimation : UIScaleAnimation
         _sequence
             .Append(_transform.DOScale(_startScale + 0.3f, _iterationTime))
             .Append(_transform.DOScale(_startScale, _iterationTime))
-            .AppendCallback(() => _finishCallback?.Invoke());
+            .AppendCallback(Finish);
     }
 
     protected override void Release()

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3226ffd2b6d3ec4fb7fdeb4018c7eb8, type: 3}
   m_Name: BrightnessAnimation 1
   m_EditorClassIdentifier: 
-  _darknessEnd: 0
+  _fadeEnd: 0
   _time: 1
