@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SendOrderButton : OrdersControlButton, IButtonWithStates
 {
@@ -13,6 +12,8 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     private GamesConditionChecker _conditionChecker;
 
     private Action OnOrderChanged;
+
+    [SerializeField] private UIBlockWithStates _connectedBlockWithStates;
 
     public override void Init()
     {
@@ -48,6 +49,10 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     public void ChangeStates(bool toActiveState)
     {
         _button.interactable = toActiveState;
+        if (_connectedBlockWithStates != null)
+        {
+            _connectedBlockWithStates.ChangeState(toActiveState);
+        }
     }
 
     public bool CheckStatesChangeCondition()
