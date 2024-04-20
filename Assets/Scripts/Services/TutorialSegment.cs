@@ -20,6 +20,7 @@ public class TutorialSegment : MonoBehaviour, ITutorial
     public void Deactivate()
     {
         IsActivated = false;
+        DeactivatePart(_currentSegmentIndex);
     }
 
     public bool ConditionCompleted()
@@ -29,7 +30,7 @@ public class TutorialSegment : MonoBehaviour, ITutorial
 
     public void ActivateNextPart()
     {
-        DeactivatePart();
+        DeactivatePart(_currentSegmentIndex);
         _currentSegmentIndex++;
         if (_currentSegmentIndex < _tutorialSegmentParts.Length) ActivatePart();
     }
@@ -44,9 +45,9 @@ public class TutorialSegment : MonoBehaviour, ITutorial
         GetPart(_currentSegmentIndex).Activate();
     }
 
-    private void DeactivatePart()
+    private void DeactivatePart(int index)
     {
-        GetPart(_currentSegmentIndex).Deactivate();
+        GetPart(index).Deactivate();
     }
 
     private TutorialSegmentPart GetPart(int index)

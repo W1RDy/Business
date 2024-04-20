@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Tab : OpenButton
 {
+    private ColorBlock _startColors;
+    private bool _isTutorial;
+
     public override void Init()
     {
         base.Init();
+        _startColors = _button.colors;
         (_window as WindowWithCallbacks).WindowChanged += ChangeInteractableDelegate;
         if (_windowType == WindowType.DeliveryWindow) OpenWindow();
     }
@@ -17,13 +22,35 @@ public class Tab : OpenButton
 
     private void ChangeInteractableDelegate()
     {
-        Debug.Log("ChangeInteractable");
         ChangeTabInteractable(!_window.gameObject.activeSelf);
+    }
+
+    protected override void ActivateClickableByTutorial()
+    {
+        _button.colors = _startColors;
+
+        _isTutorial = false;
+        ChangeInteractableDelegate();
+    }
+
+    protected override void DeactivateClickableByTutorial()
+    {
+        _isTutorial = true;
+
+        ChangeTabInteractable(_button.interactable);
+        _button.interactable = false;
     }
 
     public void ChangeTabInteractable(bool isInteractable)
     {
-        _button.interactable = isInteractable;
+        if (!_isTutorial) _button.interactable = isInteractable;
+        else
+        {
+            var colors = _button.colors;
+            colors.disabledColor = isInteractable ? _startColors.normalColor : _startColors.disabledColor;
+
+            _button.colors = colors;
+        }
     }
 
     public void OnDestroy()

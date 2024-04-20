@@ -19,6 +19,6 @@ public class CompositeTutorialPart : TutorialSegmentPart
     public override void Deactivate()
     {
         _mainPart.Deactivate();
-        _additivePart.Activate();
+        _additivePart.Deactivate();
     }
 }
