@@ -17,8 +17,8 @@ MonoBehaviour:
     _audioClip: {fileID: 8300000, guid: 90bc9440773e1174286beb680d0d88ca, type: 3}
     _volume: 0.5
   - _index: Click
-    _audioClip: {fileID: 8300000, guid: 368b2116f28d26e4996fd730eb77e336, type: 3}
-    _volume: 1.3
+    _audioClip: {fileID: 8300000, guid: fd86f5f78290c7e4abb3ec971fdd706d, type: 3}
+    _volume: 0.3
   - _index: EarnCoins
     _audioClip: {fileID: 8300000, guid: 8804414ff0a3c004c9a678bf3f7e4188, type: 3}
     _volume: 0.5

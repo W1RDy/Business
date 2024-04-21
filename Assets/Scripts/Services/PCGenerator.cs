@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PCGenerator : IService
+public class PCGenerator : ClassForInitialization, IService
 {
     private PCService _pcService;
 
@@ -11,15 +11,18 @@ public class PCGenerator : IService
 
     private Dictionary<(GoodsType goodsType, bool isBroken, bool isReused), PCConfig> _configsDictionary = new Dictionary<(GoodsType goodsType, bool isBroken, bool isReused), PCConfig>();
 
-    public PCGenerator(PCConfig[] goodsConfigs)
+    public PCGenerator(PCConfig[] goodsConfigs) : base()
+    {
+        InitDictionary(goodsConfigs);
+    }
+
+    public override void Init()
     {
         _pool = ServiceLocator.Instance.Get<Pool<PC>>();
         _pcService = ServiceLocator.Instance.Get<PCService>();
 
         var windowService = ServiceLocator.Instance.Get<WindowService>();
         _windowChildChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.GoodsWindow));
-
-        InitDictionary(goodsConfigs);
     }
 
     private void InitDictionary(PCConfig[] pcConfigs)

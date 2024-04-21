@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PeriodController : IService
+public class PeriodController : ClassForInitialization, IService
 {
     private BankCoinsCounter _bankCoinsCounter;
 
@@ -11,7 +11,12 @@ public class PeriodController : IService
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
 
-    public PeriodController()
+    public PeriodController() : base()
+    {
+
+    }
+
+    public override void Init()
     {
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 

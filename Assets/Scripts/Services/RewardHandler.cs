@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RewardHandler : IService
+public class RewardHandler : ClassForInitialization, IService
 {
     private HandsCoinsCounter _coinCounter;
 
-    public RewardHandler()
+    public RewardHandler() : base()
+    {
+
+    }
+
+    public override void Init()
     {
         _coinCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
     }

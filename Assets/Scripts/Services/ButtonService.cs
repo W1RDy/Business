@@ -8,8 +8,6 @@ public class ButtonService : IService
     private TimeController _timeController;
     private PeriodSkipController _gameLifeController;
 
-    private WasteCoinsHandler _wasteCoinsHandler;
-
     private WindowActivator _windowActivator;
 
     private OrderProgressChecker _orderProgressChecker;
@@ -22,12 +20,10 @@ public class ButtonService : IService
     private ResultsOfTheMonthService _resultsOfTheMonthService;
     private GameController _gameController;
 
-    public ButtonService() 
+    public ButtonService()
     {
         _timeController = ServiceLocator.Instance.Get<TimeController>();
         _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
-
-        _wasteCoinsHandler = new WasteCoinsHandler();
 
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
 

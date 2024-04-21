@@ -7735,34 +7735,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8eb9dc021ca044b8820013410774f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeIndicator: {fileID: 569108376}
-  _handsCoinsIndicator: {fileID: 1593328554}
-  _bankCoinsIndicator: {fileID: 1402424600}
-  _handsCoinsChangeView: {fileID: 768211055}
-  _bankCoinsChangeView: {fileID: 1533276983}
   _periodSkipController: {fileID: 1924889488}
   _suggestionsService: {fileID: 1819322213}
   _objectsInitializator: {fileID: 297445484}
   _servicesLocatorEntitiesLoader: {fileID: 253144516}
-  _clicksBlocker: {fileID: 536637359}
+  _servicesLocatorUILoader: {fileID: 2094643343}
   _difficultyController: {fileID: 855340456}
   _subscribeController: {fileID: 1301618223}
-  _iconComponentsRandomizer: {fileID: 32872871}
-  _audioDataConfigs: {fileID: 11400000, guid: a1fe5f172b1a9be47b7bf3d57966ca74, type: 2}
-  _audioPlayerPrefab: {fileID: 6660564155923859586, guid: a14bdd45e9dadc449a01694ce3a7cc22, type: 3}
-  _windows:
-  - {fileID: 737807952}
-  - {fileID: 1820471388}
-  - {fileID: 2063184570}
-  - {fileID: 114013206}
-  - {fileID: 1596205504}
-  - {fileID: 671119684}
-  - {fileID: 954349253}
-  - {fileID: 1967188954}
-  - {fileID: 642005812}
-  - {fileID: 959521845}
-  _ordersNotification: {fileID: 6153828305333895990}
-  _deliveryOrdersNotification: {fileID: 621317905}
   _tutorialController: {fileID: 1159712959}
   _tutorialSegments:
   - {fileID: 1204470059}
@@ -8931,6 +8910,7 @@ Transform:
   m_Children:
   - {fileID: 695608018}
   - {fileID: 253144515}
+  - {fileID: 2094643342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811869854
@@ -15818,7 +15798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 145, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 83.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1402424598
@@ -17865,7 +17845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 145, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 83.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593328552
@@ -23136,6 +23116,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2074527547}
   m_CullTransparentMesh: 1
+--- !u!1 &2094643341
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094643342}
+  - component: {fileID: 2094643343}
+  m_Layer: 0
+  m_Name: ServiceLocatorUILoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2094643342
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094643341}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 811451931}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2094643343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094643341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a4311b73ade5c49b262778109a7b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _timeIndicator: {fileID: 569108376}
+  _handsCoinsIndicator: {fileID: 1593328554}
+  _bankCoinsIndicator: {fileID: 1402424600}
+  _handsCoinsChangeView: {fileID: 768211055}
+  _bankCoinsChangeView: {fileID: 1533276983}
+  _clicksBlocker: {fileID: 536637359}
+  _iconComponentsRandomizer: {fileID: 32872871}
+  _audioDataConfigs: {fileID: 11400000, guid: a1fe5f172b1a9be47b7bf3d57966ca74, type: 2}
+  _audioPlayerPrefab: {fileID: 6660564155923859586, guid: a14bdd45e9dadc449a01694ce3a7cc22, type: 3}
+  _windows:
+  - {fileID: 671119684}
+  - {fileID: 1596205504}
+  - {fileID: 737807952}
+  - {fileID: 642005812}
+  - {fileID: 2063184570}
+  - {fileID: 114013206}
+  - {fileID: 1820471388}
+  - {fileID: 1967188954}
+  - {fileID: 954349253}
+  - {fileID: 959521845}
+  _ordersNotification: {fileID: 6153828305333895990}
+  _deliveryOrdersNotification: {fileID: 621317905}
 --- !u!1 &2124232982
 GameObject:
   m_ObjectHideFlags: 0

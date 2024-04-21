@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class GoodsGenerator : IService
+public class GoodsGenerator : ClassForInitialization, IService
 {
     private GoodsService _goodsService;
 
@@ -15,15 +15,18 @@ public class GoodsGenerator : IService
 
     private Dictionary<GoodsType, GoodsConfig> _configsDictionary = new Dictionary<GoodsType, GoodsConfig>();
 
-    public GoodsGenerator(GoodsConfig[] goodsConfigs)
+    public GoodsGenerator(GoodsConfig[] goodsConfigs) : base()
+    {
+        InitDictionary(goodsConfigs);
+    }
+
+    public override void Init()
     {
         _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
         _goodsService = ServiceLocator.Instance.Get<GoodsService>();
 
         var windowService = ServiceLocator.Instance.Get<WindowService>();
         _windowChildChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.GoodsWindow));
-
-        InitDictionary(goodsConfigs);
     }
 
     private void InitDictionary(GoodsConfig[] goodsConfigs)
