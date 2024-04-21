@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "GoodsConfigs", menuName = "GoodsConfigs/New GoodsConfigs")]
 public class GoodsConfig : ScriptableObject

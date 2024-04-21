@@ -12,11 +12,10 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private CoinsChangeView _handsCoinsChangeView;
     [SerializeField] private CoinsChangeView _bankCoinsChangeView;
 
-    [SerializeField] private RandomController _problemsRandomController;
     [SerializeField] private PeriodSkipController _periodSkipController;
     [SerializeField] private SuggestionsService _suggestionsService;
-
     [SerializeField] private ObjectsInitializator _objectsInitializator;
+    [SerializeField] private ServiceLocatorEntitiesLoader _servicesLocatorEntitiesLoader;
 
     [SerializeField] private ClicksBlocker _clicksBlocker;
 
@@ -24,35 +23,12 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private SubscribeController _subscribeController;
 
     [SerializeField] private IconComponentsRandomizer _iconComponentsRandomizer;
-    [SerializeField] private OrderGenerator _orderGenerator;
 
     [SerializeField] private AudioDataConfigs _audioDataConfigs;
     [SerializeField] private AudioPlayer _audioPlayerPrefab;
     private AudioPlayer _audioPlayer;
 
     [SerializeField] private Window[] _windows;
-
-    #region PoolsTransforms
-
-    [SerializeField] private RectTransform _orderPoolContainer;
-    [SerializeField] private Transform _orderParent;
-
-    [SerializeField] private RectTransform _goalPoolContainer;
-    [SerializeField] private Transform _goalParent;
-
-    [SerializeField] private RectTransform _deliveryOrderPoolContainer;
-    [SerializeField] private Transform _deliveryOrderParent;
-
-    [SerializeField] private RectTransform _goodsPoolContainer;
-    [SerializeField] private Transform _goodsParent;
-
-    #endregion
-
-    [SerializeField] private CompositeOrder _compositeDeliveryOrder;
-
-    [SerializeField] private GoodsConfig[] _goodsConfigs;
-    [SerializeField] private PCConfig[] _pcConfigs;
-    [SerializeField] private ProblemConfig[] _problemConfigs;
 
     [SerializeField] private Notification _ordersNotification;
     [SerializeField] private Notification _deliveryOrdersNotification;
@@ -95,21 +71,13 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindIconComponentsRandomizer();
 
         BindOrderCompleteHandler();
-        BindOrdersServices();
-        BindDeliveryCompositeOrder();
-        BindOrderGenerator();
+        _servicesLocatorEntitiesLoader.BindEntities();
 
-        BindProblemGenerator();
         BindResultsService();
 
         BindPeriodSkipController();
         BindPeriodController();
         BindTimeController();
-
-        BindPools();
-
-        BindGoodsService();
-        BindPCService();
 
         BindOrderProgressChecker();
 
@@ -211,12 +179,6 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.Instance.Register(_periodSkipController);
     }
 
-    private void BindProblemGenerator()
-    {
-        var problemGenerator = new ProblemsGenerator(_problemConfigs, _problemsRandomController);
-        ServiceLocator.Instance.Register(problemGenerator);
-    }
-
     private void BindResultsService()
     {
         var resultService = new ResultsOfTheMonthService();
@@ -235,76 +197,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         ServiceLocator.Instance.Register(orderProgressChecker);
     }
 
-    private void BindPCService()
-    {
-        var pcService = new PCService();
-        ServiceLocator.Instance.Register(pcService);
-
-        var pcGenerator = new PCGenerator(_pcConfigs);
-        ServiceLocator.Instance.Register(pcGenerator);
-    }
-
-    private void BindGoodsService()
-    {
-        var goodsService = new GoodsService();
-        ServiceLocator.Instance.Register(goodsService);
-
-        var goodsGenerator = new GoodsGenerator(_goodsConfigs);
-        ServiceLocator.Instance.Register(goodsGenerator);
-    }
-
-    private void BindDeliveryCompositeOrder()
-    {
-        ServiceLocator.Instance.Register(_compositeDeliveryOrder);
-    }
-
-    private void BindPools()
-    {
-        var orderPool = new Pool<Order>(new OrderFactory(_orderPoolContainer), _orderPoolContainer, _orderParent, 1);
-        orderPool.Init();
-
-        var goalPool = new Pool<Goal>(new GoalFactory(_goalPoolContainer), _goalPoolContainer, _goalParent, 1);
-        goalPool.Init();
-
-        var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_deliveryOrderPoolContainer), _deliveryOrderPoolContainer, _deliveryOrderParent, 3);
-        deliveryOrderPool.Init();
-
-        var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 1);
-        goodsPool.Init();
-
-        var pcPool = new Pool<PC>(new PCFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
-        pcPool.Init();
-
-        ServiceLocator.Instance.Register(orderPool);
-        ServiceLocator.Instance.Register(goalPool);
-        ServiceLocator.Instance.Register(deliveryOrderPool);
-        ServiceLocator.Instance.Register(goodsPool);
-        ServiceLocator.Instance.Register(pcPool);
-    }
-
     private void BindRewardHandler()
     {
         var rewardHandler = new RewardHandler();
 
         ServiceLocator.Instance.Register(rewardHandler);
-    }
-
-    private void BindOrderGenerator()
-    {
-        ServiceLocator.Instance.Register(_orderGenerator);
-    }
-
-    private void BindOrdersServices()
-    {
-        var ordersService = new OrderService();
-        var activeOrderService = new ActiveOrderService();
-        var deliveryOrderService = new DeliveryOrderService();
-        var rememberedOrderService = new RememberedOrderService();
-
-        ServiceLocator.Instance.Register(ordersService);
-        ServiceLocator.Instance.Register(activeOrderService);
-        ServiceLocator.Instance.Register(deliveryOrderService);
-        ServiceLocator.Instance.Register(rememberedOrderService);
     }
 
     private void BindPeriodController()

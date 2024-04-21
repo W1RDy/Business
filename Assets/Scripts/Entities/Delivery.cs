@@ -36,10 +36,10 @@ public class Delivery : ObjectForInitialization
 
     #endregion
 
-    private Pool<DeliveryOrder> _pool;
-
     private DeliveryOrderService _orderService;
     private CompositeOrder _compositeOrder;
+
+    private DeliveryOrderGenerator _orderGenerator;
     private WindowChildChangedHandler _windowChildChangedHandler;
 
 
@@ -51,7 +51,7 @@ public class Delivery : ObjectForInitialization
         _view = new DeliveryView(_costText, _timeText, _titleText, _descriptionText, _icon);
         _view.SetView(Cost, Time, _deliveryConfig.DeliveryTitle, _deliveryConfig.DeliveryDescription, _deliveryConfig.Icon);
 
-        _pool = ServiceLocator.Instance.Get<Pool<DeliveryOrder>>();
+        _orderGenerator = ServiceLocator.Instance.Get<DeliveryOrderGenerator>();
         _orderService = ServiceLocator.Instance.Get<DeliveryOrderService>();
         _compositeOrder = ServiceLocator.Instance.Get<CompositeOrder>();
 
@@ -70,11 +70,7 @@ public class Delivery : ObjectForInitialization
         var deliveryOrder = _orderService.GetOrder(ID) as DeliveryOrder;
         if (deliveryOrder == null)
         {
-            deliveryOrder = _pool.Get();
-            deliveryOrder.InitVariant(ID, Cost, Time, _deliveryConfigInstance.GoodsType, _deliveryConfigInstance.Icon);
-            _orderService.AddOrder(deliveryOrder);
-
-            _compositeOrder.AddOrder(deliveryOrder);
+            _orderGenerator.GenerateOrder(ID, Cost, Time, _deliveryConfigInstance.GoodsType, _deliveryConfigInstance.Icon);
         }
         else
         {

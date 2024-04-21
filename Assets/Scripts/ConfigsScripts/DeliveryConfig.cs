@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "DeliveryConfig", menuName = "DeliveryConfigs/New DeliveryConfig")]
 public class DeliveryConfig : ScriptableObject
