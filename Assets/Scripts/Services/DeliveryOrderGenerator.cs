@@ -38,4 +38,15 @@ public class DeliveryOrderGenerator : ClassForInitialization, IService
 
         _compositeOrder.AddOrder(deliveryOrder);
     }
+
+    public void GenerateOrderByLoadData(DeliveryOrderSaveConfig saveConfig)
+    {
+        var config = _configs[saveConfig.goodsType];
+
+        var deliveryOrder = _pool.Get();
+        deliveryOrder.InitVariant((int)config.GoodsType, config.DeliveryCost, config.DeliveryTime, saveConfig.amount, config.GoodsType, config.Icon);
+        _orderService.AddOrder(deliveryOrder);
+
+        _compositeOrder.AddOrder(deliveryOrder);
+    }
 }

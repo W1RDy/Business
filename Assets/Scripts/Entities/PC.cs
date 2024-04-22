@@ -71,11 +71,16 @@ public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
 
     public void InitVariant(PCConfig config, bool isBroken)
     {
+        InitVariant(config, isBroken, 1);
+    }
+
+    public void InitVariant(PCConfig config, bool isBroken, int amount)
+    {
         ID = config.ID;
         _config = config;
         _isBroken = isBroken;
 
-        Amount = 1;
+        Amount = amount;
         _view.SetView(_config.Title, _config.Description, Amount, _isBroken, _config.Icon);
     }
 

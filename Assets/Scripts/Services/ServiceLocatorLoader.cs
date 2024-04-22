@@ -20,6 +20,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private TutorialSegment[] _tutorialSegments;
 
     [SerializeField] private GameController _gameController;
+    [SerializeField] private DataSaver _dataSaver;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class ServiceLocatorLoader : MonoBehaviour
     private void Bind()
     {
         BindInitializator();
+        BindDataControllers();
         BindTutorial();
 
         BindSubscribeController();
@@ -54,6 +56,14 @@ public class ServiceLocatorLoader : MonoBehaviour
         _servicesLocatorUILoader.BindUI();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindDataControllers()
+    {
+        var dataLoader = new DataLoader();
+
+        ServiceLocator.Instance.Register(_dataSaver);
+        ServiceLocator.Instance.Register(dataLoader);
     }
 
     private void BindTutorial()

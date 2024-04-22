@@ -1,12 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class PCService : IService
+public class PCService : ClassForInitialization, IService, ISubscribable
 {
     [SerializeField] private Dictionary<int, PC> _pcDict = new Dictionary<int, PC>();
 
     public event Action ItemsUpdated;
+
+    private SubscribeController _subscribeController;
+    private DataSaver _dataSaver;
+
+    private Action SaveDelegate;
+
+    public PCService() : base() { }
+
+    public override void Init()
+    {
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        Subscribe();
+    }
 
     public void AddPC(PC pc)
     {
@@ -57,5 +72,18 @@ public class PCService : IService
             if ((int)pc.QualityType >= goodsTypeIndex) return true;
         }
         return false;
+    }
+
+    public virtual void Subscribe()
+    {
+        _subscribeController.AddSubscribable(this);
+
+        SaveDelegate = () => _dataSaver.SavePCS(_pcDict.Values.ToArray());
+        _dataSaver.OnStartSaving += SaveDelegate;
+    }
+
+    public void Unsubscribe()
+    {
+        _dataSaver.OnStartSaving -= SaveDelegate;
     }
 }

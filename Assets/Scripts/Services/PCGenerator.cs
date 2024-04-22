@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PCGenerator : ClassForInitialization, IService
@@ -39,6 +40,25 @@ public class PCGenerator : ClassForInitialization, IService
     {
         Action action = () => Generate(goodsType, isBroken, isReused);
         _windowChildChangedHandler.ChangeChilds(action);
+    }
+
+    public void GeneratePCByLoadData(PCSaveConfig pcSaveConfig)
+    {
+        var config = GetConfig(pcSaveConfig.id);
+
+        var pc = _pool.Get();
+        pc.InitVariant(config, config.IsBroken, pcSaveConfig.amount);
+
+        _pcService.AddPC(pc);
+    }
+
+    private PCConfig GetConfig(int index)
+    {
+        foreach (var config in _configsDictionary.Values)
+        {
+            if (config.ID == index) return config;
+        }
+        throw new System.ArgumentNullException("Config with index " + index + " doesn't exist!");
     }
 
     private void Generate(GoodsType goodsType, bool isBroken, bool isReused)

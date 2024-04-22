@@ -3,8 +3,9 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using YG;
 
-public class GameController : ObjectForInitialization, IService
+public class GameController : ObjectForInitialization, IService, ISubscribable
 {
     public event Action GameFinished;
     public event Action GameStarted;
@@ -17,11 +18,17 @@ public class GameController : ObjectForInitialization, IService
     private TutorialActivator _tutorialActivator;
     private GamesConditionChecker _conditionsChecker;
 
-    [SerializeField] private bool _isNeedTutorial;
+    private HandsCoinsCounter _handsCoinsCounter;
+    private BankCoinsCounter _bankCoinsCounter;
+
+    private SubscribeController _subscribeController;
+
+    private DataLoader _dataLoader;
+    private DataSaver _dataSaver;
 
     public bool IsFinished { get; private set; }
     public bool IsStartingTutorial { get; private set; }
-    public bool IsTutorial { get; private set; }
+    public bool IsTutorial { get; set; }
 
     public override void Init()
     {
@@ -29,21 +36,21 @@ public class GameController : ObjectForInitialization, IService
         _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        IsTutorial = _isNeedTutorial;
-        _tutorialActivator.TutorialDeactivated += ChangeGameStateFromTutorial;
+        _dataLoader = ServiceLocator.Instance.Get<DataLoader>();
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
-        var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-        var bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
+        _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 
-        handsCoinsCounter.CoinsChanged += TryFinishGame;
-        bankCoinsCounter.CoinsChanged += TryFinishGame;
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        Subscribe();
 
-        StartCoroutine(WaitBeforeStart());
+        YandexGame.ResetSaveProgress();
+        _dataLoader.LoadData();
     }
 
-    private IEnumerator WaitBeforeStart()
+    public void StartDelegate()
     {
-        yield return new WaitForSeconds(0.2f);
         if (IsTutorial) StartTutorial();
         else StartGame();
     }
@@ -89,5 +96,25 @@ public class GameController : ObjectForInitialization, IService
     {
         Debug.Log("Restart");
         GameRestarted?.Invoke();
+    }
+
+    public void Subscribe()
+    {
+        _subscribeController.AddSubscribable(this);
+
+        _dataLoader.OnDataLoaded += StartDelegate;
+        _tutorialActivator.TutorialDeactivated += ChangeGameStateFromTutorial;
+
+        _handsCoinsCounter.CoinsChanged += TryFinishGame;
+        _bankCoinsCounter.CoinsChanged += TryFinishGame;
+    }
+
+    public void Unsubscribe()
+    {
+        _dataLoader.OnDataLoaded -= StartDelegate;
+        _tutorialActivator.TutorialDeactivated -= ChangeGameStateFromTutorial;
+
+        _handsCoinsCounter.CoinsChanged -= TryFinishGame;
+        _bankCoinsCounter.CoinsChanged -= TryFinishGame;
     }
 }

@@ -28,8 +28,12 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
     private GameController _gameController;
     private SubscribeController _subscribeController;
 
+    private DataSaver _dataSaver;
+
     public event Action<int> OnTimeChanged;
     public event Action OnPeriodChanged;
+
+    private Action SaveDelegate;
 
     public TimeController(TimeIndicator timeIndicator) : base () 
     {
@@ -41,13 +45,14 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
         _periodController = ServiceLocator.Instance.Get<PeriodController>();
         _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         Subscribe();
     }
 
     private void SetStartValues()
-    {
+    { 
         if (_gameController.IsTutorial)
         {
             _currentMonth = 0;
@@ -79,6 +84,24 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
         _gameLifeController.SkipDays();
     }
 
+    public void SetParametersByLoadData(int time, int months)
+    {
+        _time = time;
+        _currentMonth = months;
+
+        if (_currentMonth > 0) _currentMaxTime = _maxTime;
+        else _currentMaxTime = _tutorialMaxTime;
+
+        _timeIndicator.Init(_currentMaxTime);
+        _timeIndicator.UpdateMonth(_currentMonth);
+        _timeIndicator.SetTime(time);
+
+        if (PeriodFinished())
+        {
+            _periodController.FinishPeriod();
+        }
+    }
+
     public void UpdateMonth()
     {
         _currentMonth++;
@@ -99,11 +122,15 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
         _subscribeController.AddSubscribable(this);
         _gameController.TutorialStarted += SetStartValues;
         _gameController.GameStarted += SetStartValues;
+
+        SaveDelegate = () => _dataSaver.SaveMonthsAndTime(CurrentMonth, Time);
+        _dataSaver.OnStartSaving += SaveDelegate;
     }
 
     public void Unsubscribe()
     {
         _gameController.TutorialStarted -= SetStartValues;
         _gameController.GameStarted -= SetStartValues;
+        _dataSaver.OnStartSaving -= SaveDelegate;
     }
 }

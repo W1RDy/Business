@@ -160,6 +160,18 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
         _orderService.AddOrder(order);
     }
 
+    public void GenerateOrderByLoadData(OrderSaveConfig orderSaveConfig)
+    {
+        var config = new OrderInstanceConfig(orderSaveConfig.cost, orderSaveConfig.time, orderSaveConfig.neededGoods);
+
+        var order = _pool.Get();
+        _idGenerator.BorrowID(orderSaveConfig.id);
+
+        order.InitVariant(orderSaveConfig.id, config, _idGenerator, orderSaveConfig.isApplied, orderSaveConfig.remainWaiting);
+
+        _orderService.AddOrder(order);
+    }
+
     private void ChangeOrderGenerateChancesByDifficulty()
     {
         _randomController.ChangeChances(_difficultyController.OrderChances);

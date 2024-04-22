@@ -81,6 +81,11 @@ public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolE
 
     public void InitVariant(int id, int cost, int time, GoodsType goodsType, Sprite icon)
     {
+        InitVariant(id, cost, time, 1, goodsType, icon);
+    }
+
+    public void InitVariant(int id, int cost, int time, int amount, GoodsType goodsType, Sprite icon)
+    {
         ID = id;
         Cost = cost;
         Time = time;
@@ -88,7 +93,7 @@ public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolE
 
         _goodsType = goodsType;
 
-        Amount = 1;
+        Amount = amount;
         _deliveryOrderView.SetIcon(icon);
 
         _notificationController.AddNotification(this);

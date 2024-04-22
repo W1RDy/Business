@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 namespace YG
 {
     [System.Serializable]
@@ -18,8 +20,10 @@ namespace YG
         public int bankCoins = 400;
 
         public int monthCount = 0;
+        public int time = 0;
 
-        public EntitiesSaveConfig entitiesSaveConfig;
+        public EntitiesSaveConfig entitiesSaveConfig = new EntitiesSaveConfig();
+        public List<ResultSaveConfig> resultSaveConfigs = new List<ResultSaveConfig>();
 
         // Ваши сохранения
 

@@ -1,11 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
-public class ResultsOfTheMonthService : IService
+public class ResultsOfTheMonthService : ClassForInitialization, IService, ISubscribable
 {
     private List<ResultsOfTheMonth> _results = new List<ResultsOfTheMonth>();
-
     private ResultsOfTheMonth _currentResults;
+
+    private DataSaver _dataSaver;
+    private Action SaveDelegate;
+
+    private SubscribeController _subscribeController;
+
+    public ResultsOfTheMonthService() : base() { }
+
+    public override void Init()
+    {
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        Subscribe();
+    }
 
     public void UpdateResults(int purchase, int emergency, int orders, int bank)
     {
@@ -18,6 +33,19 @@ public class ResultsOfTheMonthService : IService
         _results.Add(_currentResults);
     }
 
+    public void SetResultsByLoadData(List<ResultSaveConfig> resultSaveConfigs)
+    {
+        foreach (ResultSaveConfig config in resultSaveConfigs)
+        {
+            var result = new ResultsOfTheMonth();
+            result.UpdateResult(config.purchaseCosts, config.emergencyCosts, config.orderIncome, config.bankIncome);
+            result.SummarizeResults();
+
+            _results.Add(result);
+        }
+        _currentResults = _results[_results.Count - 1];
+    }
+
     public ResultsOfTheMonth GetResultsOfTheMonth()
     {
         return _currentResults;
@@ -26,6 +54,22 @@ public class ResultsOfTheMonthService : IService
     public List<ResultsOfTheMonth> GetResults() 
     {
         return _results; 
+    }
+
+    public void Subscribe()
+    {
+        _subscribeController.AddSubscribable(this);
+
+        SaveDelegate = () =>
+        {
+            _dataSaver.SaveResults(_results);
+        };
+        _dataSaver.OnStartSaving += SaveDelegate;
+    }
+
+    public void Unsubscribe()
+    {
+        _dataSaver.OnStartSaving -= SaveDelegate;
     }
 }
 

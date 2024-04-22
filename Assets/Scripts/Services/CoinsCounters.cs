@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CoinsCounter
 {
-    public abstract class CoinsCounter : IService, ICoinsCounter
+    public abstract class CoinsCounter : ClassForInitialization, IService, ICoinsCounter, ISubscribable
     {
         protected int _coins;
 
@@ -16,10 +16,19 @@ namespace CoinsCounter
 
         public event Action CoinsChanged;
 
-        public CoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView coinsChangeView)
+        protected SubscribeController _subscribeController;
+        protected DataSaver _dataSaver;
+
+        protected Action SaveDelegate;
+
+        public CoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView coinsChangeView) : base()
         {
             _coinsIndicator = coinsIndicator;
             _changeView = coinsChangeView;
+        }
+
+        public override void Init()
+        {
             _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         }
 
@@ -73,6 +82,16 @@ namespace CoinsCounter
         {
             CoinsChanged?.Invoke();
         }
+
+        public virtual void Subscribe()
+        {
+            _subscribeController.AddSubscribable(this);
+        }
+
+        public void Unsubscribe()
+        {
+            _dataSaver.OnStartSaving -= SaveDelegate;
+        }
     }
 
     public class HandsCoinsCounter : CoinsCounter
@@ -81,6 +100,12 @@ namespace CoinsCounter
 
         public HandsCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView) 
         {
+
+        }
+
+        public override void Init()
+        {
+            base.Init();
             _coins = _difficultyController.StartCoinsInHands;
             UpdateIndicator();
             _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
@@ -104,12 +129,25 @@ namespace CoinsCounter
             base.ChangeCoins(value);
             if (difference != 0) _audioPlayer.PlaySound("EarnCoins");
         }
+
+        public override void Subscribe()
+        {
+            base.Subscribe();
+            SaveDelegate = () => _dataSaver.SaveHandCoins(Coins);
+            _dataSaver.OnStartSaving += SaveDelegate;
+        }
     }
 
     public class BankCoinsCounter : CoinsCounter
     {
         public BankCoinsCounter(CoinsIndicator coinsIndicator, CoinsChangeView changeView) : base(coinsIndicator, changeView)
         {
+            
+        }
+
+        public override void Init()
+        {
+            base.Init();
             _coins = _difficultyController.StartCoinsInBank;
             UpdateIndicator();
         }
@@ -122,6 +160,13 @@ namespace CoinsCounter
             if (prevCoins != _coins) _changeView.ActivateChangeView(_coins - prevCoins);
             UpdateIndicator();
             InvokeCoinsEvent();
+        }
+
+        public override void Subscribe()
+        {
+            base.Subscribe();
+            SaveDelegate = () => _dataSaver.SaveBankCoins(Coins);
+            _dataSaver.OnStartSaving += SaveDelegate;
         }
     }
 }

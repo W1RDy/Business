@@ -72,6 +72,16 @@ public class GoodsGenerator : ClassForInitialization, IService
         _windowChildChangedHandler.ChangeChilds(action);
     }
 
+    public void GenerateGoodsByLoadData(GoodsSaveConfig goodsSaveConfig)
+    {
+        var goodsConfig = _configsDictionary[goodsSaveConfig.goodsType];
+
+        var goods = _pool.Get();
+        goods.InitVariant(goodsConfig, goodsSaveConfig.brokenGoodsAmount, goodsSaveConfig.amount);
+
+        _goodsService.AddGoods(goods);
+    }
+
     private void Generate(GoodsType goodsType, int amount)
     {
         var goodsConfigInstance = _configsDictionary[goodsType];

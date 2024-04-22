@@ -91,12 +91,12 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
         InitAnimations();
     }
-
-    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)
+    
+    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator, bool isApplied, int remaimWaiting)
     {
         _orderConfig = orderConfig;
         _id = id;
-        _remainWaiting = 2;
+        _remainWaiting = remaimWaiting;
 
         _view.SetView(_orderConfig.Cost, _orderConfig.Time, NeededGoods, ID);
 
@@ -104,6 +104,13 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         _notificationController.AddNotification(this);
 
         _idGenerator = idGenerator;
+
+        if (isApplied) ApplyOrder();
+    }
+
+    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)
+    {
+        InitVariant(id, orderConfig, idGenerator, false, 2);
     }
 
     private void InitAnimations()

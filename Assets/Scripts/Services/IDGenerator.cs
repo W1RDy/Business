@@ -18,6 +18,11 @@ public class IDGenerator : IIDGenerator
         return id;
     }
 
+    public void BorrowID(int id)
+    {
+        _id = id;
+    }
+
     public void ReleaseID(int id)
     {
         Debug.Log("ReleaseID");
@@ -53,6 +58,11 @@ public class IDGeneratorWithMinID : IIDGenerator
         }
 
         throw new System.NullReferenceException("Id hasn't found! Need to increase generator's max count!");
+    }
+
+    public void BorrowID(int id)
+    {
+        _ids[id - _startID] = false;
     }
 
     public void ReleaseID(int id)

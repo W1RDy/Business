@@ -17,6 +17,9 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
     private Action _onDifficultyChanged;
 
     private SubscribeController _subscribeController;
+    private DataSaver _dataSaver;
+
+    private ProblemConfig _currentProblem;
 
     public ProblemsGenerator(ProblemConfig[] problemConfigs, RandomController randomController) : base()
     {
@@ -29,10 +32,13 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
         _problemWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.ProblemWindow) as ProblemWindow;
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
         _rememberedOrderService = ServiceLocator.Instance.Get<RememberedOrderService>();
+
         _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
-        _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
+        _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
+
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
         Subscribe();
     }
@@ -76,13 +82,42 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
     {
         if (_gameController.IsTutorial) return;
 
-        var problemConfig = GetRandomProblem();
-        if (problemConfig != null)
+        _currentProblem = GetRandomProblem();
+        if (_currentProblem != null)
         {
-            _problemWindow.SetProblem(problemConfig);
+            _problemWindow.SetProblem(_currentProblem);
             _clicksBlocker.BlockClicks();
             _windowActivator.ActivateWindow(WindowType.ProblemWindow);
+
+            SaveDelegate();
         }
+    }
+
+    private void SaveDelegate()
+    {
+        _dataSaver.SaveProblem(_currentProblem);
+        _currentProblem = null;
+    }
+
+    public void GenerateProblemByLoadData(ProblemSaveConfig problem)
+    {
+        _randomController.BlockController();
+
+        var problemConfig = GetProblem(problem.id);
+        if (problemConfig is ProblemWithOrder problemWithOrder) problemWithOrder.SetParameters(problem.problemedOrder);
+
+        _problemWindow.SetProblem(problemConfig);
+        _clicksBlocker.BlockClicks();
+        _windowActivator.ActivateWindow(WindowType.ProblemWindow);
+    }
+
+    private ProblemConfig GetProblem(string index)
+    {
+        foreach (var problem in _problemConfigsInstance)
+        {
+            if (problem.ID == index) return problem;
+        }
+        throw new System.ArgumentNullException("Problem with index " + index + " doesn't exist!");
     }
 
     private void ChangeGenerateChancesByDifficulty()
@@ -116,10 +151,13 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
 
         _difficultyController.DifficultyChanged += _onDifficultyChanged;
         _onDifficultyChanged.Invoke();
+
+        _dataSaver.OnStartSaving += SaveDelegate;
     }
 
     public void Unsubscribe()
     {
         _difficultyController.DifficultyChanged -= _onDifficultyChanged;
+        _dataSaver.OnStartSaving -= SaveDelegate;
     }
 }

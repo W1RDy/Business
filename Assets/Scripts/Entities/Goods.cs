@@ -49,7 +49,7 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
 
     #endregion
 
-    public int _brokenGoodsCount;
+    public int BrokenGoodsCount { get; private set; }
 
     public bool IsFree { get; private set; }
     public Goods Element => this;
@@ -75,7 +75,7 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
     public void InitVariant(GoodsConfig config, int brokenGoodsCount, int amount)
     {
         _config = config;
-        _brokenGoodsCount = brokenGoodsCount;
+        BrokenGoodsCount = brokenGoodsCount;
 
         Amount = amount;
         _view.SetView(_config.Title, _config.Description, _config.BuildTime, Amount, config.Icon);
@@ -98,8 +98,8 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
     {
         int randomGoodsIndex = Random.Range(1, Amount);
 
-        var isBroken = randomGoodsIndex <= _brokenGoodsCount;
-        if (isBroken) _brokenGoodsCount -= 1;
+        var isBroken = randomGoodsIndex <= BrokenGoodsCount;
+        if (isBroken) BrokenGoodsCount -= 1;
         return isBroken;
     }
 

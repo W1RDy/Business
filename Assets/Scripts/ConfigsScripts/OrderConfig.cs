@@ -60,6 +60,7 @@ public class OrderConfig : ScriptableObject, IRandomizable
     }
 }
 
+[Serializable]
 public class OrderInstanceConfig
 {
     public int Cost {get; private set; }

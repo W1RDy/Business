@@ -20,6 +20,8 @@ public class PeriodSkipController : ObjectForInitialization, IService
     private OrderGenerator _orderGenerator;
     private OrderUrgencyUpdater _orderUrgencyUpdater;
 
+    private DataSaver _dataSaver;
+
     public override void Init()
     {
         base.Init();
@@ -35,6 +37,8 @@ public class PeriodSkipController : ObjectForInitialization, IService
         _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
         _orderGenerator = ServiceLocator.Instance.Get<OrderGenerator>();
         _orderUrgencyUpdater = new OrderUrgencyUpdater();
+
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
     }
 
     public void SkipDays()
@@ -44,6 +48,11 @@ public class PeriodSkipController : ObjectForInitialization, IService
         {
             if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay(); 
         });
+        if (_conditionChecker.IsPeriodFinished())
+        {
+            _dataSaver.SaveTutorialState();
+            _dataSaver.StartSaving();
+        }
         _audioPlayer.PlaySound("SkipTime");
     }
 
