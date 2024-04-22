@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class TimeController : ClassForInitialization, IService, ISubscribable
 {
@@ -105,6 +106,8 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
     public void UpdateMonth()
     {
         _currentMonth++;
+        YandexGame.NewLeaderboardScores("leaderboard", _currentMonth);
+
         _timeIndicator.UpdateMonth(_currentMonth);
         _time = 0;
 
