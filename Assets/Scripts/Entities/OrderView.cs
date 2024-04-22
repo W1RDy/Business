@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +25,7 @@ public class OrderView : MonoBehaviour
     public void SetView(int coinsValue, int timeValue, GoodsType goodsType, int id)
     {
         if (_iconRandomizer == null) _iconRandomizer = ServiceLocator.Instance.Get<IconComponentsRandomizer>();
-        _indexText.text = "order " + id;
+        _indexText.text = LocalizationManager.GetTranslation("Order") + " " + id;
         SetCoins(coinsValue);
         SetTime(timeValue);
         SetQuality(goodsType);
@@ -45,9 +46,9 @@ public class OrderView : MonoBehaviour
     public void SetQuality(GoodsType goodsType)
     {
         string quality;
-        if (goodsType == GoodsType.LowQuality) quality = "low +";
-        else if (goodsType == GoodsType.MediumQuality) quality = "medium +";
-        else quality = "high";
+        if (goodsType == GoodsType.LowQuality) quality = LocalizationManager.GetTranslation("Low") + " +";
+        else if (goodsType == GoodsType.MediumQuality) quality = LocalizationManager.GetTranslation("Medium") + " +";
+        else quality = LocalizationManager.GetTranslation("High");
 
         _qualityText.text = quality;
     }

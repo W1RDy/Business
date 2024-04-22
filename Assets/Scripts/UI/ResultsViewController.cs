@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using System.Linq;
+using I2.Loc;
 
 public class ResultsViewController
 {
@@ -61,16 +62,16 @@ public class ResultsViewController
 
     private void ShowResultsOfTheMonth(ResultsOfTheMonth resultsOfTheMonth)
     {
-        _titleText.text = "Results of the month";
+        _titleText.text = LocalizationManager.GetTranslation("Results of the month");
 
-        _costsText1.text = "Purchase costs: " + resultsOfTheMonth.PurchaseCosts.ToString();
-        _costsText2.text = "Emergency costs: " + resultsOfTheMonth.EmergencyCosts.ToString();
+        _costsText1.text = LocalizationManager.GetTranslation("Purchase costs") + ": " + resultsOfTheMonth.PurchaseCosts.ToString();
+        _costsText2.text = LocalizationManager.GetTranslation("Emergency costs") + ": " + resultsOfTheMonth.EmergencyCosts.ToString();
 
-        _incomeText1.text = "Orders income: +" + resultsOfTheMonth.OrderIncome.ToString();
-        _incomeText2.text = "Bank income: +" + resultsOfTheMonth.BankIncome.ToString();
+        _incomeText1.text = LocalizationManager.GetTranslation("Orders income") + ": +" + resultsOfTheMonth.OrderIncome.ToString();
+        _incomeText2.text = LocalizationManager.GetTranslation("Bank income") + ": +" + resultsOfTheMonth.BankIncome.ToString();
 
         var valueSymbol = resultsOfTheMonth.Summary >= 0 ? "+" : "-";
-        _summaryCoinsText.text = "Summary: " + valueSymbol + Math.Abs(resultsOfTheMonth.Summary).ToString();
+        _summaryCoinsText.text = LocalizationManager.GetTranslation("Summary") + ": " + valueSymbol + Math.Abs(resultsOfTheMonth.Summary).ToString();
 
         _summaryCoinsText.color = resultsOfTheMonth.Summary >= 0 ? _positiveColor : _negativeColor;
 
@@ -80,11 +81,11 @@ public class ResultsViewController
 
     private void ShowResultsOfTheGame(ResultsOfTheGame resultsOfTheGame)
     {
-        _titleText.text = "Results of the game";
+        _titleText.text = LocalizationManager.GetTranslation("Results of the game");
 
-        _costsText1.text = "Expenses: " + resultsOfTheGame.Expenses.ToString();
-        _incomeText1.text = "Income: +" + resultsOfTheGame.Income.ToString();
-        _summaryTimeText.text = "Time: " + resultsOfTheGame.Time.ToString() + " months";
+        _costsText1.text = LocalizationManager.GetTranslation("Expences") + ": " + resultsOfTheGame.Expenses.ToString();
+        _incomeText1.text = LocalizationManager.GetTranslation("Incomes") + ": +" + resultsOfTheGame.Income.ToString();
+        _summaryTimeText.text = LocalizationManager.GetTranslation("Time") + ": " + resultsOfTheGame.Time.ToString() + " " + LocalizationManager.GetTranslation("Months");
 
         TurnOnTexts(_costsText1, _incomeText1, _summaryTimeText);
         _audioPlayer.PlaySound("FinishPeriod");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -38,13 +39,13 @@ public class ApplyDistributeWithSuggestion : CustomButton, IButtonWithStates, IS
     public void ChangeStates(bool toActiveState)
     {
         _button.interactable = toActiveState;
-        var text = toActiveState ? "Apply" : "Can't apply";
-        SetText(text);
+        var key = toActiveState ? "Apply" : "Can't apply";
+        SetText(key);
     }
 
-    private void SetText(string text)
+    private void SetText(string key)
     {
-        _buttonText.text = text;
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 
     public bool CheckStatesChangeCondition()

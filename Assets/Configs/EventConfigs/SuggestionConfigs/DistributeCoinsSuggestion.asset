@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DistributeCoinsSuggestion
   m_EditorClassIdentifier: 
   confirmType: 2
-  _description: How much coins safe in bank and how much in wallet?
+  _description: Distribute coins suggestion

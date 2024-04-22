@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 4
   _goodsType: 1
-  _title: ReturnedMediumPC
-  _description: The computer was claimed to be of high quality, but it looks like
-    you were tricked with some details
+  _title: Medium returned pc
+  _description: Medium returned pc description
   _isReturned: 1
   _isBroken: 0
   _icon: {fileID: 21300000, guid: 92a57602bf424d94bb663b04297e51d6, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SkipTimeAndWasteCoinsSuggestion
   m_EditorClassIdentifier: 
   confirmType: 1
-  _description: The time will be skipped. The coins will be wasted.
+  _description: Skip time and coins suggestion

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deliveryType: 2
   _deliveryTitle: High delivery
-  _deliveryDescription: Fast delivery, high quality. But high price.
+  _deliveryDescription: High delivery description
   _deliveryCost: 60
   _deliveryTime: 2
   _goodsType: 2

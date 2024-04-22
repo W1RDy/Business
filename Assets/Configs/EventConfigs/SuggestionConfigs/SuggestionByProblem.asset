@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SuggestionByProblem
   m_EditorClassIdentifier: 
   confirmType: 3
-  _description: How much coins safe in bank and how much in wallet?
+  _description: Suggestion by problem

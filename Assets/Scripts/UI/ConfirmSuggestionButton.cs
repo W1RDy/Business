@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 
 public class ConfirmSuggestionButton : CloseButton
@@ -18,8 +19,8 @@ public class ConfirmSuggestionButton : CloseButton
         _buttonService.ConfirmSuggestion((_window as SuggestionWindow).GetSuggestion());
     }
 
-    protected void SetText(string text)
+    protected void SetText(string key)
     {
-        _buttonText.text = text;
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 }

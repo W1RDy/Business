@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -154,10 +155,10 @@ public class GoodsView
         _icon = icon;
     }
 
-    public void SetView(string title, string description, int time, int amount, Sprite icon)
+    public void SetView(string titleKey, string descriptionKey, int time, int amount, Sprite icon)
     {
-        _titleText.text = title;
-        _descriptionText.text = description;
+        _titleText.text = LocalizationManager.GetTranslation("Goods/" + titleKey);
+        _descriptionText.text = LocalizationManager.GetTranslation("Goods/" + descriptionKey);
 
         SetTime(time);
         SetAmount(amount);

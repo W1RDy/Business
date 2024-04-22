@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 
 public class EventsViewController
@@ -16,7 +17,7 @@ public class EventsViewController
 
     public void SetEvent(IEvent entityEvent)
     {
-        _descriptionText.text = entityEvent.Description;
+        _descriptionText.text = LocalizationManager.GetTranslation("Events/" + entityEvent.Description);
         if (entityEvent is IEventWithTimeParameters eventWithTime)
         {
             _requirementTimeText.transform.parent.gameObject.SetActive(true);

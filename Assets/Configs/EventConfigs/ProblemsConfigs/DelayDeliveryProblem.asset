@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DelayDeliveryProblem
   m_EditorClassIdentifier: 
   _id: DeliveryProblem
-  _description: Delivery is delaying. We need solve this problem.
+  _description: Delivery problem description
   _coinsRequirementInterval: 1e00000032000000
   _chance: 12
   _chancesUpdateValue: 1

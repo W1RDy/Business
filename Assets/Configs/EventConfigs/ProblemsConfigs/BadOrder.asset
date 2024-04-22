@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: BadOrder
   m_EditorClassIdentifier: 
   _id: BadOrder
-  _description: The client returned the computer and demanded money. The computer
-    really does not meet the stated quality
+  _description: Bad order problem description
   _coinsRequirementInterval: 0000000000000000
   _chance: 4
   _chancesUpdateValue: 5

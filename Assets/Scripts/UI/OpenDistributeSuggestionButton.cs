@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 
 public class OpenDistributeSuggestionButton : OpenButton
@@ -26,9 +27,9 @@ public class OpenDistributeSuggestionButton : OpenButton
         this._event = _event;
     }
 
-    private void SetText(string text)
+    private void SetText(string key)
     {
-        _buttonText.text = text;
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 
     protected override void ClickCallback()

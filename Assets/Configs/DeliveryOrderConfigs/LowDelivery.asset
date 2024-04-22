@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deliveryType: 0
   _deliveryTitle: Low delivery
-  _deliveryDescription: Slow delivery, bad quality. But low price.
+  _deliveryDescription: Low delivery description
   _deliveryCost: 20
   _deliveryTime: 6
   _goodsType: 0

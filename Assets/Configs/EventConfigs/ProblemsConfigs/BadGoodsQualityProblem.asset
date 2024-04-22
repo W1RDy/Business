@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BadGoodsQualityProblem
   m_EditorClassIdentifier: 
   _id: GoodsProblem
-  _description: This goods are awful!
+  _description: Bad goods problem description
   _coinsRequirementInterval: 280000003c000000
   _chance: 8
   _chancesUpdateValue: 3

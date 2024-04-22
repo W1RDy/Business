@@ -1,4 +1,5 @@
 ﻿using CoinsCounter;
+using I2.Loc;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -41,7 +42,7 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
         _view = new CompositeOrderView(_priceText, _timeText);
         _idGenerator = new IDGenerator(2);
 
-        _view.SetView("Delivery", 0, 0);
+        _view.SetView(0, 0);
         IsApplied = true;
         ID = _idGenerator.GetID();
 
@@ -55,7 +56,7 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
         Cost += order.Cost;
         if (order.Time > Time) Time = order.Time;
 
-        _view.SetView("Delivery", Cost, Time);
+        _view.SetView(Cost, Time);
         OrderValuesChanged?.Invoke();
         TryChangeState();
     }
@@ -67,7 +68,7 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
         Cost -= order.Cost;
         if (order.Time == Time) Time = FindMaxTime();
 
-        _view.SetView("Delivery", Cost, Time);
+        _view.SetView(Cost, Time);
         OrderValuesChanged?.Invoke();
         TryChangeState();
     }
@@ -90,7 +91,7 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
         Cost += newOrder.Cost;
         Time += newOrder.Time;
 
-        _view.SetView("Delivery", Cost, Time);
+        _view.SetView(Cost, Time);
         OrderValuesChanged?.Invoke();
         TryChangeState();
     }
@@ -142,9 +143,9 @@ public class CompositeOrderView
         _timeText = timeText;
     }
 
-    public void SetView(string orderType, int price, int time)
+    public void SetView(int price, int time)
     {
-        _priceText.text = orderType + " cost: " + price;
-        _timeText.text = orderType + " time: " + time;
+        _priceText.text = LocalizationManager.GetTranslation("Delivery cost") + ": " + price;
+        _timeText.text = LocalizationManager.GetTranslation("Delivery time") + ": " + time;
     }
 }

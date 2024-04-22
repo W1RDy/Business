@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -48,7 +49,7 @@ public class ConfirmEventWithCoinsButton : CustomButton, IButtonWithNewButton
 
     private void SetText()
     {
-        _buttonText.text = "Ok";
+        _buttonText.text = LocalizationManager.GetTranslation("Ok");
     }
 
     public bool CheckButtonChangeCondition()

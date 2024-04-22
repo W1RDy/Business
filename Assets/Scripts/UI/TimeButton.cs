@@ -1,3 +1,4 @@
+using I2.Loc;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,8 +14,7 @@ public class TimeButton : CustomButton
     public override void Init() 
     {
         base.Init();
-
-        SetText();
+        SetText("Skip day");
     }
 
     protected override void ClickCallback()
@@ -23,8 +23,8 @@ public class TimeButton : CustomButton
         _buttonService.TryAddTime(_timeValue);
     }
 
-    private void SetText()
+    private void SetText(string key)
     {
-        _buttonText.text = "Add " + _timeValue + " days";
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 }

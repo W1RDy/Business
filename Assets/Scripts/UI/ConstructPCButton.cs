@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 
 public class ConstructPCButton : TutorialButton
@@ -18,8 +19,8 @@ public class ConstructPCButton : TutorialButton
         _buttonService.ConstructPC(_goods);
     }
 
-    protected void SetText(string text)
+    protected void SetText(string key)
     {
-        _text.text = text;
+        _text.text = LocalizationManager.GetTranslation(key);
     }
 }

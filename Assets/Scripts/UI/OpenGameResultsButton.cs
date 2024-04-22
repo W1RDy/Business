@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I2.Loc;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -23,8 +24,8 @@ public class OpenGameResultsButton : CustomButton
         _gameController.FinishGame();
     }
 
-    private void SetText(string text)
+    private void SetText(string key)
     {
-        _buttonText.text = text;
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 }

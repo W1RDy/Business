@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _deliveryType: 1
   _deliveryTitle: Medium delivery
-  _deliveryDescription: All medium.
+  _deliveryDescription: Medium delivery description
   _deliveryCost: 40
   _deliveryTime: 4
   _goodsType: 1

@@ -1,3 +1,4 @@
+using I2.Loc;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -25,13 +26,13 @@ public class DeliveryView : MonoBehaviour
         _icon = icon;
     }
 
-    public void SetView(int cost, int time, string title, string description, Sprite icon)
+    public void SetView(int cost, int time, string titleKey, string descriptionKey, Sprite icon)
     {
         _costText.text = "- " + cost.ToString();
         _timeText.text = "+ " + time.ToString();
 
-        _titleText.text = title;
-        _descriptionText.text = description;
+        _titleText.text = LocalizationManager.GetTranslation(titleKey);
+        _descriptionText.text = LocalizationManager.GetTranslation(descriptionKey);
 
         _icon.sprite = icon;
     }

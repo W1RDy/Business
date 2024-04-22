@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 
 public class RestartButton : CustomButton
@@ -17,8 +18,8 @@ public class RestartButton : CustomButton
         _buttonService.RestartGame();
     }
 
-    private void SetText(string text)
+    private void SetText(string key)
     {
-        _buttonText.text = text;
+        _buttonText.text = LocalizationManager.GetTranslation(key);
     }
 }

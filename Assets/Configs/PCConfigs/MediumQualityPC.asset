@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 3
   _goodsType: 1
-  _title: MediumQualityPC
-  _description: Suit for low poly games.
+  _title: Medium pc
+  _description: Medium pc description
   _isReturned: 0
   _isBroken: 0
   _icon: {fileID: 21300000, guid: 92a57602bf424d94bb663b04297e51d6, type: 3}

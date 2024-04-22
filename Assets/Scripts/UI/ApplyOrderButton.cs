@@ -31,6 +31,7 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _order.OrderStateChanged += OnOrderStateChanged;
 
         _buttonChangeController.AddChangeButton(this);
+        SetText("Apply");
     }
 
     protected override void ClickCallback()
@@ -48,8 +49,8 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
     public void ChangeStates(bool isApplied)
     {
         _button.interactable = !isApplied;
-        var text = isApplied ? "Applied" : "Apply";
-        SetText(text);
+        var key = isApplied ? "Applied" : "Apply";
+        SetText(key);
     }
 
     public bool CheckButtonChangeCondition()

@@ -1,3 +1,4 @@
+using I2.Loc;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -23,7 +24,7 @@ public class TimeIndicator : MonoBehaviour
 
     public void UpdateMonth(int month)
     {
-        if (month == 0) _monthText.text = "study month";
-        else _monthText.text = month + " month";
+        if (month == 0) _monthText.text = LocalizationManager.GetTranslation("Study month");
+        else _monthText.text = month + " " + LocalizationManager.GetTranslation("Month");
     }
 }

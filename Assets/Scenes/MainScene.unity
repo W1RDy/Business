@@ -615,7 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 1
   _text: {fileID: 1536116909}
-  _message: 
+  _messageKey: 
 --- !u!1 &62828431
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 0
   _text: {fileID: 989489738}
-  _message: This is order!
+  _messageKey: Order tutorial
 --- !u!1 &79061285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Add Time
+  m_text: "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u0434\u0435\u043D\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2592,6 +2592,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4370128368359483934, guid: e9b08a9384c07594e8fb6a93035efc80, type: 3}
   m_PrefabInstance: {fileID: 301160293}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &302673982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 4979010943492834729}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &310396166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3248,6 +3265,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 409450314}
+  - component: {fileID: 409450315}
+  - component: {fileID: 409450316}
   m_Layer: 5
   m_Name: CostText
   m_TagString: Untagged
@@ -3273,9 +3292,49 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -180}
-  m_SizeDelta: {x: 240.00002, y: 60.000004}
+  m_AnchoredPosition: {x: 0, y: -164}
+  m_SizeDelta: {x: 278.6, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &409450315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409450313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
+--- !u!114 &409450316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409450313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 5
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &409558900
 GameObject:
   m_ObjectHideFlags: 0
@@ -3322,7 +3381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 0
   _text: {fileID: 4562622787095540243}
-  _message: 
+  _messageKey: Goal tutorial
 --- !u!1 &417215418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,7 +5092,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 60, y: -50}
-  m_SizeDelta: {x: 1080, y: 60.000004}
+  m_SizeDelta: {x: 947, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &553639592
 GameObject:
@@ -5187,7 +5246,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 60, y: -49.97}
-  m_SizeDelta: {x: 1080, y: 59.94}
+  m_SizeDelta: {x: 947, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &561105518
 GameObject:
@@ -5296,9 +5355,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 409450314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -27.800003, y: 18.800001}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 261.80002, y: -30.000002}
   m_SizeDelta: {x: 33.600002, y: 33.600002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561403289
@@ -6432,6 +6491,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &643415450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 965999694}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &649476032
 GameObject:
   m_ObjectHideFlags: 0
@@ -7110,7 +7186,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4ac51eb3fc597c429c548e784699043, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 92fc58dd814f5ff4ea5dca0a22a18197, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8252,8 +8328,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -110, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -143.80002, y: 0.5}
+  m_SizeDelta: {x: 270, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &768634677
 MonoBehaviour:
@@ -8303,8 +8379,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8906,6 +8982,23 @@ RectTransform:
   m_AnchoredPosition: {x: -4.3999977, y: 0}
   m_SizeDelta: {x: 8.799996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &823767671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 1064358085}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &832773346
 GameObject:
   m_ObjectHideFlags: 0
@@ -8981,6 +9074,876 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832773346}
   m_CullTransparentMesh: 1
+--- !u!1 &853101632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 853101634}
+  - component: {fileID: 853101633}
+  m_Layer: 0
+  m_Name: LocalizationSource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &853101633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853101632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488051eaa73ba421e8fe4868f2e0f364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mSource:
+    UserAgreesToHaveItOnTheScene: 0
+    UserAgreesToHaveItInsideThePluginsFolder: 0
+    GoogleLiveSyncIsUptoDate: 1
+    mTerms:
+    - Term: Skip day
+      TermType: 0
+      Description: 
+      Languages:
+      - Skip day
+      - "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u0434\u0435\u043D\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Open orders
+      TermType: 0
+      Description: 
+      Languages:
+      - Open orders
+      - "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u043A\u0430\u0437\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Apply
+      TermType: 0
+      Description: 
+      Languages:
+      - Apply
+      - "\u041F\u0440\u0438\u043D\u044F\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Can't apply
+      TermType: 0
+      Description: 
+      Languages:
+      - Can't apply
+      - "\u041D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Applied
+      TermType: 0
+      Description: 
+      Languages:
+      - Applied
+      - "\u041F\u0440\u0438\u043D\u044F\u0442"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Get from bank
+      TermType: 0
+      Description: 
+      Languages:
+      - Get from bank
+      - "\u0421\u043D\u044F\u0442\u044C \u0441 \u0431\u0430\u043D\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Ok
+      TermType: 0
+      Description: 
+      Languages:
+      - Ok
+      - "\u041E\u043A"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Restart
+      TermType: 0
+      Description: 
+      Languages:
+      - Restart
+      - "\u041F\u0435\u0440\u0435\u0438\u0433\u0440\u0430\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Show results
+      TermType: 0
+      Description: 
+      Languages:
+      - Show results
+      - "\u041A \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u0430\u043C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Send
+      TermType: 0
+      Description: 
+      Languages:
+      - Send
+      - "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Construct
+      TermType: 0
+      Description: 
+      Languages:
+      - Construct
+      - "\u0421\u043E\u0431\u0440\u0430\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Order
+      TermType: 0
+      Description: 
+      Languages:
+      - order
+      - "\u0437\u0430\u043A\u0430\u0437"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Low
+      TermType: 0
+      Description: 
+      Languages:
+      - low
+      - "\u043D\u0438\u0437\u043A\u043E\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: High
+      TermType: 0
+      Description: 
+      Languages:
+      - high
+      - "\u0432\u044B\u0441\u043E\u043A\u043E\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Medium
+      TermType: 0
+      Description: 
+      Languages:
+      - medium
+      - "\u0441\u0440\u0435\u0434\u043D\u0435\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Month
+      TermType: 0
+      Description: 
+      Languages:
+      - month
+      - "\u043C\u0435\u0441\u044F\u0446"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Study month
+      TermType: 0
+      Description: 
+      Languages:
+      - study month
+      - "\u0443\u0447\u0435\u0431\u043D\u044B\u0439 \u043C\u0435\u0441\u044F\u0446"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Delivery
+      TermType: 0
+      Description: 
+      Languages:
+      - Delivery
+      - "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Inventory
+      TermType: 0
+      Description: 
+      Languages:
+      - Inventory
+      - "\u0418\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Results of the month
+      TermType: 0
+      Description: 
+      Languages:
+      - Results of the month
+      - "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430 \u043F\u043E
+        \u043C\u0435\u0441\u044F\u0446\u0443"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Purchase costs
+      TermType: 0
+      Description: 
+      Languages:
+      - Purchase costs
+      - "\u0422\u0440\u0430\u0442\u044B \u043D\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0443"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Emergency costs
+      TermType: 0
+      Description: 
+      Languages:
+      - Emergency costs
+      - "\u0422\u0440\u0430\u0442\u044B \u043D\u0430 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Orders income
+      TermType: 0
+      Description: 
+      Languages:
+      - Orders income
+      - "\u0414\u043E\u0445\u043E\u0434\u044B \u043E\u0442 \u0437\u0430\u043A\u0430\u0437\u043E\u0432"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Bank income
+      TermType: 0
+      Description: 
+      Languages:
+      - Bank income
+      - "\u0414\u043E\u0445\u043E\u0434\u044B \u043E\u0442 \u0431\u0430\u043D\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Summary
+      TermType: 0
+      Description: 
+      Languages:
+      - Summary
+      - "\u0418\u0442\u043E\u0433\u043E"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Results of the game
+      TermType: 0
+      Description: 
+      Languages:
+      - Results of the game
+      - "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430 \u043F\u043E
+        \u0438\u0433\u0440\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Expences
+      TermType: 0
+      Description: 
+      Languages:
+      - Expences
+      - "\u0420\u0430\u0441\u0445\u043E\u0434\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Incomes
+      TermType: 0
+      Description: 
+      Languages:
+      - Incomes
+      - "\u0414\u043E\u0445\u043E\u0434\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Months
+      TermType: 0
+      Description: 
+      Languages:
+      - months
+      - "\u043C\u0435\u0441\u044F\u0446\u0435\u0432"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Time
+      TermType: 0
+      Description: 
+      Languages:
+      - Time
+      - "\u0412\u0440\u0435\u043C\u044F"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: High delivery
+      TermType: 0
+      Description: 
+      Languages:
+      - High delivery
+      - "\u041B\u0443\u0447\u0448\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Low delivery
+      TermType: 0
+      Description: 
+      Languages:
+      - Low delivery
+      - "\u0425\u0443\u0434\u0448\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Medium delivery
+      TermType: 0
+      Description: 
+      Languages:
+      - Medium delivery
+      - "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Low delivery description
+      TermType: 0
+      Description: 
+      Languages:
+      - No one knows exactly where they get these components from
+      - "\u041D\u0438\u043A\u0442\u043E \u0442\u043E\u0447\u043D\u043E \u043D\u0435
+        \u0437\u043D\u0430\u0435\u0442 \u043E\u0442\u043A\u0443\u0434\u0430 \u043E\u043D\u0438
+        \u0431\u0435\u0440\u0443\u0442 \u044D\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Medium delivery description
+      TermType: 0
+      Description: 
+      Languages:
+      - Common delivery, may or may not deceive
+      - "\u041E\u0431\u044B\u0447\u043D\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430,
+        \u043C\u043E\u0436\u0435\u0442 \u043E\u0431\u043C\u0430\u043D\u0443\u0442\u044C,
+        \u0430 \u043C\u043E\u0436\u0435\u0442 \u0438 \u043D\u0435 \u043E\u0431\u043C\u0430\u043D\u0443\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: High delivery description
+      TermType: 0
+      Description: 
+      Languages:
+      - The fastest delivery of the best components at a high price
+      - "\u0421\u0430\u043C\u0430\u044F \u0431\u044B\u0441\u0442\u0440\u0430\u044F
+        \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u043B\u0443\u0447\u0448\u0438\u0445
+        \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0445"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Delivery problem description
+      TermType: 0
+      Description: 
+      Languages:
+      - Delivery is delayed. We need to solve this problem.
+      - "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0437\u0430\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F.
+        \u041D\u0443\u0436\u043D\u043E \u0440\u0435\u0448\u0438\u0442\u044C \u044D\u0442\u0443
+        \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Bad goods problem description
+      TermType: 0
+      Description: 
+      Languages:
+      - You have received components of terrible quality. We need to solve this problem.
+      - "\u0422\u0435\u0431\u0435 \u0434\u043E\u0441\u0442\u0430\u0432\u0438\u043B\u0438
+        \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B \u0443\u0436\u0430\u0441\u043D\u043E\u0433\u043E
+        \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041D\u0443\u0436\u043D\u043E
+        \u0440\u0435\u0448\u0438\u0442\u044C \u044D\u0442\u0443 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Bad order problem description
+      TermType: 0
+      Description: 
+      Languages:
+      - The client returned the computer and demanded money. The computer really
+        does not meet the stated quality.
+      - "\u041A\u043B\u0438\u0435\u043D\u0442 \u0432\u0435\u0440\u043D\u0443\u043B
+        \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440 \u0438 \u043F\u043E\u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043B
+        \u0434\u0435\u043D\u044C\u0433\u0438. \u041A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E
+        \u043D\u0435 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u0442
+        \u0437\u0430\u044F\u0432\u043B\u0435\u043D\u043D\u043E\u043C\u0443 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0443."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Distribute coins suggestion
+      TermType: 0
+      Description: 
+      Languages:
+      - How much money should you keep in the bank and how much in your hands?
+      - "\u0421\u043A\u043E\u043B\u044C\u043A\u043E \u0434\u0435\u043D\u0435\u0433
+        \u043D\u0443\u0436\u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
+        \u0432 \u0431\u0430\u043D\u043A\u0435 \u0438 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
+        \u043D\u0430 \u0440\u0443\u043A\u0430\u0445?"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Skip time suggestion
+      TermType: 0
+      Description: 
+      Languages:
+      - 'The time will be skipped. '
+      - "\u0412\u0440\u0435\u043C\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043E."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Skip time and coins suggestion
+      TermType: 0
+      Description: 
+      Languages:
+      - The time will be skipped. The money will be wasted.
+      - "\u0412\u0440\u0435\u043C\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043E.
+        \u0414\u0435\u043D\u044C\u0433\u0438 \u0431\u0443\u0434\u0443\u0442 \u043F\u043E\u0442\u0440\u0430\u0447\u0435\u043D\u044B."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Events/Suggestion by problem
+      TermType: 0
+      Description: 
+      Languages:
+      - How much money should you keep in the bank and how much in your hands?
+      - "\u0421\u043A\u043E\u043B\u044C\u043A\u043E \u0434\u0435\u043D\u0435\u0433
+        \u043D\u0443\u0436\u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
+        \u0432 \u0431\u0430\u043D\u043A\u0435 \u0438 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
+        \u043D\u0430 \u0440\u0443\u043A\u0430\u0445?"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/High goods
+      TermType: 0
+      Description: 
+      Languages:
+      - High goods
+      - "\u041B\u0443\u0447\u0448\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low goods
+      TermType: 0
+      Description: 
+      Languages:
+      - Low goods
+      - "\u0425\u0443\u0434\u0448\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium goods
+      TermType: 0
+      Description: 
+      Languages:
+      - Medium goods
+      - "\u0421\u0440\u0435\u0434\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/High goods description
+      TermType: 0
+      Description: 
+      Languages:
+      - Everyone dreams of such components
+      - "\u041E \u0442\u0430\u043A\u0438\u0445 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0445
+        \u043C\u0435\u0447\u0442\u0430\u0435\u0442 \u043A\u0430\u0436\u0434\u044B\u0439"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium goods description
+      TermType: 0
+      Description: 
+      Languages:
+      - Average components at a reasonable price
+      - "\u0421\u0440\u0435\u0434\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
+        \u043F\u043E \u043F\u0440\u0438\u0435\u043C\u043B\u0435\u043C\u043E\u0439
+        \u0446\u0435\u043D\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low goods description
+      TermType: 0
+      Description: 
+      Languages:
+      - These components are so old that they can no longer be found for sale.
+      - "\u042D\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
+        \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043A\u043E \u0441\u0442\u0430\u0440\u044B\u0435,
+        \u0447\u0442\u043E \u0438\u0445 \u0443\u0436\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u0448\u044C
+        \u0432 \u043F\u0440\u043E\u0434\u0430\u0436\u0435"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Low pc
+      - "\u0421\u043B\u0430\u0431\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Medium pc
+      - "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/High pc
+      TermType: 0
+      Description: 
+      Languages:
+      - High pc
+      - "\u041C\u043E\u0449\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium returned pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Medium returned pc
+      - "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low returned pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Low returned pc
+      - "\u0421\u043B\u0430\u0431\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Broken returned pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Broken returned pc
+      - "\u0421\u043B\u043E\u043C\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Broken pc
+      TermType: 0
+      Description: 
+      Languages:
+      - Broken pc
+      - "\u0421\u043B\u043E\u043C\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/High pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - Runs the most demanding games at high settings
+      - "\u041F\u043E\u0442\u044F\u043D\u0435\u0442 \u0441\u0430\u043C\u044B\u0435
+        \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435
+        \u0438\u0433\u0440\u044B \u043D\u0430 \u0432\u044B\u0441\u043E\u043A\u0438\u0445
+        \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - Standard computer, used almost everywhere, suitable for routine work
+      - "\u0421\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440,
+        \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F
+        \u043F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0432\u0435\u0437\u0434\u0435,
+        \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0434\u043B\u044F \u0440\u0443\u0442\u0438\u043D\u043D\u043E\u0439
+        \u0440\u0430\u0431\u043E\u0442\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - Good for very simple work and freezes every 2 minutes
+      - "\u041F\u043E\u0434\u043E\u0439\u0434\u0435\u0442 \u0434\u043B\u044F \u043E\u0447\u0435\u043D\u044C
+        \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u0440\u0430\u0431\u043E\u0442\u044B
+        \u0438 \u0437\u0430\u0432\u0438\u0441\u0430\u0435\u0442 \u043A\u0430\u0436\u0434\u044B\u0435
+        2 \u043C\u0438\u043D\u0443\u0442\u044B"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Medium returned pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - The computer was declared to be of high quality. Apparently you were deceived
+        somewhere
+      - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u0432\u044B\u0441\u043E\u043A\u043E\u0433\u043E
+        \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
+        \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Low returned pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - The computer was declared to be of medium quality. Apparently you were deceived
+        somewhere
+      - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E
+        \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
+        \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Broken returned pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - The computer was declared to be of low quality. Apparently you were deceived
+        somewhere
+      - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
+        \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u043D\u0438\u0437\u043A\u043E\u0433\u043E
+        \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
+        \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Goods/Broken pc description
+      TermType: 0
+      Description: 
+      Languages:
+      - Apparently you were deceived with the components
+      - "\u041F\u043E\u0445\u043E\u0436\u0435 \u0442\u0435\u0431\u044F \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438
+        \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u043C\u0438"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Tutorial/Order tutorial
+      TermType: 0
+      Description: 
+      Languages:
+      - 'On the left side of the order are the requirements (fulfillment time and
+        quality requirements), on the right side is the reward.
+
+        Urgent orders
+        that need to be accepted on that day are marked in red.
+
+        Accept the
+        order.'
+      - "\u0412 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u0437\u0430\u043A\u0430\u0437\u0430
+        \u0443\u043A\u0430\u0437\u0430\u043D\u044B \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u0438\u044F
+        (\u0432\u0440\u0435\u043C\u044F \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F
+        \u0438 \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u0438\u0435 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430),
+        \u0432 \u043F\u0440\u0430\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438
+        \u043D\u0430\u0433\u0440\u0430\u0434\u0430. \n\u041A\u0440\u0430\u0441\u043D\u044B\u043C
+        \u043F\u043E\u043C\u0435\u0447\u0435\u043D\u044B \u0441\u0440\u043E\u0447\u043D\u044B\u0435
+        \u0437\u0430\u043A\u0430\u0437\u044B, \u043A\u043E\u0442\u043E\u0440\u044B\u0435
+        \u043D\u0443\u0436\u043D\u043E \u043F\u0440\u0438\u043D\u044F\u0442\u044C
+        \u0432 \u044D\u0442\u043E\u0442 \u0434\u0435\u043D\u044C.\n\u041F\u0440\u0438\u043C\u0438
+        \u0437\u0430\u043A\u0430\u0437. "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Tutorial/Delivery tutorial
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Each type of delivery delivers its own components and has different requirements.
+
+        Order
+        the low delivery.'
+      - "\u041A\u0430\u0436\u0434\u044B\u0439 \u0432\u0438\u0434 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438
+        \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438
+        \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
+        \u0438 \u0438\u043C\u0435\u044E\u0442 \u0440\u0430\u0437\u043D\u044B\u0435
+        \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u0438\u044F.\n\u0417\u0430\u043A\u0430\u0436\u0438
+        \u0445\u0443\u0434\u0448\u0443\u044E \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0443."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Tutorial/Goal tutorial
+      TermType: 0
+      Description: 
+      Languages:
+      - 'Once you have a product of the required quality or higher, you can complete
+        the order.
+
+        Send the computer to the client.'
+      - "\u041F\u043E\u0441\u043B\u0435 \u0442\u043E\u0433\u043E, \u043A\u043E\u0433\u0434\u0430
+        \u0443 \u0442\u0435\u0431\u044F \u043F\u043E\u044F\u0432\u0438\u043B\u0441\u044F
+        \u0442\u043E\u0432\u0430\u0440 \u043D\u0443\u0436\u043D\u043E\u0433\u043E
+        \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430 \u0438\u043B\u0438 \u0432\u044B\u0448\u0435,
+        \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0438\u0442\u044C
+        \u0437\u0430\u043A\u0430\u0437.\n\u041E\u0442\u043F\u0440\u0430\u0432\u044C
+        \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440 \u043A\u043B\u0438\u0435\u043D\u0442\u0443."
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Tutorial/Distribute coins tutorial
+      TermType: 0
+      Description: 
+      Languages:
+      - "At the end of the month or if you don't have enough money on hand, you can
+        distribute the money between the bank and your own hands.\nThe more money
+        left in the bank at the end of the month, the more income the bank will bring.\nBut
+        if you don\u2019t have enough money on hand, you\u2019ll have to spend extra
+        time."
+      - "\u0412 \u043A\u043E\u043D\u0446\u0435 \u043C\u0435\u0441\u044F\u0446\u0430
+        \u0438\u043B\u0438 \u0435\u0441\u043B\u0438 \u0443 \u0442\u0435\u0431\u044F
+        \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u0434\u0435\u043D\u0435\u0433
+        \u043D\u0430 \u0440\u0443\u043A\u0430\u0445, \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+        \u0440\u0430\u0441\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C
+        \u0434\u0435\u043D\u044C\u0433\u0438 \u043C\u0435\u0436\u0434\u0443 \u0431\u0430\u043D\u043A\u043E\u043C
+        \u0438 \u0441\u0432\u043E\u0438\u043C\u0438 \u0440\u0443\u043A\u0430\u043C\u0438.
+        \r\n\u0427\u0435\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u0435\u043D\u0435\u0433
+        \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0441\u044F \u0432 \u0431\u0430\u043D\u043A\u0435
+        \u043A \u043A\u043E\u043D\u0446\u0443 \u043C\u0435\u0441\u044F\u0446\u0430,
+        \u0442\u0435\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u043E\u0445\u043E\u0434\u043E\u0432
+        \u043F\u0440\u0438\u043D\u0435\u0441\u0435\u0442 \u0431\u0430\u043D\u043A.
+        \r\n\u041D\u043E \u0435\u0441\u043B\u0438 \u043D\u0430 \u0440\u0443\u043A\u0430\u0445
+        \u0431\u0443\u0434\u0435\u0442 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0442\u044C
+        \u0434\u0435\u043D\u0435\u0433, \u0442\u043E \u043F\u0440\u0438\u0434\u0435\u0442\u0441\u044F
+        \u043F\u043E\u0442\u0440\u0430\u0442\u0438\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0435
+        \u0432\u0440\u0435\u043C\u044F. "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Open goods
+      TermType: 0
+      Description: 
+      Languages:
+      - Open a warehouse
+      - "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u043A\u043B\u0430\u0434"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Deliver
+      TermType: 0
+      Description: 
+      Languages:
+      - Deliver
+      - "\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Delivery cost
+      TermType: 0
+      Description: 
+      Languages:
+      - Delivery cost
+      - "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Delivery time
+      TermType: 0
+      Description: 
+      Languages:
+      - Delivery time
+      - "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Tutorial/Confirm delivery tutorial
+      TermType: 0
+      Description: 
+      Languages:
+      - In this window you can once again see how much time and money you will spend.
+        By pressing the button, the current day will be completed.
+      - "\u0412 \u044D\u0442\u043E\u043C \u043E\u043A\u043D\u0435 \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
+        \u0435\u0449\u0435 \u0440\u0430\u0437 \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
+        \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438
+        \u0438 \u0434\u0435\u043D\u0435\u0433 \u0442\u044B \u043F\u043E\u0442\u0440\u0430\u0442\u0438\u0448\u044C.
+        \u041D\u0430\u0436\u0430\u0432 \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443,
+        \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0434\u0435\u043D\u044C \u0431\u0443\u0434\u0435\u0442
+        \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D. "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    CaseInsensitiveTerms: 0
+    OnMissingTranslation: 1
+    mTerm_AppName: 
+    mLanguages:
+    - Name: English
+      Code: en
+      Flags: 0
+    - Name: Russian
+      Code: ru
+      Flags: 0
+    - Name: Turkish
+      Code: tr
+      Flags: 0
+    IgnoreDeviceLanguage: 0
+    _AllowUnloadingLanguages: 0
+    Google_WebServiceURL: 
+    Google_SpreadsheetKey: 
+    Google_SpreadsheetName: 
+    Google_LastUpdatedVersion: 
+    Google_Password: change_this
+    GoogleUpdateFrequency: 3
+    GoogleInEditorCheckFrequency: 2
+    GoogleUpdateSynchronization: 1
+    GoogleUpdateDelay: 0
+    Assets: []
+    Spreadsheet_LocalFileName: 
+    Spreadsheet_LocalCSVSeparator: ','
+    Spreadsheet_LocalCSVEncoding: utf-8
+    Spreadsheet_SpecializationAsRows: 1
+  version: 1
+  NeverDestroy: 0
+  UserAgreesToHaveItOnTheScene: 0
+  UserAgreesToHaveItInsideThePluginsFolder: 0
+  GoogleLiveSyncIsUptoDate: 1
+  Assets: []
+  Google_WebServiceURL: 
+  Google_SpreadsheetKey: 
+  Google_SpreadsheetName: 
+  Google_LastUpdatedVersion: 
+  GoogleUpdateFrequency: 3
+  GoogleUpdateDelay: 5
+  mLanguages: []
+  IgnoreDeviceLanguage: 0
+  _AllowUnloadingLanguages: 0
+  mTerms: []
+  CaseInsensitiveTerms: 0
+  OnMissingTranslation: 1
+  mTerm_AppName: 
+  Spreadsheet_LocalFileName: 
+  Spreadsheet_LocalCSVSeparator: ','
+  Spreadsheet_LocalCSVEncoding: utf-8
+  Spreadsheet_SpecializationAsRows: 1
+  Google_Password: change_this
+  GoogleInEditorCheckFrequency: 2
+--- !u!4 &853101634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853101632}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.138247, y: 2.0312376, z: -1.4235373}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &855340455
 GameObject:
   m_ObjectHideFlags: 0
@@ -9512,7 +10475,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4ac51eb3fc597c429c548e784699043, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 92fc58dd814f5ff4ea5dca0a22a18197, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10855,6 +11818,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &965999694 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
+  m_PrefabInstance: {fileID: 965999691}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &967962158
 GameObject:
   m_ObjectHideFlags: 0
@@ -11009,6 +11983,7 @@ GameObject:
   - component: {fileID: 973655560}
   - component: {fileID: 973655562}
   - component: {fileID: 973655561}
+  - component: {fileID: 973655563}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11055,7 +12030,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Inventory
+  m_text: "\u0418\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11132,6 +12107,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973655559}
   m_CullTransparentMesh: 1
+--- !u!114 &973655563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973655559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Inventory
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 1147465157}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &989489736
 GameObject:
   m_ObjectHideFlags: 0
@@ -11167,7 +12180,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 240.00002, y: 60.000004}
+  m_SizeDelta: {x: 947, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &989489738
 MonoBehaviour:
@@ -11216,14 +12229,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.2
-  m_fontSizeBase: 35.2
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -12105,6 +13118,7 @@ GameObject:
   - component: {fileID: 1064358087}
   - component: {fileID: 1064358086}
   - component: {fileID: 1064358085}
+  - component: {fileID: 1064358088}
   m_Layer: 5
   m_Name: CostsText
   m_TagString: Untagged
@@ -12228,6 +13242,44 @@ RectTransform:
   m_AnchoredPosition: {x: 54.000004, y: -36}
   m_SizeDelta: {x: 108.00001, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1064358088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064358084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: 
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 823767671}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &1076006229
 GameObject:
   m_ObjectHideFlags: 0
@@ -12400,8 +13452,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -191.29999, y: -290}
-  m_SizeDelta: {x: 174.00002, y: 100.23636}
+  m_AnchoredPosition: {x: -208, y: -290}
+  m_SizeDelta: {x: 210, y: 100.23636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082925575
 MonoBehaviour:
@@ -12931,6 +13983,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111353965}
   m_CullTransparentMesh: 1
+--- !u!114 &1116654483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 1154077331}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &1121936316
 GameObject:
   m_ObjectHideFlags: 0
@@ -13052,6 +14121,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 0
   _buttonType: 4
+--- !u!114 &1147465157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 973655561}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &1154077329
 GameObject:
   m_ObjectHideFlags: 0
@@ -13063,6 +14149,7 @@ GameObject:
   - component: {fileID: 1154077330}
   - component: {fileID: 1154077332}
   - component: {fileID: 1154077331}
+  - component: {fileID: 1154077333}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -13109,7 +14196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Delivery
+  m_text: "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13186,6 +14273,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1154077329}
   m_CullTransparentMesh: 1
+--- !u!114 &1154077333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1154077329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Delivery
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 1116654483}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &1159712957
 GameObject:
   m_ObjectHideFlags: 0
@@ -13559,6 +14684,7 @@ GameObject:
   - component: {fileID: 1241090617}
   - component: {fileID: 1241090619}
   - component: {fileID: 1241090618}
+  - component: {fileID: 1241090620}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -13580,9 +14706,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1416631457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120.00001, y: -30.000002}
   m_SizeDelta: {x: 240.00002, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1241090618
@@ -13639,8 +14765,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -13682,6 +14808,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241090616}
   m_CullTransparentMesh: 1
+--- !u!114 &1241090620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241090616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49892506009da4abe81e67763185bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1258524946
 GameObject:
   m_ObjectHideFlags: 0
@@ -13749,9 +14887,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1416631457}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -27.5, y: 16.630001}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 260.00003, y: -30.000002}
   m_SizeDelta: {x: 30.000002, y: 30.000002}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1259894871
@@ -14062,8 +15200,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -191.29999, y: -120}
-  m_SizeDelta: {x: 174.00002, y: 100.23636}
+  m_AnchoredPosition: {x: -208, y: -120}
+  m_SizeDelta: {x: 210, y: 100.23636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273978587
 MonoBehaviour:
@@ -14560,6 +15698,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caf9732433f4dc044845763962493607, type: 3}
+--- !u!114 &1326587236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 2046356590}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &1328356262
 GameObject:
   m_ObjectHideFlags: 0
@@ -14943,8 +16098,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 191.29999, y: -290}
-  m_SizeDelta: {x: 174.00002, y: 100.23636}
+  m_AnchoredPosition: {x: 208, y: -290}
+  m_SizeDelta: {x: 210, y: 100.23636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1369660151
 MonoBehaviour:
@@ -15297,7 +16452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 0
   _text: {fileID: 1076006230}
-  _message: 
+  _messageKey: Confirm delivery tutorial
 --- !u!1 &1402424596
 GameObject:
   m_ObjectHideFlags: 0
@@ -15435,6 +16590,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1416631457}
+  - component: {fileID: 1416631458}
+  - component: {fileID: 1416631459}
   m_Layer: 5
   m_Name: DeliveryTime
   m_TagString: Untagged
@@ -15460,9 +16617,49 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -230}
-  m_SizeDelta: {x: 240.00002, y: 60.000004}
+  m_AnchoredPosition: {x: 0, y: -210}
+  m_SizeDelta: {x: 275.00003, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1416631458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416631456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 0
+--- !u!114 &1416631459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416631456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 5
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &1419327634
 GameObject:
   m_ObjectHideFlags: 0
@@ -16307,7 +17504,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 240.00002, y: 60.000004}
+  m_SizeDelta: {x: 947, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483898782
 MonoBehaviour:
@@ -16356,14 +17553,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.2
-  m_fontSizeBase: 35.2
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -17211,6 +18408,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6947743330601564212, guid: aef7e4fb0fe33184e9004223fc91f827, type: 3}
   m_PrefabInstance: {fileID: 1564069238}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1567304319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 1898154591}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &1586853570
 GameObject:
   m_ObjectHideFlags: 0
@@ -17505,6 +18719,7 @@ GameObject:
   - component: {fileID: 1600358980}
   - component: {fileID: 1600358981}
   - component: {fileID: 1600358982}
+  - component: {fileID: 1600358983}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -17526,9 +18741,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 409450314}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120.00001, y: -30.000002}
   m_SizeDelta: {x: 240.00002, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1600358981
@@ -17593,8 +18808,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -17628,6 +18843,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1600358983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600358979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a49892506009da4abe81e67763185bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1625661287
 GameObject:
   m_ObjectHideFlags: 0
@@ -18203,6 +19430,7 @@ GameObject:
   - component: {fileID: 1668350791}
   - component: {fileID: 1668350793}
   - component: {fileID: 1668350792}
+  - component: {fileID: 1668350794}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -18249,7 +19477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Open Goods
+  m_text: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u043A\u043B\u0430\u0434"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -18326,6 +19554,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668350790}
   m_CullTransparentMesh: 1
+--- !u!114 &1668350794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668350790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Open goods
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 1964374247}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &1670347867
 GameObject:
   m_ObjectHideFlags: 0
@@ -19148,7 +20414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 0
   _text: {fileID: 1483898782}
-  _message: 
+  _messageKey: Delivery tutorial
 --- !u!1 &1795876594
 GameObject:
   m_ObjectHideFlags: 0
@@ -20098,6 +21364,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1898154591 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
+  m_PrefabInstance: {fileID: 1898154588}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1899306492
@@ -21177,6 +22454,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 84, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1964374247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTarget: {fileID: 1668350792}
+  mAlignment_RTL: 514
+  mAlignment_LTR: 514
+  mAlignmentWasRTL: 0
+  mInitializeAlignment: 0
 --- !u!1 &1967188952
 GameObject:
   m_ObjectHideFlags: 0
@@ -22074,6 +23368,7 @@ GameObject:
   - component: {fileID: 2046356589}
   - component: {fileID: 2046356591}
   - component: {fileID: 2046356590}
+  - component: {fileID: 2046356592}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -22120,7 +23415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Open Orders
+  m_text: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u043A\u0430\u0437\u044B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22197,6 +23492,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046356588}
   m_CullTransparentMesh: 1
+--- !u!114 &2046356592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046356588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mTerm: Open orders
+  mTermSecondary: 
+  PrimaryTermModifier: 0
+  SecondaryTermModifier: 0
+  TermPrefix: 
+  TermSuffix: 
+  LocalizeOnAwake: 1
+  IgnoreRTL: 0
+  MaxCharactersInRTL: 0
+  IgnoreNumbersInRTL: 1
+  CorrectAlignmentForRTL: 1
+  AddSpacesToJoinedLanguages: 0
+  AllowLocalizedParameters: 1
+  TranslatedObjects: []
+  LocalizeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  AlwaysForceLocalize: 0
+  LocalizeCallBack:
+    Target: {fileID: 0}
+    MethodName: 
+  mGUI_ShowReferences: 0
+  mGUI_ShowTems: 1
+  mGUI_ShowCallback: 0
+  mLocalizeTarget: {fileID: 1326587236}
+  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &2048723233
 GameObject:
   m_ObjectHideFlags: 0
@@ -23080,7 +24413,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.9607843, b: 0.37254903, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -23097,19 +24430,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30
-  m_fontSizeBase: 30
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 5
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -23147,10 +24480,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 794013164}
     m_Modifications:
-    - target: {fileID: 468085268339632414, guid: fa90728d30611264787ad52f2d800064, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 9.5
-      objectReference: {fileID: 0}
     - target: {fileID: 649789560485943721, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -23479,6 +24808,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4979010943492834729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
+  m_PrefabInstance: {fileID: 4979010943492834726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5057035059367104036
 GameObject:
   m_ObjectHideFlags: 0
@@ -23653,7 +24993,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 276, y: -30}
-  m_SizeDelta: {x: 480.00003, y: 60.000004}
+  m_SizeDelta: {x: 480.00003, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7820369961915491843
 MonoBehaviour:
@@ -23716,7 +25056,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 480.00003, y: 60.000004}
+  m_SizeDelta: {x: 415, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -23744,3 +25084,4 @@ SceneRoots:
   - {fileID: 447957369}
   - {fileID: 1311767667}
   - {fileID: 789632468}
+  - {fileID: 853101634}

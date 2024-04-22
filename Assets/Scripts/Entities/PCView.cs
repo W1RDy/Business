@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,10 +28,10 @@ public class PCView
         _iconSpace = iconSpace;
     }
 
-    public void SetView(string title, string description, int amount, bool isBroken, Sprite icon)
+    public void SetView(string titleKey, string descriptionKey, int amount, bool isBroken, Sprite icon)
     {
-        _titleText.text = title;
-        _descriptionText.text = description;
+        _titleText.text = LocalizationManager.GetTranslation("Goods/" + titleKey);
+        _descriptionText.text = LocalizationManager.GetTranslation("Goods/" + descriptionKey);
 
         SetAmount(amount);
         SetBroken(isBroken);

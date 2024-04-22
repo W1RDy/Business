@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4c1d5b230eaca42b2f3c66be1fe616, type: 3}
   m_Name: SkipTimeSuggestion
   m_EditorClassIdentifier: 
-  _id: SkipTime
-  _description: The time will be skipped.
+  confirmType: 0
+  _description: Skip time suggestion

@@ -1,3 +1,4 @@
+using I2.Loc;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -22,8 +23,8 @@ public abstract class OrdersControlButton : TutorialButton
         base.Init();
     }
 
-    protected virtual void SetText(string text)
+    protected virtual void SetText(string key)
     {
-        _stateText.text = text;
+        _stateText.text = LocalizationManager.GetTranslation(key);
     }
 }
