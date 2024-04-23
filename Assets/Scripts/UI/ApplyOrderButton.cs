@@ -59,6 +59,12 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         return false;
     }
 
+    protected override void ActivateClickableByTutorial()
+    {
+        base.ActivateClickableByTutorial();
+        OnOrderStateChanged?.Invoke();
+    }
+
     public void OnDestroy()
     {
         if (_buttonChangeController != null)

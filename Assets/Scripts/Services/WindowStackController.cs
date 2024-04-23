@@ -48,7 +48,7 @@ public class WindowStackController : MonoBehaviour
         return _stackSize == 0;
     }
 
-    private void ClearStack()
+    public void ClearStack()
     {
         _stackSize = 0;
 

@@ -22,6 +22,7 @@ public class WindowActivator : IService
             window.ActivateWindow();
 
             if (window.Type == WindowType.BasketWindow || window.Type == WindowType.DeliveryWindow || window.Type == WindowType.InventoryWindow) return;
+            if (window.Type == WindowType.Results) _windowStackController.ClearStack();
             if (!_windowStackController.StackIsEmpty()) _windowStackController.PeekWindow().DeactivateWindow();
             _windowStackController.AddWindowToStack(window);
         }

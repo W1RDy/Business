@@ -70,6 +70,7 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
         _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
 
         _goodsService = ServiceLocator.Instance.Get<GoodsService>();
+
         InitAnimations();
     }
 

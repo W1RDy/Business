@@ -50,8 +50,8 @@ public class Window : ObjectForInitializationWithChildren
     {
         Action endChangeDelegate = () =>
         {
-            gameObject.SetActive(false);
             IsChanging = false;
+            gameObject.SetActive(false);
             OnWindowChanged?.Invoke();
         };
 

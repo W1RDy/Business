@@ -46,6 +46,12 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
         _buttonService.SendOrder(_order);
     }
 
+    protected override void ActivateClickableByTutorial()
+    {
+        base.ActivateClickableByTutorial();
+        OnOrderChanged?.Invoke();
+    }
+
     public void ChangeStates(bool toActiveState)
     {
         _button.interactable = toActiveState;

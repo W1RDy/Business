@@ -1,56 +1,65 @@
 {
-    "idSave": 21,
+    "idSave": 32,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "isTutorial": false,
     "handsCoins": 100,
     "bankCoins": 400,
-    "monthCount": 0,
-    "time": 15,
+    "monthCount": 1,
+    "time": 30,
     "entitiesSaveConfig": {
         "orders": [
             {
-                "id": 1,
-                "cost": 38,
-                "time": 18,
+                "id": 2,
+                "cost": 43,
+                "time": 16,
                 "neededGoods": 0,
                 "isApplied": false,
-                "remainWaiting": 1
+                "remainWaiting": 2
             },
             {
-                "id": 2,
-                "cost": 44,
-                "time": 19,
-                "neededGoods": 0,
-                "isApplied": false,
+                "id": 1,
+                "cost": 55,
+                "time": 16,
+                "neededGoods": 1,
+                "isApplied": true,
                 "remainWaiting": 1
             },
             {
                 "id": 3,
-                "cost": 53,
-                "time": 20,
-                "neededGoods": 1,
-                "isApplied": false,
+                "cost": 32,
+                "time": 16,
+                "neededGoods": 0,
+                "isApplied": true,
                 "remainWaiting": 2
             }
         ],
         "deliveryOrders": [],
         "goods": [
             {
-                "goodsType": 0,
-                "buildTime": 2,
-                "amount": 1,
-                "brokenGoodsAmount": 0
-            },
-            {
                 "goodsType": 1,
                 "buildTime": 1,
                 "amount": 1,
                 "brokenGoodsAmount": 0
+            },
+            {
+                "goodsType": 0,
+                "buildTime": 2,
+                "amount": 1,
+                "brokenGoodsAmount": 0
             }
         ],
-        "pcs": [],
+        "pcs": [
+            {
+                "id": 6,
+                "amount": 1
+            },
+            {
+                "id": 1,
+                "amount": 1
+            }
+        ],
         "problem": {
             "id": "",
             "coins": 0,
@@ -60,10 +69,22 @@
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": -40,
+            "purchaseCosts": -80,
             "emergencyCosts": 0,
-            "orderIncome": 50,
+            "orderIncome": 40,
             "bankIncome": 200
+        },
+        {
+            "purchaseCosts": -80,
+            "emergencyCosts": 0,
+            "orderIncome": 40,
+            "bankIncome": 200
+        },
+        {
+            "purchaseCosts": -160,
+            "emergencyCosts": -103,
+            "orderIncome": 303,
+            "bankIncome": 258
         }
     ]
 }
