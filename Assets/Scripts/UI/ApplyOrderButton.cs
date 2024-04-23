@@ -31,7 +31,6 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _order.OrderStateChanged += OnOrderStateChanged;
 
         _buttonChangeController.AddChangeButton(this);
-        SetText("Apply");
     }
 
     protected override void ClickCallback()

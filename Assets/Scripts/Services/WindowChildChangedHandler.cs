@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class WindowChildChangedHandler : ISubscribable
 {
     private Window _window;
     private SubscribeController _subscribeController;
+    private Queue<Action> _actions = new Queue<Action>();
 
-    public int ActionCount { get; private set; }
-    private Action _action;
-
+    public int ActionCount => _actions.Count;
 
     public WindowChildChangedHandler(Window window)
     {
@@ -21,25 +21,40 @@ public class WindowChildChangedHandler : ISubscribable
     {
         if (_window.IsChanging)
         {
-            ActionCount++;
-            _action = () =>
+            Action action = () => { };
+            action = () =>
             {
-                ActionCount--;
                 changeAction.Invoke();
-                Unsubscribe();
+                _actions.Dequeue();
+                UnsubscribeAction(action);
             };
-            Subscribe();
+
+            SubscribeAction(action);
+            _actions.Enqueue(action);
         }
         else changeAction.Invoke();
     }
 
     public void Subscribe()
     {
-        _window.OnWindowChanged += _action;
     }
 
     public void Unsubscribe()
     {
-        _window.OnWindowChanged -= _action;
+        while (_actions.Count > 0)
+        {
+            var action = _actions.Dequeue();
+            UnsubscribeAction(action);
+        }
+    }
+
+    private void SubscribeAction(Action action)
+    {
+        _window.OnWindowChanged += action;
+    }
+
+    private void UnsubscribeAction(Action action)
+    {
+        _window.OnWindowChanged -= action;
     }
 }

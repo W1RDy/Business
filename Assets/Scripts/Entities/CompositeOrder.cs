@@ -134,18 +134,18 @@ public class CompositeOrder : ObjectForInitializationWithChildren, IRemembable, 
 
 public class CompositeOrderView
 {
-    private TextMeshProUGUI _priceText;
-    private TextMeshProUGUI _timeText;
+    private SizedText _priceText;
+    private SizedText _timeText;
 
     public CompositeOrderView(TextMeshProUGUI priceText, TextMeshProUGUI timeText)
     {
-        _priceText = priceText;
-        _timeText = timeText;
+        _priceText = priceText.GetComponent<SizedText>();
+        _timeText = timeText.GetComponent<SizedText>();
     }
 
     public void SetView(int price, int time)
     {
-        _priceText.text = LocalizationManager.GetTranslation("Delivery cost") + ": " + price;
-        _timeText.text = LocalizationManager.GetTranslation("Delivery time") + ": " + time;
+        _priceText.SetText(LocalizationManager.GetTranslation("Delivery cost") + ": " + price);
+        _timeText.SetText(LocalizationManager.GetTranslation("Delivery time") + ": " + time);
     }
 }

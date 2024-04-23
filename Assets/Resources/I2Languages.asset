@@ -16,70 +16,7 @@ MonoBehaviour:
     UserAgreesToHaveItOnTheScene: 0
     UserAgreesToHaveItInsideThePluginsFolder: 0
     GoogleLiveSyncIsUptoDate: 1
-    mTerms:
-    - Term: BankCoins
-      TermType: 0
-      Description: 
-      Languages:
-      - 
-      Flags: 00
-      Languages_Touch: []
-    - Term: Orders income
-      TermType: 0
-      Description: 
-      Languages:
-      - 'Orders income: + 20'
-      Flags: 00
-      Languages_Touch: []
-    - Term: Summary
-      TermType: 0
-      Description: 
-      Languages:
-      - 'Summary: + 20'
-      Flags: 00
-      Languages_Touch: []
-    - Term: Bank income
-      TermType: 0
-      Description: 
-      Languages:
-      - 'Bank income: + 20'
-      Flags: 00
-      Languages_Touch: []
-    - Term: Purchase costs
-      TermType: 0
-      Description: 
-      Languages:
-      - 'Purchase costs: - 20'
-      Flags: 00
-      Languages_Touch: []
-    - Term: Emergency costs
-      TermType: 0
-      Description: 
-      Languages:
-      - 'Emergency costs: - 20'
-      Flags: 00
-      Languages_Touch: []
-    - Term: DelayingProblem
-      TermType: 0
-      Description: 
-      Languages:
-      - The delivery is delayed, we need to solve this somehow
-      Flags: 00
-      Languages_Touch: []
-    - Term: ButtonOutlinePressed
-      TermType: 5
-      Description: 
-      Languages:
-      - 
-      Flags: 00
-      Languages_Touch: []
-    - Term: Deliver
-      TermType: 0
-      Description: 
-      Languages:
-      - "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u043A\u043B\u0430\u0434"
-      Flags: 00
-      Languages_Touch: []
+    mTerms: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 

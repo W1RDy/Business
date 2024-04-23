@@ -795,6 +795,7 @@ MonoBehaviour:
   _orderClass: {fileID: 3717929654221527168}
   _stateText: {fileID: 587954222865492220}
   _changeConditions: 01000000
+  _connectedBlockWithStates: {fileID: 0}
 --- !u!1 &3571688017357551106
 GameObject:
   m_ObjectHideFlags: 0

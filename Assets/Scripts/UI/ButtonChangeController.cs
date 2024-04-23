@@ -23,6 +23,7 @@ public class ButtonChangeController : ClassForInitialization, IService
     public void AddChangeButton(IChangeButton button)
     {
         List<IChangeButton> buttonsList;
+
         foreach (var changeCondition in button.ChangeConditions)
         {
             if (!_buttons.TryGetValue(changeCondition, out buttonsList))
@@ -31,6 +32,9 @@ public class ButtonChangeController : ClassForInitialization, IService
             }
             buttonsList.Add(button);
         }
+
+        if (button is IButtonWithNewButton withNewButton) ChangeButtonToNewButton(withNewButton);
+        if (button is IButtonWithStates withStates) ChangeButtonStates(withStates);
     }
 
     public void RemoveChangeButton(IChangeButton button)
@@ -64,7 +68,8 @@ public class ButtonChangeController : ClassForInitialization, IService
     {
         if (_buttons.TryGetValue(changeCondition, out var buttons))
         {
-            foreach (var button in buttons)
+            var buttonsCopy = new List<IChangeButton>(buttons);
+            foreach (var button in buttonsCopy)
             {
                 if (button is IButtonWithNewButton buttonWithNewButton) ChangeButtonToNewButton(buttonWithNewButton);
                 if (button is IButtonWithStates buttonWithStates) ChangeButtonStates(buttonWithStates);

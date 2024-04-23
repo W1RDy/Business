@@ -615,7 +615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _segmentType: 1
   _text: {fileID: 1536116909}
-  _messageKey: 
+  _messageKey: Distribute coins tutorial
 --- !u!1 &62828431
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,23 +2592,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4370128368359483934, guid: e9b08a9384c07594e8fb6a93035efc80, type: 3}
   m_PrefabInstance: {fileID: 301160293}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &302673982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTarget: {fileID: 4979010943492834729}
-  mAlignment_RTL: 514
-  mAlignment_LTR: 514
-  mAlignmentWasRTL: 0
-  mInitializeAlignment: 0
 --- !u!1 &310396166
 GameObject:
   m_ObjectHideFlags: 0
@@ -4564,8 +4547,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 832773348}
   m_HandleRect: {fileID: 832773347}
   m_Direction: 2
-  m_Value: 0.99999964
-  m_Size: 0.67830664
+  m_Value: 0.9999995
+  m_Size: 0.73359585
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6491,23 +6474,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &643415450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTarget: {fileID: 965999694}
-  mAlignment_RTL: 514
-  mAlignment_LTR: 514
-  mAlignmentWasRTL: 0
-  mInitializeAlignment: 0
 --- !u!1 &649476032
 GameObject:
   m_ObjectHideFlags: 0
@@ -7082,6 +7048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animation: {fileID: 11400000, guid: 22944c408f0825b4bb0c2019a5f28376, type: 2}
   _coinsDistributor: {fileID: 128994634}
+  _buttonText: {fileID: 1394709911}
 --- !u!1 &667096718
 GameObject:
   m_ObjectHideFlags: 0
@@ -8824,7 +8791,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 269.99982}
-  m_SizeDelta: {x: 120.00001, y: 796.10004}
+  m_SizeDelta: {x: 120.00001, y: 736.10004}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &794013165
 MonoBehaviour:
@@ -8982,23 +8949,6 @@ RectTransform:
   m_AnchoredPosition: {x: -4.3999977, y: 0}
   m_SizeDelta: {x: 8.799996, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &823767671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTarget: {fileID: 1064358085}
-  mAlignment_RTL: 514
-  mAlignment_LTR: 514
-  mAlignmentWasRTL: 0
-  mInitializeAlignment: 0
 --- !u!1 &832773346
 GameObject:
   m_ObjectHideFlags: 0
@@ -9031,7 +8981,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1897365205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.32169327}
+  m_AnchorMin: {x: 0, y: 0.26640406}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 5.3, y: 0}
   m_SizeDelta: {x: -10.556, y: 0}
@@ -9535,7 +9485,7 @@ MonoBehaviour:
       Description: 
       Languages:
       - Low goods
-      - "\u0425\u0443\u0434\u0448\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
+      - "\u0421\u043B\u0430\u0431\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
       - 
       Flags: 000000
       Languages_Touch: []
@@ -9663,9 +9613,8 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - Standard computer, used almost everywhere, suitable for routine work
-      - "\u0421\u0442\u0430\u043D\u0434\u0430\u0440\u0442\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440,
-        \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F
+      - Used almost everywhere, suitable for routine work
+      - "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F
         \u043F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0432\u0435\u0437\u0434\u0435,
         \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0434\u043B\u044F \u0440\u0443\u0442\u0438\u043D\u043D\u043E\u0439
         \u0440\u0430\u0431\u043E\u0442\u044B"
@@ -9798,28 +9747,24 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - "At the end of the month or if you don't have enough money on hand, you can
-        distribute the money between the bank and your own hands.\nThe more money
-        left in the bank at the end of the month, the more income the bank will bring.\nBut
-        if you don\u2019t have enough money on hand, you\u2019ll have to spend extra
-        time."
+      - "At the end of the month, or if you don't have enough money on hand, you
+        can distribute your money. \r\nThe more money left in the bank by the end
+        of the month, the more revenue the bank will bring. And the lack of money
+        on hand leads to a waste of time."
       - "\u0412 \u043A\u043E\u043D\u0446\u0435 \u043C\u0435\u0441\u044F\u0446\u0430
         \u0438\u043B\u0438 \u0435\u0441\u043B\u0438 \u0443 \u0442\u0435\u0431\u044F
         \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u0434\u0435\u043D\u0435\u0433
         \u043D\u0430 \u0440\u0443\u043A\u0430\u0445, \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
         \u0440\u0430\u0441\u043F\u0440\u0435\u0434\u0435\u043B\u0438\u0442\u044C
-        \u0434\u0435\u043D\u044C\u0433\u0438 \u043C\u0435\u0436\u0434\u0443 \u0431\u0430\u043D\u043A\u043E\u043C
-        \u0438 \u0441\u0432\u043E\u0438\u043C\u0438 \u0440\u0443\u043A\u0430\u043C\u0438.
-        \r\n\u0427\u0435\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u0435\u043D\u0435\u0433
-        \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0441\u044F \u0432 \u0431\u0430\u043D\u043A\u0435
-        \u043A \u043A\u043E\u043D\u0446\u0443 \u043C\u0435\u0441\u044F\u0446\u0430,
-        \u0442\u0435\u043C \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u043E\u0445\u043E\u0434\u043E\u0432
-        \u043F\u0440\u0438\u043D\u0435\u0441\u0435\u0442 \u0431\u0430\u043D\u043A.
-        \r\n\u041D\u043E \u0435\u0441\u043B\u0438 \u043D\u0430 \u0440\u0443\u043A\u0430\u0445
-        \u0431\u0443\u0434\u0435\u0442 \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0442\u044C
-        \u0434\u0435\u043D\u0435\u0433, \u0442\u043E \u043F\u0440\u0438\u0434\u0435\u0442\u0441\u044F
-        \u043F\u043E\u0442\u0440\u0430\u0442\u0438\u0442\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0435
-        \u0432\u0440\u0435\u043C\u044F. "
+        \u0441\u0432\u043E\u0438 \u0434\u0435\u043D\u044C\u0433\u0438. \r\n\u0427\u0435\u043C
+        \u0431\u043E\u043B\u044C\u0448\u0435 \u0434\u0435\u043D\u0435\u0433 \u043E\u0441\u0442\u0430\u043D\u0435\u0442\u0441\u044F
+        \u0432 \u0431\u0430\u043D\u043A\u0435 \u043A \u043A\u043E\u043D\u0446\u0443
+        \u043C\u0435\u0441\u044F\u0446\u0430, \u0442\u0435\u043C \u0431\u043E\u043B\u044C\u0448\u0435
+        \u0434\u043E\u0445\u043E\u0434\u043E\u0432 \u043F\u0440\u0438\u043D\u0435\u0441\u0435\u0442
+        \u0431\u0430\u043D\u043A. \u0410 \u043D\u0435\u0445\u0432\u0430\u0442\u043A\u0430
+        \u0434\u0435\u043D\u0435\u0433 \u043D\u0430 \u0440\u0443\u043A\u0430\u0445
+        \u043F\u0440\u0438\u0432\u043E\u0434\u0438\u0442 \u043A \u0442\u0440\u0430\u0442\u0435
+        \u0432\u0440\u0435\u043C\u0435\u043D\u0438. "
       - 
       Flags: 000000
       Languages_Touch: []
@@ -9872,6 +9817,15 @@ MonoBehaviour:
         \u041D\u0430\u0436\u0430\u0432 \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443,
         \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0434\u0435\u043D\u044C \u0431\u0443\u0434\u0435\u0442
         \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D. "
+      - 
+      Flags: 000000
+      Languages_Touch: []
+    - Term: Days remain
+      TermType: 0
+      Description: 
+      Languages:
+      - days remain
+      - "\u0434\u043D\u0435\u0439 \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C"
       - 
       Flags: 000000
       Languages_Touch: []
@@ -11688,7 +11642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -438.05002
+      value: -378.05002
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11716,7 +11670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11776,7 +11730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 308
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11816,17 +11770,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &965999694 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
-  m_PrefabInstance: {fileID: 965999691}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &967962158
@@ -13118,7 +13061,6 @@ GameObject:
   - component: {fileID: 1064358087}
   - component: {fileID: 1064358086}
   - component: {fileID: 1064358085}
-  - component: {fileID: 1064358088}
   m_Layer: 5
   m_Name: CostsText
   m_TagString: Untagged
@@ -13242,44 +13184,6 @@ RectTransform:
   m_AnchoredPosition: {x: 54.000004, y: -36}
   m_SizeDelta: {x: 108.00001, y: 60.000004}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1064358088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064358084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 344445a89b4f74a0e9a0a766903df87e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTerm: 
-  mTermSecondary: 
-  PrimaryTermModifier: 0
-  SecondaryTermModifier: 0
-  TermPrefix: 
-  TermSuffix: 
-  LocalizeOnAwake: 1
-  IgnoreRTL: 0
-  MaxCharactersInRTL: 0
-  IgnoreNumbersInRTL: 1
-  CorrectAlignmentForRTL: 1
-  AddSpacesToJoinedLanguages: 0
-  AllowLocalizedParameters: 1
-  TranslatedObjects: []
-  LocalizeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  AlwaysForceLocalize: 0
-  LocalizeCallBack:
-    Target: {fileID: 0}
-    MethodName: 
-  mGUI_ShowReferences: 0
-  mGUI_ShowTems: 1
-  mGUI_ShowCallback: 0
-  mLocalizeTarget: {fileID: 823767671}
-  mLocalizeTargetName: I2.Loc.LocalizeTarget_TextMeshPro_UGUI
 --- !u!1 &1076006229
 GameObject:
   m_ObjectHideFlags: 0
@@ -18408,23 +18312,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6947743330601564212, guid: aef7e4fb0fe33184e9004223fc91f827, type: 3}
   m_PrefabInstance: {fileID: 1564069238}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1567304319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 481ab606793a67349be805c13febeba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mTarget: {fileID: 1898154591}
-  mAlignment_RTL: 514
-  mAlignment_LTR: 514
-  mAlignmentWasRTL: 0
-  mInitializeAlignment: 0
 --- !u!1 &1586853570
 GameObject:
   m_ObjectHideFlags: 0
@@ -21236,7 +21123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -676.75
+      value: -616.75
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -21264,7 +21151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21324,7 +21211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 308
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -21364,17 +21251,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1898154591 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
-  m_PrefabInstance: {fileID: 1898154588}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1899306492
@@ -24682,7 +24558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -199.35
+      value: -139.35
       objectReference: {fileID: 0}
     - target: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -24710,7 +24586,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 445
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5902282496940269222, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24770,7 +24646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 308
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7061817376975605132, guid: fa90728d30611264787ad52f2d800064, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -24806,17 +24682,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3793c6ede08716f4d9595401dfc35bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4979010943492834729 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6026863300824524484, guid: fa90728d30611264787ad52f2d800064, type: 3}
-  m_PrefabInstance: {fileID: 4979010943492834726}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5057035059367104036

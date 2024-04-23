@@ -31,6 +31,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     {
         BindInitializator();
         BindDataControllers();
+
+        BindLocalizationInitializer();
         BindTutorial();
 
         BindSubscribeController();
@@ -56,6 +58,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         _servicesLocatorUILoader.BindUI();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindLocalizationInitializer()
+    {
+        new LocalizationInitializer();
     }
 
     private void BindDataControllers()

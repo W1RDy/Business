@@ -1,16 +1,18 @@
+using I2.Loc;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
-public class SizeText : MonoBehaviour
+public class SizedText : MonoBehaviour
 {
     private TextMeshProUGUI _text;
 
-    private void Start()
+    public void SetText(string text)
     {
-        _text = GetComponent<TextMeshProUGUI>();
+        if (_text == null) _text = GetComponent<TextMeshProUGUI>();
+        _text.text = text;
         _text.rectTransform.sizeDelta = new Vector2(_text.preferredWidth + 10f, _text.rectTransform.sizeDelta.y);
     }
 }

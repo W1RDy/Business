@@ -31,28 +31,38 @@ public class Window : ObjectForInitializationWithChildren
         gameObject.SetActive(true);
         if (_type == WindowType.FinishPeriodWindow) Debug.Log(_openAnimation);
 
+        Action endChangeDelegate = () =>
+        {
+            IsChanging = false;
+            OnWindowChanged?.Invoke();
+        };
+
         if (_openAnimationInstance != null)
         {
             InteruptActivatedAnimations();
             IsChanging = true;
-            _openAnimationInstance.Play();
+            _openAnimationInstance.Play(endChangeDelegate);
         }
-        IsChanging = false;
-        OnWindowChanged?.Invoke();
+        else endChangeDelegate.Invoke();
     }
 
     public virtual void DeactivateWindow()
     {
+        Action endChangeDelegate = () =>
+        {
+            gameObject.SetActive(false);
+            IsChanging = false;
+            OnWindowChanged?.Invoke();
+        };
+
         if (_closeAnimationInstance != null)
         {
             InteruptActivatedAnimations();
             IsChanging = true;
-            _closeAnimationInstance.Play(() => gameObject.SetActive(false));
+            _closeAnimationInstance.Play(endChangeDelegate);
 
         }
-        else gameObject.SetActive(false);
-        IsChanging = false;
-        OnWindowChanged?.Invoke();
+        else endChangeDelegate?.Invoke();
     }
 
     private void InteruptActivatedAnimations()

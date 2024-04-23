@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using I2.Loc;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,7 +45,7 @@ public class GoalView
 
     public void SetTime(int remainTime, int time)
     {
-        _remainingTimeText.text = remainTime + " days remain";
+        _remainingTimeText.text = remainTime + " " + LocalizationManager.GetTranslation("Days remain");
 
         var timeProgress = (float)remainTime / time;
 
@@ -58,9 +59,9 @@ public class GoalView
     public void SetQualityText(GoodsType goodsType)
     {
         string qualityText;
-        if (goodsType == GoodsType.LowQuality) qualityText = "low +";
-        else if (goodsType == GoodsType.MediumQuality) qualityText = "medium +";
-        else qualityText = "high";
+        if (goodsType == GoodsType.LowQuality) qualityText = LocalizationManager.GetTranslation("Low") + " +";
+        else if (goodsType == GoodsType.MediumQuality) qualityText = LocalizationManager.GetTranslation("Medium") + " +";
+        else qualityText = LocalizationManager.GetTranslation("High");
 
         _remainingQuality.text = qualityText;
     }

@@ -5,16 +5,16 @@ using UnityEngine;
 public class ObjectsInitializator : MonoBehaviour, IService
 {
     [SerializeField] ObjectForInitialization[] _hiddenObjectsForInit;
-    private List<IInitializable> _initializables;
+    private List<IInitializable> _initializables = new List<IInitializable>();
 
     private void Awake()
     {
-        _initializables = new List<IInitializable>(_hiddenObjectsForInit);
         ServiceLocator.Instance.ServiceRegistered += InitObjects;
     }
 
     private void InitObjects()
     {
+        _initializables.AddRange(_hiddenObjectsForInit);
         foreach (var initializable in _initializables)
         {
             initializable.Init();
