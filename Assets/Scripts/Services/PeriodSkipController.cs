@@ -1,24 +1,14 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 
 public class PeriodSkipController : ObjectForInitialization, IService
 {
-    [SerializeField] private UIFadeAnimationWithText _darknessAnimation;
-    [SerializeField] private UIFadeAnimationWithText _brightnessAnimation;
-    private UIFadeAnimationWithText _darknessAnimationInstance;
-    private UIFadeAnimationWithText _brightnessAnimationInstance;
-
-    [SerializeField] private CustomImage _darknessView;
-
-    [SerializeField] private ClicksBlocker _clicksBlocker;
-
     private GamesConditionChecker _conditionChecker;
     private AudioPlayer _audioPlayer;
 
     private ProblemsGenerator _problemsGenerator;
     private OrderGenerator _orderGenerator;
     private OrderUrgencyUpdater _orderUrgencyUpdater;
+    private DarknessAnimationController _animationController;
 
     private DataSaver _dataSaver;
 
@@ -27,11 +17,7 @@ public class PeriodSkipController : ObjectForInitialization, IService
         base.Init();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        _darknessAnimationInstance = Instantiate(_darknessAnimation);
-        _brightnessAnimationInstance = Instantiate(_brightnessAnimation);
-
-        _darknessAnimationInstance.SetParameters(_darknessView);
-        _brightnessAnimationInstance.SetParameters(_darknessView);
+        _animationController = ServiceLocator.Instance.Get<DarknessAnimationController>();
 
         _audioPlayer = ServiceLocator.Instance.Get<AudioPlayer>();
         _problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
@@ -43,12 +29,12 @@ public class PeriodSkipController : ObjectForInitialization, IService
 
     public void SkipDays()
     {
-        _clicksBlocker.BlockClicks();
-        _darknessAnimationInstance.Play(() => 
+        _animationController.PlayDarknessAnimation(() => 
         {
             if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay(); 
         });
-        if (_conditionChecker.IsPeriodFinished())
+        
+        if (_conditionChecker.IsPeriodFinished() || _conditionChecker.IsGameFinished())
         {
             _dataSaver.StartSaving();
         }
@@ -57,8 +43,7 @@ public class PeriodSkipController : ObjectForInitialization, IService
 
     public void SkipDaysWithoutSaving()
     {
-        _clicksBlocker.BlockClicks();
-        _darknessAnimationInstance.Play(() =>
+        _animationController.PlayDarknessAnimation(() =>
         {
             if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay();
         });
@@ -70,7 +55,6 @@ public class PeriodSkipController : ObjectForInitialization, IService
         _orderUrgencyUpdater.UpdateUrgency();
         _problemsGenerator.TryGenerateProblem();
         _orderGenerator.ActivateOrderGenerator();
-        _clicksBlocker.UnblockClicks();
-        _brightnessAnimationInstance.Play();
+        _animationController.PlayBrightnessAnimation(null);
     }
 }

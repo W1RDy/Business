@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class ResultsOfTheMonthService : ClassForInitialization, IService, ISubscribable
+public class ResultsOfTheMonthService : ResetableClassForInit, IService, ISubscribable
 {
     private List<ResultsOfTheMonth> _results = new List<ResultsOfTheMonth>();
     private ResultsOfTheMonth _currentResults;
@@ -17,6 +17,7 @@ public class ResultsOfTheMonthService : ClassForInitialization, IService, ISubsc
 
     public override void Init()
     {
+        base.Init();
         _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         Subscribe();
@@ -31,6 +32,7 @@ public class ResultsOfTheMonthService : ClassForInitialization, IService, ISubsc
     {
         _currentResults = new ResultsOfTheMonth();
         _results.Add(_currentResults);
+        Debug.Log(_results.Count);
     }
 
     public void SetResultsByLoadData(List<ResultSaveConfig> resultSaveConfigs)
@@ -70,6 +72,12 @@ public class ResultsOfTheMonthService : ClassForInitialization, IService, ISubsc
     public void Unsubscribe()
     {
         _dataSaver.OnStartSaving -= SaveDelegate;
+    }
+
+    public override void Reset()
+    {
+        _results.Clear();
+        ActivateNewResults();
     }
 }
 
@@ -115,17 +123,16 @@ public class ResultsOfTheGame : IResults
     public int Income { get; private set; }
     public int Time {  get; private set; }
 
-    public ResultsOfTheGame()
+    public ResultsOfTheGame(int time)
     {
         Expenses = 0;
         Income = 0;
-        Time = -1;
+        Time = time;
     }
 
-    public void UpdateResult(int expenses, int income, int time)
+    public void UpdateResult(int expenses, int income)
     {
         Expenses += expenses;
         Income += income;
-        Time += time;
     }
 }

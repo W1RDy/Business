@@ -5,15 +5,20 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class WindowStackController : MonoBehaviour
+public class WindowStackController : ResetableClassForInit
 {
     private Stack<Window> _windowsStack = new Stack<Window>();
     private int _maxStackSize;
     private int _stackSize = 0;
 
-    public WindowStackController(int maxStackSize)
+    public WindowStackController(int maxStackSize) : base()
     {
         _maxStackSize = maxStackSize;
+    }
+
+    public override void Init()
+    {
+        base.Init();
     }
 
     public void AddWindowToStack(Window window)
@@ -59,5 +64,10 @@ public class WindowStackController : MonoBehaviour
             window.DeactivateWindow();
         }
         _windowsStack.Clear();
+    }
+
+    public override void Reset()
+    {
+        ClearStack();
     }
 }

@@ -84,9 +84,16 @@ public class DeliveryOrderService : OrderService
     }
 }
 
-public class RememberedOrderService : IService
+public class RememberedOrderService : ResetableClassForInit, IService
 {
     private Queue<OrderInstanceConfig> _rememberedOrder = new Queue<OrderInstanceConfig>();
+
+    public RememberedOrderService() : base () { }
+
+    public override void Init()
+    {
+        base.Init();
+    }
 
     public void RememberOrder(Order order)
     {
@@ -110,5 +117,10 @@ public class RememberedOrderService : IService
     public int GetOrdersCount()
     {
         return _rememberedOrder.Count;
+    }
+
+    public override void Reset()
+    {
+        _rememberedOrder.Clear();
     }
 }

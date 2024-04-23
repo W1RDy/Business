@@ -7640,6 +7640,7 @@ MonoBehaviour:
   _objectsInitializator: {fileID: 297445484}
   _servicesLocatorEntitiesLoader: {fileID: 253144516}
   _servicesLocatorUILoader: {fileID: 2094643343}
+  _darknessAnimationController: {fileID: 1263381410}
   _difficultyController: {fileID: 855340456}
   _subscribeController: {fileID: 1301618223}
   _tutorialController: {fileID: 1159712959}
@@ -14906,6 +14907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1263381409}
+  - component: {fileID: 1263381410}
   m_Layer: 5
   m_Name: Darkness
   m_TagString: Untagged
@@ -14933,6 +14935,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1263381410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263381408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2c39207a92fb994caa6e6188940b636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _darknessAnimation: {fileID: 11400000, guid: 33dadb31f062ab948900626b3ed7f1b4, type: 2}
+  _brightnessAnimation: {fileID: 11400000, guid: 5364289aafe6f224db9b48a74cc36716, type: 2}
+  _darknessView: {fileID: 1955773069}
+  _clicksBlocker: {fileID: 536637359}
 --- !u!1 &1270318310
 GameObject:
   m_ObjectHideFlags: 0
@@ -22064,10 +22082,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916d52cf55457f447bfb7bdfc7084aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _darknessAnimation: {fileID: 11400000, guid: 33dadb31f062ab948900626b3ed7f1b4, type: 2}
-  _brightnessAnimation: {fileID: 11400000, guid: 5364289aafe6f224db9b48a74cc36716, type: 2}
-  _darknessView: {fileID: 1955773069}
-  _clicksBlocker: {fileID: 536637359}
 --- !u!224 &1927855417 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5823654874089797875, guid: fa90728d30611264787ad52f2d800064, type: 3}
@@ -22210,7 +22224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3d3ad0bc7c1cdbc429b0d5c7f740d3dc, type: 2}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0.03773582, g: 0.031149851, b: 0.031149851, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -23088,7 +23102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a7858ce36b8a24794113ef21413178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isResetSaves: 0
+  _isResetSaves: 1
 --- !u!4 &2030697025
 Transform:
   m_ObjectHideFlags: 0

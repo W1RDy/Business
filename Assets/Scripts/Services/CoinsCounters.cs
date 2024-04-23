@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CoinsCounter
 {
-    public abstract class CoinsCounter : ClassForInitialization, IService, ICoinsCounter, ISubscribable
+    public abstract class CoinsCounter : ResetableClassForInit, IService, ICoinsCounter, ISubscribable
     {
         protected int _coins;
 
@@ -29,6 +29,7 @@ namespace CoinsCounter
 
         public override void Init()
         {
+            base.Init();
             _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
             _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
@@ -144,6 +145,13 @@ namespace CoinsCounter
             };
             _dataSaver.OnStartSaving += SaveDelegate;
         }
+
+        public override void Reset()
+        {
+            _coins = _difficultyController.StartCoinsInHands;
+            UpdateIndicator();
+            InvokeCoinsEvent();
+        }
     }
 
     public class BankCoinsCounter : CoinsCounter
@@ -175,6 +183,13 @@ namespace CoinsCounter
             base.Subscribe();
             SaveDelegate = () => _dataSaver.SaveBankCoins(Coins);
             _dataSaver.OnStartSaving += SaveDelegate;
+        }
+
+        public override void Reset()
+        {
+            _coins = _difficultyController.StartCoinsInBank;
+            UpdateIndicator();
+            InvokeCoinsEvent();
         }
     }
 }

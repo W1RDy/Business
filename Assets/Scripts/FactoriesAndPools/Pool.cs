@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<T>
+public class Pool<T> : IPool<T>, IService, IResetable where T : MonoBehaviour, IPoolElement<T>
 {
     protected int _startPoolSize;
 
@@ -12,6 +12,8 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
     protected IFactory _factory;
     private RectTransform _poolContainer;
     private Transform _parent;
+
+    private ResetContoroller _resetContoroller;
 
     public Pool(IFactory factory, RectTransform poolContainer, Transform parent, int startPoolSize)
     {
@@ -22,6 +24,9 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
         _factory.LoadResources();
 
         _startPoolSize = startPoolSize;
+
+        _resetContoroller = ServiceLocator.Instance.Get<ResetContoroller>();
+        _resetContoroller.AddResetable(this);
     }
 
     public virtual void Init()
@@ -75,5 +80,13 @@ public class Pool<T> : IPool<T>, IService where T : MonoBehaviour, IPoolElement<
         var scale = element.Element.transform.localScale;
         element.Element.transform.SetParent(parent);
         element.Element.transform.localScale = scale;
+    }
+
+    public void Reset()
+    {
+        foreach (var element in _elementsList)
+        {
+            if (!element.IsFree) Release(element.Element);
+        }
     }
 }

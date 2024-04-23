@@ -3,21 +3,26 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonChangeController : ClassForInitialization, IService
+public class ButtonChangeController : ClassForInitialization, IService, ISubscribable
 {
     private Dictionary<ChangeCondition, List<IChangeButton>> _buttons = new Dictionary<ChangeCondition, List<IChangeButton>>();
+
+    private GameController _gameController;
+    private HandsCoinsCounter _handsCoinsCounter;
+    private PCService _pcService;
+
+    private SubscribeController _subscribeController;
 
     public ButtonChangeController() : base() { }
 
     public override void Init()
     {
-        var gameController = ServiceLocator.Instance.Get<GameController>();
-        var handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
-        var pcService = ServiceLocator.Instance.Get<PCService>();
+        _gameController = ServiceLocator.Instance.Get<GameController>();
+        _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
+        _pcService = ServiceLocator.Instance.Get<PCService>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
 
-        handsCoinsCounter.CoinsChanged += ChangeByCoinsChangeCondition;
-        gameController.GameFinished += ChangeByFinishGameCondition;
-        pcService.ItemsUpdated += ChangeByNewItemCondition;
+        Subscribe();
     }
 
     public void AddChangeButton(IChangeButton button)
@@ -96,5 +101,23 @@ public class ButtonChangeController : ClassForInitialization, IService
             from.gameObject.SetActive(false);
             to.gameObject.SetActive(true);
         }
+    }
+
+    public void Subscribe()
+    {
+        _subscribeController.AddSubscribable(this);
+
+        _handsCoinsCounter.CoinsChanged += ChangeByCoinsChangeCondition;
+        _gameController.GameFinished += ChangeByFinishGameCondition;
+        _gameController.GameStarted += ChangeByFinishGameCondition;
+        _pcService.ItemsUpdated += ChangeByNewItemCondition;
+    }
+
+    public void Unsubscribe()
+    {
+        _handsCoinsCounter.CoinsChanged -= ChangeByCoinsChangeCondition;
+        _gameController.GameFinished -= ChangeByFinishGameCondition;
+        _gameController.GameStarted -= ChangeByFinishGameCondition;
+        _pcService.ItemsUpdated -= ChangeByNewItemCondition;
     }
 }

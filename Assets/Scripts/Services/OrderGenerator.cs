@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
+public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
 {
     [SerializeField] private OrderConfig[] _orders;
     [SerializeField] private OrderConfig _tutorialOrderConfig; 
@@ -43,6 +43,7 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
 
     public override void Init()
     {
+        base.Init();
         _pool = ServiceLocator.Instance.Get<Pool<Order>>();
         _orderService = ServiceLocator.Instance.Get<OrderService>();
         _idGenerator = new IDGeneratorWithMinID(3, 1);
@@ -221,5 +222,10 @@ public class OrderGenerator : ObjectForInitialization, IService, ISubscribable
         _isSubscribeToActivating = false;
         _gameController.GameStarted -= ActivateOrderGenerator;
         _gameController.TutorialLevelStarted -= ActivateOrderGenerator;
+    }
+
+    public override void Reset()
+    {
+        ActivatingSubscribe();
     }
 }

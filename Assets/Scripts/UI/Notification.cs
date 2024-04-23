@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-public class Notification : MonoBehaviour
+public class Notification : ResetableObjForInit
 {
     [SerializeField] private NotificationType _notificationType;
 
@@ -15,6 +15,11 @@ public class Notification : MonoBehaviour
     private bool _isActivated;
 
     private AudioPlayer _audioPlayer;
+
+    public override void Init()
+    {
+        base.Init();
+    }
 
     public void AddNotification()
     {
@@ -48,6 +53,19 @@ public class Notification : MonoBehaviour
             _view.SetActive(false);
             _count = 0;
         }
+    }
+
+    private void RemoveAllNotifications()
+    {
+        _count = 0;
+        _text.text = _count.ToString();
+
+        DeactivateNotification();
+    }
+
+    public override void Reset()
+    {
+        RemoveAllNotifications();
     }
 }
 

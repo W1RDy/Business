@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RandomController : MonoBehaviour
+public class RandomController : ResetableObjForInit
 {
     [SerializeField] private ChancesConfigForView[] _configs;
     private IRandomizable[] _randomizables;
+
+    private IRandomizable[] _startRandomizables;
+    private ChancesConfigForView[] _startConfig;
 
     [SerializeField] private int _minBlocksCount;
 
@@ -15,9 +18,19 @@ public class RandomController : MonoBehaviour
 
     private List<IRandomizable> _blockedRandomizables = new List<IRandomizable>();
 
+    public RandomController() : base() { }
+
+    public override void Init()
+    {
+        base.Init();
+    }
+
     public void Init(IRandomizable[] randomizables)
     {
         _randomizables = randomizables;
+        _startRandomizables = new IRandomizable[randomizables.Length];
+
+        _randomizables.CopyTo(_startRandomizables, 0);
 
 #if UNITY_EDITOR
         _configs = new ChancesConfigForView[randomizables.Length];
@@ -28,6 +41,9 @@ public class RandomController : MonoBehaviour
             _configs[i].className = ((ScriptableObject)randomizables[i]).name;
             _configs[i].chance = randomizables[i].Chance;
         }
+
+        _startConfig = new ChancesConfigForView[_configs.Length];
+        _configs.CopyTo(_startConfig, 0);
 #endif
     }
 
@@ -158,6 +174,14 @@ public class RandomController : MonoBehaviour
     public void ChangeMinBlocksCount(int minBlocksCount)
     {
         _minBlocksCount = minBlocksCount;
+    }
+
+    public override void Reset()
+    {
+        _startRandomizables.CopyTo(_randomizables, 0);
+        _startConfig.CopyTo(_configs, 0);
+
+        UnblockController();
     }
 }
 

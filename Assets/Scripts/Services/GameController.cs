@@ -5,11 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using YG;
 
-public class GameController : ObjectForInitialization, IService, ISubscribable
+public class GameController : ResetableObjForInit, IService, ISubscribable
 {
     public event Action GameFinished;
     public event Action GameStarted;
-    public event Action GameRestarted;
 
     public event Action TutorialStarted;
     public event Action TutorialLevelStarted;
@@ -22,6 +21,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
     private BankCoinsCounter _bankCoinsCounter;
 
     private SubscribeController _subscribeController;
+    private LoadSceneController _loadSceneController;
 
     private DataLoader _dataLoader;
 
@@ -33,6 +33,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
 
     public override void Init()
     {
+        base.Init();
         _resultsActivator = ServiceLocator.Instance.Get<ResultsActivator>();
         _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
@@ -43,6 +44,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        _loadSceneController = ServiceLocator.Instance.Get<LoadSceneController>();
 
         if ( _isResetSaves ) YandexGame.ResetSaveProgress();
         Subscribe();
@@ -50,6 +52,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
 
     public void StartDelegate()
     {
+        if (!_conditionsChecker.IsPeriodFinished()) _loadSceneController.LoadScene();
         if (YandexGame.savesData.tutorialPartsCompleted == 0) StartTutorial();
         else if (YandexGame.savesData.tutorialPartsCompleted == 1) StartTutorialLevel();
         else StartGame();
@@ -88,8 +91,9 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
   
     public void RestartGame()
     {
-        Debug.Log("Restart");
-        GameRestarted?.Invoke();
+        YandexGame.ResetSaveProgress();
+        YandexGame.savesData.tutorialPartsCompleted = 2;
+        _loadSceneController.Reset();
     }
 
     public void Subscribe()
@@ -101,6 +105,8 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
 
         _handsCoinsCounter.CoinsChanged += TryFinishGame;
         _bankCoinsCounter.CoinsChanged += TryFinishGame;
+
+        _loadSceneController.IsReseted += StartDelegate;
     }
 
     public void Unsubscribe()
@@ -110,5 +116,12 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
 
         _handsCoinsCounter.CoinsChanged -= TryFinishGame;
         _bankCoinsCounter.CoinsChanged -= TryFinishGame;
+
+        _loadSceneController.IsReseted -= StartDelegate;
+    }
+
+    public override void Reset()
+    {
+        IsFinished = false;
     }
 }

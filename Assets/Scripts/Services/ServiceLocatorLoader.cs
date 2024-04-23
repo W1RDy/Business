@@ -13,6 +13,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private ServiceLocatorEntitiesLoader _servicesLocatorEntitiesLoader;
     [SerializeField] private ServiceLocatorUILoader _servicesLocatorUILoader;
 
+    [SerializeField] private DarknessAnimationController _darknessAnimationController;
+
     [SerializeField] private DifficultyController _difficultyController;
     [SerializeField] private SubscribeController _subscribeController;
 
@@ -33,7 +35,9 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindDataControllers();
 
         BindLocalizationInitializer();
+        BindLoadSceneController();
         BindTutorial();
+        BindResetController();
 
         BindSubscribeController();
         BindDifficultyController();
@@ -58,6 +62,19 @@ public class ServiceLocatorLoader : MonoBehaviour
         _servicesLocatorUILoader.BindUI();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindResetController()
+    {
+        var resetController = new ResetContoroller();
+        ServiceLocator.Instance.Register(resetController);
+    }
+
+    private void BindLoadSceneController()
+    {
+        ServiceLocator.Instance.Register(_darknessAnimationController);
+        var loadSceneController = new LoadSceneController(_darknessAnimationController);
+        ServiceLocator.Instance.Register(loadSceneController);
     }
 
     private void BindLocalizationInitializer()

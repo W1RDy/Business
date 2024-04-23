@@ -4,12 +4,14 @@ using UnityEngine;
 public class ResultsCalculator : ClassForInitialization
 { 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
+    private TimeController _timeController;
 
     public ResultsCalculator () : base () { }
 
     public override void Init()
     {
         _resultsOfTheMonthService = ServiceLocator.Instance.Get<ResultsOfTheMonthService>();
+        _timeController = ServiceLocator.Instance.Get<TimeController>();
     }
 
     public int CalculateSummary(ResultsOfTheMonth results)
@@ -26,14 +28,14 @@ public class ResultsCalculator : ClassForInitialization
 
     public ResultsOfTheGame CalculateResultsOfTheGame()
     {
-        var resultOfTheGame = new ResultsOfTheGame();
+        var resultOfTheGame = new ResultsOfTheGame(_timeController.CurrentMonth - 1);
 
         foreach (var resultOfTheMonth in _resultsOfTheMonthService.GetResults()) 
         {
             var expenses = resultOfTheMonth.EmergencyCosts + resultOfTheMonth.PurchaseCosts;
             var income = resultOfTheMonth.OrderIncome + resultOfTheMonth.BankIncome;
 
-            resultOfTheGame.UpdateResult(expenses, income, 1);
+            resultOfTheGame.UpdateResult(expenses, income);
         }
 
         return resultOfTheGame;

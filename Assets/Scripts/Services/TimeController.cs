@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using YG;
 
-public class TimeController : ClassForInitialization, IService, ISubscribable
+public class TimeController : ResetableClassForInit, IService, ISubscribable
 {
     #region TimeValues
 
@@ -43,6 +43,7 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
 
     public override void Init()
     {
+        base.Init();
         _periodController = ServiceLocator.Instance.Get<PeriodController>();
         _gameLifeController = ServiceLocator.Instance.Get<PeriodSkipController>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
@@ -136,5 +137,12 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
         _gameController.TutorialStarted -= SetStartValues;
         _gameController.GameStarted -= SetStartValues;
         _dataSaver.OnStartSaving -= SaveDelegate;
+    }
+
+    public override void Reset()
+    {
+        _time = 0;
+        _timeIndicator.SetTime(_time);
+        SetStartValues();
     }
 }

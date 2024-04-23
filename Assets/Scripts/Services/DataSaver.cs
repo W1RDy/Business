@@ -87,7 +87,7 @@ public class DataSaver : MonoBehaviour, IService
         yield return new WaitForSeconds(0.5f);
         _resultsSaved = false;
         OnStartSaving?.Invoke();
-        yield return new WaitUntil(() => _entitiesSaveConfig.entitiesSetted >= 5);
+        yield return new WaitUntil(() => _entitiesSaveConfig.entitiesSetted >= 4);
         yield return new WaitUntil(() => _resultsSaved);
         yield return new WaitForSeconds(0.5f);
         Debug.Log("SaveToCloud");
