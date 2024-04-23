@@ -45,7 +45,6 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         Subscribe();
 
-        YandexGame.ResetSaveProgress();
         _dataLoader.LoadData();
     }
 

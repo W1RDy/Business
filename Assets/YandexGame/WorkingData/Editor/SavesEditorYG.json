@@ -1,60 +1,50 @@
 {
-    "idSave": 32,
+    "idSave": 34,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "isTutorial": false,
     "handsCoins": 100,
     "bankCoins": 400,
-    "monthCount": 1,
-    "time": 30,
+    "monthCount": 0,
+    "time": 15,
     "entitiesSaveConfig": {
         "orders": [
             {
-                "id": 2,
-                "cost": 43,
-                "time": 16,
-                "neededGoods": 0,
-                "isApplied": false,
-                "remainWaiting": 2
-            },
-            {
                 "id": 1,
-                "cost": 55,
-                "time": 16,
-                "neededGoods": 1,
-                "isApplied": true,
-                "remainWaiting": 1
-            },
-            {
-                "id": 3,
                 "cost": 32,
                 "time": 16,
                 "neededGoods": 0,
                 "isApplied": true,
+                "remainWaiting": 1
+            },
+            {
+                "id": 2,
+                "cost": 82,
+                "time": 11,
+                "neededGoods": 2,
+                "isApplied": false,
+                "remainWaiting": 1
+            },
+            {
+                "id": 3,
+                "cost": 35,
+                "time": 16,
+                "neededGoods": 0,
+                "isApplied": false,
                 "remainWaiting": 2
             }
         ],
         "deliveryOrders": [],
         "goods": [
             {
-                "goodsType": 1,
-                "buildTime": 1,
-                "amount": 1,
-                "brokenGoodsAmount": 0
-            },
-            {
                 "goodsType": 0,
                 "buildTime": 2,
-                "amount": 1,
+                "amount": 0,
                 "brokenGoodsAmount": 0
             }
         ],
         "pcs": [
-            {
-                "id": 6,
-                "amount": 1
-            },
             {
                 "id": 1,
                 "amount": 1
@@ -69,22 +59,10 @@
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": -80,
+            "purchaseCosts": -40,
             "emergencyCosts": 0,
-            "orderIncome": 40,
+            "orderIncome": 47,
             "bankIncome": 200
-        },
-        {
-            "purchaseCosts": -80,
-            "emergencyCosts": 0,
-            "orderIncome": 40,
-            "bankIncome": 200
-        },
-        {
-            "purchaseCosts": -160,
-            "emergencyCosts": -103,
-            "orderIncome": 303,
-            "bankIncome": 258
         }
     ]
 }

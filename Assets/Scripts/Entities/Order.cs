@@ -63,8 +63,6 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     protected IIDGenerator _idGenerator;
 
-    private WindowChildChangedHandler _windowChildChangedHandler;
-
     public override void Init()
     {
         base.Init();

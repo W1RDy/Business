@@ -11,6 +11,8 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     private ButtonChangeController _changeController;
     private GamesConditionChecker _conditionChecker;
 
+    private ButtonTextFitter _buttonTextFitter;
+
     private Action OnOrderChanged;
 
     [SerializeField] private UIBlockWithStates _connectedBlockWithStates;
@@ -19,6 +21,7 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     {
         base.Init();
 
+        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>());
         SetText("Send");
 
         _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();
@@ -65,6 +68,12 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     {
         if (_order == null) return false;
         return _conditionChecker.IsHasInInventory((_order as Order).NeededGoods);
+    }
+
+    protected override void SetText(string key)
+    {
+        base.SetText(key);
+        _buttonTextFitter.CheckButtonTextFit(_stateText);
     }
 
     public void OnDestroy()
