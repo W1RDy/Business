@@ -14,7 +14,7 @@ namespace YG
 
         // Тестовые сохранения для демо сцены
         // Можно удалить этот код, но тогда удалите и демо (папка Example)
-        public bool isTutorial = true;
+        public int tutorialPartsCompleted = 0;
 
         public int handsCoins = 100;
         public int bankCoins = 400;

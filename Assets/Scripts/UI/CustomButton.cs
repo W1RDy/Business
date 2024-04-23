@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
 public abstract class CustomButton : ObjectForInitialization
@@ -24,7 +25,7 @@ public abstract class CustomButton : ObjectForInitialization
         _button = GetComponent<Button>();
         _disabledColor = _button.colors.disabledColor;
 
-        _tutorialActivator.TutorialActivated += DeactivateClickableByTutorial;
+        _tutorialActivator.TutorialActivated += TutorialActivateDelegate;
         _tutorialActivator.TutorialDeactivated += ReturnValuesToDefaultByTutorial;
 
         _button.onClick.AddListener(ClickCallback);
@@ -44,6 +45,21 @@ public abstract class CustomButton : ObjectForInitialization
     }
 
     #region Tutorial
+
+    private void TutorialActivateDelegate()
+    {
+        InitByTutorial();
+        if (YandexGame.savesData.tutorialPartsCompleted == 0) DeactivateClickableByTutorial();
+    }
+
+    protected virtual void InitByTutorial()
+    {
+        if (YandexGame.savesData.tutorialPartsCompleted > 0)
+        {
+            _tutorialActivator.TutorialActivated -= DeactivateClickableByTutorial;
+            _tutorialActivator.TutorialDeactivated -= ReturnValuesToDefaultByTutorial;
+        }
+    }
 
     protected virtual void DeactivateClickableByTutorial()
     {

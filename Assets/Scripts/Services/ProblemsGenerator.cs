@@ -17,7 +17,7 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
     private Action _onDifficultyChanged;
 
     private SubscribeController _subscribeController;
-    private DataSaver _dataSaver;
+    //private DataSaver _dataSaver;
 
     private ProblemConfig _currentProblem;
 
@@ -38,7 +38,7 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
         _gameController = ServiceLocator.Instance.Get<GameController>();
         _clicksBlocker = ServiceLocator.Instance.Get<ClicksBlocker>();
 
-        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
+        //_dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
         Subscribe();
     }
@@ -89,15 +89,15 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
             _clicksBlocker.BlockClicks();
             _windowActivator.ActivateWindow(WindowType.ProblemWindow);
 
-            SaveDelegate();
+            //SaveDelegate();
         }
     }
 
-    private void SaveDelegate()
-    {
-        _dataSaver.SaveProblem(_currentProblem);
-        _currentProblem = null;
-    }
+    //private void SaveDelegate()
+    //{
+    //    _dataSaver.SaveProblem(_currentProblem);
+    //    _currentProblem = null;
+    //}
 
     public void GenerateProblemByLoadData(ProblemSaveConfig problem)
     {
@@ -152,12 +152,12 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
         _difficultyController.DifficultyChanged += _onDifficultyChanged;
         _onDifficultyChanged.Invoke();
 
-        _dataSaver.OnStartSaving += SaveDelegate;
+        //_dataSaver.OnStartSaving += SaveDelegate;
     }
 
     public void Unsubscribe()
     {
         _difficultyController.DifficultyChanged -= _onDifficultyChanged;
-        _dataSaver.OnStartSaving -= SaveDelegate;
+        //_dataSaver.OnStartSaving -= SaveDelegate;
     }
 }

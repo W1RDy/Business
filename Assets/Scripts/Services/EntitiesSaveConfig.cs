@@ -10,7 +10,7 @@ public class EntitiesSaveConfig
     public GoodsSaveConfig[] goods;
     public PCSaveConfig[] pcs;
 
-    public ProblemSaveConfig problem;
+    //public ProblemSaveConfig problem = null;
     public int entitiesSetted;
 
     public void SetOrders(Order[] orders)
@@ -20,7 +20,7 @@ public class EntitiesSaveConfig
         for (int i = 0; i < orders.Length; i++)
         {
             var order = orders[i];
-            this.orders[i] = new OrderSaveConfig(order.ID, order.Cost, order.Time, order.NeededGoods, order.IsApplied, order.RemainWaiting);
+            this.orders[i] = new OrderSaveConfig(order.ID, order.Cost, order.Time, order.NeededGoods, order.IsApplied, order.RemainWaiting, order.RemainTime);
         }
         entitiesSetted++;
     }
@@ -58,16 +58,16 @@ public class EntitiesSaveConfig
         entitiesSetted++;
     }
 
-    public void SetProblem(ProblemConfig problem)
-    {
-        if (problem == null) this.problem = null;
-        else
-        {
-            this.problem = new ProblemSaveConfig(problem.ID, problem.CoinsRequirements);
-            if (problem is ProblemWithOrder problemWithOrder) this.problem.problemedOrder = problemWithOrder.ProblemedOrder;
-        }
-        entitiesSetted++;
-    }
+    //public void SetProblem(ProblemConfig problem)
+    //{
+    //    if (problem == null) this.problem = null;
+    //    else
+    //    {
+    //        this.problem = new ProblemSaveConfig(problem.ID, problem.CoinsRequirements);
+    //        if (problem is ProblemWithOrder problemWithOrder) this.problem.problemedOrder = problemWithOrder.ProblemedOrder;
+    //    }
+    //    entitiesSetted++;
+    //}
 }
 
 [Serializable]
@@ -79,9 +79,10 @@ public class OrderSaveConfig
     public GoodsType neededGoods;
 
     public bool isApplied;
+    public int remainTime;
     public int remainWaiting;
 
-    public OrderSaveConfig(int id, int cost, int time, GoodsType neededGoods, bool isApplied, int remainWaiting)
+    public OrderSaveConfig(int id, int cost, int time, GoodsType neededGoods, bool isApplied,  int remainWaiting, int remainTime)
     {
         this.id = id;
         this.cost = cost;
@@ -89,6 +90,7 @@ public class OrderSaveConfig
         this.neededGoods = neededGoods;
         this.isApplied = isApplied;
         this.remainWaiting = remainWaiting;
+        this.remainTime = remainTime;
     }
 }
 

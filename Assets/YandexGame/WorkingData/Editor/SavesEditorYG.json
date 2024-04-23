@@ -1,49 +1,45 @@
 {
-    "idSave": 34,
+    "idSave": 49,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "isTutorial": false,
-    "handsCoins": 100,
-    "bankCoins": 400,
+    "tutorialPartsCompleted": 1,
+    "handsCoins": 109,
+    "bankCoins": 600,
     "monthCount": 0,
     "time": 15,
     "entitiesSaveConfig": {
         "orders": [
             {
                 "id": 1,
-                "cost": 32,
-                "time": 16,
+                "cost": 37,
+                "time": 17,
                 "neededGoods": 0,
                 "isApplied": true,
-                "remainWaiting": 1
+                "remainTime": 10,
+                "remainWaiting": 2
             },
             {
                 "id": 2,
-                "cost": 82,
-                "time": 11,
-                "neededGoods": 2,
+                "cost": 32,
+                "time": 19,
+                "neededGoods": 0,
                 "isApplied": false,
+                "remainTime": 19,
                 "remainWaiting": 1
             },
             {
                 "id": 3,
-                "cost": 35,
-                "time": 16,
-                "neededGoods": 0,
+                "cost": 63,
+                "time": 13,
+                "neededGoods": 1,
                 "isApplied": false,
+                "remainTime": 13,
                 "remainWaiting": 2
             }
         ],
         "deliveryOrders": [],
-        "goods": [
-            {
-                "goodsType": 0,
-                "buildTime": 2,
-                "amount": 0,
-                "brokenGoodsAmount": 0
-            }
-        ],
+        "goods": [],
         "pcs": [
             {
                 "id": 1,
@@ -61,7 +57,7 @@
         {
             "purchaseCosts": -40,
             "emergencyCosts": 0,
-            "orderIncome": 47,
+            "orderIncome": 49,
             "bankIncome": 200
         }
     ]

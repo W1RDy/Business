@@ -35,4 +35,9 @@ public class PeriodController : ClassForInitialization, IService
 
         _resultsActivator.ActivateResultsOfTheMonth();
     }
+
+    public void FinishPeriodWithoutDouble()
+    {
+        _resultsActivator.ActivateResultsOfTheMonth();
+    }
 }

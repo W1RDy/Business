@@ -16,14 +16,12 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
         base.Init();
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
-        Debug.Log(_conditionChecker);
 
         _buttonChangeController.AddChangeButton(this);
     }
 
     public bool CheckButtonChangeCondition()
     {
-        Debug.Log(_conditionChecker);
         return _conditionChecker.IsGameFinished();
     }
 

@@ -19,6 +19,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
     public int Time => _orderConfig.Time;
     public GoodsType NeededGoods => _orderConfig.NeededGoods;
     public int RemainWaiting => _remainWaiting;
+    public int RemainTime => _remainTime;
 
     public OrderInstanceConfig OrderConfig => _orderConfig;
 
@@ -92,7 +93,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         InitAnimations();
     }
     
-    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator, bool isApplied, int remaimWaiting)
+    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator, bool isApplied, int remainTime, int remaimWaiting)
     {
         _orderConfig = orderConfig;
         _id = id;
@@ -100,7 +101,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
         _view.SetView(_orderConfig.Cost, _orderConfig.Time, NeededGoods, ID);
 
-        _remainTime = _orderConfig.Time;
+        _remainTime = remainTime;
         _notificationController.AddNotification(this);
 
         _idGenerator = idGenerator;
@@ -110,7 +111,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)
     {
-        InitVariant(id, orderConfig, idGenerator, false, 2);
+        InitVariant(id, orderConfig, idGenerator, false, orderConfig.Time, 2);
     }
 
     private void InitAnimations()

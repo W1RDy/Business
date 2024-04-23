@@ -1,4 +1,5 @@
 ﻿using System;
+using YG;
 
 public class TutorialActivator : IService
 {
@@ -9,11 +10,14 @@ public class TutorialActivator : IService
     private TutorialController _controller;
 
     private TutorialSegment _currentSegment;
+    private DataSaver _dataSaver;
 
     public TutorialActivator(TutorialService tutorialService, TutorialController tutorialController)
     {
         _service = tutorialService;
         _controller = tutorialController;
+
+        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
     }
 
     public void ActivateTutorial(TutorialSegmentType segmentType)
@@ -28,6 +32,7 @@ public class TutorialActivator : IService
     public void DeactivateTutorial()
     {
         _currentSegment.Deactivate();
+        _dataSaver.SaveTutorialState();
 
         TutorialDeactivated?.Invoke();
     }

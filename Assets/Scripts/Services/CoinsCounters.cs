@@ -30,6 +30,10 @@ namespace CoinsCounter
         public override void Init()
         {
             _difficultyController = ServiceLocator.Instance.Get<DifficultyController>();
+            _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
+
+            _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+            Subscribe();
         }
 
         public virtual void AddCoins(int value)
@@ -133,7 +137,11 @@ namespace CoinsCounter
         public override void Subscribe()
         {
             base.Subscribe();
-            SaveDelegate = () => _dataSaver.SaveHandCoins(Coins);
+            SaveDelegate = () =>
+            {
+                Debug.Log("Hands coins " + Coins);
+                _dataSaver.SaveHandCoins(Coins);
+            };
             _dataSaver.OnStartSaving += SaveDelegate;
         }
     }

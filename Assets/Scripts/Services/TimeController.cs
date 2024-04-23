@@ -99,7 +99,8 @@ public class TimeController : ClassForInitialization, IService, ISubscribable
 
         if (PeriodFinished())
         {
-            _periodController.FinishPeriod();
+            _periodController.FinishPeriodWithoutDouble();
+            _gameLifeController.SkipDaysWithoutSaving();
         }
     }
 

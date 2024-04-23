@@ -24,7 +24,8 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
     private SubscribeController _subscribeController;
 
     private DataLoader _dataLoader;
-    private DataSaver _dataSaver;
+
+    [SerializeField] private bool _isResetSaves;
 
     public bool IsFinished { get; private set; }
     public bool IsStartingTutorial { get; private set; }
@@ -37,20 +38,20 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
         _dataLoader = ServiceLocator.Instance.Get<DataLoader>();
-        _dataSaver = ServiceLocator.Instance.Get<DataSaver>();
 
         _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
 
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
-        Subscribe();
 
-        _dataLoader.LoadData();
+        if ( _isResetSaves ) YandexGame.ResetSaveProgress();
+        Subscribe();
     }
 
     public void StartDelegate()
     {
-        if (IsTutorial) StartTutorial();
+        if (YandexGame.savesData.tutorialPartsCompleted == 0) StartTutorial();
+        else if (YandexGame.savesData.tutorialPartsCompleted == 1) StartTutorialLevel();
         else StartGame();
     }
 
@@ -84,13 +85,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
         IsStartingTutorial = false;
         TutorialLevelStarted?.Invoke();
     }
-
-    private void ChangeGameStateFromTutorial()
-    {
-        if (IsStartingTutorial) StartTutorialLevel();
-        else StartGame();
-    }
-    
+  
     public void RestartGame()
     {
         Debug.Log("Restart");
@@ -102,7 +97,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
         _subscribeController.AddSubscribable(this);
 
         _dataLoader.OnDataLoaded += StartDelegate;
-        _tutorialActivator.TutorialDeactivated += ChangeGameStateFromTutorial;
+        _tutorialActivator.TutorialDeactivated += StartDelegate;
 
         _handsCoinsCounter.CoinsChanged += TryFinishGame;
         _bankCoinsCounter.CoinsChanged += TryFinishGame;
@@ -111,7 +106,7 @@ public class GameController : ObjectForInitialization, IService, ISubscribable
     public void Unsubscribe()
     {
         _dataLoader.OnDataLoaded -= StartDelegate;
-        _tutorialActivator.TutorialDeactivated -= ChangeGameStateFromTutorial;
+        _tutorialActivator.TutorialDeactivated -= StartDelegate;
 
         _handsCoinsCounter.CoinsChanged -= TryFinishGame;
         _bankCoinsCounter.CoinsChanged -= TryFinishGame;

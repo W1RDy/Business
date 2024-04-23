@@ -44,7 +44,7 @@ public class Goal : ObjectForInitialization, IPoolElement<Goal>
         _cost = order.Cost;
         _time = order.Time;
 
-        _remainTime = order.Time;
+        _remainTime = order.RemainTime;
 
         _view.SetView(_id, _cost, _remainTime, _time, order.NeededGoods);
         _sendButton.SetOrder(order);

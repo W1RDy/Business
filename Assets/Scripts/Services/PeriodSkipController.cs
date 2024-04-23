@@ -50,9 +50,18 @@ public class PeriodSkipController : ObjectForInitialization, IService
         });
         if (_conditionChecker.IsPeriodFinished())
         {
-            _dataSaver.SaveTutorialState();
             _dataSaver.StartSaving();
         }
+        _audioPlayer.PlaySound("SkipTime");
+    }
+
+    public void SkipDaysWithoutSaving()
+    {
+        _clicksBlocker.BlockClicks();
+        _darknessAnimationInstance.Play(() =>
+        {
+            if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay();
+        });
         _audioPlayer.PlaySound("SkipTime");
     }
 
