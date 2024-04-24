@@ -9008,638 +9008,635 @@ MonoBehaviour:
       TermType: 0
       Description: 
       Languages:
-      - Skip day
       - "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C \u0434\u0435\u043D\u044C"
-      - 
+      - Skip day
+      - "G\xFCn\xFC atla"
       Flags: 000000
       Languages_Touch: []
     - Term: Open orders
       TermType: 0
       Description: 
       Languages:
-      - Open orders
       - "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0437\u0430\u043A\u0430\u0437\u044B"
-      - 
+      - Open orders
+      - "A\xE7\u0131k sipari\u015Fler"
       Flags: 000000
       Languages_Touch: []
     - Term: Apply
       TermType: 0
       Description: 
       Languages:
-      - Apply
       - "\u041F\u0440\u0438\u043D\u044F\u0442\u044C"
-      - 
+      - Apply
+      - Uygula
       Flags: 000000
       Languages_Touch: []
     - Term: Can't apply
       TermType: 0
       Description: 
       Languages:
-      - Can't apply
       - "\u041D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442"
-      - 
+      - Can't apply
+      - "Imkans\u0131z"
       Flags: 000000
       Languages_Touch: []
     - Term: Applied
       TermType: 0
       Description: 
       Languages:
-      - Applied
       - "\u041F\u0440\u0438\u043D\u044F\u0442"
-      - 
+      - Applied
+      - "Uygulamal\u0131"
       Flags: 000000
       Languages_Touch: []
     - Term: Get from bank
       TermType: 0
       Description: 
       Languages:
-      - Get from bank
       - "\u0421\u043D\u044F\u0442\u044C \u0441 \u0431\u0430\u043D\u043A\u0430"
-      - 
+      - Get from bank
+      - Masraflar
       Flags: 000000
       Languages_Touch: []
     - Term: Ok
       TermType: 0
       Description: 
       Languages:
-      - Ok
       - "\u041E\u043A"
-      - 
+      - Ok
+      - Tamam
       Flags: 000000
       Languages_Touch: []
     - Term: Restart
       TermType: 0
       Description: 
       Languages:
-      - Restart
       - "\u041F\u0435\u0440\u0435\u0438\u0433\u0440\u0430\u0442\u044C"
-      - 
+      - Restart
+      - "Tekrar ba\u015Flat"
       Flags: 000000
       Languages_Touch: []
     - Term: Show results
       TermType: 0
       Description: 
       Languages:
-      - Show results
       - "\u041A \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u0430\u043C"
-      - 
+      - Show results
+      - "Sonu\xE7lar\u0131 g\xF6ster"
       Flags: 000000
       Languages_Touch: []
     - Term: Send
       TermType: 0
       Description: 
       Languages:
-      - Send
       - "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"
-      - 
+      - Send
+      - "G\xF6ndermek"
       Flags: 000000
       Languages_Touch: []
     - Term: Construct
       TermType: 0
       Description: 
       Languages:
-      - Construct
       - "\u0421\u043E\u0431\u0440\u0430\u0442\u044C"
-      - 
+      - Construct
+      - "in\u015Fa et"
       Flags: 000000
       Languages_Touch: []
     - Term: Order
       TermType: 0
       Description: 
       Languages:
-      - order
       - "\u0437\u0430\u043A\u0430\u0437"
-      - 
+      - order
+      - emir
       Flags: 000000
       Languages_Touch: []
     - Term: Low
       TermType: 0
       Description: 
       Languages:
-      - low
       - "\u043D\u0438\u0437\u043A\u043E\u0435"
-      - 
+      - low
+      - "d\xFC\u015F\xFCk"
       Flags: 000000
       Languages_Touch: []
     - Term: High
       TermType: 0
       Description: 
       Languages:
-      - high
       - "\u0432\u044B\u0441\u043E\u043A\u043E\u0435"
-      - 
+      - high
+      - "y\xFCksek"
       Flags: 000000
       Languages_Touch: []
     - Term: Medium
       TermType: 0
       Description: 
       Languages:
-      - medium
       - "\u0441\u0440\u0435\u0434\u043D\u0435\u0435"
-      - 
+      - medium
+      - orta
       Flags: 000000
       Languages_Touch: []
     - Term: Month
       TermType: 0
       Description: 
       Languages:
-      - month
       - "\u043C\u0435\u0441\u044F\u0446"
-      - 
+      - month
+      - ay
       Flags: 000000
       Languages_Touch: []
     - Term: Study month
       TermType: 0
       Description: 
       Languages:
-      - study month
       - "\u0443\u0447\u0435\u0431\u043D\u044B\u0439 \u043C\u0435\u0441\u044F\u0446"
-      - 
+      - study month
+      - "\xE7al\u0131\u015Fma ay\u0131"
       Flags: 000000
       Languages_Touch: []
     - Term: Delivery
       TermType: 0
       Description: 
       Languages:
-      - Delivery
       - "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
-      - 
+      - Delivery
+      - Teslimat
       Flags: 000000
       Languages_Touch: []
     - Term: Inventory
       TermType: 0
       Description: 
       Languages:
-      - Inventory
       - "\u0418\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044C"
-      - 
+      - Inventory
+      - Envanter
       Flags: 000000
       Languages_Touch: []
     - Term: Results of the month
       TermType: 0
       Description: 
       Languages:
-      - Results of the month
       - "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430 \u043F\u043E
         \u043C\u0435\u0441\u044F\u0446\u0443"
-      - 
+      - Results of the month
+      - "Ay\u0131n sonu\xE7lar\u0131"
       Flags: 000000
       Languages_Touch: []
     - Term: Purchase costs
       TermType: 0
       Description: 
       Languages:
-      - Purchase costs
       - "\u0422\u0440\u0430\u0442\u044B \u043D\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0443"
-      - 
+      - Purchase costs
+      - "Sat\u0131n alma maliyetleri"
       Flags: 000000
       Languages_Touch: []
     - Term: Emergency costs
       TermType: 0
       Description: 
       Languages:
-      - Emergency costs
       - "\u0422\u0440\u0430\u0442\u044B \u043D\u0430 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u044B"
-      - 
+      - Emergency costs
+      - Acil durum maliyetleri
       Flags: 000000
       Languages_Touch: []
     - Term: Orders income
       TermType: 0
       Description: 
       Languages:
-      - Orders income
       - "\u0414\u043E\u0445\u043E\u0434\u044B \u043E\u0442 \u0437\u0430\u043A\u0430\u0437\u043E\u0432"
-      - 
+      - Orders income
+      - "Sipari\u015F geliri"
       Flags: 000000
       Languages_Touch: []
     - Term: Bank income
       TermType: 0
       Description: 
       Languages:
-      - Bank income
       - "\u0414\u043E\u0445\u043E\u0434\u044B \u043E\u0442 \u0431\u0430\u043D\u043A\u0430"
-      - 
+      - Bank income
+      - Banka geliri
       Flags: 000000
       Languages_Touch: []
     - Term: Summary
       TermType: 0
       Description: 
       Languages:
-      - Summary
       - "\u0418\u0442\u043E\u0433\u043E"
-      - 
+      - Summary
+      - "\xD6zet"
       Flags: 000000
       Languages_Touch: []
     - Term: Results of the game
       TermType: 0
       Description: 
       Languages:
-      - Results of the game
       - "\u0421\u0442\u0430\u0442\u0438\u0441\u0442\u0438\u043A\u0430 \u043F\u043E
         \u0438\u0433\u0440\u0435"
-      - 
+      - Results of the game
+      - "Oyunun sonu\xE7lar\u0131"
       Flags: 000000
       Languages_Touch: []
     - Term: Expences
       TermType: 0
       Description: 
       Languages:
-      - Expences
       - "\u0420\u0430\u0441\u0445\u043E\u0434\u044B"
-      - 
+      - Expenses
+      - Giderler
       Flags: 000000
       Languages_Touch: []
     - Term: Incomes
       TermType: 0
       Description: 
       Languages:
-      - Incomes
       - "\u0414\u043E\u0445\u043E\u0434\u044B"
-      - 
+      - Incomes
+      - Gelirler
       Flags: 000000
       Languages_Touch: []
     - Term: Months
       TermType: 0
       Description: 
       Languages:
-      - months
       - "\u043C\u0435\u0441\u044F\u0446\u0435\u0432"
-      - 
+      - months
+      - aylar
       Flags: 000000
       Languages_Touch: []
     - Term: Time
       TermType: 0
       Description: 
       Languages:
-      - Time
       - "\u0412\u0440\u0435\u043C\u044F"
-      - 
+      - Time
+      - Zaman
       Flags: 000000
       Languages_Touch: []
     - Term: High delivery
       TermType: 0
       Description: 
       Languages:
-      - High delivery
       - "\u041B\u0443\u0447\u0448\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
-      - 
+      - High delivery
+      - "Y\xFCksek teslimat"
       Flags: 000000
       Languages_Touch: []
     - Term: Low delivery
       TermType: 0
       Description: 
       Languages:
-      - Low delivery
       - "\u0425\u0443\u0434\u0448\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
-      - 
+      - Low delivery
+      - "D\xFC\u015F\xFCk teslimat"
       Flags: 000000
       Languages_Touch: []
     - Term: Medium delivery
       TermType: 0
       Description: 
       Languages:
-      - Medium delivery
       - "\u0421\u0440\u0435\u0434\u043D\u044F\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430"
-      - 
+      - Medium delivery
+      - Orta teslimat
       Flags: 000000
       Languages_Touch: []
     - Term: Low delivery description
       TermType: 0
       Description: 
       Languages:
-      - No one knows exactly where they get these components from
       - "\u041D\u0438\u043A\u0442\u043E \u0442\u043E\u0447\u043D\u043E \u043D\u0435
         \u0437\u043D\u0430\u0435\u0442 \u043E\u0442\u043A\u0443\u0434\u0430 \u043E\u043D\u0438
         \u0431\u0435\u0440\u0443\u0442 \u044D\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
-      - 
+      - No one knows exactly where they get these components from
+      - "Hi\xE7 kimse bu bile\u015Fenlerin nereden geldi\u011Fini tam olarak bilmiyor"
       Flags: 000000
       Languages_Touch: []
     - Term: Medium delivery description
       TermType: 0
       Description: 
       Languages:
-      - Common delivery, may or may not deceive
       - "\u041E\u0431\u044B\u0447\u043D\u0430\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430,
         \u043C\u043E\u0436\u0435\u0442 \u043E\u0431\u043C\u0430\u043D\u0443\u0442\u044C,
         \u0430 \u043C\u043E\u0436\u0435\u0442 \u0438 \u043D\u0435 \u043E\u0431\u043C\u0430\u043D\u0443\u0442\u044C"
-      - 
+      - Common delivery, may or may not deceive
+      - "Ortak teslimat, aldat\u0131c\u0131 olabilir veya olmayabilir"
       Flags: 000000
       Languages_Touch: []
     - Term: High delivery description
       TermType: 0
       Description: 
       Languages:
-      - The fastest delivery of the best components at a high price
       - "\u0421\u0430\u043C\u0430\u044F \u0431\u044B\u0441\u0442\u0440\u0430\u044F
         \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u043B\u0443\u0447\u0448\u0438\u0445
         \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0445"
-      - 
+      - The fastest delivery of the best components at a high price
+      - "En iyi bile\u015Fenlerin y\xFCksek fiyata en h\u0131zl\u0131 teslimat\u0131"
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Delivery problem description
       TermType: 0
       Description: 
       Languages:
-      - Delivery is delayed. We need to solve this problem.
       - "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0437\u0430\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044F.
         \u041D\u0443\u0436\u043D\u043E \u0440\u0435\u0448\u0438\u0442\u044C \u044D\u0442\u0443
         \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443."
-      - 
+      - Delivery is delayed. We need to solve this problem.
+      - "Teslimat gecikiyor. Bu sorunu \xE7\xF6zmemiz gerekiyor."
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Bad goods problem description
       TermType: 0
       Description: 
       Languages:
-      - You have received components of terrible quality. We need to solve this problem.
       - "\u0422\u0435\u0431\u0435 \u0434\u043E\u0441\u0442\u0430\u0432\u0438\u043B\u0438
         \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B \u0443\u0436\u0430\u0441\u043D\u043E\u0433\u043E
         \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041D\u0443\u0436\u043D\u043E
         \u0440\u0435\u0448\u0438\u0442\u044C \u044D\u0442\u0443 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443."
-      - 
+      - You have received components of terrible quality. We need to solve this problem.
+      - "Korkun\xE7 kalitede bile\u015Fenler ald\u0131n\u0131z. Bu sorunu \xE7\xF6zmemiz
+        gerekiyor."
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Bad order problem description
       TermType: 0
       Description: 
       Languages:
-      - The client returned the computer and demanded money. The computer really
-        does not meet the stated quality.
       - "\u041A\u043B\u0438\u0435\u043D\u0442 \u0432\u0435\u0440\u043D\u0443\u043B
         \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440 \u0438 \u043F\u043E\u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043B
         \u0434\u0435\u043D\u044C\u0433\u0438. \u041A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E
         \u043D\u0435 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u0435\u0442
         \u0437\u0430\u044F\u0432\u043B\u0435\u043D\u043D\u043E\u043C\u0443 \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0443."
-      - 
+      - The client returned the computer and demanded money. The computer really
+        does not meet the stated quality.
+      - "M\xFC\u015Fteri bilgisayar\u0131 iade edip paray\u0131 talep etti. Bilgisayar
+        ger\xE7ekten belirtilen kaliteyi kar\u015F\u0131lam\u0131yor."
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Distribute coins suggestion
       TermType: 0
       Description: 
       Languages:
-      - How much money should you keep in the bank and how much in your hands?
       - "\u0421\u043A\u043E\u043B\u044C\u043A\u043E \u0434\u0435\u043D\u0435\u0433
         \u043D\u0443\u0436\u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
         \u0432 \u0431\u0430\u043D\u043A\u0435 \u0438 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
         \u043D\u0430 \u0440\u0443\u043A\u0430\u0445?"
-      - 
+      - How much money should you keep in the bank and how much in your hands?
+      - "Bankada ne kadar para ve elinizde ne kadar para tutmal\u0131s\u0131n\u0131z?"
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Skip time suggestion
       TermType: 0
       Description: 
       Languages:
-      - 'The time will be skipped. '
       - "\u0412\u0440\u0435\u043C\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043E."
-      - 
+      - 'The time will be skipped. '
+      - Zaman atlanacak.
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Skip time and coins suggestion
       TermType: 0
       Description: 
       Languages:
-      - The time will be skipped. The money will be wasted.
       - "\u0412\u0440\u0435\u043C\u044F \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u043F\u0443\u0449\u0435\u043D\u043E.
         \u0414\u0435\u043D\u044C\u0433\u0438 \u0431\u0443\u0434\u0443\u0442 \u043F\u043E\u0442\u0440\u0430\u0447\u0435\u043D\u044B."
-      - 
+      - The time will be skipped. The money will be wasted.
+      - "Zaman atlanacak. Para bo\u015Fa gidecek."
       Flags: 000000
       Languages_Touch: []
     - Term: Events/Suggestion by problem
       TermType: 0
       Description: 
       Languages:
-      - How much money should you keep in the bank and how much in your hands?
       - "\u0421\u043A\u043E\u043B\u044C\u043A\u043E \u0434\u0435\u043D\u0435\u0433
         \u043D\u0443\u0436\u043D\u043E \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u044C
         \u0432 \u0431\u0430\u043D\u043A\u0435 \u0438 \u0441\u043A\u043E\u043B\u044C\u043A\u043E
         \u043D\u0430 \u0440\u0443\u043A\u0430\u0445?"
-      - 
+      - How much money should you keep in the bank and how much in your hands?
+      - "Bankada ne kadar para ve elinizde ne kadar para tutmal\u0131s\u0131n\u0131z?"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/High goods
       TermType: 0
       Description: 
       Languages:
-      - High goods
       - "\u041B\u0443\u0447\u0448\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
-      - 
+      - High components
+      - "Y\xFCksek bile\u015Fenler"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low goods
       TermType: 0
       Description: 
       Languages:
-      - Low goods
       - "\u0421\u043B\u0430\u0431\u044B\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
-      - 
+      - Low components
+      - "D\xFC\u015F\xFCk bile\u015Fenler"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium goods
       TermType: 0
       Description: 
       Languages:
-      - Medium goods
       - "\u0421\u0440\u0435\u0434\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435"
-      - 
+      - Medium components
+      - "Orta bile\u015Fenler"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/High goods description
       TermType: 0
       Description: 
       Languages:
-      - Everyone dreams of such components
       - "\u041E \u0442\u0430\u043A\u0438\u0445 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0445
         \u043C\u0435\u0447\u0442\u0430\u0435\u0442 \u043A\u0430\u0436\u0434\u044B\u0439"
-      - 
+      - Everyone dreams of such components
+      - "Herkes bu t\xFCr bile\u015Fenlerin hayalini kurar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium goods description
       TermType: 0
       Description: 
       Languages:
-      - Average components at a reasonable price
       - "\u0421\u0440\u0435\u0434\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
         \u043F\u043E \u043F\u0440\u0438\u0435\u043C\u043B\u0435\u043C\u043E\u0439
         \u0446\u0435\u043D\u0435"
-      - 
+      - Average components at a reasonable price
+      - "Makul bir fiyata ortalama bile\u015Fenler"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low goods description
       TermType: 0
       Description: 
       Languages:
-      - These components are so old that they can no longer be found for sale.
       - "\u042D\u0442\u0438 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
         \u043D\u0430\u0441\u0442\u043E\u043B\u044C\u043A\u043E \u0441\u0442\u0430\u0440\u044B\u0435,
         \u0447\u0442\u043E \u0438\u0445 \u0443\u0436\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u0448\u044C
-        \u0432 \u043F\u0440\u043E\u0434\u0430\u0436\u0435"
-      - 
+        \u0432 \u043F\u0440\u043E\u0434\u0430\u0436\u0435."
+      - These components are so old that they can no longer be found for sale.
+      - "Bu bile\u015Fenler o kadar eski ki art\u0131k sat\u0131\u015Fta bulunam\u0131yorlar."
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low pc
       TermType: 0
       Description: 
       Languages:
-      - Low pc
       - "\u0421\u043B\u0430\u0431\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
-      - 
+      - Low pc
+      - "D\xFC\u015F\xFCk bilgisayar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium pc
       TermType: 0
       Description: 
       Languages:
-      - Medium pc
       - "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
-      - 
+      - Medium pc
+      - Orta bilgisayar
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/High pc
       TermType: 0
       Description: 
       Languages:
-      - High pc
       - "\u041C\u043E\u0449\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
-      - 
+      - High pc
+      - "Y\xFCksek bilgisayar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium returned pc
       TermType: 0
       Description: 
       Languages:
-      - Medium returned pc
       - "\u0421\u0440\u0435\u0434\u043D\u0438\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
-      - 
+      - Medium returned pc
+      - Orta iade edilen bilgisayar
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low returned pc
       TermType: 0
       Description: 
       Languages:
-      - Low returned pc
       - "\u0421\u043B\u0430\u0431\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
-      - 
+      - Low returned pc
+      - "D\xFC\u015F\xFCk iadeli bilgisayar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Broken returned pc
       TermType: 0
       Description: 
       Languages:
-      - Broken returned pc
       - "\u0421\u043B\u043E\u043C\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         (\u0432\u043E\u0437\u0432\u0440\u0430\u0442)"
-      - 
+      - Broken returned pc
+      - "K\u0131r\u0131k iade edilen bilgisayar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Broken pc
       TermType: 0
       Description: 
       Languages:
-      - Broken pc
       - "\u0421\u043B\u043E\u043C\u0430\u043D\u043D\u044B\u0439 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440"
-      - 
+      - Broken pc
+      - "K\u0131r\u0131k bilgisayar"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/High pc description
       TermType: 0
       Description: 
       Languages:
-      - Runs the most demanding games at high settings
       - "\u041F\u043E\u0442\u044F\u043D\u0435\u0442 \u0441\u0430\u043C\u044B\u0435
         \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u0442\u0435\u043B\u044C\u043D\u044B\u0435
         \u0438\u0433\u0440\u044B \u043D\u0430 \u0432\u044B\u0441\u043E\u043A\u0438\u0445
         \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0430\u0445"
-      - 
+      - Runs the most demanding games at high settings
+      - "En zorlu oyunlar\u0131 y\xFCksek ayarlarda \xE7al\u0131\u015Ft\u0131r\u0131r"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium pc description
       TermType: 0
       Description: 
       Languages:
-      - Used almost everywhere, suitable for routine work
       - "\u0418\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u0442\u0441\u044F
         \u043F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438 \u0432\u0435\u0437\u0434\u0435,
         \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0434\u043B\u044F \u0440\u0443\u0442\u0438\u043D\u043D\u043E\u0439
         \u0440\u0430\u0431\u043E\u0442\u044B"
-      - 
+      - Used almost everywhere, suitable for routine work
+      - "Hemen hemen her yerde kullan\u0131l\u0131r, rutin i\u015Flere uygundur"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low pc description
       TermType: 0
       Description: 
       Languages:
-      - Good for very simple work and freezes every 2 minutes
       - "\u041F\u043E\u0434\u043E\u0439\u0434\u0435\u0442 \u0434\u043B\u044F \u043E\u0447\u0435\u043D\u044C
         \u043F\u0440\u043E\u0441\u0442\u043E\u0439 \u0440\u0430\u0431\u043E\u0442\u044B
         \u0438 \u0437\u0430\u0432\u0438\u0441\u0430\u0435\u0442 \u043A\u0430\u0436\u0434\u044B\u0435
         2 \u043C\u0438\u043D\u0443\u0442\u044B"
-      - 
+      - Good for very simple work and freezes every 2 minutes
+      - "\xC7ok basit i\u015Fler i\xE7in iyi ve her 2 dakikada bir donuyor"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Medium returned pc description
       TermType: 0
       Description: 
       Languages:
-      - The computer was declared to be of high quality. Apparently you were deceived
-        somewhere
       - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u0432\u044B\u0441\u043E\u043A\u043E\u0433\u043E
         \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
         \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
-      - 
+      - The computer was declared to be of high quality. Apparently you were deceived
+        somewhere
+      - "Bilgisayar\u0131n y\xFCksek kalitede oldu\u011Fu a\xE7\u0131kland\u0131.
+        Belli ki bir yerlerde aldat\u0131lm\u0131\u015Fs\u0131n"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Low returned pc description
       TermType: 0
       Description: 
       Languages:
-      - The computer was declared to be of medium quality. Apparently you were deceived
-        somewhere
       - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u0441\u0440\u0435\u0434\u043D\u0435\u0433\u043E
         \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
         \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
-      - 
+      - The computer was declared to be of medium quality. Apparently you were deceived
+        somewhere
+      - "Bilgisayar\u0131n orta kalitede oldu\u011Fu belirtildi. Belli ki bir yerlerde
+        aldat\u0131lm\u0131\u015Fs\u0131n"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Broken returned pc description
       TermType: 0
       Description: 
       Languages:
-      - The computer was declared to be of low quality. Apparently you were deceived
-        somewhere
       - "\u042D\u0442\u043E\u0442 \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440
         \u0431\u044B\u043B \u0437\u0430\u044F\u0432\u043B\u0435\u043D \u043D\u0438\u0437\u043A\u043E\u0433\u043E
         \u043A\u0430\u0447\u0435\u0441\u0442\u0432\u0430. \u041F\u043E\u0445\u043E\u0436\u0435
         \u0442\u0435\u0431\u044F \u0433\u0434\u0435-\u0442\u043E \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438 "
-      - 
+      - The computer was declared to be of low quality. Apparently you were deceived
+        somewhere
+      - "Bilgisayar\u0131n d\xFC\u015F\xFCk kalitede oldu\u011Fu bildirildi. Belli
+        ki bir yerlerde aldat\u0131lm\u0131\u015Fs\u0131n"
       Flags: 000000
       Languages_Touch: []
     - Term: Goods/Broken pc description
       TermType: 0
       Description: 
       Languages:
-      - Apparently you were deceived with the components
       - "\u041F\u043E\u0445\u043E\u0436\u0435 \u0442\u0435\u0431\u044F \u043E\u0431\u043C\u0430\u043D\u0443\u043B\u0438
         \u0441 \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u043C\u0438"
-      - 
+      - Apparently you were deceived with the components
+      - "G\xF6r\xFCn\xFC\u015Fe g\xF6re bile\u015Fenler konusunda aldat\u0131ld\u0131n"
       Flags: 000000
       Languages_Touch: []
     - Term: Tutorial/Order tutorial
       TermType: 0
       Description: 
       Languages:
-      - 'On the left side of the order are the requirements (fulfillment time and
-        quality requirements), on the right side is the reward.
-
-        Urgent orders
-        that need to be accepted on that day are marked in red.
-
-        Accept the
-        order.'
       - "\u0412 \u043B\u0435\u0432\u043E\u0439 \u0447\u0430\u0441\u0442\u0438 \u0437\u0430\u043A\u0430\u0437\u0430
         \u0443\u043A\u0430\u0437\u0430\u043D\u044B \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u0438\u044F
         (\u0432\u0440\u0435\u043C\u044F \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u044F
@@ -9651,34 +9648,42 @@ MonoBehaviour:
         \u043D\u0443\u0436\u043D\u043E \u043F\u0440\u0438\u043D\u044F\u0442\u044C
         \u0432 \u044D\u0442\u043E\u0442 \u0434\u0435\u043D\u044C.\n\u041F\u0440\u0438\u043C\u0438
         \u0437\u0430\u043A\u0430\u0437. "
-      - 
+      - 'On the left side of the order are the requirements (fulfillment time and
+        quality requirements), on the right side is the reward.
+
+        Urgent orders
+        that need to be accepted on that day are marked in red.
+
+        Accept the
+        order.'
+      - "Sipari\u015Fin sol taraf\u0131nda gereksinimler (yerine getirme s\xFCresi
+        ve kalite gereksinimleri), sa\u011F taraf\u0131nda ise \xF6d\xFCl yer al\u0131r.\nO
+        g\xFCn kabul edilmesi gereken acil sipari\u015Fler k\u0131rm\u0131z\u0131
+        renkle i\u015Faretlenmi\u015Ftir.\nSipari\u015Fi kabul et."
       Flags: 000000
       Languages_Touch: []
     - Term: Tutorial/Delivery tutorial
       TermType: 0
       Description: 
       Languages:
-      - 'Each type of delivery delivers its own components and has different requirements.
-
-        Order
-        the low delivery.'
       - "\u041A\u0430\u0436\u0434\u044B\u0439 \u0432\u0438\u0434 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438
         \u0434\u043E\u0441\u0442\u0430\u0432\u043B\u044F\u0435\u0442 \u0441\u0432\u043E\u0438
         \u043A\u043E\u043C\u043F\u043B\u0435\u043A\u0442\u0443\u044E\u0449\u0438\u0435
         \u0438 \u0438\u043C\u0435\u044E\u0442 \u0440\u0430\u0437\u043D\u044B\u0435
         \u0442\u0440\u0435\u0431\u043E\u0432\u0430\u043D\u0438\u044F.\n\u0417\u0430\u043A\u0430\u0436\u0438
         \u0445\u0443\u0434\u0448\u0443\u044E \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0443."
-      - 
+      - 'Each type of delivery delivers its own components and has different requirements.
+
+        Order
+        the low delivery.'
+      - "Her teslimat t\xFCr\xFC kendi bile\u015Fenlerini sunar ve farkl\u0131 gereksinimlere
+        sahiptir.\nD\xFC\u015F\xFCk teslimat\u0131 sipari\u015F edin."
       Flags: 000000
       Languages_Touch: []
     - Term: Tutorial/Goal tutorial
       TermType: 0
       Description: 
       Languages:
-      - 'Once you have a product of the required quality or higher, you can complete
-        the order.
-
-        Send the computer to the client.'
       - "\u041F\u043E\u0441\u043B\u0435 \u0442\u043E\u0433\u043E, \u043A\u043E\u0433\u0434\u0430
         \u0443 \u0442\u0435\u0431\u044F \u043F\u043E\u044F\u0432\u0438\u043B\u0441\u044F
         \u0442\u043E\u0432\u0430\u0440 \u043D\u0443\u0436\u043D\u043E\u0433\u043E
@@ -9686,17 +9691,18 @@ MonoBehaviour:
         \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C \u0432\u044B\u043F\u043E\u043B\u043D\u0438\u0442\u044C
         \u0437\u0430\u043A\u0430\u0437.\n\u041E\u0442\u043F\u0440\u0430\u0432\u044C
         \u043A\u043E\u043C\u043F\u044C\u044E\u0442\u0435\u0440 \u043A\u043B\u0438\u0435\u043D\u0442\u0443."
-      - 
+      - 'Once you have a product of the required quality or higher, you can complete
+        the order.
+
+        Send the computer to the client.'
+      - "\u0130stenilen kalitede veya daha y\xFCksek bir \xFCr\xFCne sahip oldu\u011Funuzda
+        sipari\u015Fi tamamlayabilirsiniz.\nBilgisayar\u0131 istemciye g\xF6nderin."
       Flags: 000000
       Languages_Touch: []
     - Term: Tutorial/Distribute coins tutorial
       TermType: 0
       Description: 
       Languages:
-      - "At the end of the month, or if you don't have enough money on hand, you
-        can distribute your money. \r\nThe more money left in the bank by the end
-        of the month, the more revenue the bank will bring. And the lack of money
-        on hand leads to a waste of time."
       - "\u0412 \u043A\u043E\u043D\u0446\u0435 \u043C\u0435\u0441\u044F\u0446\u0430
         \u0438\u043B\u0438 \u0435\u0441\u043B\u0438 \u0443 \u0442\u0435\u0431\u044F
         \u043D\u0435 \u0445\u0432\u0430\u0442\u0430\u0435\u0442 \u0434\u0435\u043D\u0435\u0433
@@ -9711,51 +9717,56 @@ MonoBehaviour:
         \u0434\u0435\u043D\u0435\u0433 \u043D\u0430 \u0440\u0443\u043A\u0430\u0445
         \u043F\u0440\u0438\u0432\u043E\u0434\u0438\u0442 \u043A \u0442\u0440\u0430\u0442\u0435
         \u0432\u0440\u0435\u043C\u0435\u043D\u0438. "
-      - 
+      - "At the end of the month, or if you don't have enough money on hand, you
+        can distribute your money. \r\nThe more money left in the bank by the end
+        of the month, the more revenue the bank will bring. And the lack of money
+        on hand leads to a waste of time."
+      - "Ay sonunda ya da elinizde yeterli para yoksa paran\u0131z\u0131 da\u011F\u0131tabilirsiniz.\nAy
+        sonuna kadar bankada ne kadar \xE7ok para kal\u0131rsa, banka o kadar fazla
+        gelir elde edecektir. Eldeki paran\u0131n olmay\u0131\u015F\u0131 da zaman
+        kayb\u0131na neden olur."
       Flags: 000000
       Languages_Touch: []
     - Term: Open goods
       TermType: 0
       Description: 
       Languages:
-      - Open a warehouse
       - "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0441\u043A\u043B\u0430\u0434"
-      - 
+      - Open a warehouse
+      - "Bir depo a\xE7"
       Flags: 000000
       Languages_Touch: []
     - Term: Deliver
       TermType: 0
       Description: 
       Languages:
-      - Deliver
       - "\u0417\u0430\u043A\u0430\u0437\u0430\u0442\u044C"
-      - 
+      - Deliver
+      - Teslim etmek
       Flags: 000000
       Languages_Touch: []
     - Term: Delivery cost
       TermType: 0
       Description: 
       Languages:
-      - Delivery cost
       - "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
-      - 
+      - Delivery cost
+      - Teslimat maliyeti
       Flags: 000000
       Languages_Touch: []
     - Term: Delivery time
       TermType: 0
       Description: 
       Languages:
-      - Delivery time
       - "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
-      - 
+      - Delivery time
+      - "Teslimat s\xFCresi"
       Flags: 000000
       Languages_Touch: []
     - Term: Tutorial/Confirm delivery tutorial
       TermType: 0
       Description: 
       Languages:
-      - In this window you can once again see how much time and money you will spend.
-        By pressing the button, the current day will be completed.
       - "\u0412 \u044D\u0442\u043E\u043C \u043E\u043A\u043D\u0435 \u0442\u044B \u043C\u043E\u0436\u0435\u0448\u044C
         \u0435\u0449\u0435 \u0440\u0430\u0437 \u043F\u043E\u0441\u043C\u043E\u0442\u0440\u0435\u0442\u044C
         \u0441\u043A\u043E\u043B\u044C\u043A\u043E \u0432\u0440\u0435\u043C\u0435\u043D\u0438
@@ -9763,27 +9774,31 @@ MonoBehaviour:
         \u041D\u0430\u0436\u0430\u0432 \u043D\u0430 \u043A\u043D\u043E\u043F\u043A\u0443,
         \u0442\u0435\u043A\u0443\u0449\u0438\u0439 \u0434\u0435\u043D\u044C \u0431\u0443\u0434\u0435\u0442
         \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043D. "
-      - 
+      - In this window you can once again see how much time and money you will spend.
+        By pressing the button, the current day will be completed.
+      - "Bu pencerede ne kadar zaman ve para harcayaca\u011F\u0131n\u0131z\u0131
+        bir kez daha g\xF6rebilirsiniz. D\xFC\u011Fmeye bas\u0131ld\u0131\u011F\u0131nda
+        mevcut g\xFCn tamamlanacakt\u0131r."
       Flags: 000000
       Languages_Touch: []
     - Term: Days remain
       TermType: 0
       Description: 
       Languages:
-      - days remain
       - "\u0434\u043D\u0435\u0439 \u043E\u0441\u0442\u0430\u043B\u043E\u0441\u044C"
-      - 
+      - days remain
+      - "g\xFCnler kald\u0131"
       Flags: 000000
       Languages_Touch: []
     CaseInsensitiveTerms: 0
     OnMissingTranslation: 1
     mTerm_AppName: 
     mLanguages:
-    - Name: English
-      Code: en
-      Flags: 0
     - Name: Russian
       Code: ru
+      Flags: 0
+    - Name: English
+      Code: en
       Flags: 0
     - Name: Turkish
       Code: tr
@@ -16357,7 +16372,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 145, y: 0}
   m_SizeDelta: {x: 0, y: 83.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1402424598
@@ -18446,7 +18461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 145, y: 0}
   m_SizeDelta: {x: 0, y: 83.33333}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593328552
