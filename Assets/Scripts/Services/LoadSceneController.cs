@@ -29,7 +29,6 @@ public class LoadSceneController : ClassForInitialization, IService
     public void LoadScene()
     {
         Debug.Log("LoadScene");
-        Debug.Log(_isLoaded);
         if (!_isLoaded)
         {
             _darknessAnimation.PlayBrightnessAnimation(null);

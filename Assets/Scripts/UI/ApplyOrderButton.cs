@@ -37,6 +37,15 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _buttonChangeController.AddChangeButton(this);
     }
 
+    private void OnEnable()
+    {
+        if (OnOrderValuesChanged != null)
+        {
+            OnOrderStateChanged.Invoke();
+            OnOrderValuesChanged.Invoke();
+        }
+    }
+
     protected override void ClickCallback()
     {
         base.ClickCallback();

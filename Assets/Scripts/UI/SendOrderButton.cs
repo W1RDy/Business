@@ -55,6 +55,11 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
         OnOrderChanged?.Invoke();
     }
 
+    private void OnEnable()
+    {
+        if (_changeController != null) _changeController.ChangeButtonStates(this);
+    }
+
     public void ChangeStates(bool toActiveState)
     {
         _button.interactable = toActiveState;

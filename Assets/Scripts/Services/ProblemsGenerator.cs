@@ -80,6 +80,7 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
 
     public void TryGenerateProblem()
     {
+        Debug.Log("TryGenerate");
         if (_gameController.IsTutorial) return;
 
         _currentProblem = GetRandomProblem();
@@ -99,17 +100,17 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
     //    _currentProblem = null;
     //}
 
-    public void GenerateProblemByLoadData(ProblemSaveConfig problem)
-    {
-        _randomController.BlockController();
+    //public void GenerateProblemByLoadData(ProblemSaveConfig problem)
+    //{
+    //    _randomController.BlockController();
 
-        var problemConfig = GetProblem(problem.id);
-        if (problemConfig is ProblemWithOrder problemWithOrder) problemWithOrder.SetParameters(problem.problemedOrder);
+    //    var problemConfig = GetProblem(problem.id);
+    //    if (problemConfig is ProblemWithOrder problemWithOrder) problemWithOrder.SetParameters(problem.problemedOrder);
 
-        _problemWindow.SetProblem(problemConfig);
-        _clicksBlocker.BlockClicks();
-        _windowActivator.ActivateWindow(WindowType.ProblemWindow);
-    }
+    //    _problemWindow.SetProblem(problemConfig);
+    //    _clicksBlocker.BlockClicks();
+    //    _windowActivator.ActivateWindow(WindowType.ProblemWindow);
+    //}
 
     private ProblemConfig GetProblem(string index)
     {

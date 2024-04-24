@@ -6,6 +6,7 @@ public class ResultsActivator : ClassForInitialization, IService
     private ResultsWindow _resultsWindow;
     private ResultsCalculator _calculator;
     private WindowActivator _windowActivator;
+    private DarknessAnimationController _darknessController;
 
     public ResultsActivator() : base() { }
 
@@ -14,6 +15,8 @@ public class ResultsActivator : ClassForInitialization, IService
         _calculator = new ResultsCalculator();
         _resultsWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.Results) as ResultsWindow;
         _windowActivator = ServiceLocator.Instance.Get<WindowActivator>();
+
+        _darknessController = ServiceLocator.Instance.Get<DarknessAnimationController>();
     }
 
     public void ActivateResultsOfTheMonth()
@@ -29,5 +32,7 @@ public class ResultsActivator : ClassForInitialization, IService
         var result = _calculator.CalculateResultsOfTheGame();
         _resultsWindow.SetResults(result);
         _windowActivator.ActivateWindow(WindowType.Results);
+
+        _darknessController.PlayDarknessAnimation(null);
     }
 }

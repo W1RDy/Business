@@ -39,6 +39,11 @@ public class ConfirmEventWithCoinsButton : CustomButton, IButtonWithNewButton
         _changeController.ChangeButtonToNewButton(this);
     }
 
+    private void OnEnable()
+    {
+        if (_changeController != null) _changeController.ChangeButtonToNewButton(this);
+    }
+
     protected override void ClickCallback()
     {
         base.ClickCallback();

@@ -25,6 +25,11 @@ public class ApplyDistributeWithSuggestion : CustomButton, IButtonWithStates, IS
         Subscribe();
     }
 
+    private void OnEnable()
+    {
+        if (_changeController != null) _changeController.ChangeButtonStates(this);
+    }
+
     public void InitializeVariant(Suggestion suggestion, CoinsDistributor coinsDistributor)
     {
         if (_coinsDistributor == null) _coinsDistributor = coinsDistributor;

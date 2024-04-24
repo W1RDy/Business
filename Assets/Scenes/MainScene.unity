@@ -22888,6 +22888,7 @@ MonoBehaviour:
   _window: {fileID: 954349253}
   _buttonForChange: {fileID: 688476238}
   _changeConditions: 02000000
+  _buttonText: {fileID: 429008233}
 --- !u!1 &2006584410
 GameObject:
   m_ObjectHideFlags: 0

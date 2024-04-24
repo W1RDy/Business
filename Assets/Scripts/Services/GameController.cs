@@ -69,7 +69,7 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
 
     private void TryFinishGame()
     {
-        if (_conditionsChecker.IsEnoughCoinsForMinCoins() && _dataLoader.DataLoaded) FinishGame();
+        if (!_conditionsChecker.IsEnoughCoinsForMinCoins() && _dataLoader.DataLoaded) FinishGame();
     }
 
     public void FinishGame()

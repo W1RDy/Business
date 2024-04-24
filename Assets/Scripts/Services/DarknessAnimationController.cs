@@ -24,13 +24,19 @@ public class DarknessAnimationController : ObjectForInitialization, IService
 
     public void PlayDarknessAnimation(Action callback)
     {
-        _clicksBlocker.BlockClicks();
-        _darknessAnimationInstance.Play(callback);
+        if (_darknessView.Color.a < 1) 
+        {
+            if (!_clicksBlocker.IsBlocked) _clicksBlocker.BlockClicks();
+            _darknessAnimationInstance.Play(callback);
+        }
     }
 
     public void PlayBrightnessAnimation(Action callback)
     {
-        _clicksBlocker.UnblockClicks();
-        _brightnessAnimationInstance.Play(callback);
+        if (_darknessView.Color.a > 0)
+        {
+            _clicksBlocker.UnblockClicks();
+            _brightnessAnimationInstance.Play(callback);
+        }
     }
 }

@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using I2.Loc;
+using TMPro;
+using UnityEngine;
 
 public class CloseResultsButton : CloseButton, IButtonWithNewButton
 {
     [SerializeField] private CustomButton _buttonForChange;
     [SerializeField] private ChangeCondition[] _changeConditions;
+
+    [SerializeField] private TextMeshProUGUI _buttonText;
 
     public ChangeCondition[] ChangeConditions => _changeConditions;
     public CustomButton ButtonForChange => _buttonForChange;
@@ -18,6 +22,12 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
         _buttonChangeController.AddChangeButton(this);
+        SetText();
+    }
+
+    private void OnEnable()
+    {
+        if (_buttonChangeController != null) _buttonChangeController.ChangeButtonToNewButton(this);
     }
 
     public bool CheckButtonChangeCondition()
@@ -31,5 +41,10 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
         {
             _buttonChangeController.RemoveChangeButton(this);
         }
+    }
+
+    private void SetText()
+    {
+        _buttonText.text = LocalizationManager.GetTranslation("Ok");
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GamesConditionChecker : ClassForInitialization, IService
 {
-    private int _minCoins = 40;
+    private int _minCoins = 20;
 
     private TimeController _timeController;
 
@@ -34,7 +34,7 @@ public class GamesConditionChecker : ClassForInitialization, IService
 
     public bool IsEnoughCoinsForMinCoins()
     {
-        return _handsCoinsCounter.Coins + _bankCoinsCounter.Coins <= _minCoins;
+        return _handsCoinsCounter.Coins + _bankCoinsCounter.Coins > _minCoins;
     }
 
     public bool IsHasInInventory(GoodsType goodsType)

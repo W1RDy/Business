@@ -1,51 +1,27 @@
 {
-    "idSave": 93,
+    "idSave": 145,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "tutorialPartsCompleted": 1,
+    "tutorialPartsCompleted": 2,
     "gameIsFinished": false,
-    "handsCoins": 109,
-    "bankCoins": 600,
-    "monthCount": 0,
-    "time": 15,
+    "handsCoins": 100,
+    "bankCoins": 400,
+    "monthCount": 1,
+    "time": 0,
     "entitiesSaveConfig": {
-        "orders": [
-            {
-                "id": 1,
-                "cost": 35,
-                "time": 18,
-                "neededGoods": 0,
-                "isApplied": true,
-                "remainTime": 11,
-                "remainWaiting": 2
-            },
-            {
-                "id": 2,
-                "cost": 34,
-                "time": 16,
-                "neededGoods": 0,
-                "isApplied": false,
-                "remainTime": 16,
-                "remainWaiting": 1
-            }
-        ],
+        "orders": [],
         "deliveryOrders": [],
         "goods": [],
-        "pcs": [
-            {
-                "id": 1,
-                "amount": 1
-            }
-        ],
-        "entitiesSetted": 4
+        "pcs": [],
+        "entitiesSetted": 0
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": -40,
+            "purchaseCosts": 0,
             "emergencyCosts": 0,
-            "orderIncome": 49,
-            "bankIncome": 200
+            "orderIncome": 0,
+            "bankIncome": 0
         }
     ]
 }

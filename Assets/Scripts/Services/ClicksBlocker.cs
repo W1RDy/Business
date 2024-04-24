@@ -6,6 +6,8 @@ public class ClicksBlocker : MonoBehaviour, IService
     [SerializeField] private Image _clickBlocker;
     private int _blocksCount = 0;
 
+    public bool IsBlocked => _blocksCount > 0;
+
     public void BlockClicks()
     {
         _blocksCount++;
