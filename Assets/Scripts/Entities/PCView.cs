@@ -47,7 +47,7 @@ public class PCView
     {
         if (isBroken)
         {
-            if (_brokenText.text != "Broken") _brokenText.text = "Broken";
+            if (_brokenText.text != LocalizationManager.GetTranslation("Broken")) _brokenText.text = LocalizationManager.GetTranslation("Broken");
             _brokenViewContainer.SetActive(true);
         }
         else _brokenViewContainer.SetActive(false);

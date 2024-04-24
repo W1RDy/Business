@@ -1,50 +1,37 @@
 {
-    "idSave": 89,
+    "idSave": 93,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "tutorialPartsCompleted": 2,
-    "gameIsFinished": true,
-    "handsCoins": 2,
-    "bankCoins": 0,
-    "monthCount": 1,
-    "time": 4,
+    "tutorialPartsCompleted": 1,
+    "gameIsFinished": false,
+    "handsCoins": 109,
+    "bankCoins": 600,
+    "monthCount": 0,
+    "time": 15,
     "entitiesSaveConfig": {
         "orders": [
             {
                 "id": 1,
-                "cost": 95,
-                "time": 14,
-                "neededGoods": 2,
-                "isApplied": false,
-                "remainTime": 14,
+                "cost": 35,
+                "time": 18,
+                "neededGoods": 0,
+                "isApplied": true,
+                "remainTime": 11,
                 "remainWaiting": 2
             },
             {
-                "id": 3,
-                "cost": 58,
-                "time": 18,
-                "neededGoods": 1,
+                "id": 2,
+                "cost": 34,
+                "time": 16,
+                "neededGoods": 0,
                 "isApplied": false,
-                "remainTime": 18,
+                "remainTime": 16,
                 "remainWaiting": 1
             }
         ],
         "deliveryOrders": [],
-        "goods": [
-            {
-                "goodsType": 2,
-                "buildTime": 1,
-                "amount": 11,
-                "brokenGoodsAmount": 0
-            },
-            {
-                "goodsType": 1,
-                "buildTime": 1,
-                "amount": 1,
-                "brokenGoodsAmount": 0
-            }
-        ],
+        "goods": [],
         "pcs": [
             {
                 "id": 1,
@@ -57,14 +44,8 @@
         {
             "purchaseCosts": -40,
             "emergencyCosts": 0,
-            "orderIncome": 42,
+            "orderIncome": 49,
             "bankIncome": 200
-        },
-        {
-            "purchaseCosts": -700,
-            "emergencyCosts": 0,
-            "orderIncome": 0,
-            "bankIncome": 0
         }
     ]
 }

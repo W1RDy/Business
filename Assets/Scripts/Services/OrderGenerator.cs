@@ -106,8 +106,11 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
 
     private OrderInstanceConfig GetOrderConfig()
     {
-        var order = _randomController.GetRandomizableWithChances() as OrderConfig;
+        var tryedOrder = _randomController.GetRandomizableWithChances();
 
+        if (tryedOrder == null) return null;
+
+        var order = tryedOrder as OrderConfig;
         order.InitConfigValues();
         var orderInstance = new OrderInstanceConfig(order.Cost, order.Time, order.NeededGoods);
         CheckSpawnInRow(order);
@@ -136,6 +139,8 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
     public void GenerateOrder()
     {
         var config = GetOrderConfig();
+
+        if (config == null) return;
 
         var order = _pool.Get();
         var id = _idGenerator.GetID();

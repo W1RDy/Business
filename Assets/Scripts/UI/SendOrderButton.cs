@@ -21,7 +21,7 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     {
         base.Init();
 
-        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>());
+        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>(), 15, 24);
         SetText("Send");
 
         _changeController = ServiceLocator.Instance.Get<ButtonChangeController>();

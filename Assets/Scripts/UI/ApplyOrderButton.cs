@@ -18,11 +18,15 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
     private Action OnOrderValuesChanged;
     private Action OnOrderStateChanged;
 
+    private ButtonTextFitter _buttonTextFitter;
+
     public override void Init()
     {
         base.Init();
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
+
+        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>(), 15, 24);
 
         OnOrderValuesChanged = () => _buttonChangeController.ChangeButtonToNewButton(this);
         OnOrderStateChanged = () => _buttonChangeController.ChangeButtonStates(this);
@@ -50,6 +54,12 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _button.interactable = !isApplied;
         var key = isApplied ? "Applied" : "Apply";
         SetText(key);
+    }
+
+    protected override void SetText(string key)
+    {
+        base.SetText(key);
+        _buttonTextFitter.CheckButtonTextFit(_stateText);
     }
 
     public bool CheckButtonChangeCondition()
