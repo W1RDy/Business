@@ -78,9 +78,9 @@ namespace CoinsCounter
             }
         }
 
-        public virtual void ChangeCoinsByLoadData(int value)
+        public virtual void SetCoins(int value)
         {
-            if (_coins > -1)
+            if (value > -1)
             {
                 _coins = value;
                 UpdateIndicator();
@@ -144,6 +144,8 @@ namespace CoinsCounter
             base.ChangeCoins(value);
             if (difference != 0) _audioPlayer.PlaySound("EarnCoins");
         }
+
+
 
         public override void Subscribe()
         {

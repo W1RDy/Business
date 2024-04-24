@@ -9,6 +9,7 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
 {
     public event Action GameFinished;
     public event Action GameStarted;
+    public event Action GameContinued;
 
     public event Action TutorialStarted;
     public event Action TutorialLevelStarted;
@@ -35,6 +36,8 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
     public override void Init()
     {
         base.Init();
+        Debug.Log(ServiceLocator.Instance.IsRegistered);
+
         _resultsActivator = ServiceLocator.Instance.Get<ResultsActivator>();
         _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
@@ -111,6 +114,18 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
     {
         IsStarted = true;
         TutorialLevelStarted?.Invoke();
+    }
+
+    public void Continue()
+    {
+        IsFinished = false;
+        YandexGame.savesData.tutorialPartsCompleted = 2;
+        YandexGame.savesData.gameIsFinished = false;
+
+        _dataSaver.StartSavingWithView();
+
+        _loadSceneController.LoadCurrentScene();
+        GameContinued?.Invoke();
     }
   
     public void RestartGame()

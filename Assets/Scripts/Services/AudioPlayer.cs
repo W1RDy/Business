@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using YG;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioPlayer : MonoBehaviour, IService
@@ -17,8 +18,8 @@ public class AudioPlayer : MonoBehaviour, IService
         _audioService = audioService;
         _audioSource = GetComponent<AudioSource>();
 
-
         PlayAudio(_defaultMusicIndex);
+        Subscribe();
     }
 
     public void PlayAudio(string index)
@@ -58,5 +59,44 @@ public class AudioPlayer : MonoBehaviour, IService
 
             _audioSource.PlayOneShot(audio.AudioClip, audio.Volume);
         }
+    }
+
+    private void Subscribe()
+    {
+        YandexGame.OpenFullAdEvent += StopByADS;
+        YandexGame.OpenVideoEvent += StopByADS;
+
+        YandexGame.ErrorFullAdEvent += PlayByADS;
+        YandexGame.ErrorVideoEvent += PlayByADS;
+        YandexGame.CloseFullAdEvent += PlayByADS;
+        YandexGame.CloseVideoEvent += PlayByADS;
+    }
+
+    private void Unsubscribe()
+    {
+        YandexGame.OpenFullAdEvent -= StopByADS;
+        YandexGame.OpenVideoEvent -= StopByADS;
+
+        YandexGame.ErrorFullAdEvent -= PlayByADS;
+        YandexGame.ErrorVideoEvent -= PlayByADS;
+        YandexGame.CloseFullAdEvent -= PlayByADS;
+        YandexGame.CloseVideoEvent -= PlayByADS;
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    private void StopByADS()
+    {
+        Debug.Log("Audio Stopped");
+        StopAudio();
+    }
+
+    private void PlayByADS()
+    {
+        Debug.Log("Audio Played");
+        PlayAudio(_defaultMusicIndex);
     }
 }

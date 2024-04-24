@@ -3,14 +3,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using YG;
 
-public class TimerBeforeAdsYG : MonoBehaviour
+public class TimerBeforeAdsYG : ObjectForInitialization
 {
-    [SerializeField,
-        Tooltip("Объект таймера перед показом рекламы. Он будет активироваться и деактивироваться в нужное время.")]
-    private GameObject secondsPanelObject;
-    [SerializeField,
-        Tooltip("Массив объектов, которые будут показываться по очереди через секунду. Сколько объектов вы поместите в массив, столько секунд будет отчитываться перед показом рекламы.\n\nНапример, поместите в массив три объекта: певый с текстом '3', второй с текстом '2', третий с текстом '1'.\nВ таком случае произойдёт отчет трёх секунд с показом объектов с цифрами перед рекламой.")]
-    private GameObject[] secondObjects;
+    [SerializeField] private ADSWarning _adsWarning;
 
     [SerializeField,
         Tooltip("Работа таймера в реальном времени, независимо от time scale.")]
@@ -23,39 +18,42 @@ public class TimerBeforeAdsYG : MonoBehaviour
     private UnityEvent onHideTimer;
     private int objSecCounter;
 
-    private void Start()
+    private bool _isStopTimer;
+
+    public override void Init()
     {
-        if (secondsPanelObject)
-            secondsPanelObject.SetActive(false);
+        base.Init();
 
-        for (int i = 0; i < secondObjects.Length; i++)
-            secondObjects[i].SetActive(false);
+        YandexGame.OpenFullAdEvent += StopTimer;
+        YandexGame.OpenVideoEvent += StopTimer;
 
-        if (secondObjects.Length > 0)
-            StartCoroutine(CheckTimerAd());
-        else
-            Debug.LogError("Fill in the array 'secondObjects'");
+        YandexGame.CloseFullAdEvent += RestartTimer;
+        YandexGame.CloseVideoEvent += StartTimer;
+
+        StartTimer();
     }
 
     IEnumerator CheckTimerAd()
     {
         while (true)
         {
+            if (_isStopTimer) yield break;
             if (YandexGame.timerShowAd >= YandexGame.Instance.infoYG.fullscreenAdInterval)
             {
                 onShowTimer?.Invoke();
                 objSecCounter = 0;
-                if (secondsPanelObject)
-                    secondsPanelObject.SetActive(true);
+                _adsWarning.ActivateWarning();
 
                 StartCoroutine(TimerAdShow());
                 yield break;
             }
 
+            if (_isStopTimer) yield break;
             if (!realtimeSeconds)
                 yield return new WaitForSeconds(1.0f);
             else
                 yield return new WaitForSecondsRealtime(1.0f);
+            if (_isStopTimer) yield break;
         }
     }
 
@@ -63,52 +61,48 @@ public class TimerBeforeAdsYG : MonoBehaviour
     {
         while (true)
         {
-            if (objSecCounter < secondObjects.Length)
+            if (objSecCounter < 3)
             {
-                for (int i2 = 0; i2 < secondObjects.Length; i2++)
-                    secondObjects[i2].SetActive(false);
-
-                secondObjects[objSecCounter].SetActive(true);
                 objSecCounter++;
-
                 if (!realtimeSeconds)
                     yield return new WaitForSeconds(1.0f);
                 else
                     yield return new WaitForSecondsRealtime(1.0f);
             }
 
-            if (objSecCounter == secondObjects.Length)
+            if (objSecCounter == 3)
             {
                 YandexGame.FullscreenShow();
-                StartCoroutine(BackupTimerClosure());
-
-                while (!YandexGame.nowFullAd)
-                    yield return null;
-
-                RestartTimer();
                 yield break;
             }
         }
     }
 
-    IEnumerator BackupTimerClosure()
-    {
-        if (!realtimeSeconds)
-            yield return new WaitForSeconds(2.5f);
-        else
-            yield return new WaitForSecondsRealtime(2.5f);
-
-        if (objSecCounter != 0)
-        {
-            RestartTimer();
-        }
-    }
-
     private void RestartTimer()
     {
-        secondsPanelObject.SetActive(false);
+        _adsWarning.DeactivateWarning();
         onHideTimer?.Invoke();
         objSecCounter = 0;
+        StartTimer();
+    }
+
+    private void StopTimer()
+    {
+        _isStopTimer = true;
+    }
+
+    private void StartTimer()
+    {
+        _isStopTimer = false;
         StartCoroutine(CheckTimerAd());
+    }
+
+    private void OnDestroy()
+    {
+        YandexGame.OpenFullAdEvent -= StopTimer;
+        YandexGame.OpenVideoEvent -= StopTimer;
+
+        YandexGame.CloseFullAdEvent -= RestartTimer;
+        YandexGame.CloseVideoEvent -= StartTimer;
     }
 }

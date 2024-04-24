@@ -36,6 +36,12 @@ public class LoadSceneController : ClassForInitialization, IService
         }
     }
 
+    public void LoadCurrentScene()
+    {
+        _isLoaded = false;
+        LoadScene();
+    }
+
     private IEnumerator WaitLoading()
     {
         _resetContoroller.Reset();

@@ -27,6 +27,8 @@ public class DifficultyController : MonoBehaviour, IService
 
     [SerializeField] private int _minSkipsBetweenProblems;
 
+    public float Difficulty => _difficulty + 1;
+
     public float[] ProblemChances => _problemChances;
     public float[] OrderChances => _orderChances;
 

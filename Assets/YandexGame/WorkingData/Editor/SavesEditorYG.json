@@ -1,5 +1,5 @@
 {
-    "idSave": 145,
+    "idSave": 149,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
@@ -8,18 +8,71 @@
     "handsCoins": 100,
     "bankCoins": 400,
     "monthCount": 1,
-    "time": 0,
+    "time": 15,
     "entitiesSaveConfig": {
-        "orders": [],
+        "orders": [
+            {
+                "id": 2,
+                "cost": 42,
+                "time": 19,
+                "neededGoods": 0,
+                "isApplied": false,
+                "remainTime": 19,
+                "remainWaiting": 1
+            },
+            {
+                "id": 1,
+                "cost": 51,
+                "time": 14,
+                "neededGoods": 1,
+                "isApplied": false,
+                "remainTime": 14,
+                "remainWaiting": 1
+            },
+            {
+                "id": 3,
+                "cost": 74,
+                "time": 11,
+                "neededGoods": 2,
+                "isApplied": false,
+                "remainTime": 11,
+                "remainWaiting": 2
+            }
+        ],
         "deliveryOrders": [],
-        "goods": [],
+        "goods": [
+            {
+                "goodsType": 2,
+                "buildTime": 1,
+                "amount": 7,
+                "brokenGoodsAmount": 0
+            },
+            {
+                "goodsType": 0,
+                "buildTime": 2,
+                "amount": 1,
+                "brokenGoodsAmount": 0
+            }
+        ],
         "pcs": [],
-        "entitiesSetted": 0
+        "entitiesSetted": 4
     },
     "resultSaveConfigs": [
         {
             "purchaseCosts": 0,
             "emergencyCosts": 0,
+            "orderIncome": 0,
+            "bankIncome": 0
+        },
+        {
+            "purchaseCosts": 0,
+            "emergencyCosts": 0,
+            "orderIncome": 0,
+            "bankIncome": 0
+        },
+        {
+            "purchaseCosts": -440,
+            "emergencyCosts": -47,
             "orderIncome": 0,
             "bankIncome": 0
         }

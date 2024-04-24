@@ -210,8 +210,8 @@ public class DataLoader : ClassForInitialization, IService
         _gameController.IsTutorial = YandexGame.savesData.tutorialPartsCompleted < 2;
 
         LoadEntities(savesData.entitiesSaveConfig, loadCallback);
-        _handsCoinsCounter.ChangeCoinsByLoadData(savesData.handsCoins);
-        _bankCoinsCounter.ChangeCoinsByLoadData(savesData.bankCoins);
+        _handsCoinsCounter.SetCoins(savesData.handsCoins);
+        _bankCoinsCounter.SetCoins(savesData.bankCoins);
 
         if (savesData.resultSaveConfigs != null) _resultsOfTheMonthService.SetResultsByLoadData(savesData.resultSaveConfigs, loadCallback);
         else loadCallback.Invoke();

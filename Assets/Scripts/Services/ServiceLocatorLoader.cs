@@ -39,6 +39,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindTutorial();
         BindResetController();
 
+        BindRewarder();
+
         BindSubscribeController();
         BindDifficultyController();
 
@@ -62,6 +64,12 @@ public class ServiceLocatorLoader : MonoBehaviour
         _servicesLocatorUILoader.BindUI();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindRewarder()
+    {
+        var rewarder = new Rewarder();
+        ServiceLocator.Instance.Register(rewarder);
     }
 
     private void BindResetController()

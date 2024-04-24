@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using System;
 using UnityEngine.SceneManagement;
 using YG.Utils.LB;
+using System.Collections;
 
 namespace YG
 {
@@ -720,6 +721,7 @@ namespace YG
 
         #region Update
         public static float timerShowAd;
+        private bool _isStarted;
 #if !UNITY_EDITOR
         static float timerSaveCloud = 62;
 #endif
@@ -728,6 +730,12 @@ namespace YG
         {
             // Таймер для обработки показа Fillscreen рекламы
             timerShowAd += Time.unscaledDeltaTime;
+
+            if (!_isStarted)
+            {
+                timerShowAd = 0;
+                _isStarted = true;
+            }
 
             // Таймер для облачных сохранений
 #if !UNITY_EDITOR
