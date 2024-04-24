@@ -62,7 +62,6 @@ public class HighlightAndScaleAnimation : UIScaleAnimation
 
     protected override void Release()
     {
-        Debug.Log("ReleaseHiglightValues");
         base.Release();
         _image.material = null;
         _image.color = _startImageColor;

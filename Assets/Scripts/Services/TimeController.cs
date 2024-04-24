@@ -53,18 +53,32 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
         Subscribe();
     }
 
-    private void SetStartValues()
+    private void SetStartValues(int month)
     { 
-        if (_gameController.IsTutorial)
+        if (month == 0)
         {
-            _currentMonth = 0;
-            _currentMaxTime = _tutorialMaxTime;
+            SetTutorialValues();
         }
         else
         {
-            _currentMonth = 1;
-            _currentMaxTime = _maxTime;
+            SetGameValues();
         }
+    }
+
+    private void SetGameValues()
+    {
+        _currentMonth = 1;
+        _currentMaxTime = _maxTime;
+
+        _timeIndicator.UpdateMonth(_currentMonth);
+        _timeIndicator.Init(_currentMaxTime);
+    }
+
+    private void SetTutorialValues()
+    {
+        _currentMonth = 0;
+        _currentMaxTime = _tutorialMaxTime;
+
         _timeIndicator.UpdateMonth(_currentMonth);
         _timeIndicator.Init(_currentMaxTime);
     }
@@ -88,14 +102,11 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
 
     public void SetParametersByLoadData(int time, int months)
     {
+        if (months == 1) Unsubscribe();
+
         _time = time;
-        _currentMonth = months;
+        SetStartValues(months);
 
-        if (_currentMonth > 0) _currentMaxTime = _maxTime;
-        else _currentMaxTime = _tutorialMaxTime;
-
-        _timeIndicator.Init(_currentMaxTime);
-        _timeIndicator.UpdateMonth(_currentMonth);
         _timeIndicator.SetTime(time);
 
         if (PeriodFinished())
@@ -125,8 +136,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
     public void Subscribe()
     {
         _subscribeController.AddSubscribable(this);
-        _gameController.TutorialStarted += SetStartValues;
-        _gameController.GameStarted += SetStartValues;
+        _gameController.GameStarted += SetGameValues;
 
         SaveDelegate = () => _dataSaver.SaveMonthsAndTime(CurrentMonth, Time);
         _dataSaver.OnStartSaving += SaveDelegate;
@@ -134,8 +144,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
 
     public void Unsubscribe()
     {
-        _gameController.TutorialStarted -= SetStartValues;
-        _gameController.GameStarted -= SetStartValues;
+        _gameController.GameStarted -= SetGameValues;
         _dataSaver.OnStartSaving -= SaveDelegate;
     }
 
@@ -143,6 +152,6 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
     {
         _time = 0;
         _timeIndicator.SetTime(_time);
-        SetStartValues();
+        SetStartValues(1);
     }
 }

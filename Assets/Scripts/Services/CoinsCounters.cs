@@ -78,6 +78,16 @@ namespace CoinsCounter
             }
         }
 
+        public virtual void ChangeCoinsByLoadData(int value)
+        {
+            if (_coins > -1)
+            {
+                _coins = value;
+                UpdateIndicator();
+                InvokeCoinsEvent();
+            }
+        }
+
         protected void UpdateIndicator()
         {
             _coinsIndicator.SetCoins(_coins);
@@ -140,7 +150,6 @@ namespace CoinsCounter
             base.Subscribe();
             SaveDelegate = () =>
             {
-                Debug.Log("Hands coins " + Coins);
                 _dataSaver.SaveHandCoins(Coins);
             };
             _dataSaver.OnStartSaving += SaveDelegate;

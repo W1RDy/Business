@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 public class ResultsActivator : ClassForInitialization, IService
 {
@@ -24,6 +25,7 @@ public class ResultsActivator : ClassForInitialization, IService
 
     public void ActivateResultsOfTheGame()
     {
+        Debug.Log("ActivateLose");
         var result = _calculator.CalculateResultsOfTheGame();
         _resultsWindow.SetResults(result);
         _windowActivator.ActivateWindow(WindowType.Results);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DeliveryOrderGenerator : ClassForInitialization, IService
@@ -39,7 +40,7 @@ public class DeliveryOrderGenerator : ClassForInitialization, IService
         _compositeOrder.AddOrder(deliveryOrder);
     }
 
-    public void GenerateOrderByLoadData(DeliveryOrderSaveConfig saveConfig)
+    public void GenerateOrderByLoadData(DeliveryOrderSaveConfig saveConfig, Action loadCallback)
     {
         var config = _configs[saveConfig.goodsType];
 
@@ -48,5 +49,6 @@ public class DeliveryOrderGenerator : ClassForInitialization, IService
         _orderService.AddOrder(deliveryOrder);
 
         _compositeOrder.AddOrder(deliveryOrder);
+        loadCallback.Invoke();
     }
 }

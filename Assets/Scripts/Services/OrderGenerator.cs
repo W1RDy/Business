@@ -97,7 +97,7 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
 
     public void ActivateOrderGenerator()
     {
-        if (!_gameController.IsStartingTutorial && !_gameConditionChecker.IsPeriodFinished())
+        if (_gameController.IsStarted && !_gameConditionChecker.IsPeriodFinished())
         {
             _remainOrdersInPeriod = _maxOrdersCountInPeriod;
             if (_isSubscribeToActivating) ActivatingUnsubscribe();
@@ -163,7 +163,7 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
         _orderService.AddOrder(order);
     }
 
-    public void GenerateOrderByLoadData(OrderSaveConfig orderSaveConfig)
+    public void GenerateOrderByLoadData(OrderSaveConfig orderSaveConfig, Action loadCallback)
     {
         var config = new OrderInstanceConfig(orderSaveConfig.cost, orderSaveConfig.time, orderSaveConfig.neededGoods);
 
@@ -173,6 +173,7 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
         order.InitVariant(orderSaveConfig.id, config, _idGenerator, orderSaveConfig.isApplied, orderSaveConfig.remainTime, orderSaveConfig.remainWaiting);
 
         _orderService.AddOrder(order);
+        loadCallback.Invoke();
     }
 
     private void ChangeOrderGenerateChancesByDifficulty()

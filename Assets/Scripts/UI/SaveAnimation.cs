@@ -24,21 +24,27 @@ public class SaveAnimation : ObjectForInitialization, ISubscribable
 
     private void ActivateAnimation()
     {
-        _image.gameObject.SetActive(true);
-        _sequence = DOTween.Sequence();
+        if (_saver.SaveWithView)
+        {
+            _image.gameObject.SetActive(true);
+            _sequence = DOTween.Sequence();
 
-        _sequence
-            .Append(_image.transform.DOLocalRotate(new Vector3(0,0,180), 0.2f))
-            .Append(_image.transform.DOLocalRotate(new Vector3(0,0,360), 0.2f));
-        _sequence.SetLoops(-1);
-        _sequence.Play();
+            _sequence
+                .Append(_image.transform.DOLocalRotate(new Vector3(0, 0, 180), 0.2f))
+                .Append(_image.transform.DOLocalRotate(new Vector3(0, 0, 360), 0.2f));
+            _sequence.SetLoops(-1);
+            _sequence.Play();
+        }
     }
 
     private void KillAnimation()
     {
-        _image.gameObject.SetActive(false);
-        _sequence.Kill();
-        _image.transform.localRotation = Quaternion.identity;
+        if (_saver.SaveWithView)
+        {
+            _image.gameObject.SetActive(false);
+            _sequence.Kill();
+            _image.transform.localRotation = Quaternion.identity;
+        }
     }
 
     public void Subscribe()

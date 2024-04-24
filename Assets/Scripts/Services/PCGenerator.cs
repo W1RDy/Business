@@ -41,7 +41,7 @@ public class PCGenerator : ClassForInitialization, IService
         _windowChildChangedHandler.ChangeChilds(action);
     }
 
-    public void GeneratePCByLoadData(PCSaveConfig pcSaveConfig)
+    public void GeneratePCByLoadData(PCSaveConfig pcSaveConfig, Action loadCallback)
     {
         var config = GetConfig(pcSaveConfig.id);
 
@@ -49,6 +49,7 @@ public class PCGenerator : ClassForInitialization, IService
         pc.InitVariant(config, config.IsBroken, pcSaveConfig.amount);
 
         _pcService.AddPC(pc);
+        loadCallback.Invoke();
     }
 
     private PCConfig GetConfig(int index)

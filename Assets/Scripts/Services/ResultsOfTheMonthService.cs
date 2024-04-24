@@ -32,20 +32,22 @@ public class ResultsOfTheMonthService : ResetableClassForInit, IService, ISubscr
     {
         _currentResults = new ResultsOfTheMonth();
         _results.Add(_currentResults);
-        Debug.Log(_results.Count);
     }
 
-    public void SetResultsByLoadData(List<ResultSaveConfig> resultSaveConfigs)
+    public void SetResultsByLoadData(List<ResultSaveConfig> resultSaveConfigs, Action callback)
     {
+        Debug.Log(resultSaveConfigs.Count);
         foreach (ResultSaveConfig config in resultSaveConfigs)
         {
+            Debug.Log(config.purchaseCosts + config.emergencyCosts);
             var result = new ResultsOfTheMonth();
             result.UpdateResult(config.purchaseCosts, config.emergencyCosts, config.orderIncome, config.bankIncome);
-            result.SummarizeResults();
+            //result.SummarizeResults();
 
             _results.Add(result);
         }
         _currentResults = _results[_results.Count - 1];
+        callback.Invoke();
     }
 
     public ResultsOfTheMonth GetResultsOfTheMonth()

@@ -1,44 +1,45 @@
 {
-    "idSave": 55,
+    "idSave": 89,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "tutorialPartsCompleted": 1,
+    "tutorialPartsCompleted": 2,
+    "gameIsFinished": true,
     "handsCoins": 2,
-    "bankCoins": 600,
-    "monthCount": 0,
-    "time": 15,
+    "bankCoins": 0,
+    "monthCount": 1,
+    "time": 4,
     "entitiesSaveConfig": {
         "orders": [
             {
                 "id": 1,
-                "cost": 39,
-                "time": 16,
-                "neededGoods": 0,
+                "cost": 95,
+                "time": 14,
+                "neededGoods": 2,
                 "isApplied": false,
-                "remainTime": 16,
-                "remainWaiting": 1
+                "remainTime": 14,
+                "remainWaiting": 2
             },
             {
-                "id": 2,
-                "cost": 53,
-                "time": 15,
+                "id": 3,
+                "cost": 58,
+                "time": 18,
                 "neededGoods": 1,
                 "isApplied": false,
-                "remainTime": 15,
+                "remainTime": 18,
                 "remainWaiting": 1
             }
         ],
         "deliveryOrders": [],
         "goods": [
             {
-                "goodsType": 1,
+                "goodsType": 2,
                 "buildTime": 1,
-                "amount": 1,
+                "amount": 11,
                 "brokenGoodsAmount": 0
             },
             {
-                "goodsType": 2,
+                "goodsType": 1,
                 "buildTime": 1,
                 "amount": 1,
                 "brokenGoodsAmount": 0
@@ -54,10 +55,16 @@
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": -140,
+            "purchaseCosts": -40,
             "emergencyCosts": 0,
             "orderIncome": 42,
             "bankIncome": 200
+        },
+        {
+            "purchaseCosts": -700,
+            "emergencyCosts": 0,
+            "orderIncome": 0,
+            "bankIncome": 0
         }
     ]
 }

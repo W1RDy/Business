@@ -24,11 +24,12 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
     private LoadSceneController _loadSceneController;
 
     private DataLoader _dataLoader;
+    private DataSaver _dataSaver;
 
     [SerializeField] private bool _isResetSaves;
 
     public bool IsFinished { get; private set; }
-    public bool IsStartingTutorial { get; private set; }
+    public bool IsStarted { get; private set; }
     public bool IsTutorial { get; set; }
 
     public override void Init()
@@ -39,6 +40,7 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
         _conditionsChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
         _dataLoader = ServiceLocator.Instance.Get<DataLoader>();
+        _dataSaver =ServiceLocator.Instance.Get<DataSaver>();
 
         _handsCoinsCounter = ServiceLocator.Instance.Get<HandsCoinsCounter>();
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
@@ -52,7 +54,14 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
 
     public void StartDelegate()
     {
-        if (!_conditionsChecker.IsPeriodFinished()) _loadSceneController.LoadScene();
+        Debug.Log(_conditionsChecker.IsPeriodFinished());
+        if (!_conditionsChecker.IsPeriodFinished() && !YandexGame.savesData.gameIsFinished) _loadSceneController.LoadScene();
+        if (YandexGame.savesData.gameIsFinished)
+        {
+            FinishGame();
+            return;
+        }
+
         if (YandexGame.savesData.tutorialPartsCompleted == 0) StartTutorial();
         else if (YandexGame.savesData.tutorialPartsCompleted == 1) StartTutorialLevel();
         else StartGame();
@@ -60,32 +69,47 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
 
     private void TryFinishGame()
     {
-        if (_conditionsChecker.IsEnoughCoinsForMinCoins()) FinishGame();
+        if (_conditionsChecker.IsEnoughCoinsForMinCoins() && _dataLoader.DataLoaded) FinishGame();
     }
 
     public void FinishGame()
     {
-        IsFinished = true;
-        GameFinished?.Invoke();
+        if (!IsFinished)
+        {
+            IsFinished = true;
+            if (!YandexGame.savesData.gameIsFinished)
+            {
+                _dataSaver.SaveGameFinishState();
+                _dataSaver.StartSavingWithoutView();
+            }
+            GameFinished?.Invoke();
+            StartCoroutine(WaitResults());
+        }
+    }
+
+    private IEnumerator WaitResults()
+    {
+        yield return null;
         _resultsActivator.ActivateResultsOfTheGame();
     }
 
     public void StartGame()
     {
+        IsStarted = true;
         IsTutorial = false;
         GameStarted?.Invoke();
     }
 
     public void StartTutorial()
     {
-        IsStartingTutorial = true;
+        IsStarted = false;
         _tutorialActivator.ActivateTutorial(TutorialSegmentType.CompleteOrder);
         TutorialStarted?.Invoke();
     }
 
     public void StartTutorialLevel()
     {
-        IsStartingTutorial = false;
+        IsStarted = true;
         TutorialLevelStarted?.Invoke();
     }
   
@@ -93,6 +117,10 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
     {
         YandexGame.ResetSaveProgress();
         YandexGame.savesData.tutorialPartsCompleted = 2;
+        YandexGame.savesData.gameIsFinished = false;
+
+        _dataSaver.StartSavingWithView();
+
         _loadSceneController.Reset();
     }
 

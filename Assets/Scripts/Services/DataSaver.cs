@@ -15,6 +15,8 @@ public class DataSaver : MonoBehaviour, IService
 
     private bool _resultsSaved;
 
+    public bool SaveWithView { get; private set; }
+
     public void SaveOrders(Order[] orders)
     {
         _entitiesSaveConfig.SetOrders(orders);
@@ -65,9 +67,15 @@ public class DataSaver : MonoBehaviour, IService
         }
     }
 
+    public void SaveGameFinishState()
+    {
+        YandexGame.savesData.gameIsFinished = true;
+    }
+
     public void SaveResults(List<ResultsOfTheMonth> resultsOfTheMonth)
     {
         var resultConfigs = YandexGame.savesData.resultSaveConfigs;
+        resultConfigs.Clear();
         foreach (var result in resultsOfTheMonth)
         {
             resultConfigs.Add(new ResultSaveConfig(result.PurchaseCosts, result.EmergencyCosts, result.OrderIncome, result.BankIncome));
@@ -75,7 +83,19 @@ public class DataSaver : MonoBehaviour, IService
         _resultsSaved = true;
     }
 
-    public void StartSaving()
+    public void StartSavingWithView()
+    {
+        SaveWithView = true;
+        StartSaving();
+    }
+
+    public void StartSavingWithoutView()
+    {
+        SaveWithView = false;
+        StartSaving();
+    }
+
+    private void StartSaving()
     {
         if (_entitiesSaveConfig == null) _entitiesSaveConfig = YandexGame.savesData.entitiesSaveConfig;
         _entitiesSaveConfig.entitiesSetted = 0;
@@ -100,7 +120,6 @@ public class DataSaver : MonoBehaviour, IService
     private void SaveAllDatasToCloud()
     {
         YandexGame.SaveProgress();
-        PrintDatas();
     }
 
     private void PrintDatas()
@@ -135,7 +154,9 @@ public class DataLoader : ClassForInitialization, IService
     private GameController _gameController;
 
     private ResultsOfTheMonthService _resultsOfTheMonthService;
+    private int _loadCount;
 
+    public bool DataLoaded { get; private set; }
     public event Action OnDataLoaded;
 
     public DataLoader() : base() { }
@@ -176,23 +197,39 @@ public class DataLoader : ClassForInitialization, IService
 
     public void LoadData()
     {
+        DataLoaded = false;
         var savesData = YandexGame.savesData;
-        PrintDatas();
 
+        _loadCount = 0;
+        Action loadCallback = () =>
+        {
+            _loadCount++;
+            if (_loadCount >= 6) FinishLoading();
+        };
+        
         _gameController.IsTutorial = YandexGame.savesData.tutorialPartsCompleted < 2;
-        LoadEntities(savesData.entitiesSaveConfig);
-        _handsCoinsCounter.ChangeCoins(savesData.handsCoins);
-        _bankCoinsCounter.ChangeCoins(savesData.bankCoins);
 
-        if (savesData.resultSaveConfigs != null) _resultsOfTheMonthService.SetResultsByLoadData(savesData.resultSaveConfigs);
+        LoadEntities(savesData.entitiesSaveConfig, loadCallback);
+        _handsCoinsCounter.ChangeCoinsByLoadData(savesData.handsCoins);
+        _bankCoinsCounter.ChangeCoinsByLoadData(savesData.bankCoins);
+
+        if (savesData.resultSaveConfigs != null) _resultsOfTheMonthService.SetResultsByLoadData(savesData.resultSaveConfigs, loadCallback);
+        else loadCallback.Invoke();
+
         _timeController.SetParametersByLoadData(savesData.time, savesData.monthCount);
+        loadCallback.Invoke();
+    }
+
+    private void FinishLoading()
+    {
+        DataLoaded = true;
         OnDataLoaded?.Invoke();
         YandexGame.GetDataEvent -= LoadData;
     }
 
-    private void LoadEntities(EntitiesSaveConfig entitiesSaveConfig)
+    private void LoadEntities(EntitiesSaveConfig entitiesSaveConfig, Action loadCallback)
     {
-        _entitiesLoader.LoadEntities(entitiesSaveConfig);
+        _entitiesLoader.LoadEntities(entitiesSaveConfig, loadCallback);
     }
 }
 
@@ -217,62 +254,63 @@ public class EntitiesLoader
         //_problemsGenerator = ServiceLocator.Instance.Get<ProblemsGenerator>();
     }
 
-    public void LoadEntities(EntitiesSaveConfig entitiesSaveConfig)
+    public void LoadEntities(EntitiesSaveConfig entitiesSaveConfig, Action loadCallback)
     {
-        if (entitiesSaveConfig != null)
-        {
-            LoadOrders(entitiesSaveConfig.orders);
-            LoadDeliveryOrders(entitiesSaveConfig.deliveryOrders);
+        LoadOrders(entitiesSaveConfig.orders, loadCallback);
+        LoadDeliveryOrders(entitiesSaveConfig.deliveryOrders, loadCallback);
 
-            LoadGoods(entitiesSaveConfig.goods);
-            LoadPC(entitiesSaveConfig.pcs);
+        LoadGoods(entitiesSaveConfig.goods, loadCallback);
+        LoadPC(entitiesSaveConfig.pcs, loadCallback);
 
-            //LoadProblem(entitiesSaveConfig.problem);
-        }
+        //LoadProblem(entitiesSaveConfig.problem);
     }
 
-    private void LoadOrders(OrderSaveConfig[] orders)
+    private void LoadOrders(OrderSaveConfig[] orders, Action loadCallback)
     {
         if (orders != null && orders.Length > 0)
         {
             foreach (OrderSaveConfig orderSaveConfig in orders)
             {
-                _orderGenerator.GenerateOrderByLoadData(orderSaveConfig);
+                _orderGenerator.GenerateOrderByLoadData(orderSaveConfig, loadCallback);
             }
         }
+        else loadCallback.Invoke();
     }
 
-    private void LoadDeliveryOrders(DeliveryOrderSaveConfig[] orders)
+    private void LoadDeliveryOrders(DeliveryOrderSaveConfig[] orders, Action loadCallback)
     {
         if (orders != null && orders.Length > 0)
         {
             foreach (DeliveryOrderSaveConfig orderSaveConfig in orders)
             {
-                _deliveryGenerator.GenerateOrderByLoadData(orderSaveConfig);
+                _deliveryGenerator.GenerateOrderByLoadData(orderSaveConfig, loadCallback);
             }
         }
+        else loadCallback.Invoke();
     }
 
-    private void LoadGoods(GoodsSaveConfig[] goods)
+    private void LoadGoods(GoodsSaveConfig[] goods, Action loadCallback)
     {
         if (goods != null && goods.Length > 0)
         {
             foreach (var good in goods)
             {
-                _goodsGenerator.GenerateGoodsByLoadData(good);
+                _goodsGenerator.GenerateGoodsByLoadData(good, loadCallback);
             }
         }
+        else loadCallback.Invoke();
     }
 
-    private void LoadPC(PCSaveConfig[] pcs)
+    private void LoadPC(PCSaveConfig[] pcs, Action loadCallback)
     {
         if (pcs != null && pcs.Length > 0)
         {
             foreach (var pc in pcs)
             {
-                _pcGenerator.GeneratePCByLoadData(pc);
+                _pcGenerator.GeneratePCByLoadData(pc, loadCallback);
             }
         }
+        else loadCallback.Invoke();
     }
 
     //private void LoadProblem(ProblemSaveConfig problem)

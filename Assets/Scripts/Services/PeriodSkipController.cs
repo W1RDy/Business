@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PeriodSkipController : ObjectForInitialization, IService
 {
@@ -33,10 +34,10 @@ public class PeriodSkipController : ObjectForInitialization, IService
         {
             if (!_conditionChecker.IsPeriodFinished() && !_conditionChecker.IsGameFinished()) ContinueNewDay(); 
         });
-        
-        if (_conditionChecker.IsPeriodFinished() || _conditionChecker.IsGameFinished())
+
+        if (_conditionChecker.IsPeriodFinished())
         {
-            _dataSaver.StartSaving();
+            _dataSaver.StartSavingWithView();
         }
         _audioPlayer.PlaySound("SkipTime");
     }
