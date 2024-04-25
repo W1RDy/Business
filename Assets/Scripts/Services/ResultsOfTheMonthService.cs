@@ -36,10 +36,8 @@ public class ResultsOfTheMonthService : ResetableClassForInit, IService, ISubscr
 
     public void SetResultsByLoadData(List<ResultSaveConfig> resultSaveConfigs, Action callback)
     {
-        Debug.Log(resultSaveConfigs.Count);
         foreach (ResultSaveConfig config in resultSaveConfigs)
         {
-            Debug.Log(config.purchaseCosts + config.emergencyCosts);
             var result = new ResultsOfTheMonth();
             result.UpdateResult(config.purchaseCosts, config.emergencyCosts, config.orderIncome, config.bankIncome);
             //result.SummarizeResults();

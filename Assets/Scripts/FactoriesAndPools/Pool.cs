@@ -71,6 +71,7 @@ public class Pool<T> : IPool<T>, IService, IResetable where T : MonoBehaviour, I
 
     public virtual void Release(T element)
     {
+        if (element is Order order) Debug.Log("Release");
         element.Release();
         ChangeParentWithScaleSaving(element, _poolContainer);
     }

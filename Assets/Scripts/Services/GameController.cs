@@ -36,7 +36,6 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
     public override void Init()
     {
         base.Init();
-        Debug.Log(ServiceLocator.Instance.IsRegistered);
 
         _resultsActivator = ServiceLocator.Instance.Get<ResultsActivator>();
         _tutorialActivator = ServiceLocator.Instance.Get<TutorialActivator>();
@@ -57,7 +56,6 @@ public class GameController : ResetableObjForInit, IService, ISubscribable
 
     public void StartDelegate()
     {
-        Debug.Log(_conditionsChecker.IsPeriodFinished());
         if (!_conditionsChecker.IsPeriodFinished() && !YandexGame.savesData.gameIsFinished) _loadSceneController.LoadScene();
         if (YandexGame.savesData.gameIsFinished)
         {

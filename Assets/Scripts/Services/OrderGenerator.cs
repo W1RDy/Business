@@ -31,6 +31,8 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
 
     private WindowChildChangedHandler _windowChangedHandler;
 
+    private OrderApplyHandler _orderApplyHandler;
+
     [SerializeField] private float _timeBetweenGenerate;
     private float _timePassed;
 
@@ -52,6 +54,8 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
         _gameConditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
+
+        _orderApplyHandler = new OrderApplyHandler();
 
         var windowService = ServiceLocator.Instance.Get<WindowService>();
         _windowChangedHandler = new WindowChildChangedHandler(windowService.GetWindow(WindowType.OrdersWindow));
@@ -81,12 +85,12 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
             {
                 if (!_randomController.IsBlocked)
                 {
-                    _windowChangedHandler.ChangeChilds(GenerateOrder);
                     if (_orderService.GetOrdersCount() + _windowChangedHandler.ActionCount >= _maxOrdersCount)
                     {
                         _randomController.BlockController();
                         return;
                     }
+                    _windowChangedHandler.ChangeChilds(GenerateOrder);
                 }
                 else if (_orderService.GetOrdersCount() + _windowChangedHandler.ActionCount < _maxOrdersCount) _randomController.UnblockController();
 
@@ -175,9 +179,11 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
         var order = _pool.Get();
         _idGenerator.BorrowID(orderSaveConfig.id);
 
-        order.InitVariant(orderSaveConfig.id, config, _idGenerator, orderSaveConfig.isApplied, orderSaveConfig.remainTime, orderSaveConfig.remainWaiting);
+        order.InitVariant(orderSaveConfig.id, config, _idGenerator, orderSaveConfig.remainTime, orderSaveConfig.remainWaiting);
 
         _orderService.AddOrder(order);
+
+        if (orderSaveConfig.isApplied) _orderApplyHandler.ApplyOrder(order);
         loadCallback.Invoke();
     }
 

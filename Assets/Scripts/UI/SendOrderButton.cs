@@ -35,6 +35,7 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
     protected override void ClickCallback()
     {
         base.ClickCallback();
+        Debug.Log("Click");
         SendOrder();
     }
 

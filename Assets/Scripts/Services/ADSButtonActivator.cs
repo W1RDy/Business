@@ -34,13 +34,11 @@ public class ADSButtonActivator : ObjectForInitialization, ISubscribable
     public void TryActivateButtonWithCoinsReward()
     {
         var currentCoins = _handsCoinsCounter.Coins + _bankCoinsCounter.Coins;
-        Debug.Log(currentCoins);
 
         if (_maxReachedCoins < currentCoins) _maxReachedCoins = currentCoins;
         if (_maxReachedCoins > currentCoins)
         {
             var divideValue = (float)currentCoins / _maxReachedCoins;
-            Debug.Log(divideValue);
             if (divideValue < 0.45f) ActivateButtonWithCoinsReward((int)(((0.5f - divideValue) / divideValue) * currentCoins));  
         }
     }

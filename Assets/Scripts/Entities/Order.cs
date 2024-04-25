@@ -93,7 +93,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         InitAnimations();
     }
     
-    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator, bool isApplied, int remainTime, int remaimWaiting)
+    public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator, int remainTime, int remaimWaiting)
     {
         _orderConfig = orderConfig;
         _id = id;
@@ -105,13 +105,11 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         _notificationController.AddNotification(this);
 
         _idGenerator = idGenerator;
-
-        if (isApplied) ApplyOrder();
     }
 
     public void InitVariant(int id, OrderInstanceConfig orderConfig, IIDGenerator idGenerator)
     {
-        InitVariant(id, orderConfig, idGenerator, false, orderConfig.Time, 2);
+        InitVariant(id, orderConfig, idGenerator, orderConfig.Time, 2);
     }
 
     private void InitAnimations()
@@ -214,6 +212,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     public virtual void Release()
     {
+        Debug.Log("Release order");
         gameObject.SetActive(false);
         _orderService.RemoveOrder(this);
         _idGenerator.ReleaseID(ID);

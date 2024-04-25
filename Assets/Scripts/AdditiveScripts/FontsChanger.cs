@@ -11,6 +11,7 @@ public class FontsChanger : MonoBehaviour
 
     private List<TextMeshProUGUI> _texts = new List<TextMeshProUGUI>();
 
+#if UNITY_EDITOR
     [ContextMenu("Change Fonts")]
     public void ChangeFonts()
     {
@@ -20,10 +21,11 @@ public class FontsChanger : MonoBehaviour
             if (fontObj.TryGetComponent<TextMeshProUGUI>(out var text)) _texts.Add(text);
         }
 
-        Undo.RecordObjects(_texts.ToArray(), "Change fonts");
+        //Undo.RecordObjects(_texts.ToArray(), "Change fonts");
         foreach (var text in _texts)
         {
             text.font = _newFont;
         }
     }
+#endif
 }

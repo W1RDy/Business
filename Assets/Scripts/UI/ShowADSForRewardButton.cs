@@ -24,7 +24,6 @@ public abstract class ShowADSForRewardButton : CustomButton
 
     protected virtual void SetText(string messageIndex)
     {
-        Debug.Log(_buttonText);
         _buttonText.text = LocalizationManager.GetTranslation(messageIndex);
     }
 
