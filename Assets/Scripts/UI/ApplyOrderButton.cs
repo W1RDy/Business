@@ -84,8 +84,9 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         OnOrderStateChanged?.Invoke();
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_buttonChangeController != null)
         {
             _buttonChangeController.RemoveChangeButton(this);

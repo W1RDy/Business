@@ -82,8 +82,9 @@ public class SendOrderButton : OrdersControlButton, IButtonWithStates
         _buttonTextFitter.CheckButtonTextFit(_stateText);
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_changeController != null) _changeController.RemoveChangeButton(this);
         if (_order != null) _order.OrderStateChanged -= OnOrderChanged;
     }

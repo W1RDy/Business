@@ -53,8 +53,9 @@ public class Tab : OpenButton
         }
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         _window.OnWindowChanged -= ChangeInteractableDelegate;
     }
 }

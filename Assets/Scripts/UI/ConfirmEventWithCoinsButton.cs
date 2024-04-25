@@ -70,8 +70,9 @@ public class ConfirmEventWithCoinsButton : CustomButton, IButtonWithNewButton
         return !_conditionsChecker.IsEnoughCoinsInHands(_coinsEvent.CoinsRequirements);
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if ( _changeController != null )
         {
             _changeController.RemoveChangeButton(this);

@@ -29,6 +29,11 @@ public class ObjectsInitializator : MonoBehaviour, IService
             _initializables.Add(initializable);
         }
     }
+
+    private void OnDestroy()
+    {
+        ServiceLocator.Instance.ServiceRegistered -= InitObjects;
+    }
 }
 
 public abstract class ObjectForInitialization : MonoBehaviour, IInitializable
@@ -64,6 +69,11 @@ public abstract class ObjectForInitialization : MonoBehaviour, IInitializable
     public virtual void Init()
     {
         _isAddToInit = true;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        ServiceLocator.Instance.ServiceRegistered -= InitDelegate;
     }
 }
 

@@ -86,8 +86,9 @@ public abstract class CustomButton : ObjectForInitialization
 
     #endregion 
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_button != null)
         {
             _button.onClick.RemoveListener(ClickCallback);

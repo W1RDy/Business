@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class ConfirmHandler : ClassForInitialization
+public class ConfirmHandler : ClassForInitialization, ISubscribable
 {
     private SuggestionGenerator _suggestionGenerator;
 
@@ -10,12 +10,16 @@ public class ConfirmHandler : ClassForInitialization
     private Action _rememberedAction;
     private Suggestion _suggestion;
 
+    private SubscribeController _subscribeController;
+
     public ConfirmHandler() : base() { }
 
     public override void Init()
     {
         _buttonService = ServiceLocator.Instance.Get<ButtonService>();
         _suggestionGenerator = ServiceLocator.Instance.Get<SuggestionGenerator>();
+        _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+        _subscribeController.AddSubscribable(this);
     }
 
     public void ConfirmAction(Action action, ConfirmType confirmType, int skipTime, int wasteCoins)
@@ -46,8 +50,7 @@ public class ConfirmHandler : ClassForInitialization
     {
         _suggestion = _suggestionGenerator.GenerateSuggestion(confirmType, skipTime, wasteCoins);
 
-        _suggestion.Applied += ConfirmSuggestion;
-        _suggestion.Skipped += CancelSuggestion;
+        Subscribe();
 
         if (confirmType == ConfirmType.DistributeCoins)
             _buttonService.OpenWindow(WindowType.DistributeSuggestionWindow);
@@ -59,8 +62,7 @@ public class ConfirmHandler : ClassForInitialization
     {
         _suggestion = _suggestionGenerator.GenerateSuggestionByProblem(problem);
 
-        _suggestion.Applied += ConfirmSuggestion;
-        _suggestion.Skipped += CancelSuggestion;
+        Subscribe();
 
         _buttonService.OpenWindow(WindowType.DistributeSuggestionWindow);
     }
@@ -79,10 +81,24 @@ public class ConfirmHandler : ClassForInitialization
 
             if (_suggestion != null)
             {
-                _suggestion.Applied -= ConfirmSuggestion;
-                _suggestion.Skipped -= CancelSuggestion;
+                Unsubscribe();
                 _suggestion = null;
             }
+        }
+    }
+
+    public void Subscribe()
+    {
+        _suggestion.Applied += ConfirmSuggestion;
+        _suggestion.Skipped += CancelSuggestion;
+    }
+
+    public void Unsubscribe()
+    {
+        if (_suggestion != null)
+        {
+            _suggestion.Applied -= ConfirmSuggestion;
+            _suggestion.Skipped -= CancelSuggestion;
         }
     }
 }

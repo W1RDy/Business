@@ -35,8 +35,9 @@ public class CloseResultsButton : CloseButton, IButtonWithNewButton
         return _conditionChecker.IsGameFinished();
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_buttonChangeController != null)
         {
             _buttonChangeController.RemoveChangeButton(this);

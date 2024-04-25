@@ -38,4 +38,9 @@ public class TutorialPartWithButton : TutorialSegmentPart
         _isCompleted = true;
         _tutorialButton.OnClick -= CompleteDelegate;
     }
+
+    private void OnDestroy()
+    {
+        if (_tutorialButton != null) _tutorialButton.OnClick -= CompleteDelegate;
+    }
 }

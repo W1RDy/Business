@@ -140,8 +140,9 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
     //    if (_animController != null) _animController.KillAnimation();
     //}
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         _window.OnWindowChanged -= WindowDelegate;
     }
 

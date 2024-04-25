@@ -194,8 +194,9 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
         }
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
+        base.OnDestroy();
         if (_timeController != null)
         {
             _timeController.OnTimeChanged -= TimeChangedDelegate;

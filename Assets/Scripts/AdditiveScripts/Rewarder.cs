@@ -48,7 +48,7 @@ public class Rewarder : ClassForInitialization, IService, ISubscribable
     {
         _subscribeController.AddSubscribable(this);
 
-        ApplyDelegate += index => ApplyReward(index);
+        ApplyDelegate = index => ApplyReward(index);
         YandexGame.RewardVideoEvent += ApplyDelegate;
     }
 
