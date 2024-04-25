@@ -1,50 +1,50 @@
 {
-    "idSave": 149,
+    "idSave": 151,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
-    "tutorialPartsCompleted": 2,
+    "tutorialPartsCompleted": 1,
     "gameIsFinished": false,
-    "handsCoins": 100,
-    "bankCoins": 400,
-    "monthCount": 1,
+    "handsCoins": 3,
+    "bankCoins": 600,
+    "monthCount": 0,
     "time": 15,
     "entitiesSaveConfig": {
         "orders": [
             {
-                "id": 2,
-                "cost": 42,
-                "time": 19,
-                "neededGoods": 0,
-                "isApplied": false,
-                "remainTime": 19,
-                "remainWaiting": 1
+                "id": 1,
+                "cost": 61,
+                "time": 15,
+                "neededGoods": 1,
+                "isApplied": true,
+                "remainTime": 8,
+                "remainWaiting": 2
             },
             {
-                "id": 1,
-                "cost": 51,
+                "id": 2,
+                "cost": 35,
+                "time": 16,
+                "neededGoods": 0,
+                "isApplied": true,
+                "remainTime": 9,
+                "remainWaiting": 2
+            },
+            {
+                "id": 3,
+                "cost": 53,
                 "time": 14,
                 "neededGoods": 1,
                 "isApplied": false,
                 "remainTime": 14,
-                "remainWaiting": 1
-            },
-            {
-                "id": 3,
-                "cost": 74,
-                "time": 11,
-                "neededGoods": 2,
-                "isApplied": false,
-                "remainTime": 11,
                 "remainWaiting": 2
             }
         ],
         "deliveryOrders": [],
         "goods": [
             {
-                "goodsType": 2,
+                "goodsType": 1,
                 "buildTime": 1,
-                "amount": 7,
+                "amount": 1,
                 "brokenGoodsAmount": 0
             },
             {
@@ -54,27 +54,20 @@
                 "brokenGoodsAmount": 0
             }
         ],
-        "pcs": [],
+        "pcs": [
+            {
+                "id": 0,
+                "amount": 1
+            }
+        ],
         "entitiesSetted": 4
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": 0,
+            "purchaseCosts": -140,
             "emergencyCosts": 0,
-            "orderIncome": 0,
-            "bankIncome": 0
-        },
-        {
-            "purchaseCosts": 0,
-            "emergencyCosts": 0,
-            "orderIncome": 0,
-            "bankIncome": 0
-        },
-        {
-            "purchaseCosts": -440,
-            "emergencyCosts": -47,
-            "orderIncome": 0,
-            "bankIncome": 0
+            "orderIncome": 43,
+            "bankIncome": 200
         }
     ]
 }
