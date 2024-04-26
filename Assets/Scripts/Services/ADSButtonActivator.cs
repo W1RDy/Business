@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class ADSButtonActivator : ObjectForInitialization, ISubscribable
+public class ADSButtonActivator : ResetableObjForInit, ISubscribable
 {
     private int _maxReachedCoins;
 
@@ -75,6 +75,11 @@ public class ADSButtonActivator : ObjectForInitialization, ISubscribable
         Debug.Log("StartCoroutine");
         yield return new WaitForSeconds(duration);
         callback.Invoke();
+    }
+
+    public override void Reset()
+    {
+        _maxReachedCoins = 0;
     }
 
     public void Subscribe()

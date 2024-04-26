@@ -80,7 +80,6 @@ public class ProblemsGenerator : ClassForInitialization, IService, ISubscribable
 
     public void TryGenerateProblem()
     {
-        Debug.Log("TryGenerate");
         if (_gameController.IsTutorial) return;
 
         _currentProblem = GetRandomProblem();

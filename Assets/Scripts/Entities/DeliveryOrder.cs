@@ -60,6 +60,8 @@ public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolE
 
     private Pool<DeliveryOrder> _pool;
 
+    private ActionInNextFrameActivator _inNextFrameActivator;
+
     public override void Init()
     {
         base.Init();
@@ -73,6 +75,8 @@ public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolE
 
         _goodsGenerator = ServiceLocator.Instance.Get<GoodsGenerator>();
         _notificationController = ServiceLocator.Instance.Get<NotificationController>();
+
+        _inNextFrameActivator = ServiceLocator.Instance.Get<ActionInNextFrameActivator>();
 
         InitAnimations();
     }
@@ -167,7 +171,7 @@ public class DeliveryOrder : ObjectForInitialization, IOrder, IThrowable, IPoolE
 
     private void OnDisable()
     {
-        if (_animController != null) _animController.KillAnimation();
+        if (_animController != null) _inNextFrameActivator.ActivateActionInNextFrame(() => _animController.KillAnimation()); ;
     }
 }
 

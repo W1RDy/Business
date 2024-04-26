@@ -55,6 +55,8 @@ public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
     private PCService _service;
     private Pool<PC> _pool;
 
+    private ActionInNextFrameActivator _inNextFrameActivator;
+
     public override void Init()
     {
         base.Init();
@@ -62,6 +64,7 @@ public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
 
         _service = ServiceLocator.Instance.Get<PCService>();
         _pool = ServiceLocator.Instance.Get<Pool<PC>>();
+        _inNextFrameActivator = ServiceLocator.Instance.Get<ActionInNextFrameActivator>();
 
 
         InitAnimations();
@@ -114,6 +117,6 @@ public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
 
     private void OnDisable()
     {
-        if (_animController != null) _animController.KillAnimation();
+        if (_animController != null) _inNextFrameActivator.ActivateActionInNextFrame(() => _animController.KillAnimation());
     }
 }

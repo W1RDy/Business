@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ServiceLocatorEntitiesLoader : MonoBehaviour
 {
     [SerializeField] private RandomController _problemsRandomController;
     [SerializeField] private CompositeOrder _compositeDeliveryOrder;
     [SerializeField] private OrderGenerator _orderGenerator;
+
+    [SerializeField] private ActionInNextFrameActivator _inNextFrameActivator;
 
     [Header("Pools")]
 
@@ -33,6 +36,8 @@ public class ServiceLocatorEntitiesLoader : MonoBehaviour
 
     public void BindEntities()
     {
+        BindActivatorActionInNextFrame();
+
         BindOrdersServices();
         BindDeliveryCompositeOrder();
         BindOrderGenerator();
@@ -44,6 +49,11 @@ public class ServiceLocatorEntitiesLoader : MonoBehaviour
 
         BindGoodsService();
         BindPCService();
+    }
+
+    private void BindActivatorActionInNextFrame()
+    {
+        ServiceLocator.Instance.Register(_inNextFrameActivator);
     }
 
     private void BindOrderGenerator()

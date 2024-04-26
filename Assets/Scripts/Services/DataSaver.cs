@@ -55,6 +55,7 @@ public class DataSaver : MonoBehaviour, IService
 
     public void SaveMonthsAndTime(int months, int time)
     {
+        Debug.Log("SaveMonths");
         YandexGame.savesData.monthCount = months;
         YandexGame.savesData.time = time;
     }
@@ -204,7 +205,7 @@ public class DataLoader : ClassForInitialization, IService
         Action loadCallback = () =>
         {
             _loadCount++;
-            if (_loadCount >= 6) FinishLoading();
+            if (_loadCount >= 6 && !DataLoaded) FinishLoading();
         };
         
         _gameController.IsTutorial = YandexGame.savesData.tutorialPartsCompleted < 2;

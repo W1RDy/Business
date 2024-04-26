@@ -102,7 +102,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
 
     public void SetParametersByLoadData(int time, int months)
     {
-        if (months == 1) Unsubscribe();
+        if (months == 1) _gameController.GameStarted -= SetGameValues;
 
         _time = time;
         SetStartValues(months);

@@ -59,6 +59,7 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     public event Action OrderValuesChanged;
     public event Action OrderStateChanged;
+    private ActionInNextFrameActivator _inNextFrameActivator;
 
     protected AudioPlayer _audioPlayer;
 
@@ -83,6 +84,8 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
         _goalPool = ServiceLocator.Instance.Get<Pool<Goal>>();
         _orderPool = ServiceLocator.Instance.Get<Pool<Order>>();
+
+        _inNextFrameActivator = ServiceLocator.Instance.Get<ActionInNextFrameActivator>();
 
         TimeChangedDelegate = changedValue => ChangeRemainTime(changedValue);
 
@@ -244,6 +247,6 @@ public class Order : ObjectForInitialization, IRemembable, IOrderWithCallbacks, 
 
     private void OnDisable()
     {
-        if (_animController != null) _animController.KillAnimation();
+        if (_animController != null) _inNextFrameActivator.ActivateActionInNextFrame(() => _animController.KillAnimation());
     }
 }

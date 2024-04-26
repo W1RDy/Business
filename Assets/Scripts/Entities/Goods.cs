@@ -59,7 +59,7 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
     private PCGenerator _pcGenerator;
     private Pool<Goods> _pool;
 
-    private Window _window;
+    private ActionInNextFrameActivator _inNextFrameActivator;
 
     public override void Init()
     {
@@ -72,8 +72,7 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
         _pool = ServiceLocator.Instance.Get<Pool<Goods>>();
 
         _goodsService = ServiceLocator.Instance.Get<GoodsService>();
-        _window = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.GoodsWindow);
-        _window.OnWindowChanged += WindowDelegate;
+        _inNextFrameActivator = ServiceLocator.Instance.Get<ActionInNextFrameActivator>();
 
         InitAnimations();
     }
@@ -135,20 +134,9 @@ public class Goods : ObjectForInitialization, IRemembable, IThrowable, IPoolElem
         }
     }
 
-    //private void OnDisable()
-    //{
-    //    if (_animController != null) _animController.KillAnimation();
-    //}
-
-    protected override void OnDestroy()
+    private void OnDisable()
     {
-        base.OnDestroy();
-        _window.OnWindowChanged -= WindowDelegate;
-    }
-
-    private void WindowDelegate()
-    {
-        if (!gameObject.activeInHierarchy && gameObject.activeSelf) _animController.KillAnimation();
+        if (_animController != null) _inNextFrameActivator.ActivateActionInNextFrame(() => _animController.KillAnimation());
     }
 }
 
