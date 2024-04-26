@@ -1,11 +1,11 @@
 {
-    "idSave": 162,
+    "idSave": 163,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "tutorialPartsCompleted": 1,
     "gameIsFinished": false,
-    "handsCoins": 101,
+    "handsCoins": 61,
     "bankCoins": 600,
     "monthCount": 0,
     "time": 15,
@@ -13,25 +13,41 @@
         "orders": [
             {
                 "id": 1,
-                "cost": 42,
-                "time": 19,
-                "neededGoods": 0,
-                "isApplied": false,
-                "remainTime": 19,
-                "remainWaiting": 1
+                "cost": 57,
+                "time": 12,
+                "neededGoods": 1,
+                "isApplied": true,
+                "remainTime": 5,
+                "remainWaiting": 2
             },
             {
                 "id": 2,
-                "cost": 36,
-                "time": 16,
+                "cost": 39,
+                "time": 20,
+                "neededGoods": 0,
+                "isApplied": true,
+                "remainTime": 13,
+                "remainWaiting": 2
+            },
+            {
+                "id": 3,
+                "cost": 35,
+                "time": 18,
                 "neededGoods": 0,
                 "isApplied": false,
-                "remainTime": 16,
-                "remainWaiting": 1
+                "remainTime": 18,
+                "remainWaiting": 2
             }
         ],
         "deliveryOrders": [],
-        "goods": [],
+        "goods": [
+            {
+                "goodsType": 1,
+                "buildTime": 1,
+                "amount": 1,
+                "brokenGoodsAmount": 0
+            }
+        ],
         "pcs": [
             {
                 "id": 1,
@@ -42,7 +58,7 @@
     },
     "resultSaveConfigs": [
         {
-            "purchaseCosts": -40,
+            "purchaseCosts": -80,
             "emergencyCosts": 0,
             "orderIncome": 41,
             "bankIncome": 200
