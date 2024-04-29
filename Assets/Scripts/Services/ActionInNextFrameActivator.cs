@@ -12,6 +12,6 @@ public class ActionInNextFrameActivator : MonoBehaviour, IService
     private IEnumerator ActivateNextFrame(Action action)
     {
         yield return null;
-        action.Invoke();
+        action?.Invoke();
     }
 }
