@@ -13,7 +13,8 @@ public class ServiceLocatorLoader : MonoBehaviour
     [SerializeField] private ServiceLocatorEntitiesLoader _servicesLocatorEntitiesLoader;
     [SerializeField] private ServiceLocatorUILoader _servicesLocatorUILoader;
 
-    [SerializeField] private DarknessAnimationController _darknessAnimationController;
+    [SerializeField] private DeviceService _deviceService;
+    private ILinksService _linksService;
 
     [SerializeField] private DifficultyController _difficultyController;
     [SerializeField] private SubscribeController _subscribeController;
@@ -26,6 +27,7 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void Awake()
     {
+        _linksService = _deviceService.LinksService;
         Bind();
     }
 
@@ -80,8 +82,8 @@ public class ServiceLocatorLoader : MonoBehaviour
 
     private void BindLoadSceneController()
     {
-        ServiceLocator.Instance.Register(_darknessAnimationController);
-        var loadSceneController = new LoadSceneController(_darknessAnimationController);
+        ServiceLocator.Instance.Register(_linksService._darknessAnimationController);
+        var loadSceneController = new LoadSceneController(_linksService._darknessAnimationController);
         ServiceLocator.Instance.Register(loadSceneController);
     }
 

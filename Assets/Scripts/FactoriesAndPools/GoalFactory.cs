@@ -8,14 +8,15 @@ public class GoalFactory : BaseFactory
 {
     private const string Path = "Goal";
 
-    public GoalFactory(RectTransform container) : base(container)
+    public GoalFactory(RectTransform container, bool isDesktop) : base(container, isDesktop)
     {
 
     }
 
     public override void LoadResources()
     {
-        if (_prefab == null) _prefab = Resources.Load<Goal>(Path);
+        if (_prefab == null && _isDesktop) _prefab = Resources.Load<Goal>(Path);
+        else if (_prefab == null && !_isDesktop) _prefab = Resources.Load<Goal>(Path + "Mobile");
     }
 
     public override MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)

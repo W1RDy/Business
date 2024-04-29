@@ -4,28 +4,12 @@ using UnityEngine;
 public class ServiceLocatorEntitiesLoader : MonoBehaviour
 {
     [SerializeField] private RandomController _problemsRandomController;
-    [SerializeField] private CompositeOrder _compositeDeliveryOrder;
     [SerializeField] private OrderGenerator _orderGenerator;
 
     [SerializeField] private ActionInNextFrameActivator _inNextFrameActivator;
 
-    [Header("Pools")]
-
-    #region PoolsTransforms
-
-    [SerializeField] private RectTransform _orderPoolContainer;
-    [SerializeField] private Transform _orderParent;
-
-    [SerializeField] private RectTransform _goalPoolContainer;
-    [SerializeField] private Transform _goalParent;
-
-    [SerializeField] private RectTransform _deliveryOrderPoolContainer;
-    [SerializeField] private Transform _deliveryOrderParent;
-
-    [SerializeField] private RectTransform _goodsPoolContainer;
-    [SerializeField] private Transform _goodsParent;
-
-    #endregion
+    [SerializeField] private DeviceService _deviceService;
+    private IEntitiesLinksService _linksService;
 
     [Header("Configs")]
 
@@ -36,6 +20,8 @@ public class ServiceLocatorEntitiesLoader : MonoBehaviour
 
     public void BindEntities()
     {
+        _linksService = _deviceService.EntitiesLinksService;
+
         BindActivatorActionInNextFrame();
 
         BindOrdersServices();
@@ -94,24 +80,24 @@ public class ServiceLocatorEntitiesLoader : MonoBehaviour
 
     private void BindDeliveryCompositeOrder()
     {
-        ServiceLocator.Instance.Register(_compositeDeliveryOrder);
+        ServiceLocator.Instance.Register(_linksService._compositeDeliveryOrder);
     }
 
     private void BindPools()
     {
-        var orderPool = new Pool<Order>(new OrderFactory(_orderPoolContainer), _orderPoolContainer, _orderParent, 1);
+        var orderPool = new Pool<Order>(new OrderFactory(_linksService._orderPoolContainer, _deviceService.IsDesktop), _linksService._orderPoolContainer, _linksService._orderParent, 1);
         orderPool.Init();
 
-        var goalPool = new Pool<Goal>(new GoalFactory(_goalPoolContainer), _goalPoolContainer, _goalParent, 1);
+        var goalPool = new Pool<Goal>(new GoalFactory(_linksService._goalPoolContainer, _deviceService.IsDesktop), _linksService._goalPoolContainer, _linksService._goalParent, 1);
         goalPool.Init();
 
-        var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_deliveryOrderPoolContainer), _deliveryOrderPoolContainer, _deliveryOrderParent, 3);
+        var deliveryOrderPool = new Pool<DeliveryOrder>(new DeliveryOrderFactory(_linksService._deliveryOrderPoolContainer, _deviceService.IsDesktop), _linksService._deliveryOrderPoolContainer, _linksService._deliveryOrderParent, 3);
         deliveryOrderPool.Init();
 
-        var goodsPool = new Pool<Goods>(new GoodsFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 1);
+        var goodsPool = new Pool<Goods>(new GoodsFactory(_linksService._goodsPoolContainer, _deviceService.IsDesktop), _linksService._goodsPoolContainer, _linksService._goodsParent, 1);
         goodsPool.Init();
 
-        var pcPool = new Pool<PC>(new PCFactory(_goodsPoolContainer), _goodsPoolContainer, _goodsParent, 3);
+        var pcPool = new Pool<PC>(new PCFactory(_linksService._goodsPoolContainer, _deviceService.IsDesktop), _linksService._goodsPoolContainer, _linksService._goodsParent, 3);
         pcPool.Init();
 
         ServiceLocator.Instance.Register(orderPool);

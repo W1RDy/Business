@@ -8,6 +8,13 @@ public class OpenGameResultsButton : CustomButton
     [SerializeField] private TextMeshProUGUI _buttonText; 
     protected GameController _gameController;
 
+    public override void Init()
+    {
+        base.Init();
+        _gameController = ServiceLocator.Instance.Get<GameController>();
+        SetText("Show results");
+    }
+
     protected override void ClickCallback()
     {
         base.ClickCallback();
@@ -16,11 +23,6 @@ public class OpenGameResultsButton : CustomButton
 
     protected void OpenResults()
     {
-        if (_gameController == null)
-        {
-            _gameController = ServiceLocator.Instance.Get<GameController>();
-            SetText("Show results");
-        }
         _gameController.FinishGame();
     }
 

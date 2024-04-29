@@ -7,14 +7,15 @@ public class OrderFactory : BaseFactory
 {
     private const string Path = "Order";
 
-    public OrderFactory(RectTransform container) : base(container)
+    public OrderFactory(RectTransform container, bool isDesktop) : base(container, isDesktop)
     {
 
     }
 
     public override void LoadResources()
     {
-        if (_prefab == null) _prefab = Resources.Load<Order>(Path);
+        if (_prefab == null && _isDesktop) _prefab = Resources.Load<Order>(Path);
+        else if (_prefab == null && !_isDesktop) _prefab = Resources.Load<Order>(Path + "Mobile");
     }
 
     public override MonoBehaviour Create(Vector2 pos, Quaternion rotation, Transform parent)
@@ -28,32 +29,18 @@ public class OrderFactory : BaseFactory
     }
 }
 
-public class TutorialOrderFactory : OrderFactory
-{
-    private const string Path = "TutorialOrder";
-
-    public TutorialOrderFactory(RectTransform container) : base(container)
-    {
-
-    }
-
-    public override void LoadResources()
-    {
-        if (_prefab == null) _prefab = Resources.Load<Order>(Path);
-    }
-}
-
 public class DeliveryOrderFactory : BaseFactory
 {
     private const string Path = "DeliveryOrder";
 
-    public DeliveryOrderFactory(RectTransform container) : base (container)
+    public DeliveryOrderFactory(RectTransform container, bool isDesktop) : base (container, isDesktop)
     {
 
     }
 
     public override void LoadResources()
     {
-        _prefab = Resources.Load<DeliveryOrder>(Path);
+        if (_prefab == null && _isDesktop) _prefab = Resources.Load<DeliveryOrder>(Path);
+        else if (_prefab == null && !_isDesktop) _prefab = Resources.Load<DeliveryOrder>(Path + "Mobile");
     }
 }

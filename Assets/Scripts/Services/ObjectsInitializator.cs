@@ -4,17 +4,28 @@ using UnityEngine;
 
 public class ObjectsInitializator : MonoBehaviour, IService
 {
+    [SerializeField] private DeviceService _deviceService;
     [SerializeField] ObjectForInitialization[] _hiddenObjectsForInit;
+    private List<IInitializable> _hiddenInitializables = new List<IInitializable>();
     private List<IInitializable> _initializables = new List<IInitializable>();
 
     private void Awake()
     {
+        foreach (var window in _deviceService.UILinksService._windows)
+        {
+            if (window.Type == WindowType.DeliveryWindow) continue;
+            if (!window.gameObject.activeSelf) _hiddenInitializables.Add(window);
+        }
+
+        _hiddenInitializables.Add(_deviceService.UILinksService._coinsADSButton);
+        _hiddenInitializables.Add(_deviceService.UILinksService._continueButton);
+
         ServiceLocator.Instance.ServiceRegistered += InitObjects;
     }
 
     private void InitObjects()
     {
-        _initializables.AddRange(_hiddenObjectsForInit);
+        _initializables.AddRange(_hiddenInitializables);
         foreach (var initializable in _initializables)
         {
             initializable.Init();

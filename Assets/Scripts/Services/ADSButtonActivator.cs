@@ -7,8 +7,12 @@ public class ADSButtonActivator : ResetableObjForInit, ISubscribable
 {
     private int _maxReachedCoins;
 
-    [SerializeField] private ShowADSForContinueButton _continueButton;
-    [SerializeField] private ShowADSForCoins _coinsRewardButton;
+
+    [SerializeField] private DeviceService _deviceService;
+
+    private ShowADSForContinueButton _continueButton;
+    private ShowADSForCoins _coinsRewardButton;
+
     private Rewarder _rewarder;
 
     private GameController _gameController;
@@ -27,6 +31,9 @@ public class ADSButtonActivator : ResetableObjForInit, ISubscribable
 
         _bankCoinsCounter = ServiceLocator.Instance.Get<BankCoinsCounter>();
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
+
+        _continueButton = _deviceService.UILinksService._continueButton;
+        _coinsRewardButton = _deviceService.UILinksService._coinsADSButton;
 
         Subscribe();
     }

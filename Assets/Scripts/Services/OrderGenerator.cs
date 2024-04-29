@@ -20,7 +20,7 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
 
     [SerializeField] private RandomController _randomController;
 
-    [SerializeField] private Window _ordersWindow;
+    private Window _ordersWindow;
 
     private Pool<Order> _pool;
 
@@ -54,6 +54,8 @@ public class OrderGenerator : ResetableObjForInit, IService, ISubscribable
         _subscribeController = ServiceLocator.Instance.Get<SubscribeController>();
         _gameController = ServiceLocator.Instance.Get<GameController>();
         _gameConditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
+
+        _ordersWindow = ServiceLocator.Instance.Get<WindowService>().GetWindow(WindowType.OrdersWindow);
 
         _orderApplyHandler = new OrderApplyHandler();
 

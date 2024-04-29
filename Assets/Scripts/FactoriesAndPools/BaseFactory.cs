@@ -3,12 +3,14 @@
 public abstract class BaseFactory : IFactory
 {
     protected MonoBehaviour _prefab;
+    protected bool _isDesktop;
 
     protected RectTransform _container;
 
-    public BaseFactory(RectTransform container)
+    public BaseFactory(RectTransform container, bool isDesktop)
     {
         _container = container;
+        _isDesktop = isDesktop;
         LoadResources();
     }
 

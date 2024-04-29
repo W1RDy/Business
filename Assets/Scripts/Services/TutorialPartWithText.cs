@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class TutorialPartWithText : TutorialSegmentPart
 {
-    [SerializeField] private TextMeshProUGUI _text;
+    [SerializeField] private DeviceService _deviceService;
+
     [SerializeField] private string _messageKey;
+    private TextMeshProUGUI _text;
 
     private string _defaultMessage;
     private float _defaultFontSize;
@@ -13,6 +15,7 @@ public class TutorialPartWithText : TutorialSegmentPart
 
     public override void Activate()
     {
+        SetTutorialTextPlace();
         _startTextEnabledState = _text.transform.parent.gameObject.activeSelf;
         _defaultMessage = _text.text;
 
@@ -40,5 +43,14 @@ public class TutorialPartWithText : TutorialSegmentPart
     public override bool ConditionCompleted()
     {
         return !_text.gameObject.activeInHierarchy;
+    }
+
+    private void SetTutorialTextPlace()
+    {
+        if (_messageKey == "Order tutorial") _text = _deviceService.UILinksService._ordersTutorialText;
+        else if (_messageKey == "Delivery tutorial") _text = _deviceService.UILinksService._deliveryTutorialText;
+        else if (_messageKey == "Confirm delivery tutorial") _text = _deviceService.UILinksService._confirmDeliveryTutorialText;
+        else if (_messageKey == "Goal tutorial") _text = _deviceService.UILinksService._sendTutorialText;
+        else if (_messageKey == "Distribute coins tutorial") _text = _deviceService.UILinksService._distributeCoinsTutorialText;
     }
 }
