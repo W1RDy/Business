@@ -22,7 +22,7 @@ public class TutorialPartWithText : TutorialSegmentPart
         if (_messageKey.StartsWith("Distribute"))
         {
             _defaultFontSize = _text.fontSize;
-            _text.fontSize = 28.5f;
+            _text.fontSize -= 10f;
         }
 
         _text.text = LocalizationManager.GetTranslation("Tutorial/" + _messageKey);

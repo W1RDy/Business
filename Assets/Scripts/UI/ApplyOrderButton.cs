@@ -26,7 +26,7 @@ public class ApplyOrderButton : OrdersControlButton, IButtonWithNewButton, IButt
         _buttonChangeController = ServiceLocator.Instance.Get<ButtonChangeController>();
         _conditionChecker = ServiceLocator.Instance.Get<GamesConditionChecker>();
 
-        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>(), 15, 24);
+        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>(), 15, _stateText.fontSize);
 
         OnOrderValuesChanged = () => _buttonChangeController.ChangeButtonToNewButton(this);
         OnOrderStateChanged = () => _buttonChangeController.ChangeButtonStates(this);

@@ -6,7 +6,8 @@ public class ActionInNextFrameActivator : MonoBehaviour, IService
 {
     public void ActivateActionInNextFrame(Action action)
     {
-        StartCoroutine(ActivateNextFrame(action));
+        if (gameObject != null)
+            StartCoroutine(ActivateNextFrame(action));
     }
 
     private IEnumerator ActivateNextFrame(Action action)

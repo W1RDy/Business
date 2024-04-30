@@ -13,7 +13,9 @@ public class GoalView
 
     private TextMeshProUGUI _rewardText;
 
-    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText, TextMeshProUGUI remainingQuality)
+    private DeviceService _deviceService;
+
+    public GoalView(TextMeshProUGUI titleText, Image timeProgressImage, TextMeshProUGUI remainingTimeText, TextMeshProUGUI rewardText, TextMeshProUGUI remainingQuality, DeviceService deviceService)
     {
         _titleText = titleText;
 
@@ -23,12 +25,14 @@ public class GoalView
         _rewardText = rewardText;
 
         _remainingQuality = remainingQuality;
+
+        _deviceService = deviceService;
     }
 
     public void SetView(int id, int cost, int remainTime, int time, GoodsType goodsType)
     {
-        SetId(id);
-        SetCost(cost);
+        if (_titleText != null) SetId(id);
+        if (_rewardText != null) SetCost(cost);
         SetTime(remainTime, time);
         SetQualityText(goodsType);
     }
@@ -45,7 +49,8 @@ public class GoalView
 
     public void SetTime(int remainTime, int time)
     {
-        _remainingTimeText.text = remainTime + " " + LocalizationManager.GetTranslation("Days remain");
+        var text = _deviceService.IsDesktop ? LocalizationManager.GetTranslation("Days remain") : LocalizationManager.GetTranslation("Days");
+        _remainingTimeText.text = remainTime + " " + text;
 
         var timeProgress = (float)remainTime / time;
 

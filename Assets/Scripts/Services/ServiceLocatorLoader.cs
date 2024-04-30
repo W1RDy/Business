@@ -55,6 +55,8 @@ public class ServiceLocatorLoader : MonoBehaviour
         BindConditionChecker();
         BindOrderCompleteHandler();
 
+        BindDeviceService();
+
         _servicesLocatorEntitiesLoader.BindEntities();
 
         BindResultsService();
@@ -66,6 +68,11 @@ public class ServiceLocatorLoader : MonoBehaviour
         _servicesLocatorUILoader.BindUI();
 
         ServiceLocator.Instance.RegisterService();
+    }
+
+    private void BindDeviceService()
+    {
+        ServiceLocator.Instance.Register(_deviceService);
     }
 
     private void BindRewarder()

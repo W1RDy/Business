@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class DeviceService : MonoBehaviour
+public class DeviceService : MonoBehaviour, IService
 {
     [SerializeField] private GameObject _desktopLinksServiceObj;
     [SerializeField] private GameObject _mobileLinksServiceObj;
@@ -27,6 +27,8 @@ public class DeviceService : MonoBehaviour
 
         if (deviceKey == "desktop" || deviceKey == "tv")
         {
+            _desktopLinksServiceObj.gameObject.SetActive(true);
+
             LinksService = _desktopLinksServiceObj.GetComponent<ILinksService>();
             UILinksService = _desktopLinksServiceObj.GetComponent<IUILinksService>();
             EntitiesLinksService = _desktopLinksServiceObj.GetComponent<IEntitiesLinksService>();
@@ -35,6 +37,8 @@ public class DeviceService : MonoBehaviour
         }
         else
         {
+            _mobileLinksServiceObj.gameObject.SetActive(true);
+
             LinksService = _mobileLinksServiceObj.GetComponent<ILinksService>();
             UILinksService = _mobileLinksServiceObj.GetComponent<IUILinksService>();
             EntitiesLinksService = _mobileLinksServiceObj.GetComponent<IEntitiesLinksService>();

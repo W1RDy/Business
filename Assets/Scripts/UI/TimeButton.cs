@@ -14,7 +14,7 @@ public class TimeButton : CustomButton
     public override void Init() 
     {
         base.Init();
-        SetText("Skip day");
+        if (_buttonText != null) SetText("Skip day");
     }
 
     protected override void ClickCallback()

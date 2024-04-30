@@ -24,6 +24,8 @@ public class Goal : ObjectForInitialization, IPoolElement<Goal>
     [SerializeField] private TextMeshProUGUI _rewardText;
     [SerializeField] private SendOrderButton _sendButton;
 
+    private DeviceService _deviceService;
+
     private GoalView _view;
 
     #endregion
@@ -35,7 +37,8 @@ public class Goal : ObjectForInitialization, IPoolElement<Goal>
     {
         base.Init();
         Release();
-        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText);
+        _deviceService = ServiceLocator.Instance.Get<DeviceService>();
+        _view = new GoalView(_titleText, _timeProgressImage, _remainingTimeText, _rewardText, _remainingQualityText, _deviceService);
     }
 
     public void InitVariant(Order order)
