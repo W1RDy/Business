@@ -61,13 +61,18 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
         }
         else
         {
-            SetGameValues();
+            SetGameValues(month);
         }
     }
 
-    private void SetGameValues()
+    private void SetGameValuesDelegate()
     {
-        _currentMonth = 1;
+        SetGameValues(1);
+    }
+
+    private void SetGameValues(int month)
+    {
+        _currentMonth = month;
         _currentMaxTime = _maxTime;
 
         _timeIndicator.UpdateMonth(_currentMonth);
@@ -102,7 +107,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
 
     public void SetParametersByLoadData(int time, int months)
     {
-        if (months == 1) _gameController.GameStarted -= SetGameValues;
+        if (months > 1) _gameController.GameStarted -= SetGameValuesDelegate;
 
         _time = time;
         SetStartValues(months);
@@ -136,7 +141,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
     public void Subscribe()
     {
         _subscribeController.AddSubscribable(this);
-        _gameController.GameStarted += SetGameValues;
+        _gameController.GameStarted += SetGameValuesDelegate;
 
         SaveDelegate = () => _dataSaver.SaveMonthsAndTime(CurrentMonth, Time);
         _dataSaver.OnStartSaving += SaveDelegate;
@@ -144,7 +149,7 @@ public class TimeController : ResetableClassForInit, IService, ISubscribable
 
     public void Unsubscribe()
     {
-        _gameController.GameStarted -= SetGameValues;
+        _gameController.GameStarted -= SetGameValuesDelegate;
         _dataSaver.OnStartSaving -= SaveDelegate;
     }
 
