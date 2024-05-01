@@ -15,7 +15,7 @@ MonoBehaviour:
   _id: 6
   _goodsType: 0
   _title: Broken pc
-  _description: Broken pc descriiption
+  _description: Broken pc description
   _isReturned: 0
   _isBroken: 1
   _icon: {fileID: 21300000, guid: 35615de53a94d4e4f9ea2f23fe74a1b9, type: 3}

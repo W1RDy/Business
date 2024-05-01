@@ -8,10 +8,18 @@ public class AddOrderButton : TutorialButton
 
     [SerializeField] private TextMeshProUGUI _buttonText;
 
+    private ButtonTextFitter _buttonTextFitter;
+
     public override void Init()
     {
         base.Init();
+        _buttonTextFitter = new ButtonTextFitter(_button.GetComponent<RectTransform>(), 15, _buttonText.fontSize);
+    }
+
+    private void OnEnable()
+    {
         SetText("Deliver");
+        _buttonTextFitter.CheckButtonTextFit(_buttonText);
     }
 
     protected override void ClickCallback()

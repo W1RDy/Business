@@ -15,13 +15,15 @@ public class FontsChanger : MonoBehaviour
     [ContextMenu("Change Fonts")]
     public void ChangeFonts()
     {
+        var texts = _fontsObjs[0].GetComponentsInChildren<TextMeshProUGUI>(true);
         _texts.Clear();
-        foreach (var fontObj  in _fontsObjs)
-        {
-            if (fontObj.TryGetComponent<TextMeshProUGUI>(out var text)) _texts.Add(text);
-        }
+        _texts = new List<TextMeshProUGUI>(texts);
+        //foreach (var fontObj  in _fontsObjs)
+        //{
+        //    if (fontObj.TryGetComponent<TextMeshProUGUI>(out var text)) _texts.Add(text);
+        //}
 
-        //Undo.RecordObjects(_texts.ToArray(), "Change fonts");
+        Undo.RecordObjects(_texts.ToArray(), "Change fonts");
         foreach (var text in _texts)
         {
             text.font = _newFont;
