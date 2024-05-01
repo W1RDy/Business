@@ -11,8 +11,8 @@ public class LocalizationInitializer
     private void InitializeLocalization()
     {
         YandexGame.InitLang();
-        //var languageKey = YandexGame.lang;
-        var languageKey = "tr";
+        var languageKey = YandexGame.lang;
+        //var languageKey = "tr";
         LocalizationManager.CurrentLanguageCode = languageKey;
     }
 }
