@@ -1,32 +1,32 @@
 {
-    "idSave": 185,
+    "idSave": 206,
     "isFirstSession": false,
     "language": "ru",
     "promptDone": false,
     "tutorialPartsCompleted": 2,
     "gameIsFinished": false,
-    "handsCoins": 623,
-    "bankCoins": 638,
-    "monthCount": 2,
+    "handsCoins": 101,
+    "bankCoins": 600,
+    "monthCount": 1,
     "time": 30,
     "entitiesSaveConfig": {
         "orders": [
             {
                 "id": 2,
-                "cost": 45,
-                "time": 19,
-                "neededGoods": 0,
-                "isApplied": true,
-                "remainTime": 18,
+                "cost": 61,
+                "time": 16,
+                "neededGoods": 1,
+                "isApplied": false,
+                "remainTime": 16,
                 "remainWaiting": 2
             },
             {
                 "id": 1,
-                "cost": 37,
-                "time": 18,
-                "neededGoods": 0,
+                "cost": 83,
+                "time": 8,
+                "neededGoods": 2,
                 "isApplied": true,
-                "remainTime": 17,
+                "remainTime": 4,
                 "remainWaiting": 2
             }
         ],
@@ -35,7 +35,7 @@
             {
                 "goodsType": 0,
                 "buildTime": 2,
-                "amount": 2,
+                "amount": 1,
                 "brokenGoodsAmount": 0
             }
         ],
@@ -50,28 +50,10 @@
             "bankIncome": 0
         },
         {
-            "purchaseCosts": 0,
-            "emergencyCosts": 0,
-            "orderIncome": 0,
-            "bankIncome": 0
-        },
-        {
-            "purchaseCosts": -40,
-            "emergencyCosts": 0,
-            "orderIncome": 46,
+            "purchaseCosts": -180,
+            "emergencyCosts": -91,
+            "orderIncome": 272,
             "bankIncome": 200
-        },
-        {
-            "purchaseCosts": -220,
-            "emergencyCosts": -108,
-            "orderIncome": 357,
-            "bankIncome": 178
-        },
-        {
-            "purchaseCosts": -280,
-            "emergencyCosts": -40,
-            "orderIncome": 455,
-            "bankIncome": 213
         }
     ]
 }

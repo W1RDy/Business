@@ -48,6 +48,7 @@ public class LoadSceneController : ClassForInitialization, IService
         while (true)
         {
             yield return null;
+            Debug.Log(_resetContoroller.IsReseted);
             if (_resetContoroller.IsReseted) break;
         }
         IsReseted?.Invoke();

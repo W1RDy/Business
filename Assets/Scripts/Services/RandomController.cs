@@ -179,7 +179,12 @@ public class RandomController : ResetableObjForInit
     public override void Reset()
     {
         _startRandomizables.CopyTo(_randomizables, 0);
+
+#if UNITY_EDITOR
+
         _startConfig.CopyTo(_configs, 0);
+
+#endif
 
         UnblockController();
     }

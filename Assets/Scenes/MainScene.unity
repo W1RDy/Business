@@ -661,6 +661,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &308549384 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6527457420442654036, guid: 0318207d866afc24d81a994c6fdf077d, type: 3}
+  m_PrefabInstance: {fileID: 1053127396033369540}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ea7170414a11b409b101dc90e15863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &334275322
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +782,17 @@ MonoBehaviour:
   _segmentType: 0
   _deviceService: {fileID: 95819831}
   _messageKey: Goal tutorial
+--- !u!114 &466298724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4553438709603107193, guid: 3d1aace2c07844a4eaac0a61aeea8306, type: 3}
+  m_PrefabInstance: {fileID: 8654295774739310812}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ea7170414a11b409b101dc90e15863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &486130536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3811,6 +3833,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1893066715741674868, guid: 0318207d866afc24d81a994c6fdf077d, type: 3}
+      propertyPath: _objectForInitializations.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893066715741674868, guid: 0318207d866afc24d81a994c6fdf077d, type: 3}
+      propertyPath: _objectForInitializations.Array.data[5]
+      value: 
+      objectReference: {fileID: 308549384}
     - target: {fileID: 2177779353418487101, guid: 0318207d866afc24d81a994c6fdf077d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -4936,6 +4966,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7209822634442344310, guid: 3d1aace2c07844a4eaac0a61aeea8306, type: 3}
+      propertyPath: _objectForInitializations.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7209822634442344310, guid: 3d1aace2c07844a4eaac0a61aeea8306, type: 3}
+      propertyPath: _objectForInitializations.Array.data[5]
+      value: 
+      objectReference: {fileID: 466298724}
     - target: {fileID: 7224683708509774085, guid: 3d1aace2c07844a4eaac0a61aeea8306, type: 3}
       propertyPath: m_IsActive
       value: 1

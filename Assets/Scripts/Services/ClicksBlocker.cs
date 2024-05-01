@@ -10,14 +10,12 @@ public class ClicksBlocker : MonoBehaviour, IService
 
     public void BlockClicks()
     {
-        Debug.Log("BlockClicks");
         _blocksCount++;
         _clickBlocker.enabled = true;
     }
 
     public void UnblockClicks()
     {
-        Debug.Log("UnblockClicks");
         _blocksCount--;
         if (_blocksCount <= 0)
         {

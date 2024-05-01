@@ -106,7 +106,6 @@ public class PC : ObjectForInitialization, IThrowable, IPoolElement<PC>
 
     public void ThrowOut()
     {
-        Debug.Log(Amount);
         Amount -= 1;
         if (Amount == 0)
         {

@@ -18,7 +18,6 @@ public class ButtonsForTutorialService : ClassForInitialization, IService, ISubs
 
     public void AddButton(ITutorialButton tutorialButton)
     {
-        Debug.Log(tutorialButton);
         if (_isServiceActive) _buttons.Add(tutorialButton.Type, tutorialButton);
     }
 
