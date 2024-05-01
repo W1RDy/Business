@@ -297,7 +297,7 @@ MonoBehaviour:
   archivingBuild: 1
   logoImageFormat: 1
   backgroundImageFormat: 3
-  pixelRatioEnable: 0
-  pixelRatioValue: 1
+  pixelRatioEnable: 1
+  pixelRatioValue: 2
   loadGameRun: 0
   staticRBTInGame: 1

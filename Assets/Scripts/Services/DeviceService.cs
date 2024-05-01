@@ -21,7 +21,7 @@ public class DeviceService : MonoBehaviour, IService
         var deviceKey = YandexGame.EnvironmentData.deviceType;
 #if UNITY_EDITOR
 
-        deviceKey = "mobile";
+        deviceKey = "desktop";
 
 #endif
 
